@@ -12,3 +12,5 @@ private:
 	Block m_1, m_2, m_3;
 	
 };
+
+#endif
