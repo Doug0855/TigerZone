@@ -6,7 +6,10 @@ public:
 	Meeple();
 	~Meeple();
 	
+	countPoints();
+	
 private:
+	String m_role;
 		
 	
 };

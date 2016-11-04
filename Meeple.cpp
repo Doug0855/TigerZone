@@ -9,3 +9,5 @@ Meeple::~Meeple()
 {
 	
 }
+
+Meeple::countPoints();
