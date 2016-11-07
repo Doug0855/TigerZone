@@ -23,9 +23,9 @@ vector<int> Board::display_positions(Tile tile)
 		// Loop through column of board
 		for(size_t j = 0; j < m_board[i].size())
 		{
-			if(m_board[i][j].hasOpenFace())
+			if(m_board[i][j] != null && m_board[i][j].hasOpenFace())
 			{
-				
+				if(m_board[i][j].getOpenFaces()  )
 			}
 		}
 	}
