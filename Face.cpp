@@ -24,5 +24,6 @@ bool Face::faceEquals(Face face)
 
 bool Face::connected()
 {
-	
+	if(!m_1.connected() && !m_2.connected() && !m_3.connected()) return false;
+	return true;
 }

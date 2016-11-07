@@ -9,7 +9,7 @@ public:
 	~Face();
 	
 	bool faceEquals(Face face);
-	bool connected();
+	bool connected(); ///< returns false if not connected
 	
 private:
 	Block m_1, m_2, m_3;
