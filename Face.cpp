@@ -21,3 +21,8 @@ bool Face::faceEquals(Face face)
 		
 	return false;
 }
+
+bool Face::connected()
+{
+	
+}
