@@ -8,6 +8,8 @@ public:
 	Face();
 	~Face();
 	
+	bool faceEquals(Face face);
+	
 private:
 	Block m_1, m_2, m_3;
 	

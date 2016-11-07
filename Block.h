@@ -12,6 +12,7 @@ public:
 	~Block();
 	
 	bool closed(); ///< if it completes city/field/etc
+	std::string getType() { return type; }
 	
 private:
 	Meeple meeple;

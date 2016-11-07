@@ -8,15 +8,20 @@
 class Tile{
 	Tile();
 	~Tile();
-	
-	Face up, down, left, right;
+
 	string to_string();
 	void rotate(int rotations);
-	bool shield;
-	Block center;
+	bool hasOpenFace();
+	bool shield;	
 		
+	Face getUpFace{ return up; }
+	Face getDownFace{ return down; }
+	Face getLeftFace{ return left; }
+	Face getRightFace{ return right; }
 	
-	
+private:
+	Face up, down, left, right;
+	Block center;
 }
 
 #ENDIF

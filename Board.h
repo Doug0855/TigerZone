@@ -7,13 +7,13 @@
 
 class Board {
 private:
-	std::vector<std::vector<Tile>> board;
+	std::vector<std::vector<Tile>> m_board;
 public:
 	Board();
 	~Board();
 	string to_string(void);
-	vector<int> display_positions(Tile);
-	bool place_tile(int,Tile);
+	vector<int> display_positions(Tile tile);
+	bool place_tile(int location, Tile tile);
 	
 	
 }
