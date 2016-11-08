@@ -72,10 +72,10 @@ vector<int> checkPlacement(Tile* tile, int i, int j, std::vector<std::string> op
 			for(int ii = 0; ii < 3; ii++)
 			{
 				// same thing as above but with down
-				if(board[i+2][j].getUpFace().faceEquals(tile.getDownFace()) &&
-					(board[i+1][j-1] == null || board[i-1][j-1].getRightFace().faceEquals(tile.getLeftFace())) &&
-					(board[i+1][j+1] == null || board[i-1][j+1].getLeftFace().faceEquals(tile.getRightFace())) &&
-					(board[i][j] == null || board[i][j-2].getDownFace().faceEquals(tile.getUpFace())))
+				if((board[i+2][j] == null || board[i+2][j].getUpFace().faceEquals(tile.getDownFace()))&&
+					(board[i+1][j-1] == null || board[i+1][j-1].getRightFace().faceEquals(tile.getLeftFace())) &&
+					(board[i+1][j+1] == null || board[i+1][j+1].getLeftFace().faceEquals(tile.getRightFace())) &&
+					(board[i][j].getDownFace().faceEquals(tile.getUpFace())))
 					{
 						places.push_back(i+1);
 						places.push_back(j);
@@ -88,13 +88,13 @@ vector<int> checkPlacement(Tile* tile, int i, int j, std::vector<std::string> op
 			for(int ii = 0; ii < 3; ii++)
 			{
 				// same thing as above but with left 
-				if(board[i][j].getUpFace().faceEquals(tile.getDownFace()) &&
-					(board[i+1][j+1] == null || board[i-1][j-1].getRightFace().faceEquals(tile.getLeftFace())) &&
-					(board[i+1][j+1] == null || board[i-1][j+1].getLeftFace().faceEquals(tile.getRightFace())) &&
-					(board[i+2][j] == null || board[i][j-2].getDownFace().faceEquals(tile.getUpFace())))
+				if((board[i+1][j-1] == null || board[i+1][j-1].getUpFace().faceEquals(tile.getDownFace()))&&
+					(board[i][j-2] == null || board[i-1][j-1].getRightFace().faceEquals(tile.getLeftFace())) &&
+					(board[i][j].getLeftFace().faceEquals(tile.getRightFace())) &&
+					(board[i-1][j-1] == null || board[i][j-2].getDownFace().faceEquals(tile.getUpFace())))
 					{
-						places.push_back(i+2);
-						places.push_back(j);
+						places.push_back(i);
+						places.push_back(j-1);
 						break;
 					}
 				rotate(tile);
@@ -104,13 +104,13 @@ vector<int> checkPlacement(Tile* tile, int i, int j, std::vector<std::string> op
 			for(int ii = 0; ii < 3; ii++)
 			{
 				// same thing as above but with right
-				if(board[i+1][j+1].getUpFace().faceEquals(tile.getDownFace()) &&
-					(board[i][j] == null || board[i-1][j-1].getRightFace().faceEquals(tile.getLeftFace())) &&
+				if((board[i+1][j+1] == null || board[i+1][j+1].getUpFace().faceEquals(tile.getDownFace())) &&
+					(board[i-1][j-1].getRightFace().faceEquals(tile.getLeftFace())) &&
 					(board[i][j+2] == null || board[i-1][j+1].getLeftFace().faceEquals(tile.getRightFace())) &&
 					(board[i-1][j+1] == null || board[i][j-2].getDownFace().faceEquals(tile.getUpFace())))
 					{
-						places.push_back(i+2);
-						places.push_back(j);
+						places.push_back(i);
+						places.push_back(j+1);
 						break;
 					}
 				rotate(tile);
