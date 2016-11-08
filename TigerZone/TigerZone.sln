@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TigerZone", "TigerZone\TigerZone.vcxproj", "{45AF251C-0CA0-4BC4-8A33-5ED0F06883FC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9053754A-DE6B-4DAA-9697-FECAB2A89B53} = {9053754A-DE6B-4DAA-9697-FECAB2A89B53}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Bengine", "..\PaperGame\Bengine\Bengine.vcxproj", "{9053754A-DE6B-4DAA-9697-FECAB2A89B53}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{45AF251C-0CA0-4BC4-8A33-5ED0F06883FC}.Debug|Win32.ActiveCfg = Debug|Win32
+		{45AF251C-0CA0-4BC4-8A33-5ED0F06883FC}.Debug|Win32.Build.0 = Debug|Win32
+		{45AF251C-0CA0-4BC4-8A33-5ED0F06883FC}.Release|Win32.ActiveCfg = Release|Win32
+		{45AF251C-0CA0-4BC4-8A33-5ED0F06883FC}.Release|Win32.Build.0 = Release|Win32
+		{9053754A-DE6B-4DAA-9697-FECAB2A89B53}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9053754A-DE6B-4DAA-9697-FECAB2A89B53}.Debug|Win32.Build.0 = Debug|Win32
+		{9053754A-DE6B-4DAA-9697-FECAB2A89B53}.Release|Win32.ActiveCfg = Release|Win32
+		{9053754A-DE6B-4DAA-9697-FECAB2A89B53}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
