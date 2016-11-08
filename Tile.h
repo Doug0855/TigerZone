@@ -14,8 +14,9 @@ public:
 	void rotate();
 	bool hasOpenFace();
 	std::vector<std::string> getOpenFaces();
+	bool hasInit;
+
 	Face up, down, left, right;
-	bool hasInit = false;
 
 	Face getUpFace(){ return up; }
 	Face getDownFace(){ return down; }

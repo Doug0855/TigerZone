@@ -2,11 +2,11 @@
 
 Tile::Tile()
 {
-
+	hasInit = false;
 }
 Tile::~Tile()
 {
-
+	hasInit = false;
 }
 
 std::string Tile::to_string()
