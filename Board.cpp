@@ -42,9 +42,36 @@ std::vector<std::pair<int, int>> Board::display_positions(Tile tile)
 	return places;
 }
 
-bool Board::place_tile(int location, Tile tile)
+pair<int,int> getOptimalPlacement(Tile* tile, vector<int,int> availableMoves) {
+	return availableMoves[0];
+}
+
+void Board::place_tile(pair<int, int> location, Tile tile)
 {
-	
+	// Connect bottom face of tile
+	if(board[i+1][j] != NULL)
+	{
+		board[i+1][j].getUpFace()->neighborFace = Tile.getDownFace();
+		Tile.getDownFace()->neighborFace = board[i+1][j].getUpFace()
+	}
+	// Connect top face of tile
+	if(board[i-1][j] != NULL)
+	{
+		board[i-1][j].getDownFace()->neighborFace = Tile.getUpFace();
+		Tile.getUpFace()->neighborFace = board[i-1][j].getDownFace()
+	}
+	// Connect left face of tile
+	if(board[i][j-1] != NULL)
+	{
+		board[i][j-1].getRightFace()->neighborFace = Tile.getLeftFace();
+		Tile.getLeftFace()->neighborFace = board[i][j-1].getRightFace()
+	}
+	// Connect right face of tile
+	if(board[i][j+1] != NULL)
+	{
+		board[i][j+1].getLeftFace()->neighborFace = Tile.getRightFace();
+		Tile.getRightFace()->neighborFace = board[i][j+1].getLeftFace()
+	}
 }
 
 std::vector<std::pair<int, int>> checkPlacement(Tile* tile, int i, int j, std::vector<std::string> openFaces)
