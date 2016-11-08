@@ -2,8 +2,7 @@
 #define TILESTACK_H
 
 #include <vector>
-
-class Tile;
+#include "Tile.h"
 
 class TileStack{
 public:

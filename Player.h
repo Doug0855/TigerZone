@@ -1,10 +1,9 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#inlcude <vector>
-
-class Meeple;
-class Board;
+#include <vector>
+#include "Meeple.h"
+#include "Board.h"
 
 class Player{
 public:
@@ -16,3 +15,5 @@ private:
 	int score;
 	Board board;
 };
+
+#endif

@@ -10,7 +10,7 @@ Meeple::~Meeple()
 	
 }
 
-Meeple::countPoints()
+int Meeple::countPoints()
 {
-	
+	return 0;
 }

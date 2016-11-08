@@ -1,10 +1,9 @@
 #ifndef BLOCK_H
 #define BLOCK_H
 
-#include <vector.h>
+#include <vector>
 
-class Meeple;
-class Block;
+#include "Meeple.h"
 
 class Block{
 public:
@@ -17,6 +16,8 @@ public:
 	
 private:
 	Meeple meeple;
-	std::vector<Block*> connected;
-	string type;
+	std::vector<Block*> stuffconnected;
+	std::string type;
 };
+
+#endif

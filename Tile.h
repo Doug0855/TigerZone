@@ -1,27 +1,30 @@
-#IFNDEF TILE_H
-#DEFINE TILE_H
+#ifndef TILE_H
+#define TILE_H
 
 #include "Face.h"
 #include <string>
 #include "Block.h"
 
 class Tile{
+public:
 	Tile();
 	~Tile();
 
-	string to_string();
-	void rotate(int rotations);
+	std::string to_string();
+	void rotate();
 	bool hasOpenFace();
-	bool shield;	
-		
-	Face getUpFace{ return up; }
-	Face getDownFace{ return down; }
-	Face getLeftFace{ return left; }
-	Face getRightFace{ return right; }
+	std::vector<std::string> getOpenFaces();
+	Face up, down, left, right;
+	bool hasInit = false;
+
+	Face getUpFace(){ return up; }
+	Face getDownFace(){ return down; }
+	Face getLeftFace(){ return left; }
+	Face getRightFace(){ return right; }
 	
 private:
-	Face up, down, left, right;
 	Block center;
-}
+	bool shield;
+};
 
-#ENDIF
+#endif

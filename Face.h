@@ -1,7 +1,7 @@
 #ifndef FACE_H
 #define FACE_H
 
-class Block;
+#include "Block.h"
 
 class Face{
 public:

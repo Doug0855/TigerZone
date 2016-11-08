@@ -12,11 +12,11 @@ Block::~Block()
 	
 bool Block::closed()
 {
-	
+	return false;
 }
 
 bool Block::connected()
 {
-	if(connected.size() == 0) return false;
+	if(stuffconnected.size() == 0) return false;
 	return true;
 }

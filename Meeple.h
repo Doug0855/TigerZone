@@ -1,15 +1,17 @@
 #ifndef MEEPLE_H
 #define MEEPLE_H
 
+#include <string>
+
 class Meeple{
 public:
 	Meeple();
 	~Meeple();
 	
-	countPoints();
+	int countPoints();
 	
 private:
-	String m_role;
+	std::string m_role;
 		
 	
 };

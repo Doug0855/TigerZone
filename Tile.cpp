@@ -1,59 +1,53 @@
-#inlcude "Tile.h"
+#include "Tile.h"
 
-Tile()
+Tile::Tile()
+{
+
+}
+Tile::~Tile()
 {
 
 }
 
-~Tile()
+std::string Tile::to_string()
 {
-	
-}
-
-string to_string()
-{
-	
+	return "empty";
 }
 
 // Rotate a tile to the right by 90 degrees. (Ex: left face would now be top face, top face would be right, etc...)
-void rotate(Tile tile)
+void Tile::rotate()
 {
-	Face upFace = this.up;
-	Face downFace = this.down;
-	Face leftface = this.left;
-	Face rightFace = this.right;
+	Face upFace = this->up;
+	Face downFace = this->down;
+	Face leftFace = this->left;
+	Face rightFace = this->right;
 
-	this.up = leftFace;
-	this.right = upFace;
-	this.down = rightFace;
-	this.left = downFace;
+	this->up = leftFace;
+	this->right = upFace;
+	this->down = rightFace;
+	this->left = downFace;
 	
 	
 }
 
-bool hasOpenFace()
+bool Tile::hasOpenFace()
 {
-	if(!up.connected() || !down.connected() || !left.connected() || !right.conncted()) return true;
+	if(!up.connected() || !down.connected() || !left.connected() || !right.connected()) return true;
 	else return false;
 }
 
 // Method to obtain all the open faces of a tile. Check each face, if not connected then push to vector
-std::vector<Tile> getOpenFaces() 
+std::vector<std::string> Tile::getOpenFaces()
 {
-	std::vector<Tile> openFaces;
+	std::vector<std::string> openFaces;
 	if(!up.connected())
-		openFaces.pushBack(up);
+		openFaces.push_back("up");
 	if(!down.connected())
-		openFaces.pushBack(down);
+		openFaces.push_back("down");
 	if(!left.connected())
-		openFaces.pushBack(left);
+		openFaces.push_back("left");
 	if(!right.connected())
-		openFaces.pushBack(right);
+		openFaces.push_back("right");
 
 	return openFaces;
-}
-
-bool shield
-{
-	
 }
