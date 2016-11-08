@@ -1,14 +1,15 @@
 #ifndef FACE_H
 #define FACE_H
 
-blass Block;
+class Block;
 
 class Face{
 public:
 	Face();
 	~Face();
 	
-	bool faceEquals(Face face);
+	Face* neighborFace;
+	bool faceEquals(Face face);	//determines if two faces are equal
 	bool connected(); ///< returns false if not connected
 	
 private:

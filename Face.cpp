@@ -2,12 +2,12 @@
 
 Face::Face()
 {
-	
+	neighborFace = NULL;
 }
 
 Face::~Face()
 {
-	
+	neighborFace = NULL;
 }
 
 bool Face::faceEquals(Face face)
