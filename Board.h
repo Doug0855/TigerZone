@@ -14,7 +14,7 @@ public:
 	string to_string(void);
 	vector<int> display_positions(Tile tile);
 	bool place_tile(int location, Tile tile);
-	
+	vector<int> checkPlacement(Tile tile, int i, int j, std::string location);
 	
 }
 
