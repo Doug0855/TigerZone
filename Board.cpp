@@ -1,6 +1,6 @@
 #inlcude "Board.h"
 
-#include <pair.h>
+#include <utility>
 
 Board::Board()
 {
@@ -19,7 +19,7 @@ string Board::to_string(void)
 
 std::vector<std::pair<int, int>> Board::display_positions(Tile tile)
 {
-	std::vector<std::pair<int, int>>> places;
+	std::vector<std::pair<int, int>> places;
 	// Loop through the rows of board
 	for(size_t i = 0; i < m_board.size(); i++)
 	{

@@ -1,9 +1,10 @@
-#include <iostream>
-#include "MainGame.h"
+#include <Bengine/IMainGame.h>
 
-int main(int argc, char** argv) {
-    MainGame mainGame;
-    mainGame.run();
+#include "App.h"
 
-    return 0;
+int main(int argc, char** argv)
+{
+	App app;
+	app.run();
+	return 0;
 }
