@@ -21,6 +21,8 @@ int main() {
 	
 	std::vector<std::pair<int,int> > openSpots = gameBoard.display_positions();
 	std::cout<<"open spots: "<<openSpots.size()<<std::endl;
+	std::cout<<"Now going to call getOpenFaces() after running placeTile. Should get same
+	results as above. As you can see there is an extra 'up' the 2nd and 3rd tiles which shouldnt be there"<<std::endl;
 	for(int i = 0; i < openSpots.size(); i++) {
 		int row = openSpots[i].first;
 		int col = openSpots[i].second;
