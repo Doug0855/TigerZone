@@ -1,5 +1,4 @@
-#ifndef TILE_H
-#define TILE_H
+#pragma once
 
 #include "Face.h"
 #include <string>
@@ -28,4 +27,3 @@ private:
 	bool shield;
 };
 
-#endif

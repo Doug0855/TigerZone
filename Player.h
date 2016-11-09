@@ -1,5 +1,4 @@
-#ifndef PLAYER_H
-#define PLAYER_H
+#pragma once
 
 #include <vector>
 #include "Meeple.h"
@@ -16,4 +15,3 @@ private:
 	Board board;
 };
 
-#endif

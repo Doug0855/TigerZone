@@ -1,5 +1,4 @@
-#ifndef BOARD_H
-#define BOARD_H
+#pragma once
 
 #include <vector>
 #include "Tile.h"
@@ -14,12 +13,9 @@ public:
 	~Board();
 	std::string to_string(void);
 	std::vector< std::pair<int, int> > display_positions();
-	void place_tile(std::pair<int, int> location, Tile tile);
+	void place_tile(std::pair<int, int> location, Tile& tile);
 	std::vector< std::pair<int, int> > checkPlacement(Tile* tile, int i, int j, std::string location);
 
 };
 
-
-
-#endif
 

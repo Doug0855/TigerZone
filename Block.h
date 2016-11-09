@@ -1,5 +1,4 @@
-#ifndef BLOCK_H
-#define BLOCK_H
+#pragma once
 
 #include <vector>
 
@@ -21,4 +20,3 @@ private:
 	std::string type;
 };
 
-#endif

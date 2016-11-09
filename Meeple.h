@@ -1,5 +1,4 @@
-#ifndef MEEPLE_H
-#define MEEPLE_H
+#pragma once
 
 #include <string>
 
@@ -16,4 +15,3 @@ private:
 	
 };
 
-#endif

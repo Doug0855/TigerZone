@@ -1,5 +1,4 @@
-#ifndef TILESTACK_H
-#define TILESTACK_H
+#pragma once
 
 #include <vector>
 #include "Tile.h"
@@ -17,4 +16,3 @@ private:
 	std::vector<Tile> tiles;
 };
 
-#endif

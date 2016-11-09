@@ -131,7 +131,7 @@ std::pair<int,int> getOptimalPlacement(Tile* tile, std::vector< std::pair<int, i
 }
 
 // Place a tile on the board. Make sure all neighboring tiles are pointing to the corresponding faces
-void Board::place_tile(std::pair<int, int> location, Tile tile)
+void Board::place_tile(std::pair<int, int> location, Tile& tile)
 {
 	tile.hasInit = true;
 
@@ -146,30 +146,30 @@ void Board::place_tile(std::pair<int, int> location, Tile tile)
 	// Connect bottom face of tile to existing tile below it
 	if(m_board[i+1][j].hasInit)
 	{
-		m_board[i+1][j].up.neighborFace = &tile.down;
-		tile.down.neighborFace = &m_board[i+1][j].up;
+		m_board[i + 1][j].up.neighborFace = &m_board[i][j].down;
+		m_board[i][j].down.neighborFace = &m_board[i+1][j].up;
 	}
 	// Connect top face of tile to existing tile below it
 	if(m_board[i-1][j].hasInit)
 	{
-		m_board[i-1][j].down.neighborFace = &tile.up;
-		tile.up.neighborFace = &m_board[i - 1][j].down;
-		std::cout<<"Up neighbor is "<<tile.up.neighborFace<<std::endl;
+		m_board[i - 1][j].down.neighborFace = &m_board[i][j].up;
+		m_board[i][j].up.neighborFace = &m_board[i - 1][j].down;
+		std::cout << "Up neighbor is " << m_board[i][j].up.neighborFace << std::endl;
 	}
 	// Connect left face of tile to existing tile to the left of it
 	if (m_board[i][j - 1].hasInit)
 	{
-		m_board[i][j-1].right.neighborFace = &tile.left;
-		tile.left.neighborFace = &m_board[i][j - 1].right;
+		m_board[i][j - 1].right.neighborFace = &m_board[i][j].left;
+		m_board[i][j].left.neighborFace = &m_board[i][j - 1].right;
 	}
 	// Connect right face of tile to the existing tile to the right of int
 	if (m_board[i][j + 1].hasInit)
 	{
-		m_board[i][j+1].left.neighborFace = &tile.right;
-		tile.right.neighborFace = &m_board[i][j + 1].left;
+		m_board[i][j + 1].left.neighborFace = &m_board[i][j].right;
+		m_board[i][j].right.neighborFace = &m_board[i][j + 1].left;
 	}
 
-	std::vector< std::string > openSpots = tile.getOpenFaces();
+	std::vector< std::string > openSpots = m_board[i][j].getOpenFaces();
 	std::cout<<"After placement, tile has open faces: ";
 	for(int i = 0; i < openSpots.size(); i++) {
 		std::cout<<openSpots[i]<<" "<<std::endl;

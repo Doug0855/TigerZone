@@ -1,6 +1,4 @@
-#ifndef FACE_H
-#define FACE_H
-
+#pragma once
 #include "Block.h"
 
 class Face{
@@ -17,4 +15,3 @@ class Face{
 	
 };
 
-#endif

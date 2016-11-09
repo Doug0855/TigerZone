@@ -1,11 +1,11 @@
 #include <iostream>
 #include <utility>
 
-#include "Board.cpp"
-#include "Tile.cpp"
-#include "Block.cpp"
-#include "Face.cpp"
-#include "Meeple.cpp"
+#include "Board.h"
+#include "Tile.h"
+#include "Block.h"
+#include "Face.h"
+#include "Meeple.h"
 
 int main() {
 	Board gameBoard;	
@@ -35,6 +35,8 @@ int main() {
 		std::cout<<std::endl;
 	}
 
+	int z;
+	std::cin >> z;
 	// Print out gameboard, if actual tile will print A, if default will print '.' 
 	// Should only have 1 A in the middle as of now
 	// for(int i = 0; i < gameBoard.m_board.size(); i++)
