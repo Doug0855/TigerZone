@@ -8,16 +8,15 @@
 #include "Meeple.cpp"
 
 int main() {
-	std::cout <<"Hello!"<<std::endl;
-	Board gameBoard;
-	
+	Board gameBoard;	
 
 	// Create center tile to place in middle of matrix and test place_tile working
 	std::pair<int,int> loc(72,72);
 	Tile centerTile;	
-	centerTile.hasInit = true;
-	
+
+	Tile additonalTile;
 	gameBoard.place_tile(loc, centerTile);
+	gameBoard.place_tile(std::pair<int,int>(71,72), additonalTile);
 
 	// Print out gameboard, if actual tile will print A, if default will print '.' 
 	// Should only have 1 A in the middle as of now

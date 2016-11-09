@@ -20,3 +20,7 @@ bool Block::connected()
 	if(stuffconnected.size() == 0) return false;
 	return true;
 }
+
+void Block::setType(std::string type){
+	this->type = type;
+}

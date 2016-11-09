@@ -13,9 +13,7 @@ Board::Board()
 		{
 			Tile boardTile;
 			m_board[i].push_back(boardTile);
-			std::cout<<'*';
 		}
-		std::cout<<std::endl;
 	}
 }
 
@@ -61,38 +59,40 @@ std::pair<int,int> getOptimalPlacement(Tile* tile, std::vector< std::pair<int, i
 
 void Board::place_tile(std::pair<int, int> location, Tile tile)
 {
+	tile.hasInit = true;
+
 	int i = location.first;
 	int j = location.second;
-
+	
 	m_board[i][j] = tile;
 	
 	// Connect bottom face of tile to existing tile below it
 	if(m_board[i+1][j].hasInit)
 	{
-		*m_board[i+1][j].up.neighborFace = tile.getDownFace();
-		*tile.down.neighborFace = m_board[i + 1][j].getUpFace();
-		m_board[i+1][j].hasInit = false;	
+		std::cout<<"A tile exists below the placement of this one"<<std::endl;
+		m_board[i+1][j].up.neighborFace = &tile.down;
+		std::cout<<"Connected to down face"<<std::endl;
+		tile.down.neighborFace = &m_board[i + 1][j].up;
+		bool isConnect = (tile.down.neighborFace->faceEquals(m_board[i + 1][j].up));
+		if(isConnect) { std::cout<< "Connected"; }
 	}
 	// Connect top face of tile to existing tile above it
 	if(m_board[i-1][j].hasInit)
 	{
 		*m_board[i-1][j].down.neighborFace = tile.getUpFace();
 		*tile.up.neighborFace = m_board[i - 1][j].getDownFace();
-		m_board[i-1][j].hasInit = false;
 	}
 	// Connect left face of tile to existing tile to the left of it
 	if (m_board[i][j - 1].hasInit)
 	{
 		*m_board[i][j-1].right.neighborFace = tile.getLeftFace();
 		*tile.left.neighborFace = m_board[i][j - 1].getRightFace();
-		m_board[i][j - 1].hasInit = false;
 	}
 	// Connect right face of tile to the existing tile to the right of int
 	if (m_board[i][j + 1].hasInit)
 	{
 		*m_board[i][j+1].left.neighborFace = tile.getRightFace();
 		*tile.right.neighborFace = m_board[i][j + 1].getLeftFace();
-		m_board[i][j + 1].hasInit = false;
 	}
 }
 

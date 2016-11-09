@@ -3,6 +3,9 @@
 Face::Face()
 {
 	neighborFace = NULL;
+	m_1.setType("city");
+	m_2.setType("ground"); 
+	m_3.setType("city");
 }
 
 Face::~Face()
