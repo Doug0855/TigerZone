@@ -14,7 +14,7 @@ Game::~Game()
 }
 
 void Game::init() {
-	currentPlayer = p1;
+	currentPlayer = &player1;
 	tileStack.shuffle(); 
 }
 
@@ -28,9 +28,9 @@ void Game::play() {
 }
 
 void Game::switchPlayer() {
-	if (currentPlayer = p1) {
-		currentPlayer = p2;
+	if (currentPlayer == &player1) {
+		currentPlayer = &player2;
 	} else {
-		currentPlayer = p1; 
+		currentPlayer = &player1; 
 	}
 }

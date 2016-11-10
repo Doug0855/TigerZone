@@ -15,8 +15,12 @@ void TileStack::shuffle()
 		
 }
 
-Tile TileStack::draw()
+Tile* TileStack::draw()
 {
-	Tile tile;
+	Tile* tile;
 	return tile;
+}
+
+bool TileStack::isEmpty() {
+	return true;
 }

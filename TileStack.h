@@ -10,7 +10,8 @@ public:
 	~TileStack();
 	
 	void shuffle();
-	Tile draw();
+	Tile* draw();
+	bool isEmpty();
 	
 private:
 	std::vector<Tile> tiles;
