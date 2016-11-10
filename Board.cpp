@@ -141,7 +141,7 @@ std::vector< std::pair<int, int> > Board::checkPlacement(Tile* tile, int i, int 
 }
 
 
-std::pair<int,int> getOptimalPlacement(Tile* tile, std::vector< std::pair<int, int> > availableMoves) {
+std::pair<int,int> Board::getOptimalPlacement(Tile* tile, std::vector< std::pair<int, int> > availableMoves) {
 	return availableMoves[0];
 }
 

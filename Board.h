@@ -15,6 +15,7 @@ public:
 	std::vector< std::pair<int, int> > display_positions(Tile* tile);
 	void place_tile(std::pair<int, int> location, Tile& tile);
 	std::vector< std::pair<int, int> > checkPlacement(Tile* tile, int i, int j, std::string location);
+	std::pair<int, int> getOptimalPlacement(Tile* tile, std::vector< std::pair<int, int> > availableMoves);
 
 };
 
