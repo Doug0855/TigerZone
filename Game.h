@@ -10,11 +10,13 @@ public:
 	~Game();
 	void init(); 
 	void play(); 
+	void switchPlayer(); 
 private:
 	Board gameBoard; 
 	Player player1, player2;
-	int currentPlayer; 
+	Player* currentPlayer; 
 	TileStack tileStack; 
+	Tile* currentTile;
 };
 
 
