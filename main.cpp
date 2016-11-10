@@ -54,7 +54,7 @@ int main() {
 	// Get coordinates of all possible locations where we can place a tile 
 	std::vector<std::pair<int,int> > availablePlacements = gameBoard.display_positions(&tile3);
 
-	std::cout<<"# of open places: "<<availablePlacements.size();
+	std::cout<<"# of open places: "<<availablePlacements.size()<<std::endl;
 	for(int i = 0; i < availablePlacements.size(); i++) {
 		int row = availablePlacements[i].first;
 		int col = availablePlacements[i].second;
