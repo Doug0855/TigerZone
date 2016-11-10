@@ -27,9 +27,9 @@ int main() {
 	tile2.right.getM2()->setType("right2");
 	tile2.right.getM3()->setType("right2");
 
-	tile2.down.getM1()->setType("down2");
-	tile2.down.getM2()->setType("down2");
-	tile2.down.getM3()->setType("down2");
+	tile2.down.getM1()->setType("Ground");
+	tile2.down.getM2()->setType("Ground");
+	tile2.down.getM3()->setType("Ground");
 
 	tile3.up.getM1()->setType("Ground");
 	tile3.up.getM2()->setType("Ground");
