@@ -1,5 +1,5 @@
 #this target will compile all files
-all: TigerZone
+all: TigerZone	
 
 TigerZone: main.o Game.o TileStack.o Face.o Block.o Player.o Board.o Tile.o Meeple.o
 	g++ -o main.o Game.o TileStack.o Face.o Block.o Player.o Board.o Tile.o Meeple.o

@@ -40,10 +40,8 @@ bool Tile::hasOpenFace()
 std::vector<std::string> Tile::getOpenFaces()
 {
 	std::vector<std::string> openFaces;
-	if(!up.connected()) {
-		std::cout<<"Up neighbor is "<<up.neighborFace<<std::endl;
+	if(!up.connected())
 		openFaces.push_back("up");
-	}
 	if(!down.connected())
 		openFaces.push_back("down");
 	if(!left.connected())

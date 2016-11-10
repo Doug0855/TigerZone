@@ -1,38 +1,65 @@
 #include <iostream>
 #include <utility>
 
-#include "Board.h"
-#include "Tile.h"
-#include "Block.h"
-#include "Face.h"
-#include "Meeple.h"
+#include "Board.cpp"
+#include "Tile.cpp"
+#include "Block.cpp"
+#include "Face.cpp"
+#include "Meeple.cpp"
 
 int main() {
 	Board gameBoard;	
 
-	// Create center tile to place in middle of matrix and test place_tile working
 	Tile tile1;	
 	Tile tile2;
 	Tile tile3;
 
+	tile2.up.getM1()->setType("up2");
+	tile2.up.getM2()->setType("up2");
+	tile2.up.getM3()->setType("up2");
+
+	tile2.left.getM1()->setType("left2");
+	tile2.left.getM2()->setType("left2");
+	tile2.left.getM3()->setType("left2");
+
+	tile2.right.getM1()->setType("right2");
+	tile2.right.getM2()->setType("right2");
+	tile2.right.getM3()->setType("right2");
+
+	tile2.down.getM1()->setType("Ground");
+	tile2.down.getM2()->setType("Ground");
+	tile2.down.getM3()->setType("Ground");
+
+	tile3.up.getM1()->setType("Ground");
+	tile3.up.getM2()->setType("Ground");
+	tile3.up.getM3()->setType("Ground");
+
+	tile3.left.getM1()->setType("left3");
+	tile3.left.getM2()->setType("left3");
+	tile3.left.getM3()->setType("left3");
+
+	tile3.right.getM1()->setType("right3");
+	tile3.right.getM2()->setType("right3");
+	tile3.right.getM3()->setType("right3");
+	
+	tile3.down.getM1()->setType("down3");
+	tile3.down.getM2()->setType("down3");
+	tile3.down.getM3()->setType("down3");
+
+
 	gameBoard.place_tile(std::pair<int,int>(71,72), tile1);
 	gameBoard.place_tile(std::pair<int,int>(72,72), tile2);
-	gameBoard.place_tile(std::pair<int,int>(73,72), tile3);
-	
-	std::vector<std::pair<int,int> > openSpots = gameBoard.display_positions();
-	std::cout<<"open spots: "<<openSpots.size()<<std::endl;
-	std::cout<<"Now going to call getOpenFaces() after running placeTile. Should get same"
-	<<"results as above. As you can see there is an extra 'up' the 2nd and 3rd tiles which shouldnt be there"<<std::endl;
-	for(int i = 0; i < openSpots.size(); i++) {
-		int row = openSpots[i].first;
-		int col = openSpots[i].second;
+	// gameBoard.place_tile(std::pair<int,int>(73,72), tile3);
 
-		std::vector<std::string> openFaces = gameBoard.m_board[row][col].getOpenFaces();
-		std::cout<<"Open faces of "<<row<<" "<<col<<" are: ";
-		for(int j = 0; j < openFaces.size(); j++) {
-			std::cout<<openFaces[j]<<" ";
-		}
-		std::cout<<std::endl;
+	// Get coordinates of all possible locations where we can place a tile 
+	std::vector<std::pair<int,int> > availablePlacements = gameBoard.display_positions(&tile3);
+
+	std::cout<<"# of open places: "<<availablePlacements.size();
+	for(int i = 0; i < availablePlacements.size(); i++) {
+		int row = availablePlacements[i].first;
+		int col = availablePlacements[i].second;
+
+		std::cout<<"Open placement at "<<row<<" "<<col<<std::endl;
 	}
 
 	int z;
@@ -50,4 +77,4 @@ int main() {
 	// 	}
 	// 	std::cout<<std::endl;
 	// }
-}
+};
