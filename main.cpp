@@ -68,16 +68,17 @@ int main() {
 
 	// int z;
 	// std::cin >> z;
+	
 	// Print out gameboard
-	for(int i = 0; i < gameBoard.m_board.size(); i++)
-	{
-		for(int j = 0; j < gameBoard.m_board[0].size(); j++)
-		{
-			if(gameBoard.m_board[i][j].hasInit)
-				std::cout<<'A';
-			else
-				std::cout<<'.';
-		}
-		std::cout<<std::endl;
-	}
+	// for(int i = 0; i < gameBoard.m_board.size(); i++)
+	// {
+	// 	for(int j = 0; j < gameBoard.m_board[0].size(); j++)
+	// 	{
+	// 		if(gameBoard.m_board[i][j].hasInit)
+	// 			std::cout<<'A';
+	// 		else
+	// 			std::cout<<'.';
+	// 	}
+	// 	std::cout<<std::endl;
+	// }
 };
