@@ -1,7 +1,8 @@
 #pragma once
 
-
+#include "Level.h"
 #include <Bengine/IGameScreen.h>
+#include <Bengine/InputManager.h>
 #include <vector>
 #include <Bengine/SpriteBatch.h>
 #include <Bengine/GLSLProgram.h>
@@ -37,8 +38,10 @@ private:
 	void initLevel(); /// sets up level
 	void initShaders(); // inits shaders
 	void checkInput(float deltaTime);
-
+	void updateLevel();
 	bool onExitClicked(const CEGUI::EventArgs& e);
+
+	Level* m_level;
 
 	Bengine::InputManager m_inputManager;
 

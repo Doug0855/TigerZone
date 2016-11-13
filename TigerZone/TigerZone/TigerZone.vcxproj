@@ -10,6 +10,18 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="App.cpp" />
+    <ClCompile Include="GamePlayScreen.cpp" />
+    <ClCompile Include="Level.cpp" />
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="App.h" />
+    <ClInclude Include="GamePlayScreen.h" />
+    <ClInclude Include="Level.h" />
+    <ClInclude Include="ScreenIndices.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{45AF251C-0CA0-4BC4-8A33-5ED0F06883FC}</ProjectGuid>
     <RootNamespace>TigerZone</RootNamespace>
@@ -74,15 +86,6 @@
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\PaperGame\graphicsTutorials\Bullet.h" />
-    <ClInclude Include="..\..\PaperGame\graphicsTutorials\MainGame.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\PaperGame\graphicsTutorials\Bullet.cpp" />
-    <ClCompile Include="..\..\PaperGame\graphicsTutorials\main.cpp" />
-    <ClCompile Include="..\..\PaperGame\graphicsTutorials\MainGame.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
