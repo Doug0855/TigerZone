@@ -1,16 +1,19 @@
-﻿Build started 11/7/2016 8:02:24 PM.
-     1>Project "c:\Users\colton garrett\documents\visual studio 2013\Projects\TigerZone\TigerZone\TigerZone.vcxproj" on node 2 (Build target(s)).
+﻿Build started 11/14/2016 11:23:12 AM.
+     1>Project "C:\Users\colt\Documents\TigerZone\TigerZone\TigerZone\TigerZone\TigerZone.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\PaperGame\graphicsTutorials\MainGame.cpp
-         MainGame.cpp
-     1>c:\users\colton garrett\documents\visual studio 2013\projects\papergame\graphicstutorials\maingame.cpp(63): warning C4305: '+=' : truncation from 'double' to 'float'
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Level.cpp
+         Level.cpp
+     1>c:\users\colt\documents\tigerzone\tigerzone\tigerzone\tigerzone\level.cpp(31): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\colt\documents\tigerzone\tigerzone\tigerzone\tigerzone\level.cpp(33): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\colt\documents\tigerzone\tigerzone\tigerzone\tigerzone\level.cpp(84): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"c:\users\colton garrett\documents\visual studio 2013\Projects\TigerZone\Debug\TigerZone.exe" /INCREMENTAL /NOLOGO SDL2.lib SDL2main.lib SDL2_ttf.lib SDL2_mixer.lib glew32.lib opengl32.lib Bengine.lib Box2D.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"c:\users\colton garrett\documents\visual studio 2013\Projects\TigerZone\Debug\TigerZone.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"c:\users\colton garrett\documents\visual studio 2013\Projects\TigerZone\Debug\TigerZone.lib" /MACHINE:X86 Debug\Bullet.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\colt\Documents\TigerZone\TigerZone\TigerZone\Debug\TigerZone.exe" /INCREMENTAL /NOLOGO SDL2.lib SDL2main.lib SDL2_ttf.lib SDL2_mixer.lib glew32.lib opengl32.lib Bengine.lib Box2D.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\colt\Documents\TigerZone\TigerZone\TigerZone\Debug\TigerZone.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\colt\Documents\TigerZone\TigerZone\TigerZone\Debug\TigerZone.lib" /MACHINE:X86 Debug\App.obj
+         Debug\GamePlayScreen.obj
+         Debug\Level.obj
          Debug\main.obj
-         Debug\MainGame.obj
-         TigerZone.vcxproj -> c:\users\colton garrett\documents\visual studio 2013\Projects\TigerZone\Debug\TigerZone.exe
-     1>Done Building Project "c:\Users\colton garrett\documents\visual studio 2013\Projects\TigerZone\TigerZone\TigerZone.vcxproj" (Build target(s)).
+         TigerZone.vcxproj -> C:\Users\colt\Documents\TigerZone\TigerZone\TigerZone\Debug\TigerZone.exe
+     1>Done Building Project "C:\Users\colt\Documents\TigerZone\TigerZone\TigerZone\TigerZone\TigerZone.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.71
+Time Elapsed 00:00:01.50

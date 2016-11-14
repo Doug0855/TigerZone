@@ -12,8 +12,9 @@ GameplayScreen::GameplayScreen(Bengine::Window* window) : m_window(window)
 	m_screenIndex = SCREEN_INDEX_GAMEPLAY;
 }
 
-GameplayScreen::~GameplayScreen(){
-	
+GameplayScreen::~GameplayScreen()
+{
+	delete m_level;
 }
 
 int GameplayScreen::getNextScreenIndex() const
@@ -58,6 +59,7 @@ void GameplayScreen::onExit()
 void GameplayScreen::update(float deltaTime)
 {
 	checkInput(deltaTime);
+	updateLevel();
 	m_camera.update();
 }
 
@@ -80,7 +82,8 @@ void GameplayScreen::draw()
 
 	m_spriteBatch.begin();
 
-	
+	m_level->draw();
+
 	m_spriteBatch.end();
 	m_spriteBatch.renderBatch();
 	m_textureProgram.unuse();
@@ -90,7 +93,7 @@ void GameplayScreen::draw()
 
 void GameplayScreen::initLevel()
 {
-	
+	m_level = new Level("Levels/level.txt");
 }
 
 void GameplayScreen::initShaders()
@@ -107,6 +110,8 @@ void GameplayScreen::checkInput(float deltaTime)
 {
 	// Update inputmanager
 	m_inputManager.update();
+	const float CAMERA_SPEED = 2.0f;
+	const float SCALE_SPEED = 0.01f;
 
 	SDL_Event evnt;
 	while (SDL_PollEvent(&evnt))
@@ -125,6 +130,29 @@ void GameplayScreen::checkInput(float deltaTime)
 			break;
 		}
 	}
+	if (m_inputManager.isKeyDown(SDLK_w)) {
+		m_camera.setPosition(m_camera.getPosition() + glm::vec2(0.0f, CAMERA_SPEED));
+	}
+	if (m_inputManager.isKeyDown(SDLK_s)) {
+		m_camera.setPosition(m_camera.getPosition() + glm::vec2(0.0f, -CAMERA_SPEED));
+	}
+	if (m_inputManager.isKeyDown(SDLK_a)) {
+		m_camera.setPosition(m_camera.getPosition() + glm::vec2(-CAMERA_SPEED, 0.0f));
+	}
+	if (m_inputManager.isKeyDown(SDLK_d)) {
+		m_camera.setPosition(m_camera.getPosition() + glm::vec2(CAMERA_SPEED, 0.0f));
+	}
+	if (m_inputManager.isKeyDown(SDLK_q)) {
+		m_camera.setScale(m_camera.getScale() + SCALE_SPEED);
+	}
+	if (m_inputManager.isKeyDown(SDLK_e)) {
+		m_camera.setScale(m_camera.getScale() - SCALE_SPEED);
+	}
+
+}
+
+void GameplayScreen::updateLevel()
+{
 
 }
 

@@ -8,7 +8,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TigerZone", "TigerZone\Tige
 		{9053754A-DE6B-4DAA-9697-FECAB2A89B53} = {9053754A-DE6B-4DAA-9697-FECAB2A89B53}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Bengine", "..\PaperGame\Bengine\Bengine.vcxproj", "{9053754A-DE6B-4DAA-9697-FECAB2A89B53}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Bengine", "Bengine\Bengine.vcxproj", "{9053754A-DE6B-4DAA-9697-FECAB2A89B53}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
