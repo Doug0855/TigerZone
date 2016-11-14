@@ -1,43 +1,9 @@
-﻿Build started 11/13/2016 5:34:35 PM.
-     1>Project "F:\documents\TigerZone\TigerZone\TigerZone\Bengine\Bengine.vcxproj" on node 2 (Build target(s)).
+﻿Build started 11/14/2016 11:23:12 AM.
+     1>Project "C:\Users\colt\Documents\TigerZone\TigerZone\TigerZone\Bengine\Bengine.vcxproj" on node 2 (Build target(s)).
      1>Lib:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"F:\documents\TigerZone\TigerZone\TigerZone\Debug\Bengine.lib" SDL2.lib SDL2main.lib SDL2_ttf.lib SDL2_mixer.lib opengl32.lib glew32.lib Box2D.lib "CEGUIBase-0_d.lib" "CEGUIOpenGLRenderer-0_d.lib" /LIBPATH:F:\documents\TigerZone\TigerZone\TigerZone\deps/lib/Debug/ /NOLOGO Debug\AudioEngine.obj
-         Debug\Bengine.obj
-         Debug\Camera2D.obj
-         Debug\BengineErrors.obj
-         Debug\DebugRenderer.obj
-         Debug\GLSLProgram.obj
-         Debug\GUI.obj
-         Debug\ImageLoader.obj
-         Debug\InputManager.obj
-         Debug\IOManager.obj
-         Debug\IMainGame.obj
-         Debug\ParticleBatch2D.obj
-         Debug\ParticleEngine2D.obj
-         Debug\picoPNG.obj
-         Debug\ResourceManager.obj
-         Debug\ScreenList.obj
-         Debug\Sprite.obj
-         Debug\SpriteBatch.obj
-         Debug\SpriteFont.obj
-         Debug\TextureCache.obj
-         Debug\Timing.obj
-         Debug\Window.obj
-     1>SDL2_ttf.lib(SDL2_ttf.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
-     1>SDL2_ttf.lib(SDL2_ttf.dll) : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
-     1>SDL2_mixer.lib(SDL2_mixer.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
-     1>SDL2_mixer.lib(SDL2_mixer.dll) : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
-     1>opengl32.lib(OPENGL32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
-     1>opengl32.lib(OPENGL32.dll) : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
-     1>glew32.lib(glew32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
-     1>glew32.lib(glew32.dll) : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
-     1>CEGUIBase-0_d.lib(CEGUIBase-0_d.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
-     1>CEGUIBase-0_d.lib(CEGUIBase-0_d.dll) : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
-     1>CEGUIOpenGLRenderer-0_d.lib(CEGUIOpenGLRenderer-0_d.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
-     1>CEGUIOpenGLRenderer-0_d.lib(CEGUIOpenGLRenderer-0_d.dll) : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
-         Bengine.vcxproj -> F:\documents\TigerZone\TigerZone\TigerZone\Debug\Bengine.lib
-     1>Done Building Project "F:\documents\TigerZone\TigerZone\TigerZone\Bengine\Bengine.vcxproj" (Build target(s)).
+         Bengine.vcxproj -> C:\Users\colt\Documents\TigerZone\TigerZone\TigerZone\Debug\Bengine.lib
+     1>Done Building Project "C:\Users\colt\Documents\TigerZone\TigerZone\TigerZone\Bengine\Bengine.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.40
+Time Elapsed 00:00:00.13

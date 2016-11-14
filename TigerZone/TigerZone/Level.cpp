@@ -43,7 +43,7 @@ Level::Level(const std::string& fileName)
 			case'.':
 				break;
 			default:
-				displayTile(x, y, tile, rotate);
+				displayTile(x/2, y, tile, rotate);
 				break;
 			}
 		}
