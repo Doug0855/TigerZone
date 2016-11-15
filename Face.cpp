@@ -1,13 +1,16 @@
 #include "Face.h"
 #include <iostream>
 
+Face::Face(char b1, char b2, char b3)
+{
+	this->m_1 = Block(b1);
+	this->m_2 = Block(b2);
+	this->m_3 = Block(b3);
+	neighborFace = NULL;
+}
 Face::Face()
 {
 	neighborFace = NULL;
-
-	m_1.setType("city");
-	m_2.setType("ground"); 
-	m_3.setType("city");
 }
 
 Face::~Face()
