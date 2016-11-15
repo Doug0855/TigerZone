@@ -17,7 +17,7 @@ void TileStack::shuffle()
 
 Tile* TileStack::draw()
 {
-	Tile* tile;
+	Tile* tile = new Tile;
 	return tile;
 }
 
