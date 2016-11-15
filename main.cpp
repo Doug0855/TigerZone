@@ -27,16 +27,16 @@ void printToTextFile(Board gameboard)
 int main() {
 	Board gameBoard;	
 
-	Tile tile1;	
-	Tile tile2;
-	Tile tile3;
+	Tile tile1(1);	
+	Tile tile2(2);
+	Tile tile3(8);
 
 	tile1.setType('b');
 	tile2.setType('b');
 	tile3.setType('b');
 
 	gameBoard.place_tile(std::pair<int,int>(71,72), tile1);
-	gameBoard.place_tile(std::pair<int,int>(72,72), tile2);
+	// gameBoard.place_tile(std::pair<int,int>(72,72), tile2);
 	// gameBoard.place_tile(std::pair<int,int>(73,72), tile3);
 
 	// Get coordinates of all possible locations where we can place a tile 
@@ -49,9 +49,9 @@ int main() {
 
 		std::cout<<"Open Location at "<<row<<" "<<col<<std::endl;
 	}
-
-	std::pair<int,int> optimalLocation = gameBoard.getOptimalPlacement(&tile3, availableLocations);
-	gameBoard.place_tile(optimalLocation, tile3);
+	if(availableLocations.size() > 0)
+		std::pair<int,int> optimalLocation = gameBoard.getOptimalPlacement(&tile3, availableLocations);
+	gameBoard.place_tile(std::pair<int,int>(0,0), tile3);
 
 	printToTextFile(gameBoard);
 	// int z;

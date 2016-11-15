@@ -5,31 +5,31 @@ TigerZone: main.o Game.o TileStack.o Face.o Block.o Player.o Board.o Tile.o Meep
 	g++ -o main.o Game.o TileStack.o Face.o Block.o Player.o Board.o Tile.o Meeple.o
 
 main.o: main.cpp
-	g++ main.cpp
+	g++ -std=c++11 main.cpp
 
 Game.o: Game.cpp
-	g++ -c Game.cpp 
+	g++ -std=c++11 -c Game.cpp 
 
 TileStack.o: TileStack.cpp
-	g++ -c TileStack.cpp
+	g++ -std=c++11 -c TileStack.cpp
 
 Face.o: Face.cpp
-	g++ -c Face.cpp
+	g++ -std=c++11 -c Face.cpp
 
 Block.o: Block.cpp
-	g++ -c Block.cpp
+	g++ -std=c++11 -c Block.cpp
 
 Player.o: Player.cpp
-	g++ -c Player.cpp
+	g++ -std=c++11 -c Player.cpp
 
 Board.o: Board.cpp
-	g++ -c Board.cpp
+	g++ -std=c++11 -c Board.cpp
 
 Tile.o: Tile.cpp
-	g++ -c Tile.cpp
+	g++ -std=c++11 -c Tile.cpp
 
 Meeple.o: Meeple.cpp
-	g++ -c Meeple.cpp
+	g++ -std=c++11 -c Meeple.cpp
 
 clean:
 	rm -rf *o menu
