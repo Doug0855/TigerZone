@@ -1,22 +1,31 @@
-#pragma once
+#ifndef BLOCK_H
+#define BLOCK_H
 
 #include <vector>
+#include <string>
+//#include "Meeple.h"
 
-#include "Meeple.h"
+#define    Jungle    	'j'
+#define    Lake      	'l'
+#define    Trail     	't'
+#define    Den	        'd'
 
 class Block{
 public:
+	Block(char c);
 	Block();
 	~Block();
 	
 	bool closed(); ///< if it completes city/field/etc
 	bool connected(); ///< if the block is connected to any other blocks returns false if not conncted
 	std::string getType() { return type; }
-	void setType(std::string);
 	
 private:
-	Meeple meeple;
-	std::vector<Block*> stuffconnected;
+//	Meeple meeple;
+	std::vector<Block*> ConnectedBlocks;
 	std::string type;
 };
+
+#endif
+
 
