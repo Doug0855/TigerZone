@@ -6,19 +6,47 @@ TileStack::TileStack()
 	{	
 		Tile tile(i);
 		if (i == 1 || i == 4 || i == 8 || i == 15 || i == 22 || i == 17 || i == 26)
-			this->tiles.insert(1,tile);
+		{
+			for(int k = 0; k < 1; k++) {
+				this->tiles.push_back(tile);
+			}
+		}	
 		if (i == 3 || i == 14 || i == 16 || i == 18 || i == 19 || i == 20 || i == 23 || i == 25 || i == 27)
-			this->tiles.insert(2,tile);
+		{
+			for(int k = 0; k < 2; k++) {
+				this->tiles.push_back(tile);
+			}
+		}
 		if (i == 11 || i == 12 || i == 21 || i == 24)
-			this->tiles.insert(3,tile);
+		{
+			for(int k = 0; k < 3; k++) {
+				this->tiles.push_back(tile);
+			}
+		}
 		if (i == 2 || i == 7 || i == 9)
-			this->tiles.insert(4,tile);
+		{
+			for(int k = 0; k < 4; k++) {
+				this->tiles.push_back(tile);
+			}
+		}
 		if (i == 10 || i == 13)
-			this->tiles.insert(5,tile);
+		{
+			for(int k = 0; k < 5; k++) {
+				this->tiles.push_back(tile);
+			}
+		}
 		if (i == 5)
-			this->tiles.insert(8,tile);
+		{
+			for(int k = 0; k < 8; k++) {
+				this->tiles.push_back(tile);
+			}
+		}
 		if (i == 6)
-			this->tiles.insert(9,tile);
+		{
+			for(int k = 0; k < 9; k++) {
+				this->tiles.push_back(tile);
+			}
+		}
 	}
 }
 
