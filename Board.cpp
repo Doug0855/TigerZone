@@ -143,40 +143,40 @@ void Board::place_tile(std::pair<int, int> location, Tile& tile)
 {
 	tile.hasInit = true;
 
-	int i = location.first;
-	int j = location.second;
+	int row = location.first;
+	int col = location.second;
 	
-	m_board[i][j] = tile;
+	m_board[row][col] = tile;
 
 	// WE SHOULD REPLACE WITH A FUNCTION LIKE connectFaces(face1, face2) that does the mutual connection
 	// between two faces rather than the method we have now. A bit cleaner and more readable code
 	
 	// Connect bottom face of tile to existing tile below it
-	if(m_board[i+1][j].hasInit)
+	if(row+1 <= 150 && m_board[row+1][col].hasInit)
 	{
-		m_board[i + 1][j].up.neighborFace = &m_board[i][j].down;
-		m_board[i][j].down.neighborFace = &m_board[i+1][j].up;
+		m_board[row + 1][col].up.neighborFace = &m_board[row][col].down;
+		m_board[row][col].down.neighborFace = &m_board[row+1][col].up;
 	}
 	// Connect top face of tile to existing tile below it
-	if(m_board[i-1][j].hasInit)
+	if(row-1 >= 0 && m_board[row-1][col].hasInit)
 	{
-		m_board[i - 1][j].down.neighborFace = &m_board[i][j].up;
-		m_board[i][j].up.neighborFace = &m_board[i - 1][j].down;
+		m_board[row - 1][col].down.neighborFace = &m_board[row][col].up;
+		m_board[row][col].up.neighborFace = &m_board[row - 1][col].down;
 	}
 	// Connect left face of tile to existing tile to the left of it
-	if (m_board[i][j - 1].hasInit)
+	if (col - 1 >= 0 && m_board[row][col - 1].hasInit)
 	{
-		m_board[i][j - 1].right.neighborFace = &m_board[i][j].left;
-		m_board[i][j].left.neighborFace = &m_board[i][j - 1].right;
+		m_board[row][col - 1].right.neighborFace = &m_board[row][col].left;
+		m_board[row][col].left.neighborFace = &m_board[row][col - 1].right;
 	}
 	// Connect right face of tile to the existing tile to the right of int
-	if (m_board[i][j + 1].hasInit)
+	if (col+1 <= 150 && m_board[row][col + 1].hasInit)
 	{
-		m_board[i][j + 1].left.neighborFace = &m_board[i][j].right;
-		m_board[i][j].right.neighborFace = &m_board[i][j + 1].left;
+		m_board[row][col + 1].left.neighborFace = &m_board[row][col].right;
+		m_board[row][col].right.neighborFace = &m_board[row][col + 1].left;
 	}
 
-	// std::vector< std::string > openSpots = m_board[i][j].getOpenFaces();
+	// std::vector< std::string > openSpots = m_board[i][col].getOpenFaces();
 	// std::cout<<"After placement, tile has open faces: ";
 	// for(int i = 0; i < openSpots.size(); i++) {
 	// 	std::cout<<openSpots[i]<<" "<<std::endl;

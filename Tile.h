@@ -20,10 +20,7 @@ public:
 
 	int getRotations(){ return rotation; }
 	char getType() { return type; }
-	// Face getUpFace(){ return up; }
-	// Face getDownFace(){ return down; }
-	// Face getLeftFace(){ return left; }
-	// Face getRightFace(){ return right; }
+
 	Block getCenter() { return center; }
 	bool hasBoar() {return boar; }
 	bool hasBuffalo() {return buffalo; }
