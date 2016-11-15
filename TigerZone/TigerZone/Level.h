@@ -16,6 +16,8 @@ public:
 
 	void draw();
 
+	glm::vec2 cameraPos;
+
 	// Getters
 	int getWidth() const { return m_levelData[0].size(); }
 	int getHeight() const { return m_levelData.size(); }

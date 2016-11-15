@@ -76,6 +76,8 @@ void Level::displayTile(int x, int y, char tile, int rotate)
 
 	glm::vec4 uvRect(0.0f, 0.0f, 1.0f, 1.0f);
 
+	cameraPos = glm::vec2(x * TILE_WIDTH, y * TILE_WIDTH);
+
 	Bengine::ColorRGBA8 whiteColor(255, 255, 255, 255);
 
 	m_spriteBatch.draw(destRect,

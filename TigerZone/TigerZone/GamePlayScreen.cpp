@@ -49,6 +49,7 @@ void GameplayScreen::onEntry()
 	m_camera.init(m_window->getScreenWidth(), m_window->getScreenHeight());
 
 	initLevel();
+	m_camera.setPosition(m_level->cameraPos);
 }
 
 void GameplayScreen::onExit()
