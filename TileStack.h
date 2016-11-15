@@ -13,7 +13,6 @@ public:
 	Tile* draw();
 	bool isEmpty();
 	
-private:
 	std::vector<Tile> tiles;
 };
 
