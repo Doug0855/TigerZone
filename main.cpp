@@ -34,39 +34,6 @@ int main() {
 	tile1.setType('b');
 	tile2.setType('b');
 	tile3.setType('b');
-	// Used for testing face connection between two tiles
-	tile2.up.getM1()->setType("up2");
-	tile2.up.getM2()->setType("up2");
-	tile2.up.getM3()->setType("up2");
-
-	tile2.left.getM1()->setType("Ground");
-	tile2.left.getM2()->setType("Ground");
-	tile2.left.getM3()->setType("Ground");
-
-	tile2.right.getM1()->setType("right2");
-	tile2.right.getM2()->setType("right2");
-	tile2.right.getM3()->setType("right2");
-
-	tile2.down.getM1()->setType("Ground");
-	tile2.down.getM2()->setType("Ground");
-	tile2.down.getM3()->setType("Ground");
-
-	tile3.up.getM1()->setType("Ground");
-	tile3.up.getM2()->setType("Ground");
-	tile3.up.getM3()->setType("Ground");
-
-	tile3.left.getM1()->setType("left3");
-	tile3.left.getM2()->setType("left3");
-	tile3.left.getM3()->setType("left3");
-
-	tile3.right.getM1()->setType("right3");
-	tile3.right.getM2()->setType("right3");
-	tile3.right.getM3()->setType("right3");
-	
-	tile3.down.getM1()->setType("down3");
-	tile3.down.getM2()->setType("down3");
-	tile3.down.getM3()->setType("down3");
-
 
 	gameBoard.place_tile(std::pair<int,int>(71,72), tile1);
 	gameBoard.place_tile(std::pair<int,int>(72,72), tile2);

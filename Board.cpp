@@ -71,10 +71,10 @@ std::vector< std::pair<int, int> > Board::checkPlacement(Tile* tile, int i, int 
 		{
 			// if the bottom face of the tile were trying to place equals the top face of the tile on the board
 			// and it equals the faces of all the other faces
-			if (m_board[i][j].getUpFace().faceEquals(tile->getDownFace()) &&
-				(!m_board[i - 1][j - 1].hasInit || m_board[i - 1][j - 1].getRightFace().faceEquals(tile->getLeftFace())) &&
-				(!m_board[i - 1][j + 1].hasInit || m_board[i - 1][j + 1].getLeftFace().faceEquals(tile->getRightFace())) &&
-				(!m_board[i - 2][j].hasInit || m_board[i - 2][j].getDownFace().faceEquals(tile->getUpFace())))
+			if (m_board[i][j].up.faceEquals(tile->down) &&
+				(!m_board[i - 1][j - 1].hasInit || m_board[i - 1][j - 1].right.faceEquals(tile->left)) &&
+				(!m_board[i - 1][j + 1].hasInit || m_board[i - 1][j + 1].left.faceEquals(tile->right)) &&
+				(!m_board[i - 2][j].hasInit || m_board[i - 2][j].down.faceEquals(tile->up)))
 			{
 				places.push_back(std::pair<int, int>(i - 1, j));
 				break;
@@ -87,19 +87,14 @@ std::vector< std::pair<int, int> > Board::checkPlacement(Tile* tile, int i, int 
 		for (int ii = 0; ii < 4; ii++)
 		{
 			// same thing as above but with down
-			if ((!m_board[i + 2][j].hasInit || m_board[i + 2][j].getUpFace().faceEquals(tile->getDownFace())) &&
-				(!m_board[i + 1][j - 1].hasInit || m_board[i + 1][j - 1].getRightFace().faceEquals(tile->getLeftFace())) &&
-				(!m_board[i + 1][j + 1].hasInit || m_board[i + 1][j + 1].getLeftFace().faceEquals(tile->getRightFace())) &&
-				(m_board[i][j].getDownFace().faceEquals(tile->getUpFace())))
+			if ((!m_board[i + 2][j].hasInit || m_board[i + 2][j].up.faceEquals(tile->down)) &&
+				(!m_board[i + 1][j - 1].hasInit || m_board[i + 1][j - 1].right.faceEquals(tile->left)) &&
+				(!m_board[i + 1][j + 1].hasInit || m_board[i + 1][j + 1].left.faceEquals(tile->right)) &&
+				(m_board[i][j].down.faceEquals(tile->up)))
 			{
-				std::cout<<"pushing back in down"<<std::endl;
 				places.push_back(std::pair<int, int>(i + 1, j));
 				break;
 			}
-			std::cout<<"tile up face is "<<std::endl
-			<<"Up: "<<tile->getUpFace().getM1()->getType()<<std::endl
-			<<"Up: "<<tile->getUpFace().getM2()->getType()<<std::endl
-			<<"Up: "<<tile->getUpFace().getM3()->getType()<<std::endl;
 			tile->rotate();
 		}
 	}
@@ -108,12 +103,11 @@ std::vector< std::pair<int, int> > Board::checkPlacement(Tile* tile, int i, int 
 		for (int ii = 0; ii < 4; ii++)
 		{
 			// same thing as above but with left 
-			if ((!m_board[i + 1][j - 1].hasInit || m_board[i + 1][j - 1].getUpFace().faceEquals(tile->getDownFace())) &&
-				(!m_board[i][j - 2].hasInit || m_board[i - 1][j - 1].getRightFace().faceEquals(tile->getLeftFace())) &&
-				(m_board[i][j].getLeftFace().faceEquals(tile->getRightFace())) &&
-				(!m_board[i - 1][j - 1].hasInit || m_board[i][j - 2].getDownFace().faceEquals(tile->getUpFace())))
+			if ((!m_board[i + 1][j - 1].hasInit || m_board[i + 1][j - 1].up.faceEquals(tile->down)) &&
+				(!m_board[i][j - 2].hasInit || m_board[i - 1][j - 1].right.faceEquals(tile->left)) &&
+				(m_board[i][j].left.faceEquals(tile->right)) &&
+				(!m_board[i - 1][j - 1].hasInit || m_board[i][j - 2].down.faceEquals(tile->up)))
 			{
-				std::cout<<"pushing back in left"<<std::endl;
 				places.push_back(std::pair<int, int>(i, j - 1));
 				break;
 			}
@@ -125,12 +119,11 @@ std::vector< std::pair<int, int> > Board::checkPlacement(Tile* tile, int i, int 
 		for (int ii = 0; ii < 4; ii++)
 		{
 			// same thing as above but with right
-			if ((!m_board[i + 1][j + 1].hasInit || m_board[i + 1][j + 1].getUpFace().faceEquals(tile->getDownFace())) &&
-				(m_board[i][j].getRightFace().faceEquals(tile->getLeftFace())) &&
-				(!m_board[i][j + 2].hasInit || m_board[i - 1][j + 1].getLeftFace().faceEquals(tile->getRightFace())) &&
-				(!m_board[i - 1][j + 1].hasInit || m_board[i][j - 2].getDownFace().faceEquals(tile->getUpFace())))
+			if ((!m_board[i + 1][j + 1].hasInit || m_board[i + 1][j + 1].up.faceEquals(tile->down)) &&
+				(m_board[i][j].right.faceEquals(tile->left)) &&
+				(!m_board[i][j + 2].hasInit || m_board[i - 1][j + 1].left.faceEquals(tile->right)) &&
+				(!m_board[i - 1][j + 1].hasInit || m_board[i][j - 2].down.faceEquals(tile->up)))
 			{
-				std::cout<<"pushing back in right"<<std::endl;
 				places.push_back(std::pair<int, int>(i, j + 1));
 				break;
 			}
