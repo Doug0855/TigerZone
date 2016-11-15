@@ -46,8 +46,9 @@ std::vector< std::pair<int, int> > Board::display_positions(Tile* tile)
 				std::vector< std::string> tempFaces = m_board[i][j].getOpenFaces();
 				for(int k = 0; k < tempFaces.size(); k ++)
 				{
+					// Check if any of the tiles open faces are compatible with the Tile's were trying to place
+					// If so, push the location where we may place the tile to an array
 					std::vector< std::pair<int, int> > tempPlacements = checkPlacement(tile, i, j, tempFaces[k]);
-					std::cout<<"There are "<<tempPlacements.size()<<" available placements for face "<<tempFaces[k]<<" of tile "<<i<<' '<<j<<std::endl;	
 					places.insert(places.end(), tempPlacements.begin(), tempPlacements.end());
 				}
 			}
@@ -92,14 +93,9 @@ std::vector< std::pair<int, int> > Board::checkPlacement(Tile* tile, int i, int 
 				(!m_board[i + 1][j + 1].hasInit || m_board[i + 1][j + 1].getLeftFace().faceEquals(tile->getRightFace())) &&
 				(m_board[i][j].getDownFace().faceEquals(tile->getUpFace())))
 			{
-				std::cout<<"pushing back in down"<<std::endl;
 				places.push_back(std::pair<int, int>(i + 1, j));
 				break;
 			}
-			std::cout<<"tile up face is "<<std::endl
-			<<"Up: "<<tile->getUpFace().getM1()->getType()<<std::endl
-			<<"Up: "<<tile->getUpFace().getM2()->getType()<<std::endl
-			<<"Up: "<<tile->getUpFace().getM3()->getType()<<std::endl;
 			tile->rotate();
 		}
 	}
@@ -113,7 +109,6 @@ std::vector< std::pair<int, int> > Board::checkPlacement(Tile* tile, int i, int 
 				(m_board[i][j].getLeftFace().faceEquals(tile->getRightFace())) &&
 				(!m_board[i - 1][j - 1].hasInit || m_board[i][j - 2].getDownFace().faceEquals(tile->getUpFace())))
 			{
-				std::cout<<"pushing back in left"<<std::endl;
 				places.push_back(std::pair<int, int>(i, j - 1));
 				break;
 			}
@@ -130,7 +125,6 @@ std::vector< std::pair<int, int> > Board::checkPlacement(Tile* tile, int i, int 
 				(!m_board[i][j + 2].hasInit || m_board[i - 1][j + 1].getLeftFace().faceEquals(tile->getRightFace())) &&
 				(!m_board[i - 1][j + 1].hasInit || m_board[i][j - 2].getDownFace().faceEquals(tile->getUpFace())))
 			{
-				std::cout<<"pushing back in right"<<std::endl;
 				places.push_back(std::pair<int, int>(i, j + 1));
 				break;
 			}

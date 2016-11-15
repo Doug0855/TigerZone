@@ -4,10 +4,10 @@
 Face::Face()
 {
 	neighborFace = NULL;
+	inwardAcrossFace = NULL;
+	inwardLeftFace = NULL;
+	inwardRightFace = NULL;
 
-	m_1.setType("city");
-	m_2.setType("ground"); 
-	m_3.setType("city");
 }
 
 Face::~Face()
@@ -15,13 +15,19 @@ Face::~Face()
 	neighborFace = NULL;
 }
 
+std::string Face::getType() {
+	return this->type;
+}
+
+void Face::setType(std::string newType) {
+	this->type = newType;
+	return;
+}
+
 bool Face::faceEquals(Face face)
 {
-	if(this->m_1.getType() == face.m_1.getType() &&
-		this->m_2.getType() == face.m_2.getType() &&
-		this->m_3.getType() == face.m_3.getType())
+	if(this->type == face.type)
 	{
-		std::cout<<"These two faces were EQUAL"<<std::endl;
 			return true;
 	}	
 	return false;
