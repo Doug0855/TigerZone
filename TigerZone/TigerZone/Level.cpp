@@ -24,6 +24,8 @@ Level::Level(const std::string& fileName)
 	// Read the level data
 	while (std::getline(file, temp)) m_levelData.emplace_back(temp);
 
+	file.close();
+
 	m_spriteBatch.init();
 	m_spriteBatch.begin();	
 

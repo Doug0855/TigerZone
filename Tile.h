@@ -16,7 +16,10 @@ public:
 	bool hasOpenFace();
 	bool hasInit;
 	std::vector<std::string> getOpenFaces();
+	void setType(char type) { this->type = type; }
 
+	int getRotations(){ return rotation; }
+	char getType() { return type; }
 	Face getUpFace(){ return up; }
 	Face getDownFace(){ return down; }
 	Face getLeftFace(){ return left; }
@@ -28,6 +31,8 @@ public:
 
 private:
 	Face up, down, left, right;
+	int rotation = 0;
+	char type = '.';
 	Block center;
 	bool boar;
 	bool buffalo;
