@@ -63,6 +63,7 @@ Tile::Tile(int type)
 		this->boar = false;
 		this->buffalo = false;
 		this->deer = false;
+		this->type = 'a';
 	}
 	else if (type == 2)
 	{
@@ -74,6 +75,7 @@ Tile::Tile(int type)
 		this->boar = false;
 		this->buffalo = false;
 		this->deer = false;
+		this->type = 'b';
 	}
 	else if (type == 3)
 	{
@@ -85,6 +87,7 @@ Tile::Tile(int type)
 		this->boar = false;
 		this->buffalo = false;
 		this->deer = false;
+		this->type = 'c';
 	}
 	else if (type == 4)
 	{
@@ -95,6 +98,7 @@ Tile::Tile(int type)
 		this->boar = false;
 		this->buffalo = false;
 		this->deer = false;
+		this->type = 'd';
 	}
 	else if (type == 5)
 	{
@@ -105,6 +109,7 @@ Tile::Tile(int type)
 		this->boar = false;
 		this->buffalo = false;
 		this->deer = false;
+		this->type = 'e';
 	}
 	else if (type == 6)
 	{
@@ -115,6 +120,7 @@ Tile::Tile(int type)
 		this->boar = false;
 		this->buffalo = false;
 		this->deer = false;
+		this->type = 'f';
 	}
 	else if (type == 7)
 	{
@@ -125,6 +131,7 @@ Tile::Tile(int type)
 		this->boar = false;
 		this->buffalo = false;
 		this->deer = false;
+		this->type = 'g';
 	}
 	else if (type == 8)
 	{
@@ -135,6 +142,7 @@ Tile::Tile(int type)
 		this->boar = false;
 		this->buffalo = false;
 		this->deer = false;
+		this->type = 'h';
 	}
 	else if (type == 9)
 	{
@@ -145,6 +153,7 @@ Tile::Tile(int type)
 		this->boar = false;
 		this->buffalo = false;
 		this->deer = false;
+		this->type = 'i';
 	}
 	else if (type == 10)
 	{
@@ -155,6 +164,7 @@ Tile::Tile(int type)
 		this->boar = false;
 		this->buffalo = false;
 		this->deer = false;
+		this->type = 'j';
 	}
 	else if (type == 11)
 	{
@@ -165,6 +175,7 @@ Tile::Tile(int type)
 		this->boar = false;
 		this->buffalo = false;
 		this->deer = false;
+		this->type = 'k';
 	}
 	else if (type == 12)
 	{
@@ -175,6 +186,7 @@ Tile::Tile(int type)
 		this->boar = false;
 		this->buffalo = false;
 		this->deer = false;
+		this->type = 'l';
 	}
 	else if (type == 13)
 	{
@@ -185,6 +197,7 @@ Tile::Tile(int type)
 		this->boar = false;
 		this->buffalo = false;
 		this->deer = false;
+		this->type = 'm';
 	}
 	else if (type == 14)
 	{
@@ -195,6 +208,7 @@ Tile::Tile(int type)
 		this->boar = false;
 		this->buffalo = false;
 		this->deer = false;
+		this->type = 'n';
 	}
 	else if (type == 15)
 	{
@@ -205,6 +219,7 @@ Tile::Tile(int type)
 		this->boar = false;
 		this->buffalo = false;
 		this->deer = false;
+		this->type = 'o';
 	}
 	else if (type == 16)
 	{
@@ -215,6 +230,7 @@ Tile::Tile(int type)
 		this->boar = true;
 		this->buffalo = false;
 		this->deer = false;
+		this->type = 'p';
 	}
 	else if (type == 17)
 	{
@@ -225,6 +241,7 @@ Tile::Tile(int type)
 		this->boar = false;
 		this->buffalo = false;
 		this->deer = false;
+		this->type = 'q';
 	}
 	else if (type == 18)
 	{
@@ -235,6 +252,7 @@ Tile::Tile(int type)
 		this->boar = false;
 		this->buffalo = true;
 		this->deer = false;
+		this->type = 'r';
 	}
 	else if (type == 19)
 	{
@@ -245,6 +263,7 @@ Tile::Tile(int type)
 		this->boar = false;
 		this->buffalo = false;
 		this->deer = false;
+		this->type = 's';
 	}
 	else if (type == 20)
 	{
@@ -255,6 +274,7 @@ Tile::Tile(int type)
 		this->boar = false;
 		this->buffalo = false;
 		this->deer = true;
+		this->type = 't';
 	}
 	else if (type == 21)
 	{
@@ -265,6 +285,7 @@ Tile::Tile(int type)
 		this->boar = false;
 		this->buffalo = false;
 		this->deer = false;
+		this->type = 'u';
 	}
 	else if (type == 22)
 	{
@@ -275,6 +296,7 @@ Tile::Tile(int type)
 		this->boar = false;
 		this->buffalo = false;
 		this->deer = false;
+		this->type = 'v';
 	}
 	else if (type == 23)
 	{
@@ -285,6 +307,7 @@ Tile::Tile(int type)
 		this->boar = true;
 		this->buffalo = false;
 		this->deer = false;
+		this->type = 'w';
 	}
 	else if (type == 24)
 	{
@@ -295,6 +318,7 @@ Tile::Tile(int type)
 		this->boar = false;
 		this->buffalo = false;
 		this->deer = false;
+		this->type = 'x';
 	}
 	else if (type == 25)
 	{
@@ -305,6 +329,7 @@ Tile::Tile(int type)
 		this->boar = false;
 		this->buffalo = true;
 		this->deer = false;
+		this->type = 'y';
 	}
 	else if (type == 26)
 	{
@@ -315,6 +340,7 @@ Tile::Tile(int type)
 		this->boar = false;
 		this->buffalo = false;
 		this->deer = false;
+		this->type = 'z';
 	}
 	else if (type == 27)
 	{
@@ -325,6 +351,7 @@ Tile::Tile(int type)
 		this->boar = false;
 		this->buffalo = false;
 		this->deer = true;
+		this->type = '#';
 	}
 	else
 	{
