@@ -24,7 +24,6 @@ bool Face::faceEquals(Face face)
 		this->m_2.getType() == face.m_2.getType() &&
 		this->m_3.getType() == face.m_3.getType())
 	{
-		std::cout<<"These two faces were EQUAL"<<std::endl;
 			return true;
 	}	
 	return false;

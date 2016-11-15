@@ -47,7 +47,6 @@ std::vector< std::pair<int, int> > Board::display_positions(Tile* tile)
 				for(int k = 0; k < tempFaces.size(); k ++)
 				{
 					std::vector< std::pair<int, int> > tempPlacements = checkPlacement(tile, i, j, tempFaces[k]);
-					std::cout<<"There are "<<tempPlacements.size()<<" available placements for face "<<tempFaces[k]<<" of tile "<<i<<' '<<j<<std::endl;	
 					places.insert(places.end(), tempPlacements.begin(), tempPlacements.end());
 				}
 			}
