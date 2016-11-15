@@ -1,11 +1,28 @@
 #include <iostream>
 #include <utility>
+#include <fstream>
 
 #include "Board.cpp"
 #include "Tile.cpp"
 #include "Block.cpp"
 #include "Face.cpp"
 #include "Meeple.cpp"
+
+void printToTextFile(Board gameboard)
+{
+	std::ofstream out_data("Levels/level.txt");
+	out_data << "Level:" << std::endl;
+	for (auto& inner : gameboard.m_board) 
+	{
+		for (auto& item : inner) 
+		{
+			out_data << item.getRotations() << item.getType();
+		}
+		out_data << std::endl;
+	}
+	out_data.close();
+}
+
 
 int main() {
 	Board gameBoard;	
@@ -14,6 +31,9 @@ int main() {
 	Tile tile2;
 	Tile tile3;
 
+	tile1.setType('b');
+	tile2.setType('b');
+	tile3.setType('b');
 	// Used for testing face connection between two tiles
 	tile2.up.getM1()->setType("up2");
 	tile2.up.getM2()->setType("up2");
@@ -66,6 +86,7 @@ int main() {
 	std::pair<int,int> optimalLocation = gameBoard.getOptimalPlacement(&tile3, availableLocations);
 	gameBoard.place_tile(optimalLocation, tile3);
 
+	printToTextFile(gameBoard);
 	// int z;
 	// std::cin >> z;
 	
@@ -82,3 +103,4 @@ int main() {
 	// 	std::cout<<std::endl;
 	// }
 };
+

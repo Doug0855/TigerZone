@@ -1,15 +1,16 @@
 #pragma once
 
 #include <string>
+#include <utility>
 
 class Meeple{
 public:
 	Meeple();
 	~Meeple();
 	
-	int countPoints();
 	
-private:
+protected:
+	std::pair<int, int> m_location;
 	std::string m_role;
 		
 	
