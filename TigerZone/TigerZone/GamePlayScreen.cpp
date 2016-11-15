@@ -110,7 +110,7 @@ void GameplayScreen::checkInput(float deltaTime)
 {
 	// Update inputmanager
 	m_inputManager.update();
-	const float CAMERA_SPEED = 2.0f;
+	const float CAMERA_SPEED = 10.0f;
 	const float SCALE_SPEED = 0.01f;
 
 	SDL_Event evnt;
