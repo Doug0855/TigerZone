@@ -28,29 +28,32 @@ std::string Board::to_string(void)
 }
 
 // Returns a vector of locations <i,j> on the board where this is a tile WITH >= 1 open face
-std::vector< std::pair<int, int> > Board::display_positions(Tile* tile, std::vector<int> &rotations)
+std::vector< std::pair<int, int> > Board::display_positions(Tile tile)
 {
 	// Create empty vector to store possible placement locations
 	std::vector< std::pair<int, int> > places;
-	
+	int i = 0;
 	// Loop through the rows of board
-	for(size_t i = 0; i < m_board.size(); i++)
+	for (auto& inner : m_board)
 	{
+		int j = 0;
 		// Loop through column of board
-		for (size_t j = 0; j < m_board[i].size(); j++)
+		for (auto& item : inner)
 		{
-			if (m_board[i][j].hasInit && m_board[i][j].hasOpenFace())
+			if (item.hasInit && item.hasOpenFace())
 			{
 				// Push back location of tile with at least 1 open face
 				// places.push_back(std::pair<int,int>(i,j));
-				std::vector< std::string> tempFaces = m_board[i][j].getOpenFaces();
+				std::vector< std::string> tempFaces = item.getOpenFaces();
 				for(int k = 0; k < tempFaces.size(); k ++)
 				{
-					std::vector< std::pair<int, int> > tempPlacements = checkPlacement(tile, i, j, tempFaces[k], rotations);
+					std::vector< std::pair<int, int> > tempPlacements = checkPlacement(tile, i, j, tempFaces[k]);
 					places.insert(places.end(), tempPlacements.begin(), tempPlacements.end());
 				}
 			}
+			j++;
 		}
+		i++;
 	}
 	return places;
 }
@@ -60,8 +63,8 @@ std::vector< std::pair<int, int> > Board::display_positions(Tile* tile, std::vec
 // all the faces of our new tile to see if the can link together
 
 // Returns a location pair where the tile may be placed
-std::vector< std::pair<int, int> > Board::checkPlacement(Tile* tile, int i, int j, 
-														std::string openFaces, std::vector<int> &rotations)
+std::vector< std::pair<int, int> > Board::checkPlacement(Tile tile, int i, int j, 
+														std::string openFaces)
 {
 	std::vector< std::pair<int, int> > places;
 
@@ -71,16 +74,15 @@ std::vector< std::pair<int, int> > Board::checkPlacement(Tile* tile, int i, int 
 		{
 			// if the bottom face of the tile were trying to place equals the top face of the tile on the board
 			// and it equals the faces of all the other faces
-			if (m_board[i][j].up.faceEquals(tile->down) &&
-				(!m_board[i - 1][j - 1].hasInit || m_board[i - 1][j - 1].right.faceEquals(tile->left)) &&
-				(!m_board[i - 1][j + 1].hasInit || m_board[i - 1][j + 1].left.faceEquals(tile->right)) &&
-				(!m_board[i - 2][j].hasInit || m_board[i - 2][j].down.faceEquals(tile->up)))
+			if (m_board[i][j].up.faceEquals(tile.down) &&
+				(!m_board[i - 1][j - 1].hasInit || m_board[i - 1][j - 1].right.faceEquals(tile.left)) &&
+				(!m_board[i - 1][j + 1].hasInit || m_board[i - 1][j + 1].left.faceEquals(tile.right)) &&
+				(!m_board[i - 2][j].hasInit || m_board[i - 2][j].down.faceEquals(tile.up)))
 			{
 				places.push_back(std::pair<int, int>(i - 1, j));
-				rotations.push_back(ii);
 				break;
 			}
-			tile->rotate();
+			tile.rotate();
 		}
 	}
 	else if (openFaces == "down")
@@ -88,16 +90,15 @@ std::vector< std::pair<int, int> > Board::checkPlacement(Tile* tile, int i, int 
 		for (int ii = 0; ii < 4; ii++)
 		{
 			// same thing as above but with down
-			if ((!m_board[i + 2][j].hasInit || m_board[i + 2][j].up.faceEquals(tile->down)) &&
-				(!m_board[i + 1][j - 1].hasInit || m_board[i + 1][j - 1].right.faceEquals(tile->left)) &&
-				(!m_board[i + 1][j + 1].hasInit || m_board[i + 1][j + 1].left.faceEquals(tile->right)) &&
-				(m_board[i][j].down.faceEquals(tile->up)))
+			if ((!m_board[i + 2][j].hasInit || m_board[i + 2][j].up.faceEquals(tile.down)) &&
+				(!m_board[i + 1][j - 1].hasInit || m_board[i + 1][j - 1].right.faceEquals(tile.left)) &&
+				(!m_board[i + 1][j + 1].hasInit || m_board[i + 1][j + 1].left.faceEquals(tile.right)) &&
+				(m_board[i][j].down.faceEquals(tile.up)))
 			{
 				places.push_back(std::pair<int, int>(i + 1, j));
-				rotations.push_back(ii);
 				break;
 			}
-			tile->rotate();
+			tile.rotate();
 		}
 	}
 	else if (openFaces == "left")
@@ -105,16 +106,15 @@ std::vector< std::pair<int, int> > Board::checkPlacement(Tile* tile, int i, int 
 		for (int ii = 0; ii < 4; ii++)
 		{
 			// same thing as above but with left 
-			if ((!m_board[i + 1][j - 1].hasInit || m_board[i + 1][j - 1].up.faceEquals(tile->down)) &&
-				(!m_board[i][j - 2].hasInit || m_board[i - 1][j - 1].right.faceEquals(tile->left)) &&
-				(m_board[i][j].left.faceEquals(tile->right)) &&
-				(!m_board[i - 1][j - 1].hasInit || m_board[i][j - 2].down.faceEquals(tile->up)))
+			if ((!m_board[i + 1][j - 1].hasInit || m_board[i + 1][j - 1].up.faceEquals(tile.down)) &&
+				(!m_board[i][j - 2].hasInit || m_board[i][j - 2].right.faceEquals(tile.left)) &&
+				(m_board[i][j].left.faceEquals(tile.right)) &&
+				(!m_board[i - 1][j - 1].hasInit || m_board[i - 1][j - 1].down.faceEquals(tile.up)))
 			{
 				places.push_back(std::pair<int, int>(i, j - 1));
-				rotations.push_back(ii);
 				break;
 			}
-			tile->rotate();
+			tile.rotate();
 		}
 	}
 	else if (openFaces == "right")
@@ -122,23 +122,39 @@ std::vector< std::pair<int, int> > Board::checkPlacement(Tile* tile, int i, int 
 		for (int ii = 0; ii < 4; ii++)
 		{
 			// same thing as above but with right
-			if ((!m_board[i + 1][j + 1].hasInit || m_board[i + 1][j + 1].up.faceEquals(tile->down)) &&
-				(m_board[i][j].right.faceEquals(tile->left)) &&
-				(!m_board[i][j + 2].hasInit || m_board[i - 1][j + 1].left.faceEquals(tile->right)) &&
-				(!m_board[i - 1][j + 1].hasInit || m_board[i][j - 2].down.faceEquals(tile->up)))
+			if ((!m_board[i + 1][j + 1].hasInit || m_board[i + 1][j + 1].up.faceEquals(tile.down)) &&
+				(m_board[i][j].right.faceEquals(tile.left)) &&
+				(!m_board[i][j + 2].hasInit || m_board[i][j + 2].left.faceEquals(tile.right)) &&
+				(!m_board[i - 1][j + 1].hasInit || m_board[i - 1][j + 1].down.faceEquals(tile.up)))
 			{
 				places.push_back(std::pair<int, int>(i, j + 1));
-				rotations.push_back(ii);
 				break;
 			}
-			tile->rotate();
+			tile.rotate();
 		}
 	}
 	return places;
 }
 
 
-std::pair<int,int> Board::getOptimalPlacement(Tile* tile, std::vector< std::pair<int, int> > availableMoves) {
+std::pair<int,int> Board::getOptimalPlacement(Tile& tile, std::vector< std::pair<int, int> > availableMoves) {
+	for (size_t z = 0; z < availableMoves.size(); z++)
+	{
+		int i = availableMoves[z].first;
+		int j = availableMoves[z].second;
+		if ((!m_board[i + 1][j].hasInit || m_board[i + 1][j].up.faceEquals(tile.down)) &&
+			(!m_board[i - 1][j].hasInit || m_board[i - 1][j].down.faceEquals(tile.up)) &&
+			(!m_board[i][j + 1].hasInit || m_board[i][j + 1].left.faceEquals(tile.right)) &&
+			(!m_board[i][j - 1].hasInit || m_board[i][j - 1].right.faceEquals(tile.left)))
+		{
+			return availableMoves[z];
+		}
+		else 
+		{
+			tile.rotate();
+			tile.rotation++;
+		}
+	}
 	return availableMoves[0];
 }
 

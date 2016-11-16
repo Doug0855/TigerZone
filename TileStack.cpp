@@ -1,4 +1,5 @@
 #include "TileStack.h"
+#include <algorithm>
 
 TileStack::TileStack()
 {

@@ -27,8 +27,9 @@ public:
 	bool hasDeer() { return deer; }
 
 	Face up, down, left, right;
-private:
 	int rotation = 0;
+private:
+	
 	char type = '.';
 	Block center;
 	bool boar;
