@@ -34,14 +34,23 @@ int main() {
 
 	gameBoard.place_tile(std::pair<int,int>(72,72), tile1);
 
+	std::vector<int> rotations;
 	for(int i = 0; i < tStack.tiles.size(); i ++) {
 		Tile tile = tStack.tiles[i];
 
-		std::vector<std::pair<int,int> > availableLocations = gameBoard.display_positions(&tile);
+		// Get all positions that we may place the tile
+		std::vector<std::pair<int,int> > availableLocations = gameBoard.display_positions(&tile, rotations);
+
+		// check if there are any available moves. If so then place at the optimal spot.
 		if(availableLocations.size() > 0) {
 			std::pair<int,int> optimalLocation = gameBoard.getOptimalPlacement(&tile, availableLocations);	
 			gameBoard.place_tile(optimalLocation, tile);	
 		}
+	}
+
+	std::cout<< "rotations: ";
+	for(int i = 0; i < rotations.size(); i++) {
+		std::cout<<rotations[i]<<' ';
 	}
 
 	printToTextFile(gameBoard);
@@ -49,16 +58,16 @@ int main() {
 	// std::cin >> z;
 	
 	// Print out gameboard
-	for(int i = 0; i < gameBoard.m_board.size(); i++)
-	{
-		for(int j = 0; j < gameBoard.m_board[0].size(); j++)
-		{
-			if(gameBoard.m_board[i][j].hasInit)
-				std::cout<<'A';
-			else
-				std::cout<<'.';
-		}
-		std::cout<<std::endl;
-	}
+	// for(int i = 0; i < gameBoard.m_board.size(); i++)
+	// {
+	// 	for(int j = 0; j < gameBoard.m_board[0].size(); j++)
+	// 	{
+	// 		if(gameBoard.m_board[i][j].hasInit)
+	// 			std::cout<<'A';
+	// 		else
+	// 			std::cout<<'.';
+	// 	}
+	// 	std::cout<<std::endl;
+	// }
 };
 

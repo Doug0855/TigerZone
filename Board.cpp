@@ -28,7 +28,7 @@ std::string Board::to_string(void)
 }
 
 // Returns a vector of locations <i,j> on the board where this is a tile WITH >= 1 open face
-std::vector< std::pair<int, int> > Board::display_positions(Tile* tile)
+std::vector< std::pair<int, int> > Board::display_positions(Tile* tile, std::vector<int> &rotations)
 {
 	// Create empty vector to store possible placement locations
 	std::vector< std::pair<int, int> > places;
@@ -46,7 +46,7 @@ std::vector< std::pair<int, int> > Board::display_positions(Tile* tile)
 				std::vector< std::string> tempFaces = m_board[i][j].getOpenFaces();
 				for(int k = 0; k < tempFaces.size(); k ++)
 				{
-					std::vector< std::pair<int, int> > tempPlacements = checkPlacement(tile, i, j, tempFaces[k]);
+					std::vector< std::pair<int, int> > tempPlacements = checkPlacement(tile, i, j, tempFaces[k], rotations);
 					places.insert(places.end(), tempPlacements.begin(), tempPlacements.end());
 				}
 			}
@@ -60,10 +60,11 @@ std::vector< std::pair<int, int> > Board::display_positions(Tile* tile)
 // all the faces of our new tile to see if the can link together
 
 // Returns a location pair where the tile may be placed
-std::vector< std::pair<int, int> > Board::checkPlacement(Tile* tile, int i, int j, std::string openFaces)
+std::vector< std::pair<int, int> > Board::checkPlacement(Tile* tile, int i, int j, 
+														std::string openFaces, std::vector<int> &rotations)
 {
 	std::vector< std::pair<int, int> > places;
-	
+
 	// if the face is the up
 	if (openFaces == "up"){
 		for (int ii = 0; ii < 4; ii++)
@@ -76,6 +77,7 @@ std::vector< std::pair<int, int> > Board::checkPlacement(Tile* tile, int i, int 
 				(!m_board[i - 2][j].hasInit || m_board[i - 2][j].down.faceEquals(tile->up)))
 			{
 				places.push_back(std::pair<int, int>(i - 1, j));
+				rotations.push_back(ii);
 				break;
 			}
 			tile->rotate();
@@ -92,6 +94,7 @@ std::vector< std::pair<int, int> > Board::checkPlacement(Tile* tile, int i, int 
 				(m_board[i][j].down.faceEquals(tile->up)))
 			{
 				places.push_back(std::pair<int, int>(i + 1, j));
+				rotations.push_back(ii);
 				break;
 			}
 			tile->rotate();
@@ -108,6 +111,7 @@ std::vector< std::pair<int, int> > Board::checkPlacement(Tile* tile, int i, int 
 				(!m_board[i - 1][j - 1].hasInit || m_board[i][j - 2].down.faceEquals(tile->up)))
 			{
 				places.push_back(std::pair<int, int>(i, j - 1));
+				rotations.push_back(ii);
 				break;
 			}
 			tile->rotate();
@@ -124,6 +128,7 @@ std::vector< std::pair<int, int> > Board::checkPlacement(Tile* tile, int i, int 
 				(!m_board[i - 1][j + 1].hasInit || m_board[i][j - 2].down.faceEquals(tile->up)))
 			{
 				places.push_back(std::pair<int, int>(i, j + 1));
+				rotations.push_back(ii);
 				break;
 			}
 			tile->rotate();
