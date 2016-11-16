@@ -2,12 +2,12 @@
 #include <utility>
 #include <fstream>
 
-#include "Board.cpp"
-#include "Tile.cpp"
-#include "Block.cpp"
-#include "Face.cpp"
-#include "Meeple.cpp"
-#include "TileStack.cpp"
+#include "Board.h"
+#include "Tile.h"
+#include "Block.h"
+#include "Face.h"
+#include "Meeple.h"
+#include "TileStack.h"
 
 void printToTextFile(Board gameboard)
 {

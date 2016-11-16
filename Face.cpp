@@ -1,5 +1,4 @@
 #include "Face.h"
-#include <iostream>
 
 Face::Face(char b1, char b2, char b3)
 {
