@@ -1,7 +1,8 @@
 #pragma once
 
-#include <vector>
 #include "Tile.h"
+#include <vector>
+#include <algorithm>
 
 class TileStack{
 public:

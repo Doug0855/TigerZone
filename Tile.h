@@ -4,6 +4,7 @@
 #include "Block.h"
 #include "Face.h"
 #include <string>
+#include <iostream>
 
 class Tile{
 public:

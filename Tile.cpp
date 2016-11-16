@@ -1,5 +1,5 @@
 #include "Tile.h"
-#include <iostream>
+
 Tile::Tile()
 {
 	hasInit = false;

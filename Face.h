@@ -2,6 +2,7 @@
 #define FACE_H
 
 #include "Block.h"
+#include <iostream>
 
 class Face{
 public:
