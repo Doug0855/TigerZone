@@ -30,7 +30,6 @@ int main() {
 
 	Tile tile1(19);	
 
-	std::cout<< "Inner faces of tile 19: "<<
 	TileStack tStack;
 	tStack.shuffle();
 

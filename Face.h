@@ -18,7 +18,6 @@ public:
 	bool faceEquals(Face face);	//determines if two faces are equal
 	bool connected(); ///< returns false if not connected
 	
-	Face* neighborFace;
 	Block m_1, m_2, m_3;
 	
 };
