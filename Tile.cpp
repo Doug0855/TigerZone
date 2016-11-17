@@ -52,6 +52,24 @@ std::vector<std::string> Tile::getOpenFaces()
 	return openFaces;
 }
 
+void Tile::connectInnerFaces() {
+	this->up.inwardAcrossFace = &this->down;
+	this->up.inwardLeftFace = &this->right;
+	this->up.inwardRightFace = &this->left;
+
+	this->down.inwardAcrossFace = &this->up;
+	this->down.inwardLeftFace = &this->left;
+	this->down.inwardRightFace = &this->right;
+
+	this->left.inwardAcrossFace = &this->right;
+	this->left.inwardLeftFace = &this->up;
+	this->left.inwardRightFace = &this->right;
+
+	this->right.inwardAcrossFace = &this->left;
+	this->right.inwardLeftFace = &this->down;
+	this->right.inwardRightFace = &this->up;
+}
+
 Tile::Tile(int type)
 {
 	if (type == 1)
@@ -64,6 +82,7 @@ Tile::Tile(int type)
 		this->buffalo = false;
 		this->deer = false;
 		this->type = 'a';
+		connectInnerFaces();
 	}
 	else if (type == 2)
 	{
@@ -76,6 +95,7 @@ Tile::Tile(int type)
 		this->buffalo = false;
 		this->deer = false;
 		this->type = 'b';
+		connectInnerFaces();
 	}
 	else if (type == 3)
 	{
@@ -88,6 +108,7 @@ Tile::Tile(int type)
 		this->buffalo = false;
 		this->deer = false;
 		this->type = 'c';
+		connectInnerFaces();
 	}
 	else if (type == 4)
 	{
@@ -99,6 +120,7 @@ Tile::Tile(int type)
 		this->buffalo = false;
 		this->deer = false;
 		this->type = 'd';
+		connectInnerFaces();
 	}
 	else if (type == 5)
 	{
@@ -110,6 +132,7 @@ Tile::Tile(int type)
 		this->buffalo = false;
 		this->deer = false;
 		this->type = 'e';
+		connectInnerFaces();
 	}
 	else if (type == 6)
 	{
@@ -121,6 +144,7 @@ Tile::Tile(int type)
 		this->buffalo = false;
 		this->deer = false;
 		this->type = 'f';
+		connectInnerFaces();
 	}
 	else if (type == 7)
 	{
@@ -132,6 +156,7 @@ Tile::Tile(int type)
 		this->buffalo = false;
 		this->deer = false;
 		this->type = 'g';
+		connectInnerFaces();
 	}
 	else if (type == 8)
 	{
@@ -143,6 +168,7 @@ Tile::Tile(int type)
 		this->buffalo = false;
 		this->deer = false;
 		this->type = 'h';
+		connectInnerFaces();
 	}
 	else if (type == 9)
 	{
@@ -154,6 +180,7 @@ Tile::Tile(int type)
 		this->buffalo = false;
 		this->deer = false;
 		this->type = 'i';
+		connectInnerFaces();
 	}
 	else if (type == 10)
 	{
@@ -165,6 +192,7 @@ Tile::Tile(int type)
 		this->buffalo = false;
 		this->deer = false;
 		this->type = 'j';
+		connectInnerFaces();
 	}
 	else if (type == 11)
 	{
@@ -176,6 +204,7 @@ Tile::Tile(int type)
 		this->buffalo = false;
 		this->deer = false;
 		this->type = 'k';
+		connectInnerFaces();
 	}
 	else if (type == 12)
 	{
@@ -187,6 +216,7 @@ Tile::Tile(int type)
 		this->buffalo = false;
 		this->deer = false;
 		this->type = 'l';
+		connectInnerFaces();
 	}
 	else if (type == 13)
 	{
@@ -198,6 +228,7 @@ Tile::Tile(int type)
 		this->buffalo = false;
 		this->deer = false;
 		this->type = 'm';
+		connectInnerFaces();
 	}
 	else if (type == 14)
 	{
@@ -209,6 +240,7 @@ Tile::Tile(int type)
 		this->buffalo = false;
 		this->deer = false;
 		this->type = 'n';
+		connectInnerFaces();
 	}
 	else if (type == 15)
 	{
@@ -220,6 +252,7 @@ Tile::Tile(int type)
 		this->buffalo = false;
 		this->deer = false;
 		this->type = 'o';
+		connectInnerFaces();
 	}
 	else if (type == 16)
 	{
@@ -231,6 +264,7 @@ Tile::Tile(int type)
 		this->buffalo = false;
 		this->deer = false;
 		this->type = 'p';
+		connectInnerFaces();
 	}
 	else if (type == 17)
 	{
@@ -242,6 +276,7 @@ Tile::Tile(int type)
 		this->buffalo = false;
 		this->deer = false;
 		this->type = 'q';
+		connectInnerFaces();
 	}
 	else if (type == 18)
 	{
@@ -253,6 +288,7 @@ Tile::Tile(int type)
 		this->buffalo = true;
 		this->deer = false;
 		this->type = 'r';
+		connectInnerFaces();
 	}
 	else if (type == 19)
 	{
@@ -264,6 +300,7 @@ Tile::Tile(int type)
 		this->buffalo = false;
 		this->deer = false;
 		this->type = 's';
+		connectInnerFaces();
 	}
 	else if (type == 20)
 	{
@@ -275,6 +312,7 @@ Tile::Tile(int type)
 		this->buffalo = false;
 		this->deer = true;
 		this->type = 't';
+		connectInnerFaces();
 	}
 	else if (type == 21)
 	{
@@ -286,6 +324,7 @@ Tile::Tile(int type)
 		this->buffalo = false;
 		this->deer = false;
 		this->type = 'u';
+		connectInnerFaces();
 	}
 	else if (type == 22)
 	{
@@ -297,6 +336,7 @@ Tile::Tile(int type)
 		this->buffalo = false;
 		this->deer = false;
 		this->type = 'v';
+		connectInnerFaces();
 	}
 	else if (type == 23)
 	{
@@ -308,6 +348,7 @@ Tile::Tile(int type)
 		this->buffalo = false;
 		this->deer = false;
 		this->type = 'w';
+		connectInnerFaces();
 	}
 	else if (type == 24)
 	{
@@ -319,6 +360,7 @@ Tile::Tile(int type)
 		this->buffalo = false;
 		this->deer = false;
 		this->type = 'x';
+		connectInnerFaces();
 	}
 	else if (type == 25)
 	{
@@ -330,6 +372,7 @@ Tile::Tile(int type)
 		this->buffalo = true;
 		this->deer = false;
 		this->type = 'y';
+		connectInnerFaces();
 	}
 	else if (type == 26)
 	{
@@ -341,6 +384,7 @@ Tile::Tile(int type)
 		this->buffalo = false;
 		this->deer = false;
 		this->type = 'z';
+		connectInnerFaces();
 	}
 	else if (type == 27)
 	{
@@ -352,6 +396,7 @@ Tile::Tile(int type)
 		this->buffalo = false;
 		this->deer = true;
 		this->type = '#';
+		connectInnerFaces();
 	}
 	else
 	{
