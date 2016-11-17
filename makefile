@@ -2,10 +2,10 @@
 all: TigerZone	
 
 TigerZone: main.o Game.o TileStack.o Face.o Block.o Player.o Board.o Tile.o Meeple.o
-	g++ -o main.o Game.o TileStack.o Face.o Block.o Player.o Board.o Tile.o Meeple.o
+	g++ main.o Game.o TileStack.o Face.o Block.o Player.o Board.o Tile.o Meeple.o
 
 main.o: main.cpp
-	g++ -std=c++11 main.cpp
+	g++ -std=c++11 -c main.cpp
 
 Game.o: Game.cpp
 	g++ -std=c++11 -c Game.cpp 
