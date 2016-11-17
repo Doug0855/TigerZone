@@ -10,6 +10,11 @@ public:
 	Face();
 	~Face();
 	
+	Face* neighborFace;
+	Face* inwardAcrossFace;
+	Face* inwardLeftFace;
+	Face* inwardRightFace;
+
 	bool faceEquals(Face face);	//determines if two faces are equal
 	bool connected(); ///< returns false if not connected
 	

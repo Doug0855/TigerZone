@@ -2,12 +2,12 @@
 #include <utility>
 #include <fstream>
 
-#include "Board.h"
-#include "Tile.h"
-#include "Block.h"
-#include "Face.h"
-#include "Meeple.h"
-#include "TileStack.h"
+#include "Board.cpp"
+#include "Tile.cpp"
+#include "Block.cpp"
+#include "Face.cpp"
+#include "Meeple.cpp"
+#include "TileStack.cpp"
 
 void printToTextFile(Board gameboard)
 {
@@ -29,6 +29,8 @@ int main() {
 	Board gameBoard;	
 
 	Tile tile1(19);	
+
+	std::cout<< "Inner faces of tile 19: "<<
 	TileStack tStack;
 	tStack.shuffle();
 
@@ -58,16 +60,16 @@ int main() {
 	// std::cin >> z;
 	
 	// Print out gameboard
-	// for(int i = 0; i < gameBoard.m_board.size(); i++)
-	// {
-	// 	for(int j = 0; j < gameBoard.m_board[0].size(); j++)
-	// 	{
-	// 		if(gameBoard.m_board[i][j].hasInit)
-	// 			std::cout<<'A';
-	// 		else
-	// 			std::cout<<'.';
-	// 	}
-	// 	std::cout<<std::endl;
-	// }
+	for(int i = 0; i < gameBoard.m_board.size(); i++)
+	{
+		for(int j = 0; j < gameBoard.m_board[0].size(); j++)
+		{
+			if(gameBoard.m_board[i][j].hasInit)
+				std::cout<<'A';
+			else
+				std::cout<<'.';
+		}
+		std::cout<<std::endl;
+	}
 };
 
