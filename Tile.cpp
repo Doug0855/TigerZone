@@ -52,24 +52,6 @@ std::vector<std::string> Tile::getOpenFaces()
 	return openFaces;
 }
 
-void Tile::connectInnerFaces() {
-	this->up.inwardAcrossFace = &this->down;
-	this->up.inwardLeftFace = &this->right;
-	this->up.inwardRightFace = &this->left;
-
-	this->down.inwardAcrossFace = &this->up;
-	this->down.inwardLeftFace = &this->left;
-	this->down.inwardRightFace = &this->right;
-
-	this->left.inwardAcrossFace = &this->right;
-	this->left.inwardLeftFace = &this->up;
-	this->left.inwardRightFace = &this->right;
-
-	this->right.inwardAcrossFace = &this->left;
-	this->right.inwardLeftFace = &this->down;
-	this->right.inwardRightFace = &this->up;
-}
-
 Tile::Tile(int type)
 {
 	if (type == 1)
@@ -82,7 +64,23 @@ Tile::Tile(int type)
 		this->buffalo = false;
 		this->deer = false;
 		this->type = 'a';
-		connectInnerFaces();
+		
+		this->up.inwardAcrossFace = &this->down;
+		this->up.inwardLeftFace = &this->right;
+		this->up.inwardRightFace = &this->left;
+
+		this->down.inwardAcrossFace = &this->up;
+		this->down.inwardLeftFace = &this->left;
+		this->down.inwardRightFace = &this->right;
+
+		this->left.inwardAcrossFace = &this->right;
+		this->left.inwardLeftFace = &this->up;
+		this->left.inwardRightFace = &this->down;
+
+		this->right.inwardAcrossFace = &this->left;
+		this->right.inwardLeftFace = &this->down;
+		this->right.inwardRightFace = &this->up;
+
 	}
 	else if (type == 2)
 	{
@@ -95,7 +93,22 @@ Tile::Tile(int type)
 		this->buffalo = false;
 		this->deer = false;
 		this->type = 'b';
-		connectInnerFaces();
+
+		this->up.inwardAcrossFace = &this->down;
+		this->up.inwardLeftFace = &this->right;
+		this->up.inwardRightFace = &this->left;
+
+		this->down.inwardAcrossFace = &this->up;
+		this->down.inwardLeftFace = &this->left;
+		this->down.inwardRightFace = &this->right;
+
+		this->left.inwardAcrossFace = &this->right;
+		this->left.inwardLeftFace = &this->up;
+		this->left.inwardRightFace = &this->down;
+
+		this->right.inwardAcrossFace = &this->left;
+		this->right.inwardLeftFace = &this->down;
+		this->right.inwardRightFace = &this->up;
 	}
 	else if (type == 3)
 	{
@@ -108,7 +121,22 @@ Tile::Tile(int type)
 		this->buffalo = false;
 		this->deer = false;
 		this->type = 'c';
-		connectInnerFaces();
+
+		this->up.inwardAcrossFace = NULL;
+		this->up.inwardLeftFace = &this->right;
+		this->up.inwardRightFace = &this->left;
+
+		this->down.inwardAcrossFace = NULL;
+		this->down.inwardLeftFace = NULL;
+		this->down.inwardRightFace = NULL;
+
+		this->left.inwardAcrossFace = &this->right;
+		this->left.inwardLeftFace = &this->up;
+		this->left.inwardRightFace = NULL;
+
+		this->right.inwardAcrossFace = &this->left;
+		this->right.inwardLeftFace = NULL;
+		this->right.inwardRightFace = &this->up;
 	}
 	else if (type == 4)
 	{
@@ -120,7 +148,22 @@ Tile::Tile(int type)
 		this->buffalo = false;
 		this->deer = false;
 		this->type = 'd';
-		connectInnerFaces();
+	
+		this->up.inwardAcrossFace = NULL;
+		this->up.inwardLeftFace = NULL;
+		this->up.inwardRightFace = NULL;
+
+		this->down.inwardAcrossFace = NULL;
+		this->down.inwardLeftFace = NULL;
+		this->down.inwardRightFace = NULL;
+
+		this->left.inwardAcrossFace = NULL;
+		this->left.inwardLeftFace = NULL;
+		this->left.inwardRightFace = NULL;
+
+		this->right.inwardAcrossFace = NULL;
+		this->right.inwardLeftFace = NULL;
+		this->right.inwardRightFace = NULL;
 	}
 	else if (type == 5)
 	{
@@ -132,7 +175,22 @@ Tile::Tile(int type)
 		this->buffalo = false;
 		this->deer = false;
 		this->type = 'e';
-		connectInnerFaces();
+
+		this->up.inwardAcrossFace = &this->down;
+		this->up.inwardLeftFace = NULL;
+		this->up.inwardRightFace = NULL;
+
+		this->down.inwardAcrossFace = &this->up;
+		this->down.inwardLeftFace = NULL;
+		this->down.inwardRightFace = NULL;
+
+		this->left.inwardAcrossFace = NULL;
+		this->left.inwardLeftFace = NULL;
+		this->left.inwardRightFace = NULL;
+
+		this->right.inwardAcrossFace = NULL;
+		this->right.inwardLeftFace = NULL;
+		this->right.inwardRightFace = NULL;
 	}
 	else if (type == 6)
 	{
@@ -144,7 +202,22 @@ Tile::Tile(int type)
 		this->buffalo = false;
 		this->deer = false;
 		this->type = 'f';
-		connectInnerFaces();
+
+		this->up.inwardAcrossFace = NULL;
+		this->up.inwardLeftFace = NULL;
+		this->up.inwardRightFace = &this->left;
+
+		this->down.inwardAcrossFace = NULL;
+		this->down.inwardLeftFace = NULL;
+		this->down.inwardRightFace = &this->right;
+
+		this->left.inwardAcrossFace = NULL;
+		this->left.inwardLeftFace = &this->up;
+		this->left.inwardRightFace = NULL;
+
+		this->right.inwardAcrossFace = NULL;
+		this->right.inwardLeftFace = &this->down;
+		this->right.inwardRightFace = NULL;
 	}
 	else if (type == 7)
 	{
@@ -156,7 +229,22 @@ Tile::Tile(int type)
 		this->buffalo = false;
 		this->deer = false;
 		this->type = 'g';
-		connectInnerFaces();
+	
+		this->up.inwardAcrossFace = NULL;
+		this->up.inwardLeftFace = NULL;
+		this->up.inwardRightFace = NULL;
+
+		this->down.inwardAcrossFace = NULL;
+		this->down.inwardLeftFace = NULL;
+		this->down.inwardRightFace = NULL;
+
+		this->left.inwardAcrossFace = NULL;
+		this->left.inwardLeftFace = NULL;
+		this->left.inwardRightFace = NULL;
+
+		this->right.inwardAcrossFace = NULL;
+		this->right.inwardLeftFace = NULL;
+		this->right.inwardRightFace = NULL;	
 	}
 	else if (type == 8)
 	{
@@ -168,7 +256,22 @@ Tile::Tile(int type)
 		this->buffalo = false;
 		this->deer = false;
 		this->type = 'h';
-		connectInnerFaces();
+
+		this->up.inwardAcrossFace = &this->down;
+		this->up.inwardLeftFace = &this->right;
+		this->up.inwardRightFace = &this->left;
+
+		this->down.inwardAcrossFace = &this->up;
+		this->down.inwardLeftFace = &this->left;
+		this->down.inwardRightFace = &this->right;
+
+		this->left.inwardAcrossFace = &this->right;
+		this->left.inwardLeftFace = &this->up;
+		this->left.inwardRightFace = &this->down;
+
+		this->right.inwardAcrossFace = &this->left;
+		this->right.inwardLeftFace = &this->down;
+		this->right.inwardRightFace = &this->up;
 	}
 	else if (type == 9)
 	{
@@ -180,7 +283,22 @@ Tile::Tile(int type)
 		this->buffalo = false;
 		this->deer = false;
 		this->type = 'i';
-		connectInnerFaces();
+
+		this->up.inwardAcrossFace = NULL;
+		this->up.inwardLeftFace = NULL;
+		this->up.inwardRightFace = NULL;
+
+		this->down.inwardAcrossFace = NULL;
+		this->down.inwardLeftFace = &this->left;
+		this->down.inwardRightFace = &this->right;
+
+		this->left.inwardAcrossFace = &this->right;
+		this->left.inwardLeftFace = NULL;
+		this->left.inwardRightFace = &this->down;
+
+		this->right.inwardAcrossFace = &this->left;
+		this->right.inwardLeftFace = &this->down;
+		this->right.inwardRightFace = NULL;
 	}
 	else if (type == 10)
 	{
@@ -192,7 +310,22 @@ Tile::Tile(int type)
 		this->buffalo = false;
 		this->deer = false;
 		this->type = 'j';
-		connectInnerFaces();
+
+		this->up.inwardAcrossFace = NULL;
+		this->up.inwardLeftFace = &this->right;
+		this->up.inwardRightFace = NULL;
+
+		this->down.inwardAcrossFace = NULL;
+		this->down.inwardLeftFace = &this->left;
+		this->down.inwardRightFace = NULL;
+
+		this->left.inwardAcrossFace = NULL;
+		this->left.inwardLeftFace = NULL;
+		this->left.inwardRightFace = &this->down;
+
+		this->right.inwardAcrossFace = NULL;
+		this->right.inwardLeftFace = NULL;
+		this->right.inwardRightFace = &this->up;
 	}
 	else if (type == 11)
 	{
@@ -204,7 +337,22 @@ Tile::Tile(int type)
 		this->buffalo = false;
 		this->deer = false;
 		this->type = 'k';
-		connectInnerFaces();
+
+		this->up.inwardAcrossFace = NULL;
+		this->up.inwardLeftFace = NULL;
+		this->up.inwardRightFace = NULL;
+
+		this->down.inwardAcrossFace = NULL;
+		this->down.inwardLeftFace = NULL;
+		this->down.inwardRightFace = NULL;
+
+		this->left.inwardAcrossFace = &this->right;
+		this->left.inwardLeftFace = NULL;
+		this->left.inwardRightFace = NULL;
+
+		this->right.inwardAcrossFace = &this->left;
+		this->right.inwardLeftFace = NULL;
+		this->right.inwardRightFace = NULL;
 	}
 	else if (type == 12)
 	{
@@ -216,7 +364,22 @@ Tile::Tile(int type)
 		this->buffalo = false;
 		this->deer = false;
 		this->type = 'l';
-		connectInnerFaces();
+		
+		this->up.inwardAcrossFace = NULL;
+		this->up.inwardLeftFace = NULL;
+		this->up.inwardRightFace = NULL;
+
+		this->down.inwardAcrossFace = NULL;
+		this->down.inwardLeftFace = NULL;
+		this->down.inwardRightFace = NULL;
+
+		this->left.inwardAcrossFace = &this->right;
+		this->left.inwardLeftFace = NULL;
+		this->left.inwardRightFace = NULL;
+
+		this->right.inwardAcrossFace = &this->left;
+		this->right.inwardLeftFace = NULL;
+		this->right.inwardRightFace = NULL;
 	}
 	else if (type == 13)
 	{
@@ -228,7 +391,22 @@ Tile::Tile(int type)
 		this->buffalo = false;
 		this->deer = false;
 		this->type = 'm';
-		connectInnerFaces();
+		
+		this->up.inwardAcrossFace = NULL;
+		this->up.inwardLeftFace = NULL;
+		this->up.inwardRightFace = NULL;
+
+		this->down.inwardAcrossFace = NULL;
+		this->down.inwardLeftFace = &this->left;
+		this->down.inwardRightFace = &this->right;
+
+		this->left.inwardAcrossFace = &this->right;
+		this->left.inwardLeftFace = NULL;
+		this->left.inwardRightFace = &this->down;
+
+		this->right.inwardAcrossFace = &this->left;
+		this->right.inwardLeftFace = &this->down;
+		this->right.inwardRightFace = NULL;
 	}
 	else if (type == 14)
 	{
@@ -240,7 +418,22 @@ Tile::Tile(int type)
 		this->buffalo = false;
 		this->deer = false;
 		this->type = 'n';
-		connectInnerFaces();
+		
+		this->up.inwardAcrossFace = NULL;
+		this->up.inwardLeftFace = NULL;
+		this->up.inwardRightFace = &this->left;
+
+		this->down.inwardAcrossFace = NULL;
+		this->down.inwardLeftFace = NULL;
+		this->down.inwardRightFace = &this->right;
+
+		this->left.inwardAcrossFace = NULL;
+		this->left.inwardLeftFace = &this->up;
+		this->left.inwardRightFace = NULL;
+
+		this->right.inwardAcrossFace = NULL;
+		this->right.inwardLeftFace = &this->down;
+		this->right.inwardRightFace = NULL;
 	}
 	else if (type == 15)
 	{
