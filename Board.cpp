@@ -22,11 +22,6 @@ Board::~Board()
 	
 }
 
-std::string Board::to_string(void)
-{
-	return "empty";
-}
-
 // Returns a vector of locations <i,j> on the board where this is a tile WITH >= 1 open face
 std::vector< std::pair<int, int> > Board::display_positions(Tile tile)
 {
