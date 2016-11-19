@@ -19,7 +19,7 @@
 #define BOLD    "\033[1m"       /* Bold */
 #define INVERT  "\033[7m"       /* Invert */
 
-/*void printToTextFile(Board gameboard)
+void printToTextFile(Board gameboard)
 {
 	std::ofstream out_data("Levels/level.txt");
 	out_data << "Level:" << std::endl;
@@ -27,12 +27,16 @@
 	{
 		for (auto& item : inner)
 		{
-			out_data << item->getRotations() << item->getType();
+			if (item != NULL)
+				out_data << item->getRotations() << item->getType();
+			else
+				out_data << '0' << '.';
+			
 		}
 		out_data << std::endl;
 	}
 	out_data.close();
-}*/
+}
 void printBoard(Board gameBoard) //debugging
 {
 
@@ -107,16 +111,19 @@ int main() {
 	}
 	printStack(tStack);
 	printBoard(gameBoard);
+	printToTextFile(gameBoard);
 
-	/**/if (gameBoard.m_board[67][47] != NULL && gameBoard.m_board[67][47]->getType() == 'e')  //debugging
+	/**/if (gameBoard.m_board[69][49] != NULL)  //debugging
 	{
-		//gameBoard.m_board[67][47]->getUpFace()->placeMeeple();
-		std::cout << gameBoard.m_board[67][47]->getUpFace()->hasMeeple() << std::endl;
-		std::cout << gameBoard.m_board[67][47]->getDownFace()->getAccrossFace()->hasMeeple() << std::endl;;
-		std::cout << "Is there meeple? " << gameBoard.checkMeeplePlacement(*gameBoard.m_board[61][47]->getDownFace());
+		gameBoard.m_board[69][49]->getUpFace()->placeMeeple();
+		std::cout << gameBoard.m_board[69][49]->getUpFace()->hasMeeple() << std::endl;
+		//std::cout << gameBoard.m_board[67][47]->getDownFace()->getAccrossFace()->hasMeeple() << std::endl;;
+		std::cout << "Is there meeple? " << gameBoard.checkMeeplePlacement(*gameBoard.m_board[68][47]->getRightFace());
 	}
 	else
 		std::cout << "meeple not placed" << std::endl;/**/																			//debugging
+	int z;
+	std::cin >> z;
 
 	return 0;
 };

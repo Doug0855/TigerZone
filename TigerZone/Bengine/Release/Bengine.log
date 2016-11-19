@@ -1,34 +1,34 @@
-﻿Build started 11/7/2016 7:51:05 PM.
-     1>Project "C:\Users\colton garrett\Documents\Visual Studio 2013\Projects\PaperGame\Bengine\Bengine.vcxproj" on node 2 (Build target(s)).
+﻿Build started 11/19/2016 5:54:56 PM.
+     1>Project "C:\Users\colt\Documents\TigerZone\TigerZone\TigerZone\Bengine\Bengine.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _LIB /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt AudioEngine.cpp Bengine.cpp BengineErrors.cpp Camera2D.cpp DebugRenderer.cpp GLSLProgram.cpp GUI.cpp IMainGame.cpp IOManager.cpp ImageLoader.cpp InputManager.cpp ParticleBatch2D.cpp ParticleEngine2D.cpp ResourceManager.cpp ScreenList.cpp Sprite.cpp SpriteBatch.cpp SpriteFont.cpp TextureCache.cpp Timing.cpp Window.cpp picoPNG.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _LIB /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt AudioEngine.cpp Bengine.cpp Camera2D.cpp BengineErrors.cpp DebugRenderer.cpp GLSLProgram.cpp GUI.cpp ImageLoader.cpp InputManager.cpp IOManager.cpp IMainGame.cpp ParticleBatch2D.cpp ParticleEngine2D.cpp picoPNG.cpp ResourceManager.cpp ScreenList.cpp Sprite.cpp SpriteBatch.cpp SpriteFont.cpp TextureCache.cpp Timing.cpp Window.cpp
          AudioEngine.cpp
          Bengine.cpp
-         BengineErrors.cpp
          Camera2D.cpp
+         BengineErrors.cpp
          DebugRenderer.cpp
          GLSLProgram.cpp
          GUI.cpp
+         ImageLoader.cpp
+         InputManager.cpp
+         IOManager.cpp
          IMainGame.cpp
      1>IMainGame.cpp(32): warning C4244: 'initializing' : conversion from 'Uint32' to 'float', possible loss of data
      1>IMainGame.cpp(40): warning C4244: 'initializing' : conversion from 'Uint32' to 'float', possible loss of data
-         IOManager.cpp
-         ImageLoader.cpp
-         InputManager.cpp
          ParticleBatch2D.cpp
          ParticleEngine2D.cpp
+         picoPNG.cpp
          ResourceManager.cpp
          ScreenList.cpp
          Sprite.cpp
          SpriteBatch.cpp
          SpriteFont.cpp
          TextureCache.cpp
-         Timing.cpp
          Compiling...
+         Timing.cpp
          Window.cpp
-         picoPNG.cpp
        Lib:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"c:\users\colton garrett\documents\visual studio 2013\Projects\TigerZone\Release\Bengine.lib" SDL2.lib SDL2main.lib SDL2_ttf.lib SDL2_mixer.lib opengl32.lib glew32.lib Box2D.lib "CEGUIBase-0.lib" "CEGUIOpenGLRenderer-0.lib" /LIBPATH:"c:\users\colton garrett\documents\visual studio 2013\Projects\TigerZone\deps/lib/Release/" /NOLOGO /LTCG Release\AudioEngine.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"C:\Users\colt\Documents\TigerZone\TigerZone\TigerZone\Release\Bengine.lib" SDL2.lib SDL2main.lib SDL2_ttf.lib SDL2_mixer.lib opengl32.lib glew32.lib Box2D.lib "CEGUIBase-0.lib" "CEGUIOpenGLRenderer-0.lib" /LIBPATH:C:\Users\colt\Documents\TigerZone\TigerZone\TigerZone\deps/lib/Release/ /NOLOGO /LTCG Release\AudioEngine.obj
          Release\Bengine.obj
          Release\Camera2D.obj
          Release\BengineErrors.obj
@@ -56,9 +56,9 @@
      1>glew32.lib(glew32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
      1>CEGUIBase-0.lib(CEGUIBase-0.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
      1>CEGUIOpenGLRenderer-0.lib(CEGUIOpenGLRenderer-0.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
-         Bengine.vcxproj -> c:\users\colton garrett\documents\visual studio 2013\Projects\TigerZone\Release\Bengine.lib
-     1>Done Building Project "C:\Users\colton garrett\Documents\Visual Studio 2013\Projects\PaperGame\Bengine\Bengine.vcxproj" (Build target(s)).
+         Bengine.vcxproj -> C:\Users\colt\Documents\TigerZone\TigerZone\TigerZone\Release\Bengine.lib
+     1>Done Building Project "C:\Users\colt\Documents\TigerZone\TigerZone\TigerZone\Bengine\Bengine.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:07.11
+Time Elapsed 00:00:11.86
