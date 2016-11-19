@@ -3,6 +3,7 @@
 
 int main ()
 {
+	//g++ Block.h Block.cpp Block_TestCase.cpp -o BlockTest.out
 	std::cout << "******************************" << std::endl;
 	std::cout << "*     Testing Block Class    *" << std::endl;
 	std::cout << "******************************" << std::endl;
