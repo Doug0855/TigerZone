@@ -452,10 +452,10 @@ void Tile::rotate()
 	Face leftFace = left;
 	Face rightFace = right;
 
-	up = leftFace;
-	right = upFace;
-	down = rightFace;
-	left = downFace;
+	up = rightFace;
+	right = downFace;
+	down = leftFace;
+	left = upFace;
 
   if (rotation < 3)
     rotation++;
