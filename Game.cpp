@@ -10,20 +10,20 @@ Game::Game(Player p1, Player p2, TileStack t, Board b)
 
 Game::~Game()
 {
-	
+
 }
 
 void Game::init() {
 	currentPlayer = &player1;
-	tileStack.shuffle(); 
+	tileStack.shuffle();
 }
 
 void Game::play() {
 	while(!tileStack.isEmpty()) {
-		currentTile = tileStack.draw(); 
+		//currentTile = tileStack.draw(); 
 		//Player places tile
 		//update player score
-		Game::switchPlayer(); 
+		Game::switchPlayer();
 	}
 }
 
@@ -31,6 +31,6 @@ void Game::switchPlayer() {
 	if (currentPlayer == &player1) {
 		currentPlayer = &player2;
 	} else {
-		currentPlayer = &player1; 
+		currentPlayer = &player1;
 	}
 }

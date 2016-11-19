@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PLAYER_H
+#define PLAYER_H
 
 #include <vector>
 #include "Meeple.h"
@@ -8,10 +9,11 @@ class Player{
 public:
 	Player();
 	~Player();
-	
+
 private:
 	std::vector<Meeple> meeples;
 	int score;
 	Board board;
 };
 
+#endif

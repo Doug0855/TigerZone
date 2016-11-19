@@ -87,9 +87,9 @@ void printTileAdddresses(Tile &tile) //debugging
 int main() {
 	Tile tile1(19);
 	TileStack tStack;
+	tStack.shuffle();
 	Board gameBoard;
 	gameBoard.place_tile(std::pair<int, int>(72, 50), tile1);
-
 
 	for(int i = 0; i < /**/tStack.tiles.size()/**/; i++) {
 		// Get all positions that we may place the tile
@@ -105,6 +105,7 @@ int main() {
 			continue;
 		}
 	}
+	printStack(tStack);
 	printBoard(gameBoard);
 
 	/**/if (gameBoard.m_board[67][47] != NULL && gameBoard.m_board[67][47]->getType() == 'e')  //debugging
