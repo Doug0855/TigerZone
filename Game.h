@@ -8,7 +8,7 @@
 class Game{
 
 public:
-	Game(Player p1, Player p2, TileStack t, Board b);
+	Game(std::string gameId, TileStack t, Board b);
 	~Game();
 
 	void init();
@@ -16,9 +16,8 @@ public:
 	void switchPlayer();
 
 private:
+	std::string gameId;
 	Board gameBoard;
-	Player player1, player2;
-	Player* currentPlayer;
 	TileStack tileStack;
 	Tile* currentTile;
 };

@@ -49,7 +49,7 @@ void TileStack::shuffle()
 Tile TileStack::draw()
 {
 	Tile tile = tiles.front();
-  tiles.pop_back();
+  	tiles.pop_back();
 	return tile;
 }
 
