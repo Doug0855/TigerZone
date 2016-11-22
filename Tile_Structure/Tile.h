@@ -23,6 +23,8 @@ public:
 	bool hasBoar() { return boar; }
 	bool hasBuffalo() { return buffalo; }
 	bool hasDeer() { return deer; }
+	bool hasCrocodile() { return crocodile; }
+	void setCrocodile() { this->crocodile = true; }
 	bool hasInit() { return initialization; }
 
   Face* getUpFace() { return &up; }
@@ -39,7 +41,7 @@ private:
   // The number of times we've rotated the tile in order to make it placeable on the board
   int rotation, num;
 	char type;
-	bool boar, buffalo, deer;
+	bool boar, buffalo, deer, crocodile;
   // Attribute to tell us if the tile is a skeleton board tile or an initialized game tile
   bool initialization;
   Block center;

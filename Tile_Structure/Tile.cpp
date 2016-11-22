@@ -16,6 +16,7 @@ Tile::Tile(int type)
     boar = false;
     buffalo = false;
     deer = false;
+    crocodile = false;
     this->type = 'a';
     initialization = true;
   }
@@ -31,6 +32,7 @@ Tile::Tile(int type)
     boar = false;
     buffalo = false;
     deer = false;
+    crocodile = false;
     this->type = 'b';
     initialization = true;
   }
@@ -46,6 +48,7 @@ Tile::Tile(int type)
     boar = false;
     buffalo = false;
     deer = false;
+    crocodile = false;
     this->type = 'c';
     initialization = true;
   }
@@ -61,6 +64,7 @@ Tile::Tile(int type)
     boar = false;
     buffalo = false;
     deer = false;
+    crocodile = false;
     this->type = 'd';
     initialization = true;
   }
@@ -76,6 +80,7 @@ Tile::Tile(int type)
     boar = false;
     buffalo = false;
     deer = false;
+    crocodile = false;
     this->type = 'e';
     initialization = true;
   }
@@ -91,6 +96,7 @@ Tile::Tile(int type)
     boar = false;
     buffalo = false;
     deer = false;
+    crocodile = false;
     this->type = 'f';
     initialization = true;
   }
@@ -106,6 +112,7 @@ Tile::Tile(int type)
     boar = false;
     buffalo = false;
     deer = false;
+    crocodile = false;
     this->type = 'g';
     initialization = true;
   }
@@ -121,6 +128,7 @@ Tile::Tile(int type)
     boar = false;
     buffalo = false;
     deer = false;
+    crocodile = false;
     this->type = 'h';
     initialization = true;
   }
@@ -136,6 +144,7 @@ Tile::Tile(int type)
     boar = false;
     buffalo = false;
     deer = false;
+    crocodile = false;
     this->type = 'i';
     initialization = true;
   }
@@ -151,6 +160,7 @@ Tile::Tile(int type)
     boar = false;
     buffalo = false;
     deer = false;
+    crocodile = false;
     this->type = 'j';
     initialization = true;
   }
@@ -166,6 +176,7 @@ Tile::Tile(int type)
     boar = false;
     buffalo = false;
     deer = false;
+    crocodile = false;
     this->type = 'k';
     initialization = true;
   }
@@ -181,6 +192,7 @@ Tile::Tile(int type)
     boar = false;
     buffalo = false;
     deer = false;
+    crocodile = false;
     this->type = 'l';
     initialization = true;
   }
@@ -196,6 +208,7 @@ Tile::Tile(int type)
     boar = false;
     buffalo = false;
     deer = false;
+    crocodile = false;
     this->type = 'm';
     initialization = true;
   }
@@ -211,6 +224,7 @@ Tile::Tile(int type)
     boar = false;
     buffalo = false;
     deer = false;
+    crocodile = false;
     this->type = 'n';
     initialization = true;
   }
@@ -226,6 +240,7 @@ Tile::Tile(int type)
     boar = false;
     buffalo = false;
     deer = false;
+    crocodile = false;
     this->type = 'o';
     initialization = true;
   }
@@ -241,6 +256,7 @@ Tile::Tile(int type)
     boar = true;
     buffalo = false;
     deer = false;
+    crocodile = false;
     this->type = 'p';
     initialization = true;
   }
@@ -256,6 +272,7 @@ Tile::Tile(int type)
     boar = false;
     buffalo = false;
     deer = false;
+    crocodile = false;
     this->type = 'q';
     initialization = true;
   }
@@ -271,6 +288,7 @@ Tile::Tile(int type)
     boar = false;
     buffalo = true;
     deer = false;
+    crocodile = false;
     this->type = 'r';
     initialization = true;
   }
@@ -286,6 +304,7 @@ Tile::Tile(int type)
     boar = false;
     buffalo = false;
     deer = false;
+    crocodile = false;
     this->type = 's';
     initialization = true;
   }
@@ -301,6 +320,7 @@ Tile::Tile(int type)
     boar = false;
     buffalo = false;
     deer = true;
+    crocodile = false;
     this->type = 't';
     initialization = true;
   }
@@ -316,6 +336,7 @@ Tile::Tile(int type)
     boar = false;
     buffalo = false;
     deer = false;
+    crocodile = false;
     this->type = 'u';
     initialization = true;
   }
@@ -331,6 +352,7 @@ Tile::Tile(int type)
     boar = false;
     buffalo = false;
     deer = false;
+    crocodile = false;
     this->type = 'v';
     initialization = true;
   }
@@ -346,6 +368,7 @@ Tile::Tile(int type)
     boar = true;
     buffalo = false;
     deer = false;
+    crocodile = false;
     this->type = 'w';
     initialization = true;
   }
@@ -361,6 +384,7 @@ Tile::Tile(int type)
     boar = false;
     buffalo = false;
     deer = false;
+    crocodile = false;
     this->type = 'x';
     initialization = true;
   }
@@ -376,6 +400,7 @@ Tile::Tile(int type)
     boar = false;
     buffalo = true;
     deer = false;
+    crocodile = false;
     this->type = 'y';
     initialization = true;
   }
@@ -391,6 +416,7 @@ Tile::Tile(int type)
     boar = false;
     buffalo = false;
     deer = false;
+    crocodile = false;
     this->type = 'z';
     initialization = true;
   }
@@ -406,7 +432,24 @@ Tile::Tile(int type)
     boar = false;
     buffalo = false;
     deer = true;
+    crocodile = false;
     this->type = '#';
+    initialization = true;
+  }
+  else if (type == 28)
+  {
+    up = Face('j', 't', 'j', *NULL_face, *NULL_face, *NULL_face);
+    down = Face('l', 'l', 'l', *NULL_face, left, right);
+    left = Face('l', 'l', 'l', right, *NULL_face, down);
+    right = Face('l', 'l', 'l', left, down, *NULL_face);
+    center = Block();
+    rotation = 0;
+    num = 28;
+    boar = false;
+    buffalo = false;
+    deer = false;
+    crocodile = true;
+    this->type = '*';
     initialization = true;
   }
   else
@@ -421,6 +464,7 @@ Tile::Tile(int type)
     boar = false;
     buffalo = false;
     deer = false;
+    crocodile = false;
     type = '.';
     initialization = false;
   }
@@ -437,6 +481,7 @@ Tile::Tile()
   boar = false;
   buffalo = false;
   deer = false;
+  crocodile = false;
   type = '.';
 	initialization = false;
 }
