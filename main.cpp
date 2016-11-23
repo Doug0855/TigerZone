@@ -8,6 +8,7 @@
 #include "Tile_Structure/Face.h"
 #include "Tile_Structure/TileStack.h"
 //#include "Meeple.h"
+#include "Game.h"
 #include "Board.h"
 
 #define WHITE   "\033[37m"      /* White */
@@ -39,7 +40,7 @@ void printToTextFile(Board gameboard)
 }
 void printBoard(Board gameBoard) //debugging
 {
-
+	std::cout<<"in print board"<<std::endl;
 	// Print out gameboard
 	std::cout << "size of gameBoard is: " << gameBoard.m_board.size() << " x " << gameBoard.m_board[0].size() << std::endl;
 	for(int i = 0; i < gameBoard.m_board.size(); i++)
@@ -92,36 +93,43 @@ int main() {
 	Tile tile1(19);
 	TileStack tStack;
 	tStack.shuffle();
-	Board gameBoard;
-	gameBoard.place_tile(std::pair<int, int>(72, 50), tile1);
+	Player p1;
+	Player p2;
+	Game game1("123", p1, p2, tStack, tile1, std::pair<int,int> (72,72));
+	game1.play();
 
-	for(int i = 0; i < /**/tStack.tiles.size()/**/; i++) {
-		// Get all positions that we may place the tile
-		std::vector<std::pair<int,int> > availableLocations = gameBoard.display_positions(tStack.tiles[i]);
-		// check if there are any available moves. If so then place at the optimal spot.
-		if(availableLocations.size() > 0) {
-			Tile *tmpTile = new Tile(tStack.tiles[i].getNum());
-			std::pair<int,int> optimalLocation = gameBoard.getOptimalPlacement(*tmpTile, availableLocations);
-			gameBoard.place_tile(optimalLocation, *tmpTile);
-		}
-		else {
-			std::cout << "TILE " << tStack.tiles[i].getType() << " CANNOT BE PLACED" << std::endl;
-			continue;
-		}
-	}
-	printStack(tStack);
-	printBoard(gameBoard);
-	printToTextFile(gameBoard);
+	printBoard(game1.gameboard);
 
-	/**/if (gameBoard.m_board[69][49] != NULL)  //debugging
-	{
-		gameBoard.m_board[69][49]->getUpFace()->placeMeeple();
-		std::cout << gameBoard.m_board[69][49]->getUpFace()->hasMeeple() << std::endl;
-		//std::cout << gameBoard.m_board[67][47]->getDownFace()->getAccrossFace()->hasMeeple() << std::endl;;
-		std::cout << "Is there meeple? " << gameBoard.checkMeeplePlacement(*gameBoard.m_board[68][47]->getRightFace());
-	}
-	else
-		std::cout << "meeple not placed" << std::endl;/**/																			//debugging
+	// Board gameBoard;
+	// gameBoard.place_tile(std::pair<int, int>(72, 50), tile1);
+
+	// for(int i = 0; i < /**/tStack.tiles.size()/**/; i++) {
+	// 	// Get all positions that we may place the tile
+	// 	std::vector<std::pair<int,int> > availableLocations = gameBoard.display_positions(tStack.tiles[i]);
+	// 	// check if there are any available moves. If so then place at the optimal spot.
+	// 	if(availableLocations.size() > 0) {
+	// 		Tile *tmpTile = new Tile(tStack.tiles[i].getNum());
+	// 		std::pair<int,int> optimalLocation = gameBoard.getOptimalPlacement(*tmpTile, availableLocations);
+	// 		gameBoard.place_tile(optimalLocation, *tmpTile);
+	// 	}
+	// 	else {
+	// 		std::cout << "TILE " << tStack.tiles[i].getType() << " CANNOT BE PLACED" << std::endl;
+	// 		continue;
+	// 	}
+	// }
+	// printStack(tStack);
+	// printBoard(gameBoard);
+	// printToTextFile(gameBoard);
+
+	// /**/if (gameBoard.m_board[72][50] != NULL)  //debugging
+	// {
+	// 	gameBoard.m_board[72][50]->getUpFace()->placeMeeple();
+	// 	std::cout << gameBoard.m_board[72][50]->getUpFace()->hasMeeple() << std::endl;
+	// 	//std::cout << gameBoard.m_board[67][47]->getDownFace()->getAccrossFace()->hasMeeple() << std::endl;;
+	// 	std::cout << "Is there meeple? " << gameBoard.checkMeeplePlacement(*gameBoard.m_board[72][50]->getRightFace());
+	// }
+	// else
+	// 	std::cout << "meeple not placed" << std::endl;/**/																			//debugging
 	int z;
 	std::cin >> z;
 

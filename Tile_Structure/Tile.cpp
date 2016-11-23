@@ -449,7 +449,7 @@ Tile::Tile(int type)
     buffalo = false;
     deer = false;
     crocodile = true;
-    this->type = '!';
+    this->type = '*';
     initialization = true;
   }
   else
@@ -497,10 +497,10 @@ void Tile::rotate()
 	Face leftFace = left;
 	Face rightFace = right;
 
-	up = leftFace;
-	right = upFace;
-	down = rightFace;
-	left = downFace;
+	up = rightFace;
+	right = downFace;
+	down = leftFace;
+	left = upFace;
 
   if (rotation < 3)
     rotation++;

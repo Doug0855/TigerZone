@@ -8,17 +8,21 @@
 class Game{
 
 public:
-	Game(Player p1, Player p2, TileStack t, Board b);
+	Game(std::string gameId, Player player1, Player player2, TileStack t,  Tile startingTile, std::pair<int,int> startingCoordinates);
 	~Game();
 
-	void init();
 	void play();
+	void makeMove(Tile);
+	void updateBoard();
 	void switchPlayer();
+	void printToTextFile(Board);
 
+
+	Board gameboard;
 private:
-	Board gameBoard;
-	Player player1, player2;
-	Player* currentPlayer;
+	std::string gameId;
+	Player player1;
+	Player player2;
 	TileStack tileStack;
 	Tile* currentTile;
 };
