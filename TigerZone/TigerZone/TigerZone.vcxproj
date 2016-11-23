@@ -12,15 +12,35 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp" />
+    <ClCompile Include="Board.cpp" />
+    <ClCompile Include="Farmer.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="GamePlayScreen.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Meeple.cpp" />
+    <ClCompile Include="Monk.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Tile_Structure\Block.cpp" />
+    <ClCompile Include="Tile_Structure\Face.cpp" />
+    <ClCompile Include="Tile_Structure\Tile.cpp" />
+    <ClCompile Include="Tile_Structure\TileStack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h" />
+    <ClInclude Include="Board.h" />
+    <ClInclude Include="Farmer.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="GamePlayScreen.h" />
     <ClInclude Include="Level.h" />
+    <ClInclude Include="Meeple.h" />
+    <ClInclude Include="Monk.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="ScreenIndices.h" />
+    <ClInclude Include="Tile_Structure\Block.h" />
+    <ClInclude Include="Tile_Structure\Face.h" />
+    <ClInclude Include="Tile_Structure\Tile.h" />
+    <ClInclude Include="Tile_Structure\TileStack.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{45AF251C-0CA0-4BC4-8A33-5ED0F06883FC}</ProjectGuid>

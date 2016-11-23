@@ -1,6 +1,12 @@
 #pragma once
 
 #include "Level.h"
+#include "Tile_Structure/Tile.h"
+#include "Tile_Structure/Block.h"
+#include "Tile_Structure/Face.h"
+#include "Tile_Structure/TileStack.h"
+#include "Game.h"
+#include "Board.h"
 #include <Bengine/IGameScreen.h>
 #include <Bengine/InputManager.h>
 #include <vector>
@@ -34,12 +40,23 @@ public:
 
 	virtual void draw() override;
 
+	Board gameboard;
+
 private:
 	void initLevel(); /// sets up level
 	void initShaders(); // inits shaders
 	void checkInput(float deltaTime);
+	void play();
 	void updateLevel();
 	bool onExitClicked(const CEGUI::EventArgs& e);
+	void printToTextFile(Board gameboard);
+
+	int m_i = 0;
+	std::string gameId;
+	Player player1;
+	Player player2;
+	TileStack tileStack;
+	Tile* currentTile;
 
 	Level* m_level;
 
