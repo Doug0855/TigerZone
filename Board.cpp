@@ -33,9 +33,11 @@ std::vector< std::pair<int, int> > Board::display_positions(Tile tile)
 			if (m_board[i][j] != NULL && m_board[i][j]->hasOpenFace())
 			{
 				std::vector< std::string> tempFaces = m_board[i][j]->getOpenFaces();
+				std::cout<<"Tile at "<<i<<' '<<j<<" has "<<tempFaces.size()<<" open faces"<<std::endl;
 				for(int k = 0; k < tempFaces.size(); k++)
 				{
 					std::vector< std::pair<int, int> > tempPlacements = checkPlacement(tile, i, j, tempFaces[k]);
+					std::cout<<"after checking placement there are  "<<tempPlacements.size()<<" on face "<<tempFaces[k]<<std::endl;
 					places.insert(places.end(), tempPlacements.begin(), tempPlacements.end());
 				}
 			}
@@ -83,6 +85,7 @@ std::vector< std::pair<int, int> > Board::checkPlacement(Tile tile, int i, int j
 	}
 	else if (openFaces == "left")
 	{
+		std::cout<<"left face "<<i<<' '<<j<<m_board[i][j]->getLeftFace()->faceEquals(*tile.getRightFace())<<std::endl;
 		for (int ii = 0; ii < 4; ii++)
 		{
 			// same thing as above but with left

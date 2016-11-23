@@ -53,6 +53,8 @@ void Face::visit()
 }
 bool Face::faceEquals(Face face)
 {
+  std::cout<<"board face: "<<this->m_1.getType()<<' '<<this->m_2.getType()<<' '<<this->m_2.getType()<<std::endl;
+  std::cout<<"tile face: "<<face.getBlockType(1)<<' '<<face.getBlockType(2)<<' '<<face.getBlockType(3)<<std::endl;
 	if(this->m_1.getType() == face.getBlockType(1) &&
 		 this->m_2.getType() == face.getBlockType(2) &&
 		 this->m_3.getType() == face.getBlockType(3))
