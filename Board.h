@@ -27,6 +27,10 @@ public:
 	// gets best placement and rotation for current tile
 	std::pair<int, int> getOptimalPlacement(Tile &tile, std::vector< std::pair<int, int> > availableMoves);
 	
+	int positionPoints(int i, int j);
+
+	int animalPoints(int i, int j);
+
 	// places the tile on the board and connects the faces
 	void place_tile(std::pair<int, int> location, Tile &tile);
 	

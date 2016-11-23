@@ -449,7 +449,7 @@ Tile::Tile(int type)
     buffalo = false;
     deer = false;
     crocodile = true;
-    this->type = '*';
+    this->type = '!';
     initialization = true;
   }
   else

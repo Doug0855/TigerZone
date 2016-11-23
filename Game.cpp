@@ -21,9 +21,9 @@ Game::~Game()
 }
 
 void Game::play() {
-	for(int i = 0; i <  10; i++) {
+	for(int i = 0; i <  tileStack.tiles.size(); i++) {
 		Tile currentTile = tileStack.tiles[i];
-		if(i % 2 == 0) {
+		if(i % 2 == 99) {
 			// player1 turn
 			std::cout<<"It's your turn with tile of type "<<currentTile.getType()<<std::endl;
 			std::vector<std::pair<int,int> > availableLocations = gameboard.display_positions(currentTile);
@@ -41,7 +41,7 @@ void Game::play() {
 			// Create a new pointer to a new tile of the same type as the currentTile
 			Tile *tmpTile = new Tile(currentTile.getNum());
 			// Properly rotate the tile so it may be placed
-			std::pair<int,int> optimalLocation = gameboard.getOptimalPlacement(*tmpTile, placementLocation);
+			std::pair<int, int> optimalLocation = gameboard.getOptimalPlacement(*tmpTile, placementLocation);
 			// Place the new tile
 			gameboard.place_tile(optimalLocation, *tmpTile);
 
@@ -53,13 +53,14 @@ void Game::play() {
 			// computer turn for solo play, player2 turn for tournament play
 			std::vector<std::pair<int,int> > availableLocations = gameboard.display_positions(currentTile);
 			Tile *tmpTile = new Tile(currentTile.getNum());
-			std::pair<int,int> optimalLocation = gameboard.getOptimalPlacement(*tmpTile, availableLocations);
+			std::pair<int, int> optimalLocation = gameboard.getOptimalPlacement(*tmpTile, availableLocations);
 			gameboard.place_tile(optimalLocation, *tmpTile);
 			std::cout<<"Computer placed tile of type "<<currentTile.getType()<<" at location "<<optimalLocation.first<<' '<<optimalLocation.second<<std::endl;
 
 			// printToTextFile(gameboard);
 		}
 	}
+	printToTextFile(gameboard);
 }
 
 void Game::makeMove(Tile tile) {
@@ -67,7 +68,7 @@ void Game::makeMove(Tile tile) {
 	// check if there are any available moves. If so then place at the optimal spot.
 	if(availableLocations.size() > 0) {
 		Tile *tmpTile = new Tile(tile.getNum());
-		std::pair<int,int> optimalLocation = gameboard.getOptimalPlacement(*tmpTile, availableLocations);
+		std::pair<int, int> optimalLocation = gameboard.getOptimalPlacement(*tmpTile, availableLocations);
 		gameboard.place_tile(optimalLocation, *tmpTile);
 	}
 	else {

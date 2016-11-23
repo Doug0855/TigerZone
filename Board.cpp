@@ -5,11 +5,11 @@ Board::Board()
 {
 	// Initialize board to be 150x150 vector of Tiles*
 	Tile *NULL_tile = NULL;
-	for(int i = 0; i < 80; i++)
+	for(int i = 0; i < 160; i++)
 	{
 		std::vector<Tile*> temp;
 		m_board.push_back(temp);
-		for(int j = 0; j < 80; j++) {
+		for(int j = 0; j < 160; j++) {
 			m_board[i].push_back(NULL_tile);
 		}
 	}
@@ -25,15 +25,15 @@ std::vector< std::pair<int, int> > Board::display_positions(Tile tile)
 	// Create empty vector to store possible placement locations
 	std::vector< std::pair<int, int> > places;
 	// Loop through the rows of board
-	for (int i = 0; i < m_board.size(); i++)
+	for (size_t i = 0; i < m_board.size(); i++)
 	{
 		// Loop through column of board
-		for (int j = 0; j < m_board[i].size(); j++)
+		for (size_t j = 0; j < m_board[i].size(); j++)
 		{
 			if (m_board[i][j] != NULL && m_board[i][j]->hasOpenFace())
 			{
 				std::vector< std::string> tempFaces = m_board[i][j]->getOpenFaces();
-				for(int k = 0; k < tempFaces.size(); k++)
+				for (size_t k = 0; k < tempFaces.size(); k++)
 				{
 					// Check that the open faces for each location (and adjacent ones) may actually connect to the tile
 					// Get back a vector of locations where we may place the tile
@@ -124,26 +124,169 @@ std::vector< std::pair<int, int> > Board::checkPlacement(Tile tile, int i, int j
 }
 
 std::pair<int,int> Board::getOptimalPlacement(Tile &tile, std::vector< std::pair<int, int> > availableMoves) {
-	for (size_t z = 0; z < availableMoves.size(); z++)
+	if (availableMoves.size() > 1)
 	{
-		int i = availableMoves[z].first;
-		int j = availableMoves[z].second;
-		for(int q = 0; q < 4; q++) {
+		int bestRotation = 0;
+		std::pair<int, int> bestSpot;
+		int mostPoints = 0;
+		for (size_t z = 0; z < availableMoves.size(); z++)
+		{
+			int i = availableMoves[z].first;
+			int j = availableMoves[z].second;
+			for (int q = 0; q < 4; q++) 
+			{
+				int points = 0;
+				if ((m_board[i + 1][j] == NULL || m_board[i + 1][j]->getUpFace()->faceEquals(*tile.getDownFace())) &&
+					(m_board[i - 1][j] == NULL || m_board[i - 1][j]->getDownFace()->faceEquals(*tile.getUpFace())) &&
+					(m_board[i][j + 1] == NULL || m_board[i][j + 1]->getLeftFace()->faceEquals(*tile.getRightFace())) &&
+					(m_board[i][j - 1] == NULL || m_board[i][j - 1]->getRightFace()->faceEquals(*tile.getLeftFace())))
+				{
+					points = positionPoints(i, j);
+				}
+				else
+				{
+					points = -1;
+				}
+				if (points > mostPoints)
+				{
+					mostPoints = points;
+					bestSpot = availableMoves[z];
+					bestRotation = q;
+				}
+				tile.rotate();
+			}
+		}
+		for (int i = 0; i < bestRotation; i++)
+		{
+			tile.rotate();
+		}
+		return bestSpot;
+	}
+	else
+	{
+		int i = availableMoves[0].first;
+		int j = availableMoves[0].second;
+		for (int q = 0; q < 4; q++) 
+		{
 			if ((m_board[i + 1][j] == NULL || m_board[i + 1][j]->getUpFace()->faceEquals(*tile.getDownFace())) &&
 				(m_board[i - 1][j] == NULL || m_board[i - 1][j]->getDownFace()->faceEquals(*tile.getUpFace())) &&
 				(m_board[i][j + 1] == NULL || m_board[i][j + 1]->getLeftFace()->faceEquals(*tile.getRightFace())) &&
 				(m_board[i][j - 1] == NULL || m_board[i][j - 1]->getRightFace()->faceEquals(*tile.getLeftFace())))
 			{
-				std::cout<<"Location "<<i<<' '<<j<<" passed optimalPlacement checks of connecting to all surrounding tiles"<<std::endl;
-				return availableMoves[z];
+				std::cout << "Location " << i << ' ' << j << " passed optimalPlacement checks of connecting to all surrounding tiles" << std::endl;
+				return availableMoves[0];
 			}
 			else
 			{
 				tile.rotate();
-			}	
-		} 
+			}
+		}
 	}
-	return availableMoves[0];
+}
+
+int Board::positionPoints(int i, int j)
+{
+	const int LAKE_POINTS = 6;
+	const int JUNGLE_POINTS = 3;
+	const int TRAIL_POINTS = 1;	
+	
+	int points = 0;
+	if (m_board[i + 1][j] != NULL)
+	{
+		points += animalPoints(i + 1, j);
+		if (m_board[i + 1][j]->getUpFace()->getBlockType(2) == "lake")
+		{
+			points += LAKE_POINTS;
+		}
+		else if (m_board[i + 1][j]->getUpFace()->getBlockType(2) == "jungle")
+		{
+			points += JUNGLE_POINTS;
+		}
+		else if (m_board[i + 1][j]->getUpFace()->getBlockType(2) == "trail")
+		{
+			points += TRAIL_POINTS;
+		}
+	}
+	if (m_board[i - 1][j] != NULL)
+	{
+		points += animalPoints(i - 1, j);
+		if (m_board[i - 1][j]->getDownFace()->getBlockType(2) == "lake")
+		{
+			points += LAKE_POINTS;
+		}
+		else if (m_board[i - 1][j]->getDownFace()->getBlockType(2) == "jungle")
+		{
+			points += JUNGLE_POINTS;
+		}
+		else if (m_board[i - 1][j]->getDownFace()->getBlockType(2) == "trail")
+		{
+			points += TRAIL_POINTS;
+		}
+	}
+	if (m_board[i][j + 1] != NULL)
+	{
+		points += animalPoints(i, j + 1);
+		if (m_board[i][j + 1]->getLeftFace()->getBlockType(2) == "lake")
+		{
+			points += LAKE_POINTS;
+		}
+		else if (m_board[i][j + 1]->getLeftFace()->getBlockType(2) == "jungle")
+		{
+			points += JUNGLE_POINTS;
+		}
+		else if (m_board[i][j + 1]->getLeftFace()->getBlockType(2) == "trail")
+		{
+			points += TRAIL_POINTS;
+		}
+	}
+	if (m_board[i][j - 1] != NULL)
+	{
+		points += animalPoints(i, j - 1);
+		if (m_board[i][j - 1]->getRightFace()->getBlockType(2) == "lake")
+		{
+			points += LAKE_POINTS;
+		}
+		else if (m_board[i][j - 1]->getRightFace()->getBlockType(2) == "jungle")
+		{
+			points += JUNGLE_POINTS;
+		}
+		else if (m_board[i][j - 1]->getRightFace()->getBlockType(2) == "trail")
+		{
+			points += TRAIL_POINTS;
+		}
+	}
+	return points;
+}
+
+int Board::animalPoints(int i, int j)
+{
+	const int DEN_POINTS = 10;
+	const int DEER_POINTS = 2;
+	const int BOAR_POINTS = 2;
+	const int BUFFALO_POINTS = 2;
+	const int CROCODILE_POINTS = -2;
+	int points = 0;
+	if (m_board[i][j]->getCenter()->getType() == "Den")
+	{
+		points += DEN_POINTS;
+	}
+	if (m_board[i][j]->hasBoar())
+	{
+		points += BOAR_POINTS;
+	}
+	if (m_board[i][j]->hasBuffalo())
+	{
+		points += BUFFALO_POINTS;
+	}
+	if (m_board[i][j]->hasDeer())
+	{
+		points += DEER_POINTS;
+	}
+	if (m_board[i][j]->hasCrocodile())
+	{
+		points += CROCODILE_POINTS;
+	}
+	return points;
 }
 
 // Place a tile on the board. Make sure all neighboring tiles are pointing to the corresponding faces
