@@ -50,7 +50,7 @@ void GameplayScreen::onEntry()
 
 	initLevel();
 	m_camera.setPosition(m_level->cameraPos);
-
+	/*
 	Tile tile1(19);
 	TileStack tStack;
 	tStack.shuffle();
@@ -60,6 +60,7 @@ void GameplayScreen::onEntry()
 	Tile *startTile = new Tile(tile1.getNum());
 	gameboard.place_tile(startingCoordinates, *startTile);
 	gameId = "123";
+	*/
 }
 
 void GameplayScreen::onExit()
@@ -70,7 +71,7 @@ void GameplayScreen::onExit()
 void GameplayScreen::update(float deltaTime)
 {
 	checkInput(deltaTime);
-
+	/*
 		Tile currentTile = tileStack.tiles[m_i];
 		if (m_i % 2 == 0) {
 			// player1 turn
@@ -106,6 +107,7 @@ void GameplayScreen::update(float deltaTime)
 			printToTextFile(gameboard);
 		}
 		m_i++;
+		*/
 	updateLevel();
 	m_camera.update();
 }

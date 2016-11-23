@@ -85,5 +85,5 @@ void Level::displayTile(int x, int y, char tile, int rotate)
 		Bengine::ResourceManager::getTexture("Textures/"+s+ ".png").id,
 		0.0f,
 		whiteColor,
-		-rotate * (3.14159265 / 2));
+		rotate * (3.14159265 / 2));
 }
