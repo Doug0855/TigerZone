@@ -15,6 +15,7 @@ public:
 	void makeMove(Tile);
 	void updateBoard();
 	void switchPlayer();
+	void printToTextFile(Board);
 
 
 	Board gameboard;
