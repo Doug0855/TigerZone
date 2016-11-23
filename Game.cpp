@@ -21,7 +21,7 @@ Game::~Game()
 }
 
 void Game::play() {
-	for(int i = 0; i <  tileStack.tiles.size(); i++) {
+	for(int i = 0; i <  10; i++) {
 		Tile currentTile = tileStack.tiles[i];
 		if(i % 2 == 0) {
 			// player1 turn
@@ -34,6 +34,7 @@ void Game::play() {
 			// Take in where the user would like to place the tile
 			int placementSelection;
 			std::cin >> placementSelection;
+			std::cout<<"Select option "<<placementSelection<<std::endl;
 			// Create vector of that pair to pass to optimalLocation(), need to keep as param vector bc this is specific scenario where we know exact coordinates
 			std::vector< std::pair<int,int> > placementLocation;
 			placementLocation.push_back(availableLocations[placementSelection]);
@@ -45,14 +46,16 @@ void Game::play() {
 			gameboard.place_tile(optimalLocation, *tmpTile);
 
 			// printToTextFile(gameboard);
+			std::cout<<std::endl;
 		} 
 		else {
+			std::cout<<"COMPUTER TURN"<<std::endl;
 			// computer turn for solo play, player2 turn for tournament play
 			std::vector<std::pair<int,int> > availableLocations = gameboard.display_positions(currentTile);
 			Tile *tmpTile = new Tile(currentTile.getNum());
 			std::pair<int,int> optimalLocation = gameboard.getOptimalPlacement(*tmpTile, availableLocations);
 			gameboard.place_tile(optimalLocation, *tmpTile);
-			std::cout<<"Computer placed tile of type "<<tmpTile->getType()<<" at location "<<optimalLocation.first<<' '<<optimalLocation.second<<std::endl;
+			std::cout<<"Computer placed tile of type "<<currentTile.getType()<<" at location "<<optimalLocation.first<<' '<<optimalLocation.second<<std::endl;
 
 			// printToTextFile(gameboard);
 		}

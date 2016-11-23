@@ -98,7 +98,7 @@ int main() {
 	Game game1("123", p1, p2, tStack, tile1, std::pair<int,int> (72,72));
 	game1.play();
 
-	// printBoard(game1.gameboard);
+	printBoard(game1.gameboard);
 
 	// Board gameBoard;
 	// gameBoard.place_tile(std::pair<int, int>(72, 50), tile1);
