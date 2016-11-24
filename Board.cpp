@@ -174,13 +174,14 @@ std::pair<int,int> Board::getOptimalPlacement(Tile &tile, std::vector< std::pair
 				(m_board[i][j - 1] == NULL || m_board[i][j - 1]->getRightFace()->faceEquals(*tile.getLeftFace())))
 			{
 				std::cout << "Location " << i << ' ' << j << " passed optimalPlacement checks of connecting to all surrounding tiles" << std::endl;
-				return availableMoves[0];
+				break;
 			}
 			else
 			{
 				tile.rotate();
 			}
 		}
+			return availableMoves[0];
 	}
 }
 
