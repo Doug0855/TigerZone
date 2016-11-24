@@ -31,7 +31,7 @@ void printToTextFile(Board gameboard)
 				out_data << item->getRotations() << item->getType();
 			else
 				out_data << '0' << '.';
-			
+
 		}
 		out_data << std::endl;
 	}
@@ -42,6 +42,12 @@ void printBoard(Board gameBoard) //debugging
 
 	// Print out gameboard
 	std::cout << "size of gameBoard is: " << gameBoard.m_board.size() << " x " << gameBoard.m_board[0].size() << std::endl;
+	std::cout << "    ";
+	for(int i = 0; i < gameBoard.m_board.size(); i++)
+	{
+		std::cout << std::setw(2) << i;
+	}
+	std::cout<<std::endl;
 	for(int i = 0; i < gameBoard.m_board.size(); i++)
 	{
 		std::cout << std::setw(3) << i << ' ';
@@ -91,25 +97,32 @@ void printTileAdddresses(Tile &tile) //debugging
 int main() {
 	Tile tile1(19);
 	TileStack tStack;
-	tStack.shuffle();
+	for (int i = 0; i < 5; i++)
+		tStack.shuffle();
 	Board gameBoard;
 	gameBoard.place_tile(std::pair<int, int>(72, 50), tile1);
 
+	printStack(tStack);
 	for(int i = 0; i < /**/tStack.tiles.size()/**/; i++) {
 		// Get all positions that we may place the tile
+		//std::cout << "placing tyle of type: " << tStack.tiles[i].getType() << std::endl; //debugging
 		std::vector<std::pair<int,int> > availableLocations = gameBoard.display_positions(tStack.tiles[i]);
 		// check if there are any available moves. If so then place at the optimal spot.
+		// for (int i = 0; i < availableLocations.size(); i++) //debugging
+		// {
+		// 	std::cout << "pair " << i << ": " << availableLocations[i].first << ", " << availableLocations[i].second << std::endl;
+		// }
 		if(availableLocations.size() > 0) {
 			Tile *tmpTile = new Tile(tStack.tiles[i].getNum());
 			std::pair<int,int> optimalLocation = gameBoard.getOptimalPlacement(*tmpTile, availableLocations);
 			gameBoard.place_tile(optimalLocation, *tmpTile);
+			//printBoard(gameBoard); //debugging
 		}
 		else {
 			std::cout << "TILE " << tStack.tiles[i].getType() << " CANNOT BE PLACED" << std::endl;
 			continue;
 		}
 	}
-	printStack(tStack);
 	printBoard(gameBoard);
 	printToTextFile(gameBoard);
 
@@ -118,12 +131,12 @@ int main() {
 		gameBoard.m_board[69][49]->getUpFace()->placeMeeple();
 		std::cout << gameBoard.m_board[69][49]->getUpFace()->hasMeeple() << std::endl;
 		//std::cout << gameBoard.m_board[67][47]->getDownFace()->getAccrossFace()->hasMeeple() << std::endl;;
-		std::cout << "Is there meeple? " << gameBoard.checkMeeplePlacement(*gameBoard.m_board[68][47]->getRightFace());
+		std::cout << "Is there meeple? " << gameBoard.checkMeeplePlacement(*gameBoard.m_board[68][48]->getRightFace());
 	}
 	else
 		std::cout << "meeple not placed" << std::endl;/**/																			//debugging
-	int z;
-	std::cin >> z;
+	//int z; 						//debugging
+	//std::cin >> z;		//debugging
 
 	return 0;
 };
