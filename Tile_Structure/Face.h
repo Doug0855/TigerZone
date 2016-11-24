@@ -6,13 +6,13 @@
 
 class Face {
 public:
-	Face(char b1, char b2, char b3, Face &accross_face, Face &left_face, Face &right_face);
+	Face(char b1, char b2, char b3, Face &across_face, Face &left_face, Face &right_face);
 	Face();
 	~Face();
 
   void setNeighborFace(Face &face);
   Face* getNeighborFace() { return neighborFace; }
-  Face* getAccrossFace() { return inwardAcrossFace; }
+  Face* getAcrossFace() { return inwardAcrossFace; }
   Face* getLeftFace() { return inwardLeftFace; }
   Face* getRightFace() { return inwardRightFace; }
 

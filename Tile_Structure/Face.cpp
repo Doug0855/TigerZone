@@ -3,8 +3,8 @@
 Face::Face(char b1, char b2, char b3, Face &accross_face, Face& left_face, Face &right_face)
 {
 	m_1 = Block(b1);
-	m_2 = Block(b2);
-	m_3 = Block(b3);
+  m_2 = Block(b2);
+  m_3 = Block(b3);
   meeple = false;
   visited = false;
 	neighborFace = NULL;
@@ -69,3 +69,7 @@ bool Face::connected()
 	else
 		return false;
 }
+
+
+
+

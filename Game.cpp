@@ -53,9 +53,15 @@ void Game::play() {
 			// computer turn for solo play, player2 turn for tournament play
 			std::vector<std::pair<int,int> > availableLocations = gameboard.display_positions(currentTile);
 			Tile *tmpTile = new Tile(currentTile.getNum());
-			std::pair<int, int> optimalLocation = gameboard.getOptimalPlacement(*tmpTile, availableLocations);
-			gameboard.place_tile(optimalLocation, *tmpTile);
-			std::cout<<"Computer placed tile of type "<<currentTile.getType()<<" at location "<<optimalLocation.first<<' '<<optimalLocation.second<<std::endl;
+			if(availableLocations.size() > 0) {
+				std::pair<int, int> optimalLocation = gameboard.getOptimalPlacement(*tmpTile, availableLocations);
+				gameboard.place_tile(optimalLocation, *tmpTile);
+				std::cout<<"Computer placed tile of type "<<currentTile.getType()<<" at location "<<optimalLocation.first<<' '<<optimalLocation.second<<std::endl;
+			}
+			else {
+				// Need to implement the 3 functions for unplayable tiles
+				std::cout<<"Unplayable tile. You may PASS, PICK UP A TIGER, OR PLACE A TIGER"<<std::endl;
+			}
 
 			// printToTextFile(gameboard);
 		}

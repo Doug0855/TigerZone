@@ -69,22 +69,22 @@ void printStack(TileStack stack) //debugging
 void printTileAdddresses(Tile &tile) //debugging
 {
 	std::cout << "DownFace addr: " << tile.getDownFace() << std::endl;
-	std::cout << " Accross addr: " << tile.getDownFace()->getAccrossFace() << std::endl;
+	std::cout << " Accross addr: " << tile.getDownFace()->getAcrossFace() << std::endl;
 	std::cout << " Left addr: " << tile.getDownFace()->getLeftFace() << std::endl;
 	std::cout << " Right addr: " << tile.getDownFace()->getRightFace() << std::endl;
 
 	std::cout << "UpFace addr: " << tile.getUpFace() << std::endl;
-	std::cout << " Accross addr: " << tile.getUpFace()->getAccrossFace() << std::endl;
+	std::cout << " Across addr: " << tile.getUpFace()->getAcrossFace() << std::endl;
 	std::cout << " Left addr: " << tile.getUpFace()->getLeftFace() << std::endl;
 	std::cout << " Right addr: " << tile.getUpFace()->getRightFace() << std::endl;
 
 	std::cout << "RightFace addr: " << tile.getRightFace() << std::endl;
-	std::cout << " Accross addr: " << tile.getRightFace()->getAccrossFace() << std::endl;
+	std::cout << " Across addr: " << tile.getRightFace()->getAcrossFace() << std::endl;
 	std::cout << " Left addr: " << tile.getRightFace()->getLeftFace() << std::endl;
 	std::cout << " Right addr: " << tile.getRightFace()->getRightFace() << std::endl;
 
 	std::cout << "LeftFace addr: " << tile.getLeftFace() << std::endl;
-	std::cout << " Accross addr: " << tile.getLeftFace()->getAccrossFace() << std::endl;
+	std::cout << " Across addr: " << tile.getLeftFace()->getAcrossFace() << std::endl;
 	std::cout << " Left addr: " << tile.getLeftFace()->getLeftFace() << std::endl;
 	std::cout << " Right addr: " << tile.getLeftFace()->getRightFace() << std::endl;
 }

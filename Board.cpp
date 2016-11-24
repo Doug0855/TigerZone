@@ -308,9 +308,9 @@ bool Board::checkMeeplePlacement(Face &face)
 	{
 		if (faces.front()->hasMeeple()) { return true; }
 
-		if (faces.front()->getAccrossFace() != NULL && !faces.front()->getAccrossFace()->hasBeenVisited())
+		if (faces.front()->getAcrossFace() != NULL && !faces.front()->getAcrossFace()->hasBeenVisited())
 		{
-			faces.push(faces.front()->getAccrossFace());
+			faces.push(faces.front()->getAcrossFace());
 		}
 
 		if (faces.front()->getLeftFace() != NULL && !faces.front()->getLeftFace()->hasBeenVisited())
