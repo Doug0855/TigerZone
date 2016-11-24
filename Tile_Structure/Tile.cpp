@@ -130,7 +130,7 @@ Tile::Tile(int type)
   }
   else if (type == 9)
   {
-    setRow(0,'j','j','j');
+    setRow(0,'m','j','m');
     setRow(1,'l','j','l'); 
     setRow(2,'l','l','l'); 
     setFaceTypes();
@@ -145,9 +145,9 @@ Tile::Tile(int type)
   }
   else if (type == 10)
   {
-    setRow(0,'j','l','l');
+    setRow(0,'m','l','l');
     setRow(1,'j','j','l'); 
-    setRow(2,'j','j','j'); 
+    setRow(2,'j','j','m'); 
     setFaceTypes();
     rotation = 0;
     num = 10;
@@ -160,9 +160,9 @@ Tile::Tile(int type)
   }
   else if (type == 11)
   {
-    setRow(0,'j','j','j');
+    setRow(0,'m','j','m');
     setRow(1,'l','l','l'); 
-    setRow(2,'j','j','j'); 
+    setRow(2,'m','j','m'); 
     setFaceTypes();
     rotation = 0;
     num = 11;
@@ -175,9 +175,9 @@ Tile::Tile(int type)
   }
   else if (type == 12)
   {
-    setRow(0,'j','l','j');
+    setRow(0,'m','l','m');
     setRow(1,'j','j','j'); 
-    setRow(2,'j','l','j'); 
+    setRow(2,'m','l','m'); 
     setFaceTypes();
     rotation = 0;
     num = 12;
@@ -190,7 +190,7 @@ Tile::Tile(int type)
   }
   else if (type == 13)
   {
-    setRow(0,'j','l','j');
+    setRow(0,'m','l','m');
     setRow(1,'j','j','j'); 
     setRow(2,'j','j','j'); 
     setFaceTypes();
@@ -205,9 +205,9 @@ Tile::Tile(int type)
   }
   else if (type == 14)
   {
-    setRow(0,'j','j','j');
+    setRow(0,'j','j','m');
     setRow(1,'j','j','l'); 
-    setRow(2,'j','l','j'); 
+    setRow(2,'m','l','m'); 
     setFaceTypes();
     rotation = 0;
     num = 14;
@@ -220,9 +220,9 @@ Tile::Tile(int type)
   }
   else if (type == 15)
   {
-    setRow(0,'j','t','j');
+    setRow(0,'j','t','m');
     setRow(1,'t','t','l'); 
-    setRow(2,'j','j','j'); 
+    setRow(2,'j','j','m'); 
     setFaceTypes();
     rotation = 0;
     num = 15;
@@ -235,9 +235,9 @@ Tile::Tile(int type)
   }
   else if (type == 16)
   {
-    setRow(0,'j','t','j');
+    setRow(0,'j','t','m');
     setRow(1,'t','t','l'); 
-    setRow(2,'j','j','j'); 
+    setRow(2,'j','j','m'); 
     setFaceTypes();
     rotation = 0;
     num = 16;
@@ -250,9 +250,9 @@ Tile::Tile(int type)
   }
   else if (type == 17)
   {
-    setRow(0,'j','j','j');
+    setRow(0,'j','j','m');
     setRow(1,'t','t','l'); 
-    setRow(2,'j','t','j'); 
+    setRow(2,'j','t','m'); 
     setFaceTypes();
     rotation = 0;
     num = 17;
@@ -265,9 +265,9 @@ Tile::Tile(int type)
   }
   else if (type == 18)
   {
-    setRow(0,'j','j','j');
+    setRow(0,'j','j','m');
     setRow(1,'t','t','l'); 
-    setRow(2,'j','t','j'); 
+    setRow(2,'j','t','m'); 
     setFaceTypes();
     rotation = 0;
     num = 18;
@@ -280,9 +280,9 @@ Tile::Tile(int type)
   }
   else if (type == 19)
   {
-    setRow(0,'j','t','j');
+    setRow(0,'j','t','m');
     setRow(1,'j','t','l'); 
-    setRow(2,'j','t','j');
+    setRow(2,'j','t','m');
     setFaceTypes();
     rotation = 0;
     num = 19;
@@ -295,9 +295,9 @@ Tile::Tile(int type)
   }
   else if (type == 20)
   {
-    setRow(0,'j','t','j');
+    setRow(0,'j','t','m');
     setRow(1,'j','t','l'); 
-    setRow(2,'j','t','j'); 
+    setRow(2,'j','t','m'); 
     setFaceTypes();
     rotation = 0;
     num = 20;
@@ -310,7 +310,7 @@ Tile::Tile(int type)
   }
   else if (type == 21)
   {
-    setRow(0,'j','t','j');
+    setRow(0,'m','t','m');
     setRow(1,'l','l','l'); 
     setRow(2,'l','l','l'); 
     setFaceTypes();
@@ -325,9 +325,9 @@ Tile::Tile(int type)
   }
   else if (type == 22)
   {
-    setRow(0,'j','t','j');
+    setRow(0,'j','t','m');
     setRow(1,'t','t','l'); 
-    setRow(2,'j','t','j'); 
+    setRow(2,'j','t','m'); 
     setFaceTypes();
     rotation = 0;
     num = 22;
@@ -340,9 +340,9 @@ Tile::Tile(int type)
   }
   else if (type == 23)
   {
-    setRow(0,'j','t','j');
+    setRow(0,'j','t','m');
     setRow(1,'t','t','l'); 
-    setRow(2,'j','t','j');
+    setRow(2,'j','t','m');
     setFaceTypes();
     rotation = 0;
     num = 23;
@@ -355,9 +355,9 @@ Tile::Tile(int type)
   }
   else if (type == 24)
   {
-    setRow(0,'j','t','j');
+    setRow(0,'j','t','m');
     setRow(1,'t','t','l'); 
-    setRow(2,'j','l','l'); 
+    setRow(2,'m','l','l'); 
     setFaceTypes();
     rotation = 0;
     num = 24;
@@ -370,9 +370,9 @@ Tile::Tile(int type)
   }
   else if (type == 25)
   {
-    setRow(0,'j','t','j');
+    setRow(0,'j','t','m');
     setRow(1,'t','t','l'); 
-    setRow(2,'j','l','l');  
+    setRow(2,'m','l','l');  
     setFaceTypes();
     rotation = 0;
     num = 25;
@@ -385,7 +385,7 @@ Tile::Tile(int type)
   }
   else if (type == 26)
   {
-    setRow(0,'j','l','j');
+    setRow(0,'m','l','m');
     setRow(1,'j','t','j'); 
     setRow(2,'j','t','j'); 
     setFaceTypes();
@@ -400,7 +400,7 @@ Tile::Tile(int type)
   }
   else if (type == 27)
   {
-    setRow(0,'j','l','j');
+    setRow(0,'m','l','m');
     setRow(1,'j','t','j'); 
     setRow(2,'j','t','j'); 
     setFaceTypes();
@@ -415,7 +415,7 @@ Tile::Tile(int type)
   }
   else if (type == 28)
   {
-    setRow(0,'j','t','j');
+    setRow(0,'m','t','m');
     setRow(1,'l','j','l'); 
     setRow(2,'l','l','l'); 
     setFaceTypes();

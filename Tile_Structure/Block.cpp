@@ -9,7 +9,9 @@ Block::Block(char c)
   else if (c == Trail)
   	type = "trail";
   else if (c == Den)
-  	type = "den";
+	  type = "den";
+  else if (c == Mixed)
+	  type == "mixed";
   else
   	type = "";
 }
@@ -33,6 +35,8 @@ void Block::setType(char c) {
     type = "trail";
   else if (c == Den)
     type = "den";
+  else if (c == Mixed)
+	  type == "mixed";
 }
 
 void Block::placeMeeple() {

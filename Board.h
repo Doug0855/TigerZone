@@ -35,9 +35,13 @@ public:
 	void place_tile(std::pair<int, int> location, Tile &tile);
 	
 	// See if feature tile is being placed in has a meeple
-	bool checkMeeplePlacement(Face &face);
+	bool checkMeeplePlacement(Tile tile, std::pair<int, int> blockSpot);
 
 private:
+	bool checkJungle(Tile tile, std::pair<int, int> blockSpot);
+	bool checkLake(Tile tile, std::pair<int, int> blockSpot);
+	bool checkTrail(Tile tile, std::pair<int, int> blockSpot);
+
 	void connectFaces(int row, int col);
 
 };

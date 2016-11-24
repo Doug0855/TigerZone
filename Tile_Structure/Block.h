@@ -9,6 +9,7 @@
 #define    Lake      	'l'
 #define    Trail     	't'
 #define    Den	      'd'
+#define	   Mixed       'm'
 
 class Block {
 public:

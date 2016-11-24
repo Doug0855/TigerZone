@@ -303,6 +303,51 @@ void Board::place_tile(std::pair<int, int> location, Tile &tile)
 	connectFaces(row, col);
 }
 
+bool Board::checkMeeplePlacement(Tile tile, std::pair<int,int> blockSpot)
+{
+	std::vector< std::vector<Block> > innerBlocks = tile.getInnerBlocks();
+	Block block = innerBlocks[blockSpot.first][blockSpot.second];
+	if (block.hasMeeple()) { return true; }
+	if (block.getType() == "jungle" || block.getType() == "mixed") 
+		checkJungle(tile, blockSpot);
+	if (block.getType() == "lake") checkLake(tile, blockSpot);
+	if (block.getType() == "trail") checkTrail(tile, blockSpot);
+}
+/*So you can use the blocks in a tile to find all of the parts of a tile in the same feature,
+To do this i have a queue of blocks and i find all of the adjacent blocks of the blocks your searching from that are the same type,
+the problem comes in when youre traversing to a new tile since the blocks dont have any connections to anything else
+i could add a queue of tiles and push tiles onto that queue if you traverse to them from the blocks
+but then im not sure how i would hold that information for the new blocks of that tile in relation to the existing queue
+instead of having a queue of tiles i could recall the function again and have it run the same process on the tiles on whatever block you move onto it from
+the problem there is how to remember which tiles youve already visited and which blocks youve visted in those tiles
+*/
+bool Board::checkJungle(Tile tile, std::pair<int, int> blockSpot)
+{
+	std::queue<Block> blocks;
+	int i = blockSpot.first;
+	int j = blockSpot.second;
+	if (tile.getInnerBlocks()[i][j].getType() == "mixed")
+	{
+		if (tile.getInnerBlocks()[1][1].getType() == "trail")
+		{
+			if (tile.getInnerBlocks()[0][0].getType() == "mixed") blocks.push(tile.getInnerBlocks()[0][0]);
+			if (tile.getInnerBlocks()[0][2].getType() == "mixed") blocks.push(tile.getInnerBlocks()[0][0]);
+			if (tile.getInnerBlocks()[2][0].getType() == "mixed") blocks.push(tile.getInnerBlocks()[0][0]);
+			if (tile.getInnerBlocks()[2][2].getType() == "mixed") blocks.push(tile.getInnerBlocks()[0][0]);
+		}
+	}
+}
+
+bool Board::checkLake(Tile tile, std::pair<int, int> blockSpot)
+{
+
+}
+
+bool Board::checkTrail(Tile tile, std::pair<int, int> blockSpot)
+{
+
+}
+
 // bool Board::checkMeeplePlacement(Face &face)
 // {
 // 	std::queue<Face*> faces;

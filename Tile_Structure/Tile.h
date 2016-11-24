@@ -51,6 +51,7 @@ public:
 	char getType() { return type; }
 	int getNum() { return num; }
 	int getRotations() { return rotation; }
+	std::vector< std::vector<Block> > getInnerBlocks(){ return innerBlocks; }
 
 private:
   	// The number of times we've rotated the tile in order to make it placeable on the board
