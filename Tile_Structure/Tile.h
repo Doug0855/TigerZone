@@ -8,9 +8,12 @@
 
 class Tile {
 public:
-	Tile(int type);
+	Tile(int num);
 	Tile();
 	~Tile();
+
+	// Set a row of blocks for a tile
+	void setRow(int row, char type1, char type2, char type3);
 
 	// Rotate the tile and set all of the faces to the face that was -90 degrees of it.
 	void rotate();
@@ -27,26 +30,37 @@ public:
 	void setCrocodile() { this->crocodile = true; }
 	bool hasInit() { return initialization; }
 
-  Face* getUpFace() { return &up; }
-  Face* getDownFace() { return &down; }
-  Face* getLeftFace() { return &left; }
-  Face* getRightFace() { return &right; }
-	// Get the center of a block, lets us know if there is a den or a meeple
-	Block* getCenter() { return &center; }
+	// Get the type of a face
+  	std::string getUpFaceType() { return up.getType(); }
+  	std::string getDownFaceType() { return down.getType(); }
+  	std::string getLeftFaceType() { return left.getType(); }
+  	std::string getRightFaceType() { return right.getType(); }
+
+  	// Get the faces
+  	Face* getUpFace() { return &up; }
+  	Face* getDownFace() { return &down; }
+  	Face* getLeftFace() { return &left; }
+  	Face* getRightFace() { return &right; }
+
+  	// Set the types of the 4 faces after matrix has been initialized
+  	void setFaceTypes();
+
+  	// Variables for the GUI
 	char getType() { return type; }
 	int getNum() { return num; }
 	int getRotations() { return rotation; }
 
 private:
-  // The number of times we've rotated the tile in order to make it placeable on the board
-  int rotation, num;
+  	// The number of times we've rotated the tile in order to make it placeable on the board
+  	int rotation, num;
 	char type;
 	bool boar, buffalo, deer, crocodile;
-  // Attribute to tell us if the tile is a skeleton board tile or an initialized game tile
-  bool initialization;
-  Block center;
-  // The four faces of the tile which will contain all the types
-  Face up, down, left, right;
+  	// Attribute to tell us if the tile is a skeleton board tile or an initialized game tile
+  	bool initialization;
+  	// The four faces of the tile which will contain all the types
+  	Face up, down, left, right;
+  	// 3x3 matrix of blocks in the tile
+  	std::vector< std::vector<Block> > innerBlocks;
 
 };
 

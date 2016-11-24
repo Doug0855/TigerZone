@@ -3,14 +3,21 @@
 // Constructor to create one of the 27 different tiles
 Tile::Tile(int type)
 {
+  // Initialize the tile's block matrix to null blocks
+  for(int i = 0; i < 3; i++) {
+    innerBlocks.push_back(std::vector<Block>(3));
+  }
   Face *NULL_face = NULL;
   if (type == 1)
   {
-    up = Face('j', 'j', 'j', down, right, left);
-    down = Face('j', 'j', 'j', up, left, right);
-    left = Face('j', 'j', 'j', right, up, down);
-    right = Face('j', 'j', 'j', left, down, up);
-    center = Block();
+    setRow(0,'j','j','j');
+    setRow(1,'j','j','j'); 
+    setRow(2,'j','j','j'); 
+    setFaceTypes();
+    up = Face();
+    down = Face();
+    left = Face();
+    right = Face();
     rotation = 0;
     num = 1;
     boar = false;
@@ -22,11 +29,14 @@ Tile::Tile(int type)
   }
   else if (type == 2)
   {
-    up = Face('j', 'j', 'j', down, right, left);
-    down = Face('j', 'j', 'j', up, left, right);
-    left = Face('j', 'j', 'j', right, up, down);
-    right = Face('j', 'j', 'j', left, down, up);
-    center = Block('d');
+    setRow(0,'j','j','j');
+    setRow(1,'j','d','j'); 
+    setRow(2,'j','j','j'); 
+    setFaceTypes();
+    up = Face();
+    down = Face();
+    left = Face();
+    right = Face();
     rotation = 0;
     num = 2;
     boar = false;
@@ -38,11 +48,14 @@ Tile::Tile(int type)
   }
   else if (type == 3)
   {
-    up = Face('j', 'j', 'j', *NULL_face, right, left);
-    down = Face('j', 't', 'j', *NULL_face, *NULL_face, *NULL_face);
-    left = Face('j', 'j', 'j', right, up, *NULL_face);
-    right = Face('j', 'j', 'j', left, *NULL_face, up);
-    center = Block('d');
+    setRow(0,'j','j','j');
+    setRow(1,'j','d','j'); 
+    setRow(2,'j','t','j');  
+    setFaceTypes();
+    up = Face();
+    down = Face();
+    left = Face();
+    right = Face();
     rotation = 0;
     num = 3;
     boar = false;
@@ -54,11 +67,14 @@ Tile::Tile(int type)
   }
   else if (type == 4)
   {
-    up = Face('j', 't', 'j', *NULL_face, *NULL_face, *NULL_face);
-    down = Face('j', 't', 'j', *NULL_face, *NULL_face, *NULL_face);
-    left = Face('j', 't', 'j', *NULL_face, *NULL_face, *NULL_face);
-    right = Face('j', 't', 'j', *NULL_face, *NULL_face, *NULL_face);
-    center = Block();
+    setRow(0,'j','t','j');
+    setRow(1,'t','t','t'); 
+    setRow(2,'j','t','j'); 
+    setFaceTypes();
+    up = Face();
+    down = Face();
+    left = Face();
+    right = Face();
     rotation = 0;
     num = 4;
     boar = false;
@@ -70,11 +86,14 @@ Tile::Tile(int type)
   }
   else if (type == 5)
   {
-    up = Face('j', 't', 'j', this->down, *NULL_face, *NULL_face);
-    down = Face('j', 't', 'j', this->up, *NULL_face, *NULL_face);
-    left = Face('j', 'j', 'j', *NULL_face, *NULL_face, *NULL_face);
-    right = Face('j', 'j', 'j', *NULL_face, *NULL_face, *NULL_face);
-    center = Block();
+    setRow(0,'j','t','j');
+    setRow(1,'j','t','j'); 
+    setRow(2,'j','t','j'); 
+    setFaceTypes();
+    up = Face();
+    down = Face();
+    left = Face();
+    right = Face();
     rotation = 0;
     num = 5;
     boar = false;
@@ -86,11 +105,14 @@ Tile::Tile(int type)
   }
   else if (type == 6)
   {
-    up = Face('j', 't', 'j', *NULL_face, *NULL_face, left);
-    down = Face('j', 'j', 'j', *NULL_face, *NULL_face, right);
-    left = Face('j', 't', 'j', *NULL_face, up, *NULL_face);
-    right = Face('j', 'j', 'j', *NULL_face, down, *NULL_face);
-    center = Block();
+    setRow(0,'j','t','j');
+    setRow(1,'t','t','j'); 
+    setRow(2,'j','j','j'); 
+    setFaceTypes();
+    up = Face();
+    down = Face();
+    left = Face();
+    right = Face();
     rotation = 0;
     num = 6;
     boar = false;
@@ -102,11 +124,14 @@ Tile::Tile(int type)
   }
   else if (type == 7)
   {
-    up = Face('j', 't', 'j', *NULL_face, *NULL_face, *NULL_face);
-    down = Face('j', 't', 'j', *NULL_face, *NULL_face, *NULL_face);
-    left = Face('j', 't', 'j', *NULL_face, *NULL_face, *NULL_face);
-    right = Face('j', 'j', 'j', *NULL_face, *NULL_face, *NULL_face);
-    center = Block();
+   setRow(0,'j','t','j');
+    setRow(1,'t','t','j'); 
+    setRow(2,'j','t','j'); 
+    setFaceTypes();
+    up = Face();
+    down = Face();
+    left = Face();
+    right = Face();
     rotation = 0;
     num = 7;
     boar = false;
@@ -118,11 +143,14 @@ Tile::Tile(int type)
   }
   else if (type == 8)
   {
-    up = Face('l', 'l', 'l', down, right, left);
-    down = Face('l', 'l', 'l', up, left, right);
-    left = Face('l', 'l', 'l', right, up, down);
-    right = Face('l', 'l', 'l', left, down, up);
-    center = Block();
+    setRow(0,'l','l','l');
+    setRow(1,'l','l','l'); 
+    setRow(2,'l','l','l'); 
+    setFaceTypes();
+    up = Face();
+    down = Face();
+    left = Face();
+    right = Face();
     rotation = 0;
     num = 8;
     boar = false;
@@ -134,11 +162,14 @@ Tile::Tile(int type)
   }
   else if (type == 9)
   {
-    up = Face('j', 'j', 'j', *NULL_face, *NULL_face, *NULL_face);
-    down = Face('l', 'l', 'l', *NULL_face, left, right);
-    left = Face('l', 'l', 'l', right, *NULL_face, down);
-    right = Face('l', 'l', 'l', left, down, *NULL_face);
-    center = Block();
+    setRow(0,'j','j','j');
+    setRow(1,'l','j','l'); 
+    setRow(2,'l','l','l'); 
+    setFaceTypes();
+    up = Face();
+    down = Face();
+    left = Face();
+    right = Face();
     rotation = 0;
     num = 9;
     boar = false;
@@ -150,11 +181,14 @@ Tile::Tile(int type)
   }
   else if (type == 10)
   {
-    up = Face('l', 'l', 'l', *NULL_face, right, *NULL_face);
-    down = Face('j', 'j', 'j', *NULL_face, left, *NULL_face);
-    left = Face('j', 'j', 'j', *NULL_face, *NULL_face, down);
-    right = Face('l', 'l', 'l', *NULL_face, *NULL_face, up);
-    center = Block();
+    setRow(0,'j','l','l');
+    setRow(1,'j','j','l'); 
+    setRow(2,'j','j','j'); 
+    setFaceTypes();
+    up = Face();
+    down = Face();
+    left = Face();
+    right = Face();
     rotation = 0;
     num = 10;
     boar = false;
@@ -166,11 +200,14 @@ Tile::Tile(int type)
   }
   else if (type == 11)
   {
-    up = Face('j', 'j', 'j', *NULL_face, *NULL_face, *NULL_face);
-    down = Face('j', 'j', 'j', *NULL_face, *NULL_face, *NULL_face);
-    left = Face('l', 'l', 'l', right, *NULL_face, *NULL_face);
-    right = Face('l', 'l', 'l', left, *NULL_face, *NULL_face);
-    center = Block();
+    setRow(0,'j','j','j');
+    setRow(1,'l','l','l'); 
+    setRow(2,'j','j','j'); 
+    setFaceTypes();
+    up = Face();
+    down = Face();
+    left = Face();
+    right = Face();
     rotation = 0;
     num = 11;
     boar = false;
@@ -182,11 +219,14 @@ Tile::Tile(int type)
   }
   else if (type == 12)
   {
-    up = Face('l', 'l', 'l', *NULL_face, *NULL_face, *NULL_face);
-    down = Face('l', 'l', 'l', *NULL_face, *NULL_face, *NULL_face);
-    left = Face('j', 'j', 'j', right, *NULL_face, *NULL_face);
-    right = Face('j', 'j', 'j', left, *NULL_face, *NULL_face);
-    center = Block();
+    setRow(0,'j','l','j');
+    setRow(1,'j','j','j'); 
+    setRow(2,'j','l','j'); 
+    setFaceTypes();
+    up = Face();
+    down = Face();
+    left = Face();
+    right = Face();
     rotation = 0;
     num = 12;
     boar = false;
@@ -198,11 +238,14 @@ Tile::Tile(int type)
   }
   else if (type == 13)
   {
-    up = Face('l', 'l', 'l', *NULL_face, *NULL_face, *NULL_face);
-    down = Face('j', 'j', 'j', *NULL_face, left, right);
-    left = Face('j', 'j', 'j', right, *NULL_face, down);
-    right = Face('j', 'j', 'j', left, down, *NULL_face);
-    center = Block();
+    setRow(0,'j','l','j');
+    setRow(1,'j','j','j'); 
+    setRow(2,'j','j','j'); 
+    setFaceTypes();
+    up = Face();
+    down = Face();
+    left = Face();
+    right = Face();
     rotation = 0;
     num = 13;
     boar = false;
@@ -214,11 +257,14 @@ Tile::Tile(int type)
   }
   else if (type == 14)
   {
-    up = Face('j', 'j', 'j', *NULL_face, *NULL_face, left);
-    down = Face('l', 'l', 'l', *NULL_face, *NULL_face, right);
-    left = Face('j', 'j', 'j', *NULL_face, up, *NULL_face);
-    right = Face('l', 'l', 'l', *NULL_face, down, *NULL_face);
-    center = Block();
+    setRow(0,'j','j','j');
+    setRow(1,'j','j','l'); 
+    setRow(2,'j','l','j'); 
+    setFaceTypes();
+    up = Face();
+    down = Face();
+    left = Face();
+    right = Face();
     rotation = 0;
     num = 14;
     boar = false;
@@ -230,11 +276,14 @@ Tile::Tile(int type)
   }
   else if (type == 15)
   {
-    up = Face('j', 't', 'j', *NULL_face, *NULL_face, left);
-    down = Face('j', 'j', 'j', *NULL_face, *NULL_face, *NULL_face);
-    left = Face('j', 't', 'j', *NULL_face, up, *NULL_face);
-    right = Face('l', 'l', 'l', *NULL_face, *NULL_face, *NULL_face);
-    center = Block();
+    setRow(0,'j','t','j');
+    setRow(1,'t','t','l'); 
+    setRow(2,'j','j','j'); 
+    setFaceTypes();
+    up = Face();
+    down = Face();
+    left = Face();
+    right = Face();
     rotation = 0;
     num = 15;
     boar = false;
@@ -246,11 +295,14 @@ Tile::Tile(int type)
   }
   else if (type == 16)
   {
-    up = Face('j', 't', 'j', *NULL_face, *NULL_face, left);
-    down = Face('j', 'j', 'j', *NULL_face, *NULL_face, *NULL_face);
-    left = Face('j', 't', 'j', *NULL_face, up, *NULL_face);
-    right = Face('l', 'l', 'l', *NULL_face, *NULL_face, *NULL_face);
-    center = Block();
+    setRow(0,'j','t','j');
+    setRow(1,'t','t','l'); 
+    setRow(2,'j','j','j'); 
+    setFaceTypes();
+    up = Face();
+    down = Face();
+    left = Face();
+    right = Face();
     rotation = 0;
     num = 16;
     boar = true;
@@ -262,11 +314,14 @@ Tile::Tile(int type)
   }
   else if (type == 17)
   {
-    up = Face('j', 'j', 'j', *NULL_face, *NULL_face, *NULL_face);
-    down = Face('j', 't', 'j', *NULL_face, left, *NULL_face);
-    left = Face('j', 't', 'j', *NULL_face, *NULL_face, down);
-    right = Face('l', 'l', 'l', *NULL_face, *NULL_face, *NULL_face);
-    center = Block();
+    setRow(0,'j','j','j');
+    setRow(1,'t','t','l'); 
+    setRow(2,'j','t','j'); 
+    setFaceTypes();
+    up = Face();
+    down = Face();
+    left = Face();
+    right = Face();
     rotation = 0;
     num = 17;
     boar = false;
@@ -278,11 +333,14 @@ Tile::Tile(int type)
   }
   else if (type == 18)
   {
-    up = Face('j', 'j', 'j', *NULL_face, *NULL_face, *NULL_face);
-    down = Face('j', 't', 'j', *NULL_face, left, *NULL_face);
-    left = Face('j', 't', 'j', *NULL_face, *NULL_face, down);
-    right = Face('l', 'l', 'l', *NULL_face, *NULL_face, *NULL_face);
-    center = Block();
+    setRow(0,'j','j','j');
+    setRow(1,'t','t','l'); 
+    setRow(2,'j','t','j'); 
+    setFaceTypes();
+    up = Face();
+    down = Face();
+    left = Face();
+    right = Face();
     rotation = 0;
     num = 18;
     boar = false;
@@ -294,11 +352,14 @@ Tile::Tile(int type)
   }
   else if (type == 19)
   {
-    up = Face('j', 't', 'j', down, *NULL_face, *NULL_face);
-    down = Face('j', 't', 'j', up, *NULL_face, *NULL_face);
-    left = Face('j', 'j', 'j', *NULL_face, *NULL_face, *NULL_face);
-    right = Face('l', 'l', 'l', *NULL_face, *NULL_face, *NULL_face);
-    center = Block();
+    setRow(0,'j','t','j');
+    setRow(1,'j','t','l'); 
+    setRow(2,'j','t','j');
+    setFaceTypes();
+    up = Face();
+    down = Face();
+    left = Face();
+    right = Face();
     rotation = 0;
     num = 19;
     boar = false;
@@ -310,11 +371,10 @@ Tile::Tile(int type)
   }
   else if (type == 20)
   {
-    up = Face('j', 't', 'j', down, *NULL_face, *NULL_face);
-    down = Face('j', 't', 'j', up, *NULL_face, *NULL_face);
-    left = Face('j', 'j', 'j', *NULL_face, *NULL_face, *NULL_face);
-    right = Face('l', 'l', 'l', *NULL_face, *NULL_face, *NULL_face);
-    center = Block();
+    setRow(0,'j','t','j');
+    setRow(1,'j','t','l'); 
+    setRow(2,'j','t','j'); 
+    setFaceTypes();
     rotation = 0;
     num = 20;
     boar = false;
@@ -326,11 +386,10 @@ Tile::Tile(int type)
   }
   else if (type == 21)
   {
-    up = Face('j', 't', 'j', *NULL_face, *NULL_face, *NULL_face);
-    down = Face('l', 'l', 'l', *NULL_face, left, right);
-    left = Face('l', 'l', 'l', right, *NULL_face, down);
-    right = Face('l', 'l', 'l', left, down, *NULL_face);
-    center = Block();
+    setRow(0,'j','t','j');
+    setRow(1,'l','l','l'); 
+    setRow(2,'l','l','l'); 
+    setFaceTypes();
     rotation = 0;
     num = 21;
     boar = false;
@@ -342,11 +401,10 @@ Tile::Tile(int type)
   }
   else if (type == 22)
   {
-    up = Face('j', 't', 'j', *NULL_face, *NULL_face, *NULL_face);
-    down = Face('j', 't', 'j', *NULL_face, *NULL_face, *NULL_face);
-    left = Face('j', 't', 'j', *NULL_face, *NULL_face, *NULL_face);
-    right = Face('l', 'l', 'l', *NULL_face, *NULL_face, *NULL_face);
-    center = Block();
+    setRow(0,'j','t','j');
+    setRow(1,'t','t','l'); 
+    setRow(2,'j','t','j'); 
+    setFaceTypes();
     rotation = 0;
     num = 22;
     boar = false;
@@ -358,11 +416,10 @@ Tile::Tile(int type)
   }
   else if (type == 23)
   {
-    up = Face('j', 't', 'j', *NULL_face, *NULL_face, *NULL_face);
-    down = Face('j', 't', 'j', *NULL_face, *NULL_face, *NULL_face);
-    left = Face('j', 't', 'j', *NULL_face, *NULL_face, *NULL_face);
-    right = Face('l', 'l', 'l', *NULL_face, *NULL_face, *NULL_face);
-    center = Block();
+    setRow(0,'j','t','j');
+    setRow(1,'t','t','l'); 
+    setRow(2,'j','t','j');
+    setFaceTypes();
     rotation = 0;
     num = 23;
     boar = true;
@@ -374,11 +431,10 @@ Tile::Tile(int type)
   }
   else if (type == 24)
   {
-    up = Face('j', 't', 'j', *NULL_face, *NULL_face, left);
-    down = Face('l', 'l', 'l', *NULL_face, *NULL_face, right);
-    left = Face('j', 't', 'j', *NULL_face, up, *NULL_face);
-    right = Face('l', 'l', 'l', *NULL_face, down, *NULL_face);
-    center = Block();
+    setRow(0,'j','t','j');
+    setRow(1,'t','t','l'); 
+    setRow(2,'j','l','l'); 
+    setFaceTypes();
     rotation = 0;
     num = 24;
     boar = false;
@@ -390,11 +446,10 @@ Tile::Tile(int type)
   }
   else if (type == 25)
   {
-    up = Face('j', 't', 'j', *NULL_face, *NULL_face, left);
-    down = Face('l', 'l', 'l', *NULL_face, *NULL_face, right);
-    left = Face('j', 't', 'j', *NULL_face, up, *NULL_face);
-    right = Face('l', 'l', 'l', *NULL_face, down, *NULL_face);
-    center = Block();
+    setRow(0,'j','t','j');
+    setRow(1,'t','t','l'); 
+    setRow(2,'j','l','l');  
+    setFaceTypes();
     rotation = 0;
     num = 25;
     boar = false;
@@ -406,11 +461,10 @@ Tile::Tile(int type)
   }
   else if (type == 26)
   {
-    up = Face('l', 'l', 'l', *NULL_face, *NULL_face, *NULL_face);
-    down = Face('j', 't', 'j', *NULL_face, *NULL_face, *NULL_face);
-    left = Face('j', 'j', 'j', *NULL_face, *NULL_face, *NULL_face);
-    right = Face('j', 'j', 'j', *NULL_face, *NULL_face, *NULL_face);
-    center = Block();
+    setRow(0,'j','l','j');
+    setRow(1,'j','t','j'); 
+    setRow(2,'j','t','j'); 
+    setFaceTypes();
     rotation = 0;
     num = 26;
     boar = false;
@@ -422,11 +476,14 @@ Tile::Tile(int type)
   }
   else if (type == 27)
   {
-    up = Face('l', 'l', 'l', *NULL_face, *NULL_face, *NULL_face);
-    down = Face('j', 't', 'j', *NULL_face, *NULL_face, *NULL_face);
-    left = Face('j', 'j', 'j', *NULL_face, *NULL_face, *NULL_face);
-    right = Face('j', 'j', 'j', *NULL_face, *NULL_face, *NULL_face);
-    center = Block();
+    setRow(0,'j','l','j');
+    setRow(1,'j','t','j'); 
+    setRow(2,'j','t','j'); 
+    setFaceTypes();
+    up = Face();
+    down = Face();
+    left = Face();
+    right = Face();
     rotation = 0;
     num = 27;
     boar = false;
@@ -438,11 +495,14 @@ Tile::Tile(int type)
   }
   else if (type == 28)
   {
-    up = Face('j', 't', 'j', *NULL_face, *NULL_face, *NULL_face);
-    down = Face('l', 'l', 'l', *NULL_face, left, right);
-    left = Face('l', 'l', 'l', right, *NULL_face, down);
-    right = Face('l', 'l', 'l', left, down, *NULL_face);
-    center = Block();
+    setRow(0,'j','t','j');
+    setRow(1,'l','j','l'); 
+    setRow(2,'l','l','l'); 
+    setFaceTypes();
+    up = Face();
+    down = Face();
+    left = Face();
+    right = Face();
     rotation = 0;
     num = 28;
     boar = false;
@@ -457,15 +517,14 @@ Tile::Tile(int type)
     up = Face();
     down = Face();
     left = Face();
-    right = Face();
-    center = Block();
+    right = Face(); 
     rotation = 0;
     num = 0;
     boar = false;
     buffalo = false;
     deer = false;
     crocodile = false;
-    type = '.';
+    this->type = '.';
     initialization = false;
   }
 }
@@ -475,7 +534,6 @@ Tile::Tile()
   down = Face();
   left = Face();
   right = Face();
-  center = Block();
   rotation = 0;
   num = 0;
   boar = false;
@@ -489,29 +547,60 @@ Tile::~Tile()
 {
 
 }
+
+void Tile::setFaceTypes() {
+  up.setType(innerBlocks[0][1].getType());
+  down.setType(innerBlocks[2][1].getType());
+  left.setType(innerBlocks[1][0].getType());
+  right.setType(innerBlocks[1][2].getType());
+}
+
+void Tile::setRow(int row, char type1, char type2, char type3) {
+  innerBlocks[row][0] = Block(type1);
+  innerBlocks[row][1] = Block(type2);
+  innerBlocks[row][2] = Block(type3);
+}
 // Rotate a tile to the right by 90 degrees. (Ex: left face would now be top face, top face would be right, etc...)
 void Tile::rotate()
 {
-	Face upFace = up;
-	Face downFace = down;
-	Face leftFace = left;
-	Face rightFace = right;
+	std::vector<std::vector<Block> > unrotated = innerBlocks;
 
-	up = rightFace;
-	right = downFace;
-	down = leftFace;
-	left = upFace;
+  // Top row
+  innerBlocks[0][0] = Block(unrotated[0][2]);
+  innerBlocks[0][1] = Block(unrotated[1][2]);
+  innerBlocks[0][2] = Block(unrotated[2][2]);
+
+  this->up.setType(innerBlocks[0][1].getType());
+
+  // Middle row except center block (doesn't rotate)
+  innerBlocks[1][0] = Block(unrotated[0][1]);
+  innerBlocks[1][2] = Block(unrotated[2][1]);
+
+  this->left.setType(innerBlocks[1][0].getType());
+  this->right.setType(innerBlocks[1][2].getType());
+
+  // Bottom row
+  innerBlocks[2][0] = Block(unrotated[0][0]);
+  innerBlocks[2][1] = Block(unrotated[1][0]);
+  innerBlocks[2][2] = Block(unrotated[2][0]);
+
+  this->down.setType(innerBlocks[2][1].getType());
+
+
 
   if (rotation < 3)
     rotation++;
   else
     rotation = 0;
 }
+
 // Method to check if tile has any open face (up, down, left, right)
 bool Tile::hasOpenFace()
 {
-	if(!up.connected() || !down.connected() || !left.connected() || !right.connected()) return true;
-	else return false;
+	if(!up.connected() || !down.connected() || !left.connected() || !right.connected())
+    return true;
+	else 
+    return false;
 }
 // Method to obtain all the open faces of a tile. Check each face, if not connected then push to vector
 std::vector<std::string> Tile::getOpenFaces()

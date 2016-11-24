@@ -17,8 +17,12 @@ public:
 	~Block();
 
 	std::string getType() { return type; }
+	void setType(char type);
+	void placeMeeple();
+	bool hasMeeple() { return meeple; }
 
 private:
+	bool meeple, visited;
 	std::string type;
 	
 };

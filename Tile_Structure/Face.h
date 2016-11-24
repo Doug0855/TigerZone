@@ -4,34 +4,38 @@
 #include "Block.h"
 #include <iostream>
 
+#define    Jungle     'j'
+#define    Lake       'l'
+#define    Trail      't'
+#define    Den        'd'
+
 class Face {
 public:
-	Face(char b1, char b2, char b3, Face &across_face, Face &left_face, Face &right_face);
+	Face(std::string faceType);
 	Face();
 	~Face();
 
   void setNeighborFace(Face &face);
   Face* getNeighborFace() { return neighborFace; }
-  Face* getAcrossFace() { return inwardAcrossFace; }
-  Face* getLeftFace() { return inwardLeftFace; }
-  Face* getRightFace() { return inwardRightFace; }
 
-  std::string getBlockType(int block);
+  std::string getType() { return type; }
+  void setType(std::string type);
 
-  void placeMeeple();
-	bool hasMeeple() { return meeple; }
-  void visit();
-  bool hasBeenVisited() { return visited; }
+  // std::string getBlockType(int block);
+
+  // void placeMeeple();
+	// bool hasMeeple() { return meeple; }
+  // void visit();
+  // bool hasBeenVisited() { return visited; }
 
 	bool faceEquals(Face face);	//determines if two faces are equal
 	bool connected(); //function to check if a face is connected to a neighborFace
 
 
 private:
-	bool meeple, visited;
+	// bool meeple, visited;
   std::string type;
-  Block m_1, m_2, m_3;
-  Face *neighborFace, *inwardAcrossFace, *inwardLeftFace, *inwardRightFace;
+  Face *neighborFace;
 };
 
 #endif
