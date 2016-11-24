@@ -42,6 +42,8 @@ public:
   	Face* getLeftFace() { return &left; }
   	Face* getRightFace() { return &right; }
 
+	Block getCenter() { return innerBlocks[1][1]; }
+
   	// Set the types of the 4 faces after matrix has been initialized
   	void setFaceTypes();
 

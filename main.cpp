@@ -99,8 +99,9 @@ int main() {
 	Player p2;
 	std::cout<<"tile 1 up face is "<<tile1.getUpFace()->getType()<<std::endl;
 	gameboard.place_tile(std::pair<int, int>(72,72), tile1);
-	// Game game1("123", p1, p2, tStack, tile1, std::pair<int,int> (72,72));
-	// game1.play();
+	Game game1("123", p1, p2, tStack, tile1, std::pair<int,int> (72,72));
+	game1.play();
+	/*
 	Tile *tmpTile = new Tile(tStack.tiles[0].getNum());
 	gameboard.place_tile(std::pair<int,int>(72,71), *tmpTile);
 
@@ -109,6 +110,7 @@ int main() {
 	for(int i = 0; i < availableLocations.size(); i++) {
 		std::cout<<i<<") "<<availableLocations[i].first<<' '<<availableLocations[i].second<<std::endl;
 	}
+	*/
 	// printBoard(game1.gameboard);
 
 	// Board gameBoard;

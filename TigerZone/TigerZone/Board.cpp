@@ -5,11 +5,11 @@ Board::Board()
 {
 	// Initialize board to be 150x150 vector of Tiles*
 	Tile *NULL_tile = NULL;
-	for(int i = 0; i < 80; i++)
+	for(int i = 0; i < 160; i++)
 	{
 		std::vector<Tile*> temp;
 		m_board.push_back(temp);
-		for(int j = 0; j < 80; j++) {
+		for(int j = 0; j < 160; j++) {
 			m_board[i].push_back(NULL_tile);
 		}
 	}
@@ -25,15 +25,15 @@ std::vector< std::pair<int, int> > Board::display_positions(Tile tile)
 	// Create empty vector to store possible placement locations
 	std::vector< std::pair<int, int> > places;
 	// Loop through the rows of board
-	for (int i = 0; i < m_board.size(); i++)
+	for (size_t i = 0; i < m_board.size(); i++)
 	{
 		// Loop through column of board
-		for (int j = 0; j < m_board[i].size(); j++)
+		for (size_t j = 0; j < m_board[i].size(); j++)
 		{
 			if (m_board[i][j] != NULL && m_board[i][j]->hasOpenFace())
 			{
 				std::vector< std::string> tempFaces = m_board[i][j]->getOpenFaces();
-				for(int k = 0; k < tempFaces.size(); k++)
+				for (size_t k = 0; k < tempFaces.size(); k++)
 				{
 					// Check that the open faces for each location (and adjacent ones) may actually connect to the tile
 					// Get back a vector of locations where we may place the tile
@@ -79,7 +79,9 @@ std::vector< std::pair<int, int> > Board::checkPlacement(Tile tile, int i, int j
 				 (m_board[i + 1][j + 1] == NULL || m_board[i + 1][j + 1]->getLeftFace()->faceEquals(*tile.getRightFace())) &&
 				 (m_board[i][j]->getDownFace()->faceEquals(*tile.getUpFace())))
 			{
-				// std::cout<<"Can connect to down face of i,j"<<std::endl;
+				std::cout<<"Checking down face equals"<<m_board[i][j]->getDownFace()->faceEquals(*tile.getUpFace())<<std::endl;
+				std::cout<<"Down face type: "<<m_board[i][j]->getDownFaceType()<<std::endl;
+				std::cout<<"Tile up face type: "<<tile.getUpFaceType()<<std::endl;
 				places.push_back(std::pair<int, int>(i + 1, j));
 				break;
 			}
@@ -124,28 +126,172 @@ std::vector< std::pair<int, int> > Board::checkPlacement(Tile tile, int i, int j
 }
 
 std::pair<int,int> Board::getOptimalPlacement(Tile &tile, std::vector< std::pair<int, int> > availableMoves) {
-	for (size_t z = 0; z < availableMoves.size(); z++)
-	{
-		int i = availableMoves[z].first;
-		int j = availableMoves[z].second;
-		for (int ii = 0; ii < 3; ii++)
-		{
-			if ((m_board[i + 1][j] == NULL || m_board[i + 1][j]->getUpFace()->faceEquals(*tile.getDownFace())) &&
-				(m_board[i - 1][j] == NULL || m_board[i - 1][j]->getDownFace()->faceEquals(*tile.getUpFace())) &&
-				(m_board[i][j + 1] == NULL || m_board[i][j + 1]->getLeftFace()->faceEquals(*tile.getRightFace())) &&
-				(m_board[i][j - 1] == NULL || m_board[i][j - 1]->getRightFace()->faceEquals(*tile.getLeftFace())))
-			{
-				std::cout << "Location " << i << ' ' << j << " passed optimalPlacement checks of connecting to all surrounding tiles" << std::endl;
-				return availableMoves[z];
-			}
-			else
-			{
-				tile.rotate();
-			}
-		}
-	}
+	 if (availableMoves.size() > 1)
+	 {
+	 	int bestRotation = 0;
+	 	std::pair<int, int> bestSpot;
+	 	int mostPoints = 0;
+	 	for (size_t z = 0; z < availableMoves.size(); z++)
+	 	{
+	 		int i = availableMoves[z].first;
+	 		int j = availableMoves[z].second;
+	 		for (int q = 0; q < 4; q++) 
+	 		{
+	 			int points = 0;
+	 			if ((m_board[i + 1][j] == NULL || m_board[i + 1][j]->getUpFace()->faceEquals(*tile.getDownFace())) &&
+	 				(m_board[i - 1][j] == NULL || m_board[i - 1][j]->getDownFace()->faceEquals(*tile.getUpFace())) &&
+	 				(m_board[i][j + 1] == NULL || m_board[i][j + 1]->getLeftFace()->faceEquals(*tile.getRightFace())) &&
+	 				(m_board[i][j - 1] == NULL || m_board[i][j - 1]->getRightFace()->faceEquals(*tile.getLeftFace())))
+	 			{
+	 				points = positionPoints(i, j);
+	 			}
+	 			else
+	 			{
+	 				points = -1;
+	 			}
+	 			if (points > mostPoints)
+	 			{
+	 				mostPoints = points;
+	 				bestSpot = availableMoves[z];
+	 				bestRotation = q;
+	 			}
+	 			tile.rotate();
+	 		}
+	 	}
+	 	for (int i = 0; i < bestRotation; i++)
+	 	{
+	 		tile.rotate();
+	 	}
+	 	return bestSpot;
+	 }
+	 else
+	 {
+	 	int i = availableMoves[0].first;
+	 	int j = availableMoves[0].second;
+	 	for (int q = 0; q < 4; q++) 
+	 	{
+	 		if ((m_board[i + 1][j] == NULL || m_board[i + 1][j]->getUpFace()->faceEquals(*tile.getDownFace())) &&
+	 			(m_board[i - 1][j] == NULL || m_board[i - 1][j]->getDownFace()->faceEquals(*tile.getUpFace())) &&
+	 			(m_board[i][j + 1] == NULL || m_board[i][j + 1]->getLeftFace()->faceEquals(*tile.getRightFace())) &&
+	 			(m_board[i][j - 1] == NULL || m_board[i][j - 1]->getRightFace()->faceEquals(*tile.getLeftFace())))
+	 		{
+	 			std::cout << "Location " << i << ' ' << j << " passed optimalPlacement checks of connecting to all surrounding tiles" << std::endl;
+	 			break;
+	 		}
+	 		else
+	 		{
+	 			tile.rotate();
+	 		}
+	 	}
+	 	return availableMoves[0];
+	 }
 	return availableMoves[0];
 }
+
+ int Board::positionPoints(int i, int j)
+ {
+ 	const int LAKE_POINTS = 6;
+ 	const int JUNGLE_POINTS = 3;
+ 	const int TRAIL_POINTS = 1;	
+	
+ 	int points = 0;
+ 	if (m_board[i + 1][j] != NULL)
+ 	{
+ 		points += animalPoints(i + 1, j);
+ 		if (m_board[i + 1][j]->getUpFace()->getType() == "lake")
+ 		{
+ 			points += LAKE_POINTS;
+ 		}
+ 		else if (m_board[i + 1][j]->getUpFace()->getType() == "jungle")
+ 		{
+ 			points += JUNGLE_POINTS;
+ 		}
+ 		else if (m_board[i + 1][j]->getUpFace()->getType() == "trail")
+ 		{
+ 			points += TRAIL_POINTS;
+ 		}
+ 	}
+ 	if (m_board[i - 1][j] != NULL)
+ 	{
+ 		points += animalPoints(i - 1, j);
+ 		if (m_board[i - 1][j]->getDownFace()->getType() == "lake")
+ 		{
+ 			points += LAKE_POINTS;
+ 		}
+ 		else if (m_board[i - 1][j]->getDownFace()->getType() == "jungle")
+ 		{
+ 			points += JUNGLE_POINTS;
+ 		}
+ 		else if (m_board[i - 1][j]->getDownFace()->getType() == "trail")
+ 		{
+ 			points += TRAIL_POINTS;
+ 		}
+ 	}
+ 	if (m_board[i][j + 1] != NULL)
+ 	{
+ 		points += animalPoints(i, j + 1);
+ 		if (m_board[i][j + 1]->getLeftFace()->getType() == "lake")
+ 		{
+ 			points += LAKE_POINTS;
+ 		}
+ 		else if (m_board[i][j + 1]->getLeftFace()->getType() == "jungle")
+ 		{
+ 			points += JUNGLE_POINTS;
+ 		}
+ 		else if (m_board[i][j + 1]->getLeftFace()->getType() == "trail")
+ 		{
+ 			points += TRAIL_POINTS;
+ 		}
+ 	}
+ 	if (m_board[i][j - 1] != NULL)
+ 	{
+ 		points += animalPoints(i, j - 1);
+ 		if (m_board[i][j - 1]->getRightFace()->getType() == "lake")
+ 		{
+ 			points += LAKE_POINTS;
+ 		}
+ 		else if (m_board[i][j - 1]->getRightFace()->getType() == "jungle")
+ 		{
+ 			points += JUNGLE_POINTS;
+ 		}
+ 		else if (m_board[i][j - 1]->getRightFace()->getType() == "trail")
+ 		{
+ 			points += TRAIL_POINTS;
+ 		}
+ 	}
+ 	return points;
+ }
+
+ int Board::animalPoints(int i, int j)
+ {
+ 	const int DEN_POINTS = 10;
+ 	const int DEER_POINTS = 2;
+ 	const int BOAR_POINTS = 2;
+ 	const int BUFFALO_POINTS = 2;
+ 	const int CROCODILE_POINTS = -2;
+ 	int points = 0;
+ 	if (m_board[i][j]->getCenter().getType() == "Den")
+ 	{
+ 		points += DEN_POINTS;
+ 	}
+ 	if (m_board[i][j]->hasBoar())
+ 	{
+ 		points += BOAR_POINTS;
+ 	}
+ 	if (m_board[i][j]->hasBuffalo())
+ 	{
+ 		points += BUFFALO_POINTS;
+ 	}
+ 	if (m_board[i][j]->hasDeer())
+ 	{
+ 		points += DEER_POINTS;
+ 	}
+ 	if (m_board[i][j]->hasCrocodile())
+ 	{
+ 		points += CROCODILE_POINTS;
+ 	}
+ 	return points;
+ }
 
 // Place a tile on the board. Make sure all neighboring tiles are pointing to the corresponding faces
 void Board::place_tile(std::pair<int, int> location, Tile &tile)
@@ -157,39 +303,39 @@ void Board::place_tile(std::pair<int, int> location, Tile &tile)
 	connectFaces(row, col);
 }
 
-bool Board::checkMeeplePlacement(Face &face)
-{
-	std::queue<Face*> faces;
-	faces.push(&face);
-	while (faces.size() > 0)
-	{
-		if (faces.front()->hasMeeple()) { return true; }
+// bool Board::checkMeeplePlacement(Face &face)
+// {
+// 	std::queue<Face*> faces;
+// 	faces.push(&face);
+// 	while (faces.size() > 0)
+// 	{
+// 		if (faces.front()->hasMeeple()) { return true; }
 
-		if (faces.front()->getAccrossFace() != NULL && !faces.front()->getAccrossFace()->hasBeenVisited())
-		{
-			faces.push(faces.front()->getAccrossFace());
-		}
+// 		if (faces.front()->getAcrossFace() != NULL && !faces.front()->getAcrossFace()->hasBeenVisited())
+// 		{
+// 			faces.push(faces.front()->getAcrossFace());
+// 		}
 
-		if (faces.front()->getLeftFace() != NULL && !faces.front()->getLeftFace()->hasBeenVisited())
-		{
-			faces.push(faces.front()->getLeftFace());
-		}
+// 		if (faces.front()->getLeftFace() != NULL && !faces.front()->getLeftFace()->hasBeenVisited())
+// 		{
+// 			faces.push(faces.front()->getLeftFace());
+// 		}
 
-		if (faces.front()->getRightFace() != NULL && !faces.front()->getRightFace()->hasBeenVisited())
-		{
-			faces.push(faces.front()->getRightFace());
-		}
+// 		if (faces.front()->getRightFace() != NULL && !faces.front()->getRightFace()->hasBeenVisited())
+// 		{
+// 			faces.push(faces.front()->getRightFace());
+// 		}
 
-		if (faces.front()->getNeighborFace() != NULL && !faces.front()->getNeighborFace()->hasBeenVisited())
-		{
-			faces.push(faces.front()->getNeighborFace());
-		}
+// 		if (faces.front()->getNeighborFace() != NULL && !faces.front()->getNeighborFace()->hasBeenVisited())
+// 		{
+// 			faces.push(faces.front()->getNeighborFace());
+// 		}
 
-		faces.front()->visit();
-		faces.pop();
-	}
-	return false;
-}
+// 		faces.front()->visit();
+// 		faces.pop();
+// 	}
+// 	return false;
+// }
 
 void Board::connectFaces(int row, int col)
 {
@@ -204,7 +350,7 @@ void Board::connectFaces(int row, int col)
 	}
 	else if(m_board[row+1][col] != NULL)// && !m_board[row+1][col]->getUpFace()->faceEquals(*m_board[row][col]->getDownFace()))
 	{
-		std::cout << "ERROR: FACES DON'T MATCH" << std::endl;
+		std::cout << "ERROR: FACES DON'T MATCH for tile down face" << std::endl;
 	}
 	// Connect top face of tile to existing tile above it
 	if(row-1 >= 0 && m_board[row-1][col] != NULL &&
@@ -218,7 +364,7 @@ void Board::connectFaces(int row, int col)
 	}
 	else if(m_board[row-1][col] != NULL)// && !m_board[row-1][col]->getDownFace()->faceEquals(*m_board[row][col]->getUpFace()))
 	{
-		std::cout << "ERROR: FACES DON'T MATCH" << std::endl;
+		std::cout << "ERROR: FACES DON'T MATCH for tile up face" << std::endl;
 	}
 	// Connect left face of tile to existing tile to the left of it
 	if (col-1 >= 0 && m_board[row][col-1] != NULL &&
@@ -232,7 +378,7 @@ void Board::connectFaces(int row, int col)
 	}
 	else if(m_board[row][col-1] != NULL)// && !m_board[row][col-1]->getRightFace()->faceEquals(*m_board[row][col]->getLeftFace()))
 	{
-		std::cout << "ERROR: FACES DON'T MATCH" << std::endl;
+		std::cout << "ERROR: FACES DON'T MATCH for tile left face" << std::endl;
 	}
 	// Connect right face of tile to the existing tile to the right of it
 	if (col+1 <= 150 && m_board[row][col+1] != NULL &&
@@ -246,6 +392,6 @@ void Board::connectFaces(int row, int col)
 	}
 	else if(m_board[row][col+1] != NULL )//&& !m_board[row][col+1]->getLeftFace()->faceEquals(*m_board[row][col]->getRightFace()))
 	{
-		std::cout << "ERROR: FACES DON'T MATCH" << std::endl;
+		std::cout << "ERROR: FACES DON'T MATCH for tile right face" << std::endl;
 	}
 }
