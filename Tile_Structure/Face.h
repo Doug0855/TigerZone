@@ -29,6 +29,7 @@ public:
 
 private:
 	bool meeple, visited;
+  std::string type;
   Block m_1, m_2, m_3;
   Face *neighborFace, *inwardAcrossFace, *inwardLeftFace, *inwardRightFace;
 };
