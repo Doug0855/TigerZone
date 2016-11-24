@@ -14,10 +14,6 @@ Tile::Tile(int type)
     setRow(1,'j','j','j'); 
     setRow(2,'j','j','j'); 
     setFaceTypes();
-    up = Face();
-    down = Face();
-    left = Face();
-    right = Face();
     rotation = 0;
     num = 1;
     boar = false;
@@ -33,10 +29,6 @@ Tile::Tile(int type)
     setRow(1,'j','d','j'); 
     setRow(2,'j','j','j'); 
     setFaceTypes();
-    up = Face();
-    down = Face();
-    left = Face();
-    right = Face();
     rotation = 0;
     num = 2;
     boar = false;
@@ -52,10 +44,6 @@ Tile::Tile(int type)
     setRow(1,'j','d','j'); 
     setRow(2,'j','t','j');  
     setFaceTypes();
-    up = Face();
-    down = Face();
-    left = Face();
-    right = Face();
     rotation = 0;
     num = 3;
     boar = false;
@@ -71,10 +59,6 @@ Tile::Tile(int type)
     setRow(1,'t','t','t'); 
     setRow(2,'j','t','j'); 
     setFaceTypes();
-    up = Face();
-    down = Face();
-    left = Face();
-    right = Face();
     rotation = 0;
     num = 4;
     boar = false;
@@ -90,10 +74,6 @@ Tile::Tile(int type)
     setRow(1,'j','t','j'); 
     setRow(2,'j','t','j'); 
     setFaceTypes();
-    up = Face();
-    down = Face();
-    left = Face();
-    right = Face();
     rotation = 0;
     num = 5;
     boar = false;
@@ -109,10 +89,6 @@ Tile::Tile(int type)
     setRow(1,'t','t','j'); 
     setRow(2,'j','j','j'); 
     setFaceTypes();
-    up = Face();
-    down = Face();
-    left = Face();
-    right = Face();
     rotation = 0;
     num = 6;
     boar = false;
@@ -128,10 +104,6 @@ Tile::Tile(int type)
     setRow(1,'t','t','j'); 
     setRow(2,'j','t','j'); 
     setFaceTypes();
-    up = Face();
-    down = Face();
-    left = Face();
-    right = Face();
     rotation = 0;
     num = 7;
     boar = false;
@@ -147,10 +119,6 @@ Tile::Tile(int type)
     setRow(1,'l','l','l'); 
     setRow(2,'l','l','l'); 
     setFaceTypes();
-    up = Face();
-    down = Face();
-    left = Face();
-    right = Face();
     rotation = 0;
     num = 8;
     boar = false;
@@ -166,10 +134,6 @@ Tile::Tile(int type)
     setRow(1,'l','j','l'); 
     setRow(2,'l','l','l'); 
     setFaceTypes();
-    up = Face();
-    down = Face();
-    left = Face();
-    right = Face();
     rotation = 0;
     num = 9;
     boar = false;
@@ -185,10 +149,6 @@ Tile::Tile(int type)
     setRow(1,'j','j','l'); 
     setRow(2,'j','j','j'); 
     setFaceTypes();
-    up = Face();
-    down = Face();
-    left = Face();
-    right = Face();
     rotation = 0;
     num = 10;
     boar = false;
@@ -204,10 +164,6 @@ Tile::Tile(int type)
     setRow(1,'l','l','l'); 
     setRow(2,'j','j','j'); 
     setFaceTypes();
-    up = Face();
-    down = Face();
-    left = Face();
-    right = Face();
     rotation = 0;
     num = 11;
     boar = false;
@@ -223,10 +179,6 @@ Tile::Tile(int type)
     setRow(1,'j','j','j'); 
     setRow(2,'j','l','j'); 
     setFaceTypes();
-    up = Face();
-    down = Face();
-    left = Face();
-    right = Face();
     rotation = 0;
     num = 12;
     boar = false;
@@ -242,10 +194,6 @@ Tile::Tile(int type)
     setRow(1,'j','j','j'); 
     setRow(2,'j','j','j'); 
     setFaceTypes();
-    up = Face();
-    down = Face();
-    left = Face();
-    right = Face();
     rotation = 0;
     num = 13;
     boar = false;
@@ -261,10 +209,6 @@ Tile::Tile(int type)
     setRow(1,'j','j','l'); 
     setRow(2,'j','l','j'); 
     setFaceTypes();
-    up = Face();
-    down = Face();
-    left = Face();
-    right = Face();
     rotation = 0;
     num = 14;
     boar = false;
@@ -280,10 +224,6 @@ Tile::Tile(int type)
     setRow(1,'t','t','l'); 
     setRow(2,'j','j','j'); 
     setFaceTypes();
-    up = Face();
-    down = Face();
-    left = Face();
-    right = Face();
     rotation = 0;
     num = 15;
     boar = false;
@@ -299,10 +239,6 @@ Tile::Tile(int type)
     setRow(1,'t','t','l'); 
     setRow(2,'j','j','j'); 
     setFaceTypes();
-    up = Face();
-    down = Face();
-    left = Face();
-    right = Face();
     rotation = 0;
     num = 16;
     boar = true;
@@ -318,10 +254,6 @@ Tile::Tile(int type)
     setRow(1,'t','t','l'); 
     setRow(2,'j','t','j'); 
     setFaceTypes();
-    up = Face();
-    down = Face();
-    left = Face();
-    right = Face();
     rotation = 0;
     num = 17;
     boar = false;
@@ -337,10 +269,6 @@ Tile::Tile(int type)
     setRow(1,'t','t','l'); 
     setRow(2,'j','t','j'); 
     setFaceTypes();
-    up = Face();
-    down = Face();
-    left = Face();
-    right = Face();
     rotation = 0;
     num = 18;
     boar = false;
@@ -356,10 +284,6 @@ Tile::Tile(int type)
     setRow(1,'j','t','l'); 
     setRow(2,'j','t','j');
     setFaceTypes();
-    up = Face();
-    down = Face();
-    left = Face();
-    right = Face();
     rotation = 0;
     num = 19;
     boar = false;
@@ -480,10 +404,6 @@ Tile::Tile(int type)
     setRow(1,'j','t','j'); 
     setRow(2,'j','t','j'); 
     setFaceTypes();
-    up = Face();
-    down = Face();
-    left = Face();
-    right = Face();
     rotation = 0;
     num = 27;
     boar = false;
@@ -499,10 +419,6 @@ Tile::Tile(int type)
     setRow(1,'l','j','l'); 
     setRow(2,'l','l','l'); 
     setFaceTypes();
-    up = Face();
-    down = Face();
-    left = Face();
-    right = Face();
     rotation = 0;
     num = 28;
     boar = false;
@@ -513,11 +429,7 @@ Tile::Tile(int type)
     initialization = true;
   }
   else
-  {
-    up = Face();
-    down = Face();
-    left = Face();
-    right = Face(); 
+  { 
     rotation = 0;
     num = 0;
     boar = false;
@@ -530,10 +442,6 @@ Tile::Tile(int type)
 }
 Tile::Tile()
 {
-  up = Face();
-  down = Face();
-  left = Face();
-  right = Face();
   rotation = 0;
   num = 0;
   boar = false;

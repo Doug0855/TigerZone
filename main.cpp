@@ -101,12 +101,14 @@ int main() {
 	gameboard.place_tile(std::pair<int, int>(72,72), tile1);
 	// Game game1("123", p1, p2, tStack, tile1, std::pair<int,int> (72,72));
 	// game1.play();
-	std::vector<std::pair<int, int> > availableLocations = gameboard.display_positions(tStack.tiles[0]);
-	std::cout<<"there are "<<availableLocations.size()<<" available locations for tile "<<tStack.tiles[0].getType()<<std::endl;
+	Tile *tmpTile = new Tile(tStack.tiles[0].getNum());
+	gameboard.place_tile(std::pair<int,int>(72,71), *tmpTile);
+
+	std::vector<std::pair<int, int> > availableLocations = gameboard.display_positions(tStack.tiles[1]);
+	std::cout<<"there are "<<availableLocations.size()<<" available locations for tile "<<tStack.tiles[1].getType()<<std::endl;
 	for(int i = 0; i < availableLocations.size(); i++) {
 		std::cout<<i<<") "<<availableLocations[i].first<<' '<<availableLocations[i].second<<std::endl;
 	}
-
 	// printBoard(game1.gameboard);
 
 	// Board gameBoard;
