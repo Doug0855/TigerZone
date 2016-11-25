@@ -111,7 +111,7 @@ int main() {
 		std::cout<<i<<") "<<availableLocations[i].first<<' '<<availableLocations[i].second<<std::endl;
 	}
 	*/
-	// printBoard(game1.gameboard);
+	printBoard(game1.gameboard);
 
 	// Board gameBoard;
 	// gameBoard.place_tile(std::pair<int, int>(72, 50), tile1);
