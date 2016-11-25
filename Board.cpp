@@ -79,9 +79,9 @@ std::vector< std::pair<int, int> > Board::checkPlacement(Tile tile, int i, int j
 				 (m_board[i + 1][j + 1] == NULL || m_board[i + 1][j + 1]->getLeftFace()->faceEquals(*tile.getRightFace())) &&
 				 (m_board[i][j]->getDownFace()->faceEquals(*tile.getUpFace())))
 			{
-				std::cout<<"Checking down face equals"<<m_board[i][j]->getDownFace()->faceEquals(*tile.getUpFace())<<std::endl;
-				std::cout<<"Down face type: "<<m_board[i][j]->getDownFaceType()<<std::endl;
-				std::cout<<"Tile up face type: "<<tile.getUpFaceType()<<std::endl;
+				//std::cout<<"Checking down face equals"<<m_board[i][j]->getDownFace()->faceEquals(*tile.getUpFace())<<std::endl;		//debugging
+				//std::cout<<"Down face type: "<<m_board[i][j]->getDownFaceType()<<std::endl;	//debugging
+				//std::cout<<"Tile up face type: "<<tile.getUpFaceType()<<std::endl;					//debugging
 				places.push_back(std::pair<int, int>(i + 1, j));
 				break;
 			}
@@ -135,7 +135,7 @@ std::pair<int,int> Board::getOptimalPlacement(Tile &tile, std::vector< std::pair
 	 	{
 	 		int i = availableMoves[z].first;
 	 		int j = availableMoves[z].second;
-	 		for (int q = 0; q < 4; q++) 
+	 		for (int q = 0; q < 4; q++)
 	 		{
 	 			int points = 0;
 	 			if ((m_board[i + 1][j] == NULL || m_board[i + 1][j]->getUpFace()->faceEquals(*tile.getDownFace())) &&
@@ -168,7 +168,7 @@ std::pair<int,int> Board::getOptimalPlacement(Tile &tile, std::vector< std::pair
 	 {
 	 	int i = availableMoves[0].first;
 	 	int j = availableMoves[0].second;
-	 	for (int q = 0; q < 4; q++) 
+	 	for (int q = 0; q < 4; q++)
 	 	{
 	 		if ((m_board[i + 1][j] == NULL || m_board[i + 1][j]->getUpFace()->faceEquals(*tile.getDownFace())) &&
 	 			(m_board[i - 1][j] == NULL || m_board[i - 1][j]->getDownFace()->faceEquals(*tile.getUpFace())) &&
@@ -185,113 +185,113 @@ std::pair<int,int> Board::getOptimalPlacement(Tile &tile, std::vector< std::pair
 	 	}
 	 	return availableMoves[0];
 	 }
-	return availableMoves[0];
+	//return availableMoves[0]; //this is redundant
 }
 
- int Board::positionPoints(int i, int j)
- {
- 	const int LAKE_POINTS = 6;
- 	const int JUNGLE_POINTS = 3;
- 	const int TRAIL_POINTS = 1;	
-	
- 	int points = 0;
- 	if (m_board[i + 1][j] != NULL)
- 	{
- 		points += animalPoints(i + 1, j);
- 		if (m_board[i + 1][j]->getUpFace()->getType() == "lake")
- 		{
- 			points += LAKE_POINTS;
- 		}
- 		else if (m_board[i + 1][j]->getUpFace()->getType() == "jungle")
- 		{
- 			points += JUNGLE_POINTS;
- 		}
- 		else if (m_board[i + 1][j]->getUpFace()->getType() == "trail")
- 		{
- 			points += TRAIL_POINTS;
- 		}
- 	}
- 	if (m_board[i - 1][j] != NULL)
- 	{
- 		points += animalPoints(i - 1, j);
- 		if (m_board[i - 1][j]->getDownFace()->getType() == "lake")
- 		{
- 			points += LAKE_POINTS;
- 		}
- 		else if (m_board[i - 1][j]->getDownFace()->getType() == "jungle")
- 		{
- 			points += JUNGLE_POINTS;
- 		}
- 		else if (m_board[i - 1][j]->getDownFace()->getType() == "trail")
- 		{
- 			points += TRAIL_POINTS;
- 		}
- 	}
- 	if (m_board[i][j + 1] != NULL)
- 	{
- 		points += animalPoints(i, j + 1);
- 		if (m_board[i][j + 1]->getLeftFace()->getType() == "lake")
- 		{
- 			points += LAKE_POINTS;
- 		}
- 		else if (m_board[i][j + 1]->getLeftFace()->getType() == "jungle")
- 		{
- 			points += JUNGLE_POINTS;
- 		}
- 		else if (m_board[i][j + 1]->getLeftFace()->getType() == "trail")
- 		{
- 			points += TRAIL_POINTS;
- 		}
- 	}
- 	if (m_board[i][j - 1] != NULL)
- 	{
- 		points += animalPoints(i, j - 1);
- 		if (m_board[i][j - 1]->getRightFace()->getType() == "lake")
- 		{
- 			points += LAKE_POINTS;
- 		}
- 		else if (m_board[i][j - 1]->getRightFace()->getType() == "jungle")
- 		{
- 			points += JUNGLE_POINTS;
- 		}
- 		else if (m_board[i][j - 1]->getRightFace()->getType() == "trail")
- 		{
- 			points += TRAIL_POINTS;
- 		}
- 	}
- 	return points;
- }
+int Board::positionPoints(int i, int j)
+{
+	const int LAKE_POINTS = 6;
+	const int JUNGLE_POINTS = 3;
+	const int TRAIL_POINTS = 1;
 
- int Board::animalPoints(int i, int j)
- {
- 	const int DEN_POINTS = 10;
- 	const int DEER_POINTS = 2;
- 	const int BOAR_POINTS = 2;
- 	const int BUFFALO_POINTS = 2;
- 	const int CROCODILE_POINTS = -2;
- 	int points = 0;
- 	if (m_board[i][j]->getCenter().getType() == "Den")
- 	{
- 		points += DEN_POINTS;
- 	}
- 	if (m_board[i][j]->hasBoar())
- 	{
- 		points += BOAR_POINTS;
- 	}
- 	if (m_board[i][j]->hasBuffalo())
- 	{
- 		points += BUFFALO_POINTS;
- 	}
- 	if (m_board[i][j]->hasDeer())
- 	{
- 		points += DEER_POINTS;
- 	}
- 	if (m_board[i][j]->hasCrocodile())
- 	{
- 		points += CROCODILE_POINTS;
- 	}
- 	return points;
- }
+	int points = 0;
+	if (m_board[i + 1][j] != NULL)
+	{
+		points += animalPoints(i + 1, j);
+		if (m_board[i + 1][j]->getUpFace()->getType() == "lake")
+		{
+			points += LAKE_POINTS;
+		}
+		else if (m_board[i + 1][j]->getUpFace()->getType() == "jungle")
+		{
+			points += JUNGLE_POINTS;
+		}
+		else if (m_board[i + 1][j]->getUpFace()->getType() == "trail")
+		{
+			points += TRAIL_POINTS;
+		}
+	}
+	if (m_board[i - 1][j] != NULL)
+	{
+		points += animalPoints(i - 1, j);
+		if (m_board[i - 1][j]->getDownFace()->getType() == "lake")
+		{
+			points += LAKE_POINTS;
+		}
+		else if (m_board[i - 1][j]->getDownFace()->getType() == "jungle")
+		{
+			points += JUNGLE_POINTS;
+		}
+		else if (m_board[i - 1][j]->getDownFace()->getType() == "trail")
+		{
+			points += TRAIL_POINTS;
+		}
+	}
+	if (m_board[i][j + 1] != NULL)
+	{
+		points += animalPoints(i, j + 1);
+		if (m_board[i][j + 1]->getLeftFace()->getType() == "lake")
+		{
+			points += LAKE_POINTS;
+		}
+		else if (m_board[i][j + 1]->getLeftFace()->getType() == "jungle")
+		{
+			points += JUNGLE_POINTS;
+		}
+		else if (m_board[i][j + 1]->getLeftFace()->getType() == "trail")
+		{
+			points += TRAIL_POINTS;
+		}
+	}
+	if (m_board[i][j - 1] != NULL)
+	{
+		points += animalPoints(i, j - 1);
+		if (m_board[i][j - 1]->getRightFace()->getType() == "lake")
+		{
+			points += LAKE_POINTS;
+		}
+		else if (m_board[i][j - 1]->getRightFace()->getType() == "jungle")
+		{
+			points += JUNGLE_POINTS;
+		}
+		else if (m_board[i][j - 1]->getRightFace()->getType() == "trail")
+		{
+			points += TRAIL_POINTS;
+		}
+	}
+	return points;
+}
+
+int Board::animalPoints(int i, int j)
+{
+	const int DEN_POINTS = 10;
+	const int DEER_POINTS = 2;
+	const int BOAR_POINTS = 2;
+	const int BUFFALO_POINTS = 2;
+	const int CROCODILE_POINTS = -2;
+	int points = 0;
+	if (m_board[i][j]->getCenter().getType() == "Den")
+	{
+		points += DEN_POINTS;
+	}
+	if (m_board[i][j]->hasBoar())
+	{
+		points += BOAR_POINTS;
+	}
+	if (m_board[i][j]->hasBuffalo())
+	{
+		points += BUFFALO_POINTS;
+	}
+	if (m_board[i][j]->hasDeer())
+	{
+		points += DEER_POINTS;
+	}
+	if (m_board[i][j]->hasCrocodile())
+	{
+		points += CROCODILE_POINTS;
+	}
+	return points;
+}
 
 // Place a tile on the board. Make sure all neighboring tiles are pointing to the corresponding faces
 void Board::place_tile(std::pair<int, int> location, Tile &tile)
@@ -304,11 +304,11 @@ void Board::place_tile(std::pair<int, int> location, Tile &tile)
 }
 
 bool Board::checkMeeplePlacement(Tile tile, std::pair<int,int> blockSpot)
-{
+	{
 	std::vector< std::vector<Block> > innerBlocks = tile.getInnerBlocks();
 	Block block = innerBlocks[blockSpot.first][blockSpot.second];
 	if (block.hasMeeple()) { return true; }
-	if (block.getType() == "jungle" || block.getType() == "mixed") 
+	if (block.getType() == "jungle" || block.getType() == "mixed")
 		checkJungle(tile, blockSpot);
 	if (block.getType() == "lake") checkLake(tile, blockSpot);
 	if (block.getType() == "trail") checkTrail(tile, blockSpot);
@@ -348,39 +348,39 @@ bool Board::checkTrail(Tile tile, std::pair<int, int> blockSpot)
 
 }
 
-// bool Board::checkMeeplePlacement(Face &face)
-// {
-// 	std::queue<Face*> faces;
-// 	faces.push(&face);
-// 	while (faces.size() > 0)
-// 	{
-// 		if (faces.front()->hasMeeple()) { return true; }
+/*bool Board::checkMeeplePlacement(Face &face)
+{
+	std::queue<Face*> faces;
+	faces.push(&face);
+	while (faces.size() > 0)
+	{
+		if (faces.front()->hasMeeple()) { return true; }
 
-// 		if (faces.front()->getAcrossFace() != NULL && !faces.front()->getAcrossFace()->hasBeenVisited())
-// 		{
-// 			faces.push(faces.front()->getAcrossFace());
-// 		}
+		if (faces.front()->getAcrossFace() != NULL && !faces.front()->getAcrossFace()->hasBeenVisited())
+		{
+			faces.push(faces.front()->getAcrossFace());
+		}
 
-// 		if (faces.front()->getLeftFace() != NULL && !faces.front()->getLeftFace()->hasBeenVisited())
-// 		{
-// 			faces.push(faces.front()->getLeftFace());
-// 		}
+		if (faces.front()->getLeftFace() != NULL && !faces.front()->getLeftFace()->hasBeenVisited())
+		{
+			faces.push(faces.front()->getLeftFace());
+		}
 
-// 		if (faces.front()->getRightFace() != NULL && !faces.front()->getRightFace()->hasBeenVisited())
-// 		{
-// 			faces.push(faces.front()->getRightFace());
-// 		}
+		if (faces.front()->getRightFace() != NULL && !faces.front()->getRightFace()->hasBeenVisited())
+		{
+			faces.push(faces.front()->getRightFace());
+		}
 
-// 		if (faces.front()->getNeighborFace() != NULL && !faces.front()->getNeighborFace()->hasBeenVisited())
-// 		{
-// 			faces.push(faces.front()->getNeighborFace());
-// 		}
+		if (faces.front()->getNeighborFace() != NULL && !faces.front()->getNeighborFace()->hasBeenVisited())
+		{
+			faces.push(faces.front()->getNeighborFace());
+		}
 
-// 		faces.front()->visit();
-// 		faces.pop();
-// 	}
-// 	return false;
-// }
+		faces.front()->visit();
+		faces.pop();
+	}
+	return false;
+}*/
 
 void Board::connectFaces(int row, int col)
 {

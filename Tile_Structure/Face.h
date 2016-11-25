@@ -7,7 +7,7 @@
 #define    Jungle     'j'
 #define    Lake       'l'
 #define    Trail      't'
-#define    Den        'd'
+#define    Den        'd' // this is probably unnecessary
 
 class Face {
 public:
