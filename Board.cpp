@@ -126,6 +126,7 @@ std::vector< std::pair<int, int> > Board::checkPlacement(Tile tile, int i, int j
 }
 
 std::pair<int,int> Board::getOptimalPlacement(Tile &tile, std::vector< std::pair<int, int> > availableMoves) {
+	// if there is more than one move available that means its out turn 
 	 if (availableMoves.size() > 1)
 	 {
 	 	int bestRotation = 0;
@@ -138,19 +139,23 @@ std::pair<int,int> Board::getOptimalPlacement(Tile &tile, std::vector< std::pair
 	 		for (int q = 0; q < 4; q++) 
 	 		{
 	 			int points = 0;
+				// see if the tile can be placed at that position with its current rotation
 	 			if ((m_board[i + 1][j] == NULL || m_board[i + 1][j]->getUpFace()->faceEquals(*tile.getDownFace())) &&
 	 				(m_board[i - 1][j] == NULL || m_board[i - 1][j]->getDownFace()->faceEquals(*tile.getUpFace())) &&
 	 				(m_board[i][j + 1] == NULL || m_board[i][j + 1]->getLeftFace()->faceEquals(*tile.getRightFace())) &&
 	 				(m_board[i][j - 1] == NULL || m_board[i][j - 1]->getRightFace()->faceEquals(*tile.getLeftFace())))
 	 			{
+					// if it can be placed find how many points that location is worth
 	 				points = positionPoints(i, j);
 	 			}
 	 			else
 	 			{
+					// if it can;t be placed assign a value that flags that roation/position combo as not valid
 	 				points = -1;
 	 			}
 	 			if (points > mostPoints)
 	 			{
+					// find th eroation and position with the most points
 	 				mostPoints = points;
 	 				bestSpot = availableMoves[z];
 	 				bestRotation = q;
@@ -158,6 +163,7 @@ std::pair<int,int> Board::getOptimalPlacement(Tile &tile, std::vector< std::pair
 	 			tile.rotate();
 	 		}
 	 	}
+		// roatate the tile back to the potation that worked for the best spot
 	 	for (int i = 0; i < bestRotation; i++)
 	 	{
 	 		tile.rotate();
@@ -188,6 +194,7 @@ std::pair<int,int> Board::getOptimalPlacement(Tile &tile, std::vector< std::pair
 	return availableMoves[0];
 }
 
+// find the value for a position based on what the faces of the nieghboring tiles are 
 int Board::positionPoints(int i, int j)
 {
 	const int LAKE_POINTS = 6;
@@ -262,6 +269,7 @@ int Board::positionPoints(int i, int j)
 	return points;
 }
 
+// add up points for all of the neighbroing tile's animals
 int Board::animalPoints(int i, int j)
 {
 	const int DEN_POINTS = 10;
