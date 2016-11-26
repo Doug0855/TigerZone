@@ -325,10 +325,106 @@ instead of having a queue of tiles i could recall the function again and have it
 the problem there is how to remember which tiles youve already visited and which blocks youve visted in those tiles
 */
 
-// Structure Board::checkJungle(Tile *tile, std::pair<int, int> blockSpot)
-// {
-// 	Structure jungleStruct("jungle", blockSpot);
-// }
+Structure Board::checkJungle(Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int, int> blockSpot)
+{
+	Structure jungleStruct("jungle", blockSpot);
+	std::vector<Tile*> visitedTiles;
+	visitedTiles.push_back(tile);
+	buildJungle(&jungleStruct, tile, tileBlocks, blockSpot, visitedTiles);
+}
+
+void Board::buildJungle(Structure* struc, Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int,int> blockSpot, std::vector<Tile*> &visitedTiles) {
+	int row = blockSpot.first;
+	int col = blockSpot.second;
+	std::cout<<"in build jungle at "<<row<<' '<<col<<std::endl;
+	tileBlocks[row][col].visit();
+
+	struc->structureBlocks.push_back(tileBlocks[row][col]);
+
+	if(tileBlocks[row][col].hasMeeple())
+		struc->hasMeeple = true;
+	if(tile->hasCrocodile())
+		struc->crocodileCount++;
+	if(tile->hasDeer())
+		struc->deerCount++;
+	if(tile->hasBoar())
+		struc->boarCount++;
+	if(tile->hasBuffalo())
+		struc->buffaloCount++;
+
+	// Check tiles above, below, left, and right of the current block to see if lake structure continues
+	// std::cout<<"about to cehck row+1"<<std::endl;
+	if((row + 1) <= 2 && !(tileBlocks[row + 1][col].isVisited()) && tileBlocks[row+1][col].getType() == "jungle") {
+		buildJungle(struc, tile, tileBlocks, std::pair<int,int>(row+1,col), visitedTiles);
+	}
+	else if(row + 1 > 2 && tile->getDownTile() != NULL) {
+		bool visitedNeighborTile = false;
+		for(int i = 0; i < visitedTiles.size(); i++) {
+			if(visitedTiles[i] == tile->getDownTile())
+				visitedNeighborTile = true;
+		}
+		if(!visitedNeighborTile) {
+			visitedTiles.push_back(tile->getDownTile());
+			std::vector< std::vector<Block> > newBlocks = tile->getDownTile()->getInnerBlocks();
+			buildJungle(struc, tile->getDownTile(), newBlocks, std::pair<int,int>(row-2,col), visitedTiles);
+		}
+	}
+	// std::cout<<"about to check row-1"<<std::endl;
+	if((row - 1) >= 0 && !(tileBlocks[row - 1][col].isVisited()) && tileBlocks[row - 1][col].getType() == "jungle") {
+		buildJungle(struc, tile, tileBlocks, std::pair<int,int>(row-1,col), visitedTiles);
+	}
+	else if(row-1 < 0 && tile->getUpTile() != NULL) {
+		bool visitedNeighborTile = false;
+		for(int i = 0; i < visitedTiles.size(); i++) {
+			if(visitedTiles[i] == tile->getUpTile())
+				visitedNeighborTile = true;
+		}
+		if(!visitedNeighborTile) {
+			visitedTiles.push_back(tile->getUpTile());
+			std::vector< std::vector<Block> > newBlocks = tile->getUpTile()->getInnerBlocks();
+			buildJungle(struc, tile->getUpTile(), newBlocks, std::pair<int,int>(row+2,col), visitedTiles);
+		}
+	}
+	// std::cout<<"about to check col+1"<<std::endl;
+	if((col + 1) <= 2 && !(tileBlocks[row][col + 1].isVisited()) && tileBlocks[row][col + 1].getType() == "jungle") {
+		buildJungle(struc, tile, tileBlocks, std::pair<int,int>(row,col+1), visitedTiles);
+	}
+	else if(col+1 > 2 && tile->getRightTile() != NULL) {
+		bool visitedNeighborTile = false;
+		for(int i = 0; i < visitedTiles.size(); i++) {
+			if(visitedTiles[i] == tile->getRightTile())
+				visitedNeighborTile = true;
+		}
+		if(!visitedNeighborTile) {
+			visitedTiles.push_back(tile->getRightTile());
+			std::vector< std::vector<Block> > newBlocks = tile->getRightTile()->getInnerBlocks();
+			buildJungle(struc, tile->getRightTile(), newBlocks, std::pair<int,int>(row,col-2), visitedTiles);
+		}
+	}
+	// std::cout<<"about to check col-1"<<std::endl;
+	if((col - 1) >= 0 && !(tileBlocks[row][col-1].isVisited()) && tileBlocks[row][col - 1].getType() == "jungle") {
+		// std::cout<<"passing col-1"<<std::endl;
+		buildJungle(struc, tile, tileBlocks, std::pair<int,int>(row,col-1), visitedTiles);
+	} 
+	else if(col-1 < 0 && tile->getLeftTile() != NULL) {
+		bool visitedNeighborTile = false;
+		for(int i = 0; i < visitedTiles.size(); i++) {
+			if(visitedTiles[i] == tile->getLeftTile())
+				visitedNeighborTile = true;
+		}
+		if(!visitedNeighborTile) {
+			visitedTiles.push_back(tile->getLeftTile());
+			std::vector< std::vector<Block> > newBlocks = tile->getLeftTile()->getInnerBlocks();
+			buildJungle(struc, tile->getLeftTile(), newBlocks, std::pair<int,int>(row,col+2), visitedTiles);
+		}
+	}
+
+	// Check for mixed block scenarios
+	if(tileBlocks[row][col].getType() == "mixed") {
+		
+	}
+	return;
+}
 
 Structure Board::checkLake(Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int, int> blockSpot)
 {
@@ -353,6 +449,9 @@ void Board::buildLake(Structure* struc, Tile *tile, std::vector< std::vector<Blo
 	// }
 	struc->structureBlocks.push_back(tileBlocks[row][col]);
 
+
+	if(tileBlocks[row][col].hasMeeple())
+		struc->hasMeeple = true;
 	if(tile->hasCrocodile())
 		struc->crocodileCount++;
 	if(tile->hasDeer())
@@ -444,13 +543,26 @@ void Board::buildTrail(Structure* struc, Tile *tile, std::vector< std::vector<Bl
 	int row = blockSpot.first;
 	int col = blockSpot.second;
 	tileBlocks[row][col].visit();
-	// for(int i = 0; i < 3; i++) {
-	// 	for(int j = 0; j < 3; j++) {
-	// 		std::cout<<"Block at "<<i<<' '<<j<<" for tile "<<tile<<" has been visited? "<<tileBlocks[i][j].isVisited()<<std::endl;
-	// 	}
-	// }
+
+	if(row == 1 && col == 1) {
+		int divergingTrailCount = 0;
+		if(tileBlocks[row+1][col].getType() == "trail") 
+			divergingTrailCount++;
+		if(tileBlocks[row-1][col].getType() == "trail") 
+			divergingTrailCount++;
+		if(tileBlocks[row][col+1].getType() == "trail") 
+			divergingTrailCount++;
+		if(tileBlocks[row][col-1].getType() == "trail") 
+			divergingTrailCount++;
+		std::cout<<"Diverging trail count is "<<divergingTrailCount<<std::endl;
+		if(divergingTrailCount > 2) 
+			return;
+	}
+
 	struc->structureBlocks.push_back(tileBlocks[row][col]);
 
+	if(tileBlocks[row][col].hasMeeple())
+		struc->hasMeeple = true;
 	if(tile->hasCrocodile())
 		struc->crocodileCount++;
 	if(tile->hasDeer())

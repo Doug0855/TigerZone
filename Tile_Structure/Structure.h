@@ -18,7 +18,7 @@ public:
 
 	// Vector of the blocks that this structure is composed of (need to set all to unvisited after we compose structure)
 	std::vector<Block> structureBlocks;
-
+ 
 	// Keep variables to track the number of game animals as well as prey animals within each structure
 	int boarCount;
 	int deerCount;
