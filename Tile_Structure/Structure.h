@@ -24,6 +24,8 @@ public:
 	int deerCount;
 	int buffaloCount;
 
+	bool hasMeeple = false;
+
 	int crocodileCount;
 };
 

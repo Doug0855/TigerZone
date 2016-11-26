@@ -42,12 +42,15 @@ public:
 	// See if feature tile is being placed in has a meeple
 	bool checkMeeplePlacement(Tile tile, std::pair<int, int> blockSpot);
 
-	void buildLake(Structure* struc, Tile *tile, std::pair<int,int> blockSpot);
+	// Helper functions for building the structures of a recently placed tile
+	void buildLake(Structure* struc, Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int,int> blockSpot, std::vector<Tile*> &visitedTiles);
+	void buildTrail(Structure* struc, Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int,int> blockSpot);
+	void buildJungle(Structure* struc, Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int,int> blockSpot);
 
 private:
-	Structure checkJungle(Tile *tile, std::pair<int, int> blockSpot);
-	Structure checkLake(Tile *tile, std::pair<int, int> blockSpot);
-	Structure checkTrail(Tile *tile, std::pair<int, int> blockSpot);
+	// Structure checkJungle(Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int, int> blockSpot);
+	Structure checkLake(Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int, int> blockSpot);
+	Structure checkTrail(Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int, int> blockSpot);
 
 	void connectFaces(int row, int col);
 
