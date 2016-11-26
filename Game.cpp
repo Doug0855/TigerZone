@@ -91,17 +91,20 @@ void Game::meepleAi(int i, int j)
 		return;
 	}
 	std::vector<Structure> structures = gameboard.getStructures(i, j);
-	if (structures.size() > 0)
+	if (structures.size() > 0 && !structures[0].hasMeeple)
 	{
 		int mostPoints = 0;
 		int bestStruct = 0;
 		for (size_t ii = 0; ii < structures.size(); ii++)
 		{
-			int points = structurePoints(structures[ii]);
-			if (points > mostPoints)
+			if (!structures[ii].hasMeeple)
 			{
-				mostPoints = points;
-				bestStruct = ii;
+				int points = structurePoints(structures[ii]);
+				if (points > mostPoints)
+				{
+					mostPoints = points;
+					bestStruct = ii;
+				}
 			}
 		}
 		gameboard.placeMeeple(i, j, structures[bestStruct].startingBlock);
