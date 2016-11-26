@@ -17,8 +17,8 @@ public:
 	void switchPlayer();
 	void printToTextFile(Board);
 
-
 	Board gameboard;
+
 private:
 	std::string gameId;
 	Player player1;

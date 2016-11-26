@@ -14,7 +14,6 @@ public:
 
 	// Set a row of blocks for a tile
 	void setRow(int row, char type1, char type2, char type3);
-
 	// Rotate the tile and set all of the faces to the face that was -90 degrees of it.
 	void rotate();
 	// Function to check if a tile is connected on all 4 sides
@@ -30,40 +29,50 @@ public:
 	void setCrocodile() { this->crocodile = true; }
 	bool hasInit() { return initialization; }
 
-	// Get the type of a face
-  	std::string getUpFaceType() { return up.getType(); }
-  	std::string getDownFaceType() { return down.getType(); }
-  	std::string getLeftFaceType() { return left.getType(); }
-  	std::string getRightFaceType() { return right.getType(); }
+	// Get the type of a face ------------------------------this isn't needed (we can get the face and then get the type from the face)
+	std::string getUpFaceType() { return up.getType(); }
+	std::string getDownFaceType() { return down.getType(); }
+	std::string getLeftFaceType() { return left.getType(); }
+	std::string getRightFaceType() { return right.getType(); }
 
-  	// Get the faces
-  	Face* getUpFace() { return &up; }
-  	Face* getDownFace() { return &down; }
-  	Face* getLeftFace() { return &left; }
-  	Face* getRightFace() { return &right; }
+	// Get the faces
+	Face* getUpFace() { return &up; }
+	Face* getDownFace() { return &down; }
+	Face* getLeftFace() { return &left; }
+	Face* getRightFace() { return &right; }
 
 	Block getCenter() { return innerBlocks[1][1]; }
 
-  	// Set the types of the 4 faces after matrix has been initialized
-  	void setFaceTypes();
+	// Set the types of the 4 faces after matrix has been initialized
+	void setFaceTypes();
 
-  	// Variables for the GUI
+	// Variables for the GUI
 	char getType() { return type; }
 	int getNum() { return num; }
 	int getRotations() { return rotation; }
 	std::vector< std::vector<Block> > getInnerBlocks(){ return innerBlocks; }
 
+	void setNeighborTileAbove(Tile &tile);
+	void setNeighborTileBelow(Tile &tile);
+	void setNeighborTileLeft(Tile &tile);
+	void setNeighborTileRight(Tile &tile);
+	Tile* getNeighborTileAbove() { return aboveTile; }
+	Tile* getNeighborTileBelow() { return belowTile; }
+	Tile* getNeighborTileLeft() { return leftTile; }
+	Tile* getNeighborTileRight() { return rightTile; }
+
+	std::vector< std::vector<Block> > innerBlocks; //moved here for testing
 private:
-  	// The number of times we've rotated the tile in order to make it placeable on the board
-  	int rotation, num;
+	// The number of times we've rotated the tile in order to make it placeable on the board
+	int rotation, num;
 	char type;
 	bool boar, buffalo, deer, crocodile;
-  	// Attribute to tell us if the tile is a skeleton board tile or an initialized game tile
-  	bool initialization;
-  	// The four faces of the tile which will contain all the types
-  	Face up, down, left, right;
-  	// 3x3 matrix of blocks in the tile
-  	std::vector< std::vector<Block> > innerBlocks;
+	// Attribute to tell us if the tile is a skeleton board tile or an initialized game tile
+	bool initialization;
+	// The four faces of the tile which will contain all the types
+	Face up, down, left, right;
+	// 3x3 matrix of blocks in the tile
+	Tile *aboveTile, *belowTile, *leftTile, *rightTile;
 
 };
 

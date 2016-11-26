@@ -94,17 +94,32 @@ void printStack(TileStack stack) //debugging
 		std::cout << " Left addr: " << tile.getLeftFace()->getLeftFace() << std::endl;
 		std::cout << " Right addr: " << tile.getLeftFace()->getRightFace() << std::endl;
 }*/
+void printTile(Tile tile)
+{
+	tile.rotate();
+	std::cout << "printing tile info: " << std::endl;
 
+	std::cout << tile.innerBlocks[0][0].getType() << ", " << tile.innerBlocks[0][1].getType() << ", " << tile.innerBlocks[0][2].getType() << std::endl;
+	std::cout << tile.innerBlocks[1][0].getType() << ", " << tile.innerBlocks[1][1].getType() << ", " << tile.innerBlocks[1][2].getType() << std::endl;
+	std::cout << tile.innerBlocks[2][0].getType() << ", " << tile.innerBlocks[2][1].getType() << ", " << tile.innerBlocks[2][2].getType() << std::endl;
+
+	std::cout << "up face of tile is " << tile.getUpFace()->getType() << std::endl;
+	std::cout << "left face of tile is " << tile.getLeftFace()->getType() << std::endl;
+	std::cout << "right face of tile is " << tile.getRightFace()->getType() << std::endl;
+	std::cout << "down face of tile is " << tile.getDownFace()->getType() << std::endl;
+}
 int main() {
-	Board gameboard;
+	Board gameBoard;
 	std::cout<<"in game"<<std::endl;
 	Tile tile1(19);
+	//printTile(tile1);
 	TileStack tStack;
-	tStack.shuffle();
+	for (int i=0;i<2;i++)
+		tStack.shuffle();
 	Player p1;
 	Player p2;
 	//std::cout<<"tile 1 up face is "<<tile1.getUpFace()->getType()<<std::endl;			//debugging
-	gameboard.place_tile(std::pair<int, int>(72,72), tile1);
+	gameBoard.place_tile(std::pair<int, int>(72,72), tile1);
 	Game game1("123", p1, p2, tStack, tile1, std::pair<int,int> (72,72));
 	game1.play();
 	/*
@@ -117,38 +132,48 @@ int main() {
 		std::cout<<i<<") "<<availableLocations[i].first<<' '<<availableLocations[i].second<<std::endl;
 	}
 	*/
+	//printStack(tStack);
+	//printBoard(game1.gameboard);
+
+	for(int i = 0; i < /**/tStack.tiles.size()/**/; i++) {
+		// Get all positions that we may place the tile
+		//std::cout << "placing tyle of type: " << tStack.tiles[i].getType() << std::endl; //debugging
+		//if (tStack.tiles[i].getType() == 'h')
+		//	printTile(tStack.tiles[i]);
+		std::vector<std::pair<int,int> > availableLocations = gameBoard.display_positions(tStack.tiles[i]);
+		// check if there are any available moves. If so then place at the optimal spot.
+		/*for (int i = 0; i < availableLocations.size(); i++) //debugging
+		{
+			std::cout << "pair " << i << ": " << availableLocations[i].first << ", " << availableLocations[i].second << std::endl;
+		}	*/																									//debugging
+		if(availableLocations.size() > 0) {
+			Tile *tmpTile = new Tile(tStack.tiles[i].getNum());
+			std::pair<int,int> optimalLocation = gameBoard.getOptimalPlacement(*tmpTile, availableLocations);
+			//std::cout << "optimal placement obtained, about to place_tile" << std::endl;
+			//std::cout << "optimal location at: <" << optimalLocation.first << ", " << optimalLocation.second << ">" << std::endl;
+			gameBoard.place_tile(optimalLocation, *tmpTile);
+			//std::cout << "tile successfully placed" << std::endl;
+		}
+		else {
+			std::cout << "TILE " << tStack.tiles[i].getType() << " CANNOT BE PLACED" << std::endl;
+			continue;
+		}
+	}
 	printStack(tStack);
-	printBoard(game1.gameboard);
+	printBoard(gameBoard);
+	//printToTextFile(gameBoard);
 
-	// Board gameBoard;
-	// gameBoard.place_tile(std::pair<int, int>(72, 50), tile1);
-
-	// for(int i = 0; i < /**/tStack.tiles.size()/**/; i++) {
-	// 	// Get all positions that we may place the tile
-	// 	std::vector<std::pair<int,int> > availableLocations = gameBoard.display_positions(tStack.tiles[i]);
-	// 	// check if there are any available moves. If so then place at the optimal spot.
-	// 	if(availableLocations.size() > 0) {
-	// 		Tile *tmpTile = new Tile(tStack.tiles[i].getNum());
-	// 		std::pair<int,int> optimalLocation = gameBoard.getOptimalPlacement(*tmpTile, availableLocations);
-	// 		gameBoard.place_tile(optimalLocation, *tmpTile);
-	// 	}
-	// 	else {
-	// 		std::cout << "TILE " << tStack.tiles[i].getType() << " CANNOT BE PLACED" << std::endl;
-	// 		continue;
-	// 	}
-	// }
-	// printBoard(gameBoard);
-	// printToTextFile(gameBoard);
-
-	// /**/if (gameBoard.m_board[72][50] != NULL)  //debugging
-	// {
-	// 	gameBoard.m_board[72][50]->getUpFace()->placeMeeple();
-	// 	std::cout << gameBoard.m_board[72][50]->getUpFace()->hasMeeple() << std::endl;
-	// 	//std::cout << gameBoard.m_board[67][47]->getDownFace()->getAccrossFace()->hasMeeple() << std::endl;;
-	// 	std::cout << "Is there meeple? " << gameBoard.checkMeeplePlacement(*gameBoard.m_board[72][50]->getRightFace());
-	// }
-	// else
-	// 	std::cout << "meeple not placed" << std::endl;/**/																			//debugging
+	/**/if (gameBoard.m_board[67][77] != NULL)  //debugging
+	{
+		gameBoard.m_board[67][77]->innerBlocks[1][0].placeMeeple();
+		std::cout << gameBoard.m_board[67][77]->getLeftFace()->hasMeeple() << std::endl;
+		//std::cout << gameBoard.m_board[67][77]->getDownFace()->hasMeeple() << std::endl;
+		//std::cout << gameBoard.m_board[67][77]->getDownFace()->getAcrossFace()->hasMeeple() << std::endl;;
+		std::pair<int, int> spot (2,1);
+		std::cout << "Is there meeple? " << gameBoard.checkMeeplePlacement(*gameBoard.m_board[66][76], spot);
+	}
+	else
+		std::cout << "meeple not placed" << std::endl;/**/																			//debugging
 	//int z;
 	//std::cin >> z;
 

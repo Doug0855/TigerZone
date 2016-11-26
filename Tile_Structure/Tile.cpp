@@ -13,6 +13,10 @@ Tile::Tile(int type)
     setRow(0,'j','j','j');
     setRow(1,'j','j','j');
     setRow(2,'j','j','j');
+    up = Face(innerBlocks[0][0], innerBlocks[0][1], innerBlocks[0][2], down, right, left);
+    down = Face(innerBlocks[2][0], innerBlocks[2][1], innerBlocks[2][2], up, left, right);
+    left = Face(innerBlocks[2][0], innerBlocks[1][0], innerBlocks[0][0], right, up, down);
+    right = Face(innerBlocks[0][2], innerBlocks[1][2], innerBlocks[2][2], left, down, up);
     setFaceTypes();
     rotation = 0;
     num = 1;
@@ -28,6 +32,10 @@ Tile::Tile(int type)
     setRow(0,'j','j','j');
     setRow(1,'j','d','j');
     setRow(2,'j','j','j');
+    up = Face(innerBlocks[0][0], innerBlocks[0][1], innerBlocks[0][2], down, right, left);
+    down = Face(innerBlocks[2][0], innerBlocks[2][1], innerBlocks[2][2], up, left, right);
+    left = Face(innerBlocks[2][0], innerBlocks[1][0], innerBlocks[0][0], right, up, down);
+    right = Face(innerBlocks[0][2], innerBlocks[1][2], innerBlocks[2][2], left, down, up);
     setFaceTypes();
     rotation = 0;
     num = 2;
@@ -43,6 +51,10 @@ Tile::Tile(int type)
     setRow(0,'j','j','j');
     setRow(1,'j','d','j');
     setRow(2,'j','t','j');
+    up = Face(innerBlocks[0][0], innerBlocks[0][1], innerBlocks[0][2], *NULL_face, right, left);
+    down = Face(innerBlocks[2][0], innerBlocks[2][1], innerBlocks[2][2], *NULL_face, *NULL_face, *NULL_face);
+    left = Face(innerBlocks[2][0], innerBlocks[1][0], innerBlocks[0][0], right, up, *NULL_face);
+    right = Face(innerBlocks[0][2], innerBlocks[1][2], innerBlocks[2][2], left, *NULL_face, up);
     setFaceTypes();
     rotation = 0;
     num = 3;
@@ -58,6 +70,10 @@ Tile::Tile(int type)
     setRow(0,'j','t','j');
     setRow(1,'t','t','t');
     setRow(2,'j','t','j');
+    up = Face(innerBlocks[0][0], innerBlocks[0][1], innerBlocks[0][2], *NULL_face, *NULL_face, *NULL_face);
+    down = Face(innerBlocks[2][0], innerBlocks[2][1], innerBlocks[2][2], *NULL_face, *NULL_face, *NULL_face);
+    left = Face(innerBlocks[2][0], innerBlocks[1][0], innerBlocks[0][0], *NULL_face, *NULL_face, *NULL_face);
+    right = Face(innerBlocks[0][2], innerBlocks[1][2], innerBlocks[2][2], *NULL_face, *NULL_face, *NULL_face);
     setFaceTypes();
     rotation = 0;
     num = 4;
@@ -73,6 +89,10 @@ Tile::Tile(int type)
     setRow(0,'j','t','j');
     setRow(1,'j','t','j');
     setRow(2,'j','t','j');
+    up = Face(innerBlocks[0][0], innerBlocks[0][1], innerBlocks[0][2], down, *NULL_face, *NULL_face);
+    down = Face(innerBlocks[2][0], innerBlocks[2][1], innerBlocks[2][2], up, *NULL_face, *NULL_face);
+    left = Face(innerBlocks[2][0], innerBlocks[1][0], innerBlocks[0][0], *NULL_face, *NULL_face, *NULL_face);
+    right = Face(innerBlocks[0][2], innerBlocks[1][2], innerBlocks[2][2], *NULL_face, *NULL_face, *NULL_face);
     setFaceTypes();
     rotation = 0;
     num = 5;
@@ -88,6 +108,10 @@ Tile::Tile(int type)
     setRow(0,'j','t','j');
     setRow(1,'t','t','j');
     setRow(2,'j','j','j');
+    up = Face(innerBlocks[0][0], innerBlocks[0][1], innerBlocks[0][2], *NULL_face, *NULL_face, left);
+    down = Face(innerBlocks[2][0], innerBlocks[2][1], innerBlocks[2][2], *NULL_face, *NULL_face, right);
+    left = Face(innerBlocks[2][0], innerBlocks[1][0], innerBlocks[0][0], *NULL_face, up, *NULL_face);
+    right = Face(innerBlocks[0][2], innerBlocks[1][2], innerBlocks[2][2], *NULL_face, down, *NULL_face);
     setFaceTypes();
     rotation = 0;
     num = 6;
@@ -100,9 +124,13 @@ Tile::Tile(int type)
   }
   else if (type == 7)
   {
-   setRow(0,'j','t','j');
+    setRow(0,'j','t','j');
     setRow(1,'t','t','j');
     setRow(2,'j','t','j');
+    up = Face(innerBlocks[0][0], innerBlocks[0][1], innerBlocks[0][2], *NULL_face, *NULL_face, *NULL_face);
+    down = Face(innerBlocks[2][0], innerBlocks[2][1], innerBlocks[2][2], *NULL_face, *NULL_face, *NULL_face);
+    left = Face(innerBlocks[2][0], innerBlocks[1][0], innerBlocks[0][0], *NULL_face, *NULL_face, *NULL_face);
+    right = Face(innerBlocks[0][2], innerBlocks[1][2], innerBlocks[2][2], *NULL_face, *NULL_face, *NULL_face);
     setFaceTypes();
     rotation = 0;
     num = 7;
@@ -118,6 +146,10 @@ Tile::Tile(int type)
     setRow(0,'l','l','l');
     setRow(1,'l','l','l');
     setRow(2,'l','l','l');
+    up = Face(innerBlocks[0][0], innerBlocks[0][1], innerBlocks[0][2], down, right, left);
+    down = Face(innerBlocks[2][0], innerBlocks[2][1], innerBlocks[2][2], up, left, right);
+    left = Face(innerBlocks[2][0], innerBlocks[1][0], innerBlocks[0][0], right, up, down);
+    right = Face(innerBlocks[0][2], innerBlocks[1][2], innerBlocks[2][2], left, down, up);
     setFaceTypes();
     rotation = 0;
     num = 8;
@@ -133,6 +165,10 @@ Tile::Tile(int type)
     setRow(0,'m','j','m');
     setRow(1,'l','j','l');
     setRow(2,'l','l','l');
+    up = Face(innerBlocks[0][0], innerBlocks[0][1], innerBlocks[0][2], *NULL_face, *NULL_face, *NULL_face);
+    down = Face(innerBlocks[2][0], innerBlocks[2][1], innerBlocks[2][2], *NULL_face, left, right);
+    left = Face(innerBlocks[2][0], innerBlocks[1][0], innerBlocks[0][0], right, *NULL_face, down);
+    right = Face(innerBlocks[0][2], innerBlocks[1][2], innerBlocks[2][2], left, down, *NULL_face);
     setFaceTypes();
     rotation = 0;
     num = 9;
@@ -148,6 +184,10 @@ Tile::Tile(int type)
     setRow(0,'m','l','l');
     setRow(1,'j','j','l');
     setRow(2,'j','j','m');
+    up = Face(innerBlocks[0][0], innerBlocks[0][1], innerBlocks[0][2], *NULL_face, right, *NULL_face);
+    down = Face(innerBlocks[2][0], innerBlocks[2][1], innerBlocks[2][2], *NULL_face, left, *NULL_face);
+    left = Face(innerBlocks[2][0], innerBlocks[1][0], innerBlocks[0][0], *NULL_face, *NULL_face, down);
+    right = Face(innerBlocks[0][2], innerBlocks[1][2], innerBlocks[2][2], *NULL_face, *NULL_face, up);
     setFaceTypes();
     rotation = 0;
     num = 10;
@@ -163,6 +203,10 @@ Tile::Tile(int type)
     setRow(0,'m','j','m');
     setRow(1,'l','l','l');
     setRow(2,'m','j','m');
+    up = Face(innerBlocks[0][0], innerBlocks[0][1], innerBlocks[0][2], *NULL_face, *NULL_face, *NULL_face);
+    down = Face(innerBlocks[2][0], innerBlocks[2][1], innerBlocks[2][2], *NULL_face, *NULL_face, *NULL_face);
+    left = Face(innerBlocks[2][0], innerBlocks[1][0], innerBlocks[0][0], right, *NULL_face, *NULL_face);
+    right = Face(innerBlocks[0][2], innerBlocks[1][2], innerBlocks[2][2], left, *NULL_face, *NULL_face);
     setFaceTypes();
     rotation = 0;
     num = 11;
@@ -178,6 +222,10 @@ Tile::Tile(int type)
     setRow(0,'m','l','m');
     setRow(1,'j','j','j');
     setRow(2,'m','l','m');
+    up = Face(innerBlocks[0][0], innerBlocks[0][1], innerBlocks[0][2], *NULL_face, *NULL_face, *NULL_face);
+    down = Face(innerBlocks[2][0], innerBlocks[2][1], innerBlocks[2][2], *NULL_face, *NULL_face, *NULL_face);
+    left = Face(innerBlocks[2][0], innerBlocks[1][0], innerBlocks[0][0], right, *NULL_face, *NULL_face);
+    right = Face(innerBlocks[0][2], innerBlocks[1][2], innerBlocks[2][2], left, *NULL_face, *NULL_face);
     setFaceTypes();
     rotation = 0;
     num = 12;
@@ -193,6 +241,10 @@ Tile::Tile(int type)
     setRow(0,'m','l','m');
     setRow(1,'j','j','j');
     setRow(2,'j','j','j');
+    up = Face(innerBlocks[0][0], innerBlocks[0][1], innerBlocks[0][2], *NULL_face, *NULL_face, *NULL_face);
+    down = Face(innerBlocks[2][0], innerBlocks[2][1], innerBlocks[2][2], *NULL_face, left, right);
+    left = Face(innerBlocks[2][0], innerBlocks[1][0], innerBlocks[0][0], right, *NULL_face, down);
+    right = Face(innerBlocks[0][2], innerBlocks[1][2], innerBlocks[2][2], left, down, *NULL_face);
     setFaceTypes();
     rotation = 0;
     num = 13;
@@ -208,6 +260,10 @@ Tile::Tile(int type)
     setRow(0,'j','j','m');
     setRow(1,'j','j','l');
     setRow(2,'m','l','m');
+    up = Face(innerBlocks[0][0], innerBlocks[0][1], innerBlocks[0][2], *NULL_face, *NULL_face, left);
+    down = Face(innerBlocks[2][0], innerBlocks[2][1], innerBlocks[2][2], *NULL_face, *NULL_face, right);
+    left = Face(innerBlocks[2][0], innerBlocks[1][0], innerBlocks[0][0], *NULL_face, up, *NULL_face);
+    right = Face(innerBlocks[0][2], innerBlocks[1][2], innerBlocks[2][2], *NULL_face, down, *NULL_face);
     setFaceTypes();
     rotation = 0;
     num = 14;
@@ -223,6 +279,10 @@ Tile::Tile(int type)
     setRow(0,'j','t','m');
     setRow(1,'t','t','l');
     setRow(2,'j','j','m');
+    up = Face(innerBlocks[0][0], innerBlocks[0][1], innerBlocks[0][2], *NULL_face, *NULL_face, left);
+    down = Face(innerBlocks[2][0], innerBlocks[2][1], innerBlocks[2][2], *NULL_face, *NULL_face, *NULL_face);
+    left = Face(innerBlocks[2][0], innerBlocks[1][0], innerBlocks[0][0], *NULL_face, up, *NULL_face);
+    right = Face(innerBlocks[0][2], innerBlocks[1][2], innerBlocks[2][2], *NULL_face, *NULL_face, *NULL_face);
     setFaceTypes();
     rotation = 0;
     num = 15;
@@ -238,6 +298,10 @@ Tile::Tile(int type)
     setRow(0,'j','t','m');
     setRow(1,'t','t','l');
     setRow(2,'j','j','m');
+    up = Face(innerBlocks[0][0], innerBlocks[0][1], innerBlocks[0][2], *NULL_face, *NULL_face, left);
+    down = Face(innerBlocks[2][0], innerBlocks[2][1], innerBlocks[2][2], *NULL_face, *NULL_face, *NULL_face);
+    left = Face(innerBlocks[2][0], innerBlocks[1][0], innerBlocks[0][0], *NULL_face, up, *NULL_face);
+    right = Face(innerBlocks[0][2], innerBlocks[1][2], innerBlocks[2][2], *NULL_face, *NULL_face, *NULL_face);
     setFaceTypes();
     rotation = 0;
     num = 16;
@@ -253,6 +317,10 @@ Tile::Tile(int type)
     setRow(0,'j','j','m');
     setRow(1,'t','t','l');
     setRow(2,'j','t','m');
+    up = Face(innerBlocks[0][0], innerBlocks[0][1], innerBlocks[0][2], *NULL_face, *NULL_face, *NULL_face);
+    down = Face(innerBlocks[2][0], innerBlocks[2][1], innerBlocks[2][2], *NULL_face, left, *NULL_face);
+    left = Face(innerBlocks[2][0], innerBlocks[1][0], innerBlocks[0][0], *NULL_face, *NULL_face, down);
+    right = Face(innerBlocks[0][2], innerBlocks[1][2], innerBlocks[2][2], *NULL_face, *NULL_face, *NULL_face);
     setFaceTypes();
     rotation = 0;
     num = 17;
@@ -268,6 +336,10 @@ Tile::Tile(int type)
     setRow(0,'j','j','m');
     setRow(1,'t','t','l');
     setRow(2,'j','t','m');
+    up = Face(innerBlocks[0][0], innerBlocks[0][1], innerBlocks[0][2], *NULL_face, *NULL_face, *NULL_face);
+    down = Face(innerBlocks[2][0], innerBlocks[2][1], innerBlocks[2][2], *NULL_face, left, *NULL_face);
+    left = Face(innerBlocks[2][0], innerBlocks[1][0], innerBlocks[0][0], *NULL_face, *NULL_face, down);
+    right = Face(innerBlocks[0][2], innerBlocks[1][2], innerBlocks[2][2], *NULL_face, *NULL_face, *NULL_face);
     setFaceTypes();
     rotation = 0;
     num = 18;
@@ -283,6 +355,10 @@ Tile::Tile(int type)
     setRow(0,'j','t','m');
     setRow(1,'j','t','l');
     setRow(2,'j','t','m');
+    up = Face(innerBlocks[0][0], innerBlocks[0][1], innerBlocks[0][2], down, *NULL_face, *NULL_face);
+    down = Face(innerBlocks[2][0], innerBlocks[2][1], innerBlocks[2][2], up, *NULL_face, *NULL_face);
+    left = Face(innerBlocks[2][0], innerBlocks[1][0], innerBlocks[0][0], *NULL_face, *NULL_face, *NULL_face);
+    right = Face(innerBlocks[0][2], innerBlocks[1][2], innerBlocks[2][2], *NULL_face, *NULL_face, *NULL_face);
     setFaceTypes();
     rotation = 0;
     num = 19;
@@ -298,6 +374,10 @@ Tile::Tile(int type)
     setRow(0,'j','t','m');
     setRow(1,'j','t','l');
     setRow(2,'j','t','m');
+    up = Face(innerBlocks[0][0], innerBlocks[0][1], innerBlocks[0][2], down, *NULL_face, *NULL_face);
+    down = Face(innerBlocks[2][0], innerBlocks[2][1], innerBlocks[2][2], up, *NULL_face, *NULL_face);
+    left = Face(innerBlocks[2][0], innerBlocks[1][0], innerBlocks[0][0], *NULL_face, *NULL_face, *NULL_face);
+    right = Face(innerBlocks[0][2], innerBlocks[1][2], innerBlocks[2][2], *NULL_face, *NULL_face, *NULL_face);
     setFaceTypes();
     rotation = 0;
     num = 20;
@@ -313,6 +393,10 @@ Tile::Tile(int type)
     setRow(0,'m','t','m');
     setRow(1,'l','l','l');
     setRow(2,'l','l','l');
+    up = Face(innerBlocks[0][0], innerBlocks[0][1], innerBlocks[0][2], *NULL_face, *NULL_face, *NULL_face);
+    down = Face(innerBlocks[2][0], innerBlocks[2][1], innerBlocks[2][2], *NULL_face, left, right);
+    left = Face(innerBlocks[2][0], innerBlocks[1][0], innerBlocks[0][0], right, *NULL_face, down);
+    right = Face(innerBlocks[0][2], innerBlocks[1][2], innerBlocks[2][2], left, down, *NULL_face);
     setFaceTypes();
     rotation = 0;
     num = 21;
@@ -328,6 +412,10 @@ Tile::Tile(int type)
     setRow(0,'j','t','m');
     setRow(1,'t','t','l');
     setRow(2,'j','t','m');
+    up = Face(innerBlocks[0][0], innerBlocks[0][1], innerBlocks[0][2], *NULL_face, *NULL_face, *NULL_face);
+    down = Face(innerBlocks[2][0], innerBlocks[2][1], innerBlocks[2][2], *NULL_face, *NULL_face, *NULL_face);
+    left = Face(innerBlocks[2][0], innerBlocks[1][0], innerBlocks[0][0], *NULL_face, *NULL_face, *NULL_face);
+    right = Face(innerBlocks[0][2], innerBlocks[1][2], innerBlocks[2][2], *NULL_face, *NULL_face, *NULL_face);
     setFaceTypes();
     rotation = 0;
     num = 22;
@@ -343,6 +431,10 @@ Tile::Tile(int type)
     setRow(0,'j','t','m');
     setRow(1,'t','t','l');
     setRow(2,'j','t','m');
+    up = Face(innerBlocks[0][0], innerBlocks[0][1], innerBlocks[0][2], *NULL_face, *NULL_face, *NULL_face);
+    down = Face(innerBlocks[2][0], innerBlocks[2][1], innerBlocks[2][2], *NULL_face, *NULL_face, *NULL_face);
+    left = Face(innerBlocks[2][0], innerBlocks[1][0], innerBlocks[0][0], *NULL_face, *NULL_face, *NULL_face);
+    right = Face(innerBlocks[0][2], innerBlocks[1][2], innerBlocks[2][2], *NULL_face, *NULL_face, *NULL_face);
     setFaceTypes();
     rotation = 0;
     num = 23;
@@ -358,6 +450,10 @@ Tile::Tile(int type)
     setRow(0,'j','t','m');
     setRow(1,'t','t','l');
     setRow(2,'m','l','l');
+    up = Face(innerBlocks[0][0], innerBlocks[0][1], innerBlocks[0][2], *NULL_face, *NULL_face, left);
+    down = Face(innerBlocks[2][0], innerBlocks[2][1], innerBlocks[2][2], *NULL_face, *NULL_face, right);
+    left = Face(innerBlocks[2][0], innerBlocks[1][0], innerBlocks[0][0], *NULL_face, up, *NULL_face);
+    right = Face(innerBlocks[0][2], innerBlocks[1][2], innerBlocks[2][2], *NULL_face, down, *NULL_face);
     setFaceTypes();
     rotation = 0;
     num = 24;
@@ -373,6 +469,10 @@ Tile::Tile(int type)
     setRow(0,'j','t','m');
     setRow(1,'t','t','l');
     setRow(2,'m','l','l');
+    up = Face(innerBlocks[0][0], innerBlocks[0][1], innerBlocks[0][2], *NULL_face, *NULL_face, left);
+    down = Face(innerBlocks[2][0], innerBlocks[2][1], innerBlocks[2][2], *NULL_face, *NULL_face, right);
+    left = Face(innerBlocks[2][0], innerBlocks[1][0], innerBlocks[0][0], *NULL_face, up, *NULL_face);
+    right = Face(innerBlocks[0][2], innerBlocks[1][2], innerBlocks[2][2], *NULL_face, down, *NULL_face);
     setFaceTypes();
     rotation = 0;
     num = 25;
@@ -388,6 +488,10 @@ Tile::Tile(int type)
     setRow(0,'m','l','m');
     setRow(1,'j','t','j');
     setRow(2,'j','t','j');
+    up = Face(innerBlocks[0][0], innerBlocks[0][1], innerBlocks[0][2], *NULL_face, *NULL_face, *NULL_face);
+    down = Face(innerBlocks[2][0], innerBlocks[2][1], innerBlocks[2][2], *NULL_face, *NULL_face, *NULL_face);
+    left = Face(innerBlocks[2][0], innerBlocks[1][0], innerBlocks[0][0], *NULL_face, *NULL_face, *NULL_face);
+    right = Face(innerBlocks[0][2], innerBlocks[1][2], innerBlocks[2][2], *NULL_face, *NULL_face, *NULL_face);
     setFaceTypes();
     rotation = 0;
     num = 26;
@@ -403,6 +507,10 @@ Tile::Tile(int type)
     setRow(0,'m','l','m');
     setRow(1,'j','t','j');
     setRow(2,'j','t','j');
+    up = Face(innerBlocks[0][0], innerBlocks[0][1], innerBlocks[0][2], *NULL_face, *NULL_face, *NULL_face);
+    down = Face(innerBlocks[2][0], innerBlocks[2][1], innerBlocks[2][2], *NULL_face, *NULL_face, *NULL_face);
+    left = Face(innerBlocks[2][0], innerBlocks[1][0], innerBlocks[0][0], *NULL_face, *NULL_face, *NULL_face);
+    right = Face(innerBlocks[0][2], innerBlocks[1][2], innerBlocks[2][2], *NULL_face, *NULL_face, *NULL_face);
     setFaceTypes();
     rotation = 0;
     num = 27;
@@ -418,6 +526,10 @@ Tile::Tile(int type)
     setRow(0,'m','t','m');
     setRow(1,'l','j','l');
     setRow(2,'l','l','l');
+    up = Face(innerBlocks[0][0], innerBlocks[0][1], innerBlocks[0][2], *NULL_face, *NULL_face, *NULL_face);
+    down = Face(innerBlocks[2][0], innerBlocks[2][1], innerBlocks[2][2], *NULL_face, left, right);
+    left = Face(innerBlocks[2][0], innerBlocks[1][0], innerBlocks[0][0], right, *NULL_face, down);
+    right = Face(innerBlocks[0][2], innerBlocks[1][2], innerBlocks[2][2], left, down, *NULL_face);
     setFaceTypes();
     rotation = 0;
     num = 28;
@@ -430,6 +542,12 @@ Tile::Tile(int type)
   }
   else
   {
+    //need to initialize setRows
+    up = Face();
+    down = Face();
+    left = Face();
+    right = Face();
+    setFaceTypes();
     rotation = 0;
     num = 0;
     boar = false;
@@ -442,25 +560,39 @@ Tile::Tile(int type)
 }
 Tile::Tile()
 {
+  //need to initialize setRows
+  up = Face();
+  down = Face();
+  left = Face();
+  right = Face();
+  setFaceTypes();
   rotation = 0;
   num = 0;
   boar = false;
   buffalo = false;
   deer = false;
   crocodile = false;
-  type = '.';
-	initialization = false;
+  this->type = '.';
+  initialization = false;
 }
 Tile::~Tile()
 {
 
 }
 
-void Tile::setFaceTypes() {
-  up.setType(innerBlocks[0][1].getType());
-  down.setType(innerBlocks[2][1].getType());
-  left.setType(innerBlocks[1][0].getType());
-  right.setType(innerBlocks[1][2].getType());
+void Tile::setFaceTypes() {  //taking advantage of this to set neighbor tiles to NULL during initialization
+  this->down.setType(innerBlocks[2][0], innerBlocks[2][1], innerBlocks[2][2]);
+  this->up.setType(innerBlocks[0][0], innerBlocks[0][1], innerBlocks[0][2]);
+  this->left.setType(innerBlocks[2][0], innerBlocks[1][0], innerBlocks[0][0]);
+  this->right.setType(innerBlocks[0][2], innerBlocks[1][2], innerBlocks[2][2]);
+  // up.setType(innerBlocks[0][1].getType());
+  // down.setType(innerBlocks[2][1].getType());
+  // left.setType(innerBlocks[1][0].getType());
+  // right.setType(innerBlocks[1][2].getType());
+  aboveTile = NULL;
+  belowTile = NULL;
+  rightTile = NULL;
+  leftTile = NULL;
 }
 
 void Tile::setRow(int row, char type1, char type2, char type3) {
@@ -474,25 +606,28 @@ void Tile::rotate()
 	std::vector<std::vector<Block> > unrotated = innerBlocks;
 
   // Top row
-  innerBlocks[0][0] = Block(unrotated[0][2]);
-  innerBlocks[0][1] = Block(unrotated[1][2]);
-  innerBlocks[0][2] = Block(unrotated[2][2]);
-
-  this->up.setType(innerBlocks[0][1].getType());
+  innerBlocks[0][0] = Block(unrotated[0][2]); //innerBlocks[0][0].setType(unrotated[0][2].getType()[0]); //
+  innerBlocks[0][1] = Block(unrotated[1][2]); //innerBlocks[0][0].setType(unrotated[1][2].getType()[0]); //
+  innerBlocks[0][2] = Block(unrotated[2][2]); //innerBlocks[0][0].setType(unrotated[2][2].getType()[0]); //
+  //this->up.setType(innerBlocks[0][1].getType());
 
   // Middle row except center block (doesn't rotate)
-  innerBlocks[1][0] = Block(unrotated[0][1]);
-  innerBlocks[1][2] = Block(unrotated[2][1]);
+  innerBlocks[1][0] = Block(unrotated[0][1]); //innerBlocks[0][0].setType(unrotated[0][1].getType()[0]); //
+  innerBlocks[1][2] = Block(unrotated[2][1]); //innerBlocks[0][0].setType(unrotated[2][1].getType()[0]); //
 
-  this->left.setType(innerBlocks[1][0].getType());
-  this->right.setType(innerBlocks[1][2].getType());
+  //this->left.setType(innerBlocks[1][0].getType());
+  //this->right.setType(innerBlocks[1][2].getType());
 
   // Bottom row
-  innerBlocks[2][0] = Block(unrotated[0][0]);
-  innerBlocks[2][1] = Block(unrotated[1][0]);
-  innerBlocks[2][2] = Block(unrotated[2][0]);
+  innerBlocks[2][0] = Block(unrotated[0][0]); //innerBlocks[0][0].setType(unrotated[0][0].getType()[0]); //
+  innerBlocks[2][1] = Block(unrotated[1][0]); //innerBlocks[0][0].setType(unrotated[1][0].getType()[0]); //
+  innerBlocks[2][2] = Block(unrotated[2][0]); //innerBlocks[0][0].setType(unrotated[2][0].getType()[0]); //
+  //this->down.setType(innerBlocks[2][1].getType());
 
-  this->down.setType(innerBlocks[2][1].getType());
+  this->down.setType(innerBlocks[2][0], innerBlocks[2][1], innerBlocks[2][2]);
+  this->up.setType(innerBlocks[0][0], innerBlocks[0][1], innerBlocks[0][2]);
+  this->left.setType(innerBlocks[2][0], innerBlocks[1][0], innerBlocks[0][0]);
+  this->right.setType(innerBlocks[0][2], innerBlocks[1][2], innerBlocks[2][2]);
 
   if (rotation < 3)
     rotation++;
@@ -521,4 +656,20 @@ std::vector<std::string> Tile::getOpenFaces()
 	if(!right.connected())
 		openFaces.push_back("right");
 	return openFaces;
+}
+void Tile::setNeighborTileAbove(Tile &tile)
+{
+  aboveTile = &tile;
+}
+void Tile::setNeighborTileBelow(Tile &tile)
+{
+  belowTile = &tile;
+}
+void Tile::setNeighborTileLeft(Tile &tile)
+{
+  leftTile = &tile;
+}
+void Tile::setNeighborTileRight(Tile &tile)
+{
+  rightTile = &tile;
 }
