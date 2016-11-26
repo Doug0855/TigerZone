@@ -301,7 +301,7 @@ void Board::place_tile(std::pair<int, int> location, Tile &tile)
 
 	m_board[row][col] = &tile;
 	connectFaces(row, col);
-	getStructures(row, col);
+	std::vector<Structure> availableStructures = getStructures(row, col);
 }
 
 // bool Board::checkMeeplePlacement(Tile tile, std::pair<int,int> blockSpot)
@@ -344,6 +344,7 @@ void Board::buildLake(Structure* struc, Tile *tile, std::vector< std::vector<Blo
 	// std::cout<<"in build lake"<<std::endl;
 	int row = blockSpot.first;
 	int col = blockSpot.second;
+	std::cout<<"in build lake at "<<row<<' '<<col<<std::endl;
 	tileBlocks[row][col].visit();
 	// for(int i = 0; i < 3; i++) {
 	// 	for(int j = 0; j < 3; j++) {
@@ -367,6 +368,7 @@ void Board::buildLake(Structure* struc, Tile *tile, std::vector< std::vector<Blo
 		buildLake(struc, tile, tileBlocks, std::pair<int,int>(row+1,col), visitedTiles);
 	}
 	else if(row + 1 > 2 && tile->getDownTile() != NULL) {
+		row = 0;
 		bool visitedNeighborTile = false;
 		for(int i = 0; i < visitedTiles.size(); i++) {
 			if(visitedTiles[i] == tile->getDownTile())
@@ -374,8 +376,8 @@ void Board::buildLake(Structure* struc, Tile *tile, std::vector< std::vector<Blo
 		}
 		if(!visitedNeighborTile) {
 			visitedTiles.push_back(tile->getDownTile());
-			tileBlocks = tile->getDownTile()->getInnerBlocks();
-			buildLake(struc, tile->getDownTile(), tileBlocks, std::pair<int,int>(row - 2,col), visitedTiles);
+			std::vector< std::vector<Block> > newBlocks = tile->getDownTile()->getInnerBlocks();
+			buildLake(struc, tile->getDownTile(), newBlocks, std::pair<int,int>(row,col), visitedTiles);
 		}
 	}
 	// std::cout<<"about to check row-1"<<std::endl;
@@ -383,6 +385,7 @@ void Board::buildLake(Structure* struc, Tile *tile, std::vector< std::vector<Blo
 		buildLake(struc, tile, tileBlocks, std::pair<int,int>(row-1,col), visitedTiles);
 	}
 	else if(row-1 < 0 && tile->getUpTile() != NULL) {
+		row = 2;
 		bool visitedNeighborTile = false;
 		for(int i = 0; i < visitedTiles.size(); i++) {
 			if(visitedTiles[i] == tile->getUpTile())
@@ -390,8 +393,8 @@ void Board::buildLake(Structure* struc, Tile *tile, std::vector< std::vector<Blo
 		}
 		if(!visitedNeighborTile) {
 			visitedTiles.push_back(tile->getUpTile());
-			tileBlocks = tile->getUpTile()->getInnerBlocks();
-			buildLake(struc, tile->getUpTile(), tileBlocks, std::pair<int,int>(row+2,col), visitedTiles);
+			std::vector< std::vector<Block> > newBlocks = tile->getUpTile()->getInnerBlocks();
+			buildLake(struc, tile->getUpTile(), newBlocks, std::pair<int,int>(row,col), visitedTiles);
 		}
 	}
 	// std::cout<<"about to check col+1"<<std::endl;
@@ -399,6 +402,7 @@ void Board::buildLake(Structure* struc, Tile *tile, std::vector< std::vector<Blo
 		buildLake(struc, tile, tileBlocks, std::pair<int,int>(row,col+1), visitedTiles);
 	}
 	else if(col+1 > 2 && tile->getRightTile() != NULL) {
+		col = 0;
 		bool visitedNeighborTile = false;
 		for(int i = 0; i < visitedTiles.size(); i++) {
 			if(visitedTiles[i] == tile->getRightTile())
@@ -406,8 +410,8 @@ void Board::buildLake(Structure* struc, Tile *tile, std::vector< std::vector<Blo
 		}
 		if(!visitedNeighborTile) {
 			visitedTiles.push_back(tile->getRightTile());
-			tileBlocks = tile->getRightTile()->getInnerBlocks();
-			buildLake(struc, tile->getRightTile(), tileBlocks, std::pair<int,int>(row,col-2), visitedTiles);
+			std::vector< std::vector<Block> > newBlocks = tile->getRightTile()->getInnerBlocks();
+			buildLake(struc, tile->getRightTile(), newBlocks, std::pair<int,int>(row,col), visitedTiles);
 		}
 	}
 	// std::cout<<"about to check col-1"<<std::endl;
@@ -416,6 +420,7 @@ void Board::buildLake(Structure* struc, Tile *tile, std::vector< std::vector<Blo
 		buildLake(struc, tile, tileBlocks, std::pair<int,int>(row,col-1), visitedTiles);
 	} 
 	else if(col-1 < 0 && tile->getLeftTile() != NULL) {
+		col = 2;
 		bool visitedNeighborTile = false;
 		for(int i = 0; i < visitedTiles.size(); i++) {
 			if(visitedTiles[i] == tile->getLeftTile())
@@ -423,8 +428,8 @@ void Board::buildLake(Structure* struc, Tile *tile, std::vector< std::vector<Blo
 		}
 		if(!visitedNeighborTile) {
 			visitedTiles.push_back(tile->getLeftTile());
-			tileBlocks = tile->getLeftTile()->getInnerBlocks();
-			buildLake(struc, tile->getLeftTile(), tileBlocks, std::pair<int,int>(row,col+2), visitedTiles);
+			std::vector< std::vector<Block> > newBlocks = tile->getLeftTile()->getInnerBlocks();
+			buildLake(struc, tile->getLeftTile(), newBlocks, std::pair<int,int>(row,col), visitedTiles);
 		}
 	}
 	return;
@@ -472,8 +477,8 @@ void Board::buildTrail(Structure* struc, Tile *tile, std::vector< std::vector<Bl
 		}
 		if(!visitedNeighborTile) {
 			visitedTiles.push_back(tile->getDownTile());
-			tileBlocks = tile->getDownTile()->getInnerBlocks();
-			buildTrail(struc, tile->getDownTile(), tileBlocks, std::pair<int,int>(row - 2,col), visitedTiles);
+			std::vector< std::vector<Block> > newBlocks = tile->getDownTile()->getInnerBlocks();
+			buildTrail(struc, tile->getDownTile(), newBlocks, std::pair<int,int>(row - 2,col), visitedTiles);
 		}
 	}
 	// std::cout<<"about to check row-1"<<std::endl;
@@ -488,8 +493,8 @@ void Board::buildTrail(Structure* struc, Tile *tile, std::vector< std::vector<Bl
 		}
 		if(!visitedNeighborTile) {
 			visitedTiles.push_back(tile->getUpTile());
-			tileBlocks = tile->getUpTile()->getInnerBlocks();
-			buildTrail(struc, tile->getUpTile(), tileBlocks, std::pair<int,int>(row+2,col), visitedTiles);
+			std::vector< std::vector<Block> > newBlocks = tile->getUpTile()->getInnerBlocks();
+			buildTrail(struc, tile->getUpTile(), newBlocks, std::pair<int,int>(row+2,col), visitedTiles);
 		}
 	}
 	// std::cout<<"about to check col+1"<<std::endl;
@@ -504,8 +509,8 @@ void Board::buildTrail(Structure* struc, Tile *tile, std::vector< std::vector<Bl
 		}
 		if(!visitedNeighborTile) {
 			visitedTiles.push_back(tile->getRightTile());
-			tileBlocks = tile->getRightTile()->getInnerBlocks();
-			buildTrail(struc, tile->getRightTile(), tileBlocks, std::pair<int,int>(row,col-2), visitedTiles);
+			std::vector< std::vector<Block> > newBlocks = tile->getRightTile()->getInnerBlocks();
+			buildTrail(struc, tile->getRightTile(), newBlocks, std::pair<int,int>(row,col-2), visitedTiles);
 		}
 	}
 	// std::cout<<"about to check col-1"<<std::endl;
@@ -521,8 +526,8 @@ void Board::buildTrail(Structure* struc, Tile *tile, std::vector< std::vector<Bl
 		}
 		if(!visitedNeighborTile) {
 			visitedTiles.push_back(tile->getLeftTile());
-			tileBlocks = tile->getLeftTile()->getInnerBlocks();
-			buildTrail(struc, tile->getLeftTile(), tileBlocks, std::pair<int,int>(row,col+2), visitedTiles);
+			std::vector< std::vector<Block> > newBlocks = tile->getLeftTile()->getInnerBlocks();
+			buildTrail(struc, tile->getLeftTile(), newBlocks, std::pair<int,int>(row,col+2), visitedTiles);
 		}
 	}
 	return;
@@ -611,13 +616,13 @@ void Board::connectFaces(int row, int col)
 
 // Pass in the coordinates of the tile that you just placed
 std::vector<Structure> Board::getStructures(int row, int col) {
+	std::cout<<"IN GET STRUCTURES FOR "<<row<<' '<<col<<std::endl;
 	std::vector<Structure> structures;
 	Tile* tile = m_board[row][col];
 	std::vector< std::vector<Block> > tileBlocks = tile->getInnerBlocks();
 	for(int i = 0; i < 3; i++) {
 		for(int j = 0; j < 3; j++) {
 			if(!(tileBlocks[i][j].isVisited())) {
-				std::cout<<"past first visit check"<<std::endl;
 				if(tileBlocks[i][j].getType() == "jungle" || tileBlocks[i][j].getType() == "mixed") {
 					// Structure struc = checkJungle(tile, std::pair<int,int>(i,j));
 					// structures.push_back(struc);
@@ -625,7 +630,6 @@ std::vector<Structure> Board::getStructures(int row, int col) {
 				else if(tileBlocks[i][j].getType() == "lake") {
 					Structure struc = checkLake(tile, tileBlocks, std::pair<int,int>(i,j));
 					structures.push_back(struc);
-					
 				}
 				else if(tileBlocks[i][j].getType() == "trail") {
 					Structure struc = checkTrail(tile, tileBlocks, std::pair<int,int>(i,j));
@@ -640,7 +644,8 @@ std::vector<Structure> Board::getStructures(int row, int col) {
 		}
 	}
 	for(int i = 0; i < structures.size(); i++) {
-		std::cout<<"Structure is of type "<<structures[i].type<<" with "<<structures[i].structureBlocks.size()<<" blocks."<<std::endl;
+		std::cout<<"Structure is of type "<<structures[i].type<<" with "<<structures[i].structureBlocks.size()
+		<<" blocks and starting block at "<<structures[i].startingBlock.first<<' '<<structures[i].startingBlock.second<<std::endl;
 	}
 	std::cout<<"Structures size is "<<structures.size()<<std::endl;
 	return structures;
