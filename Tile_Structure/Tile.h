@@ -15,6 +15,8 @@ public:
 	// Set a row of blocks for a tile
 	void setRow(int row, char type1, char type2, char type3);
 
+	void placeMeeple(std::pair<int, int> location);
+
 	// Rotate the tile and set all of the faces to the face that was -90 degrees of it.
 	void rotate();
 	// Function to check if a tile is connected on all 4 sides

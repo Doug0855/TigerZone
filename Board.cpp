@@ -330,6 +330,11 @@ the problem there is how to remember which tiles youve already visited and which
 // 	Structure jungleStruct("jungle", blockSpot);
 // }
 
+void Board::placeMeeple(int i, int j, std::pair<int, int> location)
+{
+	m_board[i][j]->placeMeeple(location);
+}
+
 Structure Board::checkLake(Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int, int> blockSpot)
 {
 	std::cout<<"in check lake"<<std::endl;

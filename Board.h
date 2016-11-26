@@ -41,6 +41,8 @@ public:
 	
 	// See if feature tile is being placed in has a meeple
 	bool checkMeeplePlacement(Tile tile, std::pair<int, int> blockSpot);
+	void placeMeeple(int i, int j, std::pair<int,int> location);
+	void meepleAi(int i, int j);
 
 	// Helper functions for building the structures of a recently placed tile
 	void buildLake(Structure* struc, Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int,int> blockSpot, std::vector<Tile*> &visitedTiles);

@@ -537,3 +537,8 @@ std::vector<std::string> Tile::getOpenFaces()
 		openFaces.push_back("right");
 	return openFaces;
 }
+
+void Tile::placeMeeple(std::pair<int, int> location)
+{
+	innerBlocks[location.first][location.second].placeMeeple();
+}
