@@ -416,7 +416,7 @@ Tile::Tile(int type)
   else if (type == 28)
   {
     setRow(0,'m','t','m');
-    setRow(1,'l','j','l'); 
+    setRow(1,'l','l','l'); 
     setRow(2,'l','l','l'); 
     setFaceTypes();
     rotation = 0;
