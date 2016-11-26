@@ -101,7 +101,7 @@ int main() {
 	Player p1;
 	Player p2;
 	std::cout<<"tile 1 up face is "<<tile1.getUpFace()->getType()<<std::endl;
-	// gameboard.place_tile(std::pair<int, int>(72,72), tile1);
+	gameboard.place_tile(std::pair<int, int>(72,72), tile1);
 	gameboard.place_tile(std::pair<int, int>(72,71), tile2);
 	// gameboard.place_tile(std::pair<int, int>(71,72), tile3);
 	gameboard.place_tile(std::pair<int, int>(71,71), tile4);

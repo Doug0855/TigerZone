@@ -368,7 +368,6 @@ void Board::buildLake(Structure* struc, Tile *tile, std::vector< std::vector<Blo
 		buildLake(struc, tile, tileBlocks, std::pair<int,int>(row+1,col), visitedTiles);
 	}
 	else if(row + 1 > 2 && tile->getDownTile() != NULL) {
-		row = 0;
 		bool visitedNeighborTile = false;
 		for(int i = 0; i < visitedTiles.size(); i++) {
 			if(visitedTiles[i] == tile->getDownTile())
@@ -377,7 +376,7 @@ void Board::buildLake(Structure* struc, Tile *tile, std::vector< std::vector<Blo
 		if(!visitedNeighborTile) {
 			visitedTiles.push_back(tile->getDownTile());
 			std::vector< std::vector<Block> > newBlocks = tile->getDownTile()->getInnerBlocks();
-			buildLake(struc, tile->getDownTile(), newBlocks, std::pair<int,int>(row,col), visitedTiles);
+			buildLake(struc, tile->getDownTile(), newBlocks, std::pair<int,int>(row-2,col), visitedTiles);
 		}
 	}
 	// std::cout<<"about to check row-1"<<std::endl;
@@ -385,7 +384,6 @@ void Board::buildLake(Structure* struc, Tile *tile, std::vector< std::vector<Blo
 		buildLake(struc, tile, tileBlocks, std::pair<int,int>(row-1,col), visitedTiles);
 	}
 	else if(row-1 < 0 && tile->getUpTile() != NULL) {
-		row = 2;
 		bool visitedNeighborTile = false;
 		for(int i = 0; i < visitedTiles.size(); i++) {
 			if(visitedTiles[i] == tile->getUpTile())
@@ -394,7 +392,7 @@ void Board::buildLake(Structure* struc, Tile *tile, std::vector< std::vector<Blo
 		if(!visitedNeighborTile) {
 			visitedTiles.push_back(tile->getUpTile());
 			std::vector< std::vector<Block> > newBlocks = tile->getUpTile()->getInnerBlocks();
-			buildLake(struc, tile->getUpTile(), newBlocks, std::pair<int,int>(row,col), visitedTiles);
+			buildLake(struc, tile->getUpTile(), newBlocks, std::pair<int,int>(row+2,col), visitedTiles);
 		}
 	}
 	// std::cout<<"about to check col+1"<<std::endl;
@@ -411,7 +409,7 @@ void Board::buildLake(Structure* struc, Tile *tile, std::vector< std::vector<Blo
 		if(!visitedNeighborTile) {
 			visitedTiles.push_back(tile->getRightTile());
 			std::vector< std::vector<Block> > newBlocks = tile->getRightTile()->getInnerBlocks();
-			buildLake(struc, tile->getRightTile(), newBlocks, std::pair<int,int>(row,col), visitedTiles);
+			buildLake(struc, tile->getRightTile(), newBlocks, std::pair<int,int>(row,col-2), visitedTiles);
 		}
 	}
 	// std::cout<<"about to check col-1"<<std::endl;
@@ -420,7 +418,6 @@ void Board::buildLake(Structure* struc, Tile *tile, std::vector< std::vector<Blo
 		buildLake(struc, tile, tileBlocks, std::pair<int,int>(row,col-1), visitedTiles);
 	} 
 	else if(col-1 < 0 && tile->getLeftTile() != NULL) {
-		col = 2;
 		bool visitedNeighborTile = false;
 		for(int i = 0; i < visitedTiles.size(); i++) {
 			if(visitedTiles[i] == tile->getLeftTile())
@@ -429,7 +426,7 @@ void Board::buildLake(Structure* struc, Tile *tile, std::vector< std::vector<Blo
 		if(!visitedNeighborTile) {
 			visitedTiles.push_back(tile->getLeftTile());
 			std::vector< std::vector<Block> > newBlocks = tile->getLeftTile()->getInnerBlocks();
-			buildLake(struc, tile->getLeftTile(), newBlocks, std::pair<int,int>(row,col), visitedTiles);
+			buildLake(struc, tile->getLeftTile(), newBlocks, std::pair<int,int>(row,col+2), visitedTiles);
 		}
 	}
 	return;
