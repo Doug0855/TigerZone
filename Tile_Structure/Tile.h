@@ -31,16 +31,28 @@ public:
 	bool hasInit() { return initialization; }
 
 	// Get the type of a face
-  	std::string getUpFaceType() { return up.getType(); }
-  	std::string getDownFaceType() { return down.getType(); }
-  	std::string getLeftFaceType() { return left.getType(); }
-  	std::string getRightFaceType() { return right.getType(); }
+  	std::string getUpFaceType() { return upFace.getType(); }
+  	std::string getDownFaceType() { return downFace.getType(); }
+  	std::string getLeftFaceType() { return leftFace.getType(); }
+  	std::string getRightFaceType() { return rightFace.getType(); }
 
-  	// Get the faces
-  	Face* getUpFace() { return &up; }
-  	Face* getDownFace() { return &down; }
-  	Face* getLeftFace() { return &left; }
-  	Face* getRightFace() { return &right; }
+  	// Get the inner faces
+  	Face* getUpFace() { return &upFace; }
+  	Face* getDownFace() { return &downFace; }
+  	Face* getLeftFace() { return &leftFace; }
+  	Face* getRightFace() { return &rightFace; }
+
+  	// Get the adjacent Tiles
+  	Tile* getUpTile() { return upTile; }
+  	Tile* getDownTile() { return downTile; }
+  	Tile* getLeftTile() { return leftTile; }
+  	Tile* getRightTile() { return rightTile; }
+
+  	// Used to set internal tile pointers to adjacent neighbors
+  	void setNeighborUpTile(Tile &tile);
+  	void setNeighborDownTile(Tile &tile);
+  	void setNeighborLeftTile(Tile &tile);
+  	void setNeighborRightTile(Tile &tile);
 
 	Block getCenter() { return innerBlocks[1][1]; }
 
@@ -61,7 +73,12 @@ private:
   	// Attribute to tell us if the tile is a skeleton board tile or an initialized game tile
   	bool initialization;
   	// The four faces of the tile which will contain all the types
-  	Face up, down, left, right;
+  	Face upFace, downFace, leftFace, rightFace;
+  	// Used for finding adjacent tiles when traversing the board
+  	Tile* upTile = NULL;
+  	Tile* downTile = NULL;
+  	Tile* leftTile = NULL;
+  	Tile* rightTile = NULL;
   	// 3x3 matrix of blocks in the tile
   	std::vector< std::vector<Block> > innerBlocks;
 

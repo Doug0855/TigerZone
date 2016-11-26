@@ -188,110 +188,110 @@ std::pair<int,int> Board::getOptimalPlacement(Tile &tile, std::vector< std::pair
 	return availableMoves[0];
 }
 
- int Board::positionPoints(int i, int j)
- {
- 	const int LAKE_POINTS = 6;
- 	const int JUNGLE_POINTS = 3;
- 	const int TRAIL_POINTS = 1;	
-	
- 	int points = 0;
- 	if (m_board[i + 1][j] != NULL)
- 	{
- 		points += animalPoints(i + 1, j);
- 		if (m_board[i + 1][j]->getUpFace()->getType() == "lake")
- 		{
- 			points += LAKE_POINTS;
- 		}
- 		else if (m_board[i + 1][j]->getUpFace()->getType() == "jungle")
- 		{
- 			points += JUNGLE_POINTS;
- 		}
- 		else if (m_board[i + 1][j]->getUpFace()->getType() == "trail")
- 		{
- 			points += TRAIL_POINTS;
- 		}
- 	}
- 	if (m_board[i - 1][j] != NULL)
- 	{
- 		points += animalPoints(i - 1, j);
- 		if (m_board[i - 1][j]->getDownFace()->getType() == "lake")
- 		{
- 			points += LAKE_POINTS;
- 		}
- 		else if (m_board[i - 1][j]->getDownFace()->getType() == "jungle")
- 		{
- 			points += JUNGLE_POINTS;
- 		}
- 		else if (m_board[i - 1][j]->getDownFace()->getType() == "trail")
- 		{
- 			points += TRAIL_POINTS;
- 		}
- 	}
- 	if (m_board[i][j + 1] != NULL)
- 	{
- 		points += animalPoints(i, j + 1);
- 		if (m_board[i][j + 1]->getLeftFace()->getType() == "lake")
- 		{
- 			points += LAKE_POINTS;
- 		}
- 		else if (m_board[i][j + 1]->getLeftFace()->getType() == "jungle")
- 		{
- 			points += JUNGLE_POINTS;
- 		}
- 		else if (m_board[i][j + 1]->getLeftFace()->getType() == "trail")
- 		{
- 			points += TRAIL_POINTS;
- 		}
- 	}
- 	if (m_board[i][j - 1] != NULL)
- 	{
- 		points += animalPoints(i, j - 1);
- 		if (m_board[i][j - 1]->getRightFace()->getType() == "lake")
- 		{
- 			points += LAKE_POINTS;
- 		}
- 		else if (m_board[i][j - 1]->getRightFace()->getType() == "jungle")
- 		{
- 			points += JUNGLE_POINTS;
- 		}
- 		else if (m_board[i][j - 1]->getRightFace()->getType() == "trail")
- 		{
- 			points += TRAIL_POINTS;
- 		}
- 	}
- 	return points;
- }
+int Board::positionPoints(int i, int j)
+{
+	const int LAKE_POINTS = 6;
+	const int JUNGLE_POINTS = 3;
+	const int TRAIL_POINTS = 1;	
 
- int Board::animalPoints(int i, int j)
- {
- 	const int DEN_POINTS = 10;
- 	const int DEER_POINTS = 2;
- 	const int BOAR_POINTS = 2;
- 	const int BUFFALO_POINTS = 2;
- 	const int CROCODILE_POINTS = -2;
- 	int points = 0;
- 	if (m_board[i][j]->getCenter().getType() == "Den")
- 	{
- 		points += DEN_POINTS;
- 	}
- 	if (m_board[i][j]->hasBoar())
- 	{
- 		points += BOAR_POINTS;
- 	}
- 	if (m_board[i][j]->hasBuffalo())
- 	{
- 		points += BUFFALO_POINTS;
- 	}
- 	if (m_board[i][j]->hasDeer())
- 	{
- 		points += DEER_POINTS;
- 	}
- 	if (m_board[i][j]->hasCrocodile())
- 	{
- 		points += CROCODILE_POINTS;
- 	}
- 	return points;
- }
+	int points = 0;
+	if (m_board[i + 1][j] != NULL)
+	{
+		points += animalPoints(i + 1, j);
+		if (m_board[i + 1][j]->getUpFace()->getType() == "lake")
+		{
+			points += LAKE_POINTS;
+		}
+		else if (m_board[i + 1][j]->getUpFace()->getType() == "jungle")
+		{
+			points += JUNGLE_POINTS;
+		}
+		else if (m_board[i + 1][j]->getUpFace()->getType() == "trail")
+		{
+			points += TRAIL_POINTS;
+		}
+	}
+	if (m_board[i - 1][j] != NULL)
+	{
+		points += animalPoints(i - 1, j);
+		if (m_board[i - 1][j]->getDownFace()->getType() == "lake")
+		{
+			points += LAKE_POINTS;
+		}
+		else if (m_board[i - 1][j]->getDownFace()->getType() == "jungle")
+		{
+			points += JUNGLE_POINTS;
+		}
+		else if (m_board[i - 1][j]->getDownFace()->getType() == "trail")
+		{
+			points += TRAIL_POINTS;
+		}
+	}
+	if (m_board[i][j + 1] != NULL)
+	{
+		points += animalPoints(i, j + 1);
+		if (m_board[i][j + 1]->getLeftFace()->getType() == "lake")
+		{
+			points += LAKE_POINTS;
+		}
+		else if (m_board[i][j + 1]->getLeftFace()->getType() == "jungle")
+		{
+			points += JUNGLE_POINTS;
+		}
+		else if (m_board[i][j + 1]->getLeftFace()->getType() == "trail")
+		{
+			points += TRAIL_POINTS;
+		}
+	}
+	if (m_board[i][j - 1] != NULL)
+	{
+		points += animalPoints(i, j - 1);
+		if (m_board[i][j - 1]->getRightFace()->getType() == "lake")
+		{
+			points += LAKE_POINTS;
+		}
+		else if (m_board[i][j - 1]->getRightFace()->getType() == "jungle")
+		{
+			points += JUNGLE_POINTS;
+		}
+		else if (m_board[i][j - 1]->getRightFace()->getType() == "trail")
+		{
+			points += TRAIL_POINTS;
+		}
+	}
+	return points;
+}
+
+int Board::animalPoints(int i, int j)
+{
+	const int DEN_POINTS = 10;
+	const int DEER_POINTS = 2;
+	const int BOAR_POINTS = 2;
+	const int BUFFALO_POINTS = 2;
+	const int CROCODILE_POINTS = -2;
+	int points = 0;
+	if (m_board[i][j]->getCenter().getType() == "Den")
+	{
+		points += DEN_POINTS;
+	}
+	if (m_board[i][j]->hasBoar())
+	{
+		points += BOAR_POINTS;
+	}
+	if (m_board[i][j]->hasBuffalo())
+	{
+		points += BUFFALO_POINTS;
+	}
+	if (m_board[i][j]->hasDeer())
+	{
+		points += DEER_POINTS;
+	}
+	if (m_board[i][j]->hasCrocodile())
+	{
+		points += CROCODILE_POINTS;
+	}
+	return points;
+}
 
 // Place a tile on the board. Make sure all neighboring tiles are pointing to the corresponding faces
 void Board::place_tile(std::pair<int, int> location, Tile &tile)
@@ -390,6 +390,16 @@ void Board::connectFaces(int row, int col)
 		(*m_board[row + 1][col]->getUpFace()).setNeighborFace(*m_board[row][col]->getDownFace());
 		(*m_board[row][col]->getDownFace()).setNeighborFace(*m_board[row + 1][col]->getUpFace());
 
+
+		// Set adjacent tiles now after setting faces
+		
+		// std::cout<<"**********DOWN TILE BEFORE SETTING IS "<<m_board[row][col]->getDownTile()<<std::endl;
+		(m_board[row][col])->setNeighborDownTile(*m_board[row + 1][col]);
+		// std::cout<<"**********DOWN TILE AFTER SETTING IS "<<m_board[row][col]->getDownTile()<<std::endl;
+		// std::cout<<"72 72 up tile before setting is "<<m_board[row+1][col]->getUpTile()<<std::endl;
+		(m_board[row+1][col])->setNeighborUpTile(*m_board[row][col]);
+		// std::cout<<"72 72 up tile after setting is "<<m_board[row+1][col]->getUpTile()<<std::endl;
+
 		//std::cout << "Neighbor of the up face of " << row + 1 << ' ' << col << " is " << m_board[row + 1][col]->getUpFace()->getNeighborFace() << std::endl;
 		//std::cout << "Neighbor of the down face of " << row << ' ' << col << " is " << m_board[row][col]->getDownFace()->getNeighborFace() << std::endl;
 	}
@@ -403,6 +413,10 @@ void Board::connectFaces(int row, int col)
 	{
 		(*m_board[row - 1][col]->getDownFace()).setNeighborFace(*m_board[row][col]->getUpFace());
 		(*m_board[row][col]->getUpFace()).setNeighborFace(*m_board[row - 1][col]->getDownFace());
+
+		// Set adjacent tiles now after setting faces
+		(m_board[row][col])->setNeighborUpTile(*m_board[row - 1][col]);
+		(m_board[row - 1][col])->setNeighborDownTile(*m_board[row][col]);
 
 		//std::cout << "Neighbor of the down face of " << row - 1 << ' ' << col << " is " << m_board[row - 1][col]->getDownFace()->getNeighborFace() << std::endl;
 		//std::cout << "Neighbor of the up face of " << row << ' ' << col << " is " << m_board[row][col]->getUpFace()->getNeighborFace() << std::endl;
@@ -418,6 +432,10 @@ void Board::connectFaces(int row, int col)
 		(*m_board[row][col - 1]->getRightFace()).setNeighborFace(*m_board[row][col]->getLeftFace());
 		(*m_board[row][col]->getLeftFace()).setNeighborFace(*m_board[row][col - 1]->getRightFace());
 
+		// Set adjacent tiles now after setting faces
+		(m_board[row][col])->setNeighborLeftTile(*m_board[row][col - 1]);
+		(m_board[row][col - 1])->setNeighborRightTile(*m_board[row][col]);
+
 		//std::cout << "Neighbor of the right face of " << row << ' ' << col - 1 << " is " << m_board[row][col - 1]->getRightFace()->getNeighborFace() << std::endl;
 		//std::cout << "Neighbor of the left face of " << row << ' ' << col << " is " << m_board[row][col]->getLeftFace()->getNeighborFace() << std::endl;
 	}
@@ -431,6 +449,10 @@ void Board::connectFaces(int row, int col)
 	{
 		(*m_board[row][col + 1]->getLeftFace()).setNeighborFace(*m_board[row][col]->getRightFace());
 		(*m_board[row][col]->getRightFace()).setNeighborFace(*m_board[row][col + 1]->getLeftFace());
+
+		// Set adjacent tiles now after setting faces
+		(m_board[row][col])->setNeighborRightTile(*m_board[row][col + 1]);
+		(m_board[row][col + 1])->setNeighborLeftTile(*m_board[row][col]);
 
 		//std::cout << "Neighbor of the left face of " << row << ' ' << col + 1 << " is " << m_board[row][col + 1]->getLeftFace()->getNeighborFace() << std::endl;
 		//std::cout << "Neighbor of the right face of " << row << ' ' << col << " is " << m_board[row][col]->getRightFace()->getNeighborFace() << std::endl;

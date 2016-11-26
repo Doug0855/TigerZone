@@ -457,10 +457,10 @@ Tile::~Tile()
 }
 
 void Tile::setFaceTypes() {
-  up.setType(innerBlocks[0][1].getType());
-  down.setType(innerBlocks[2][1].getType());
-  left.setType(innerBlocks[1][0].getType());
-  right.setType(innerBlocks[1][2].getType());
+  upFace.setType(innerBlocks[0][1].getType());
+  downFace.setType(innerBlocks[2][1].getType());
+  leftFace.setType(innerBlocks[1][0].getType());
+  rightFace.setType(innerBlocks[1][2].getType());
 }
 
 void Tile::setRow(int row, char type1, char type2, char type3) {
@@ -478,21 +478,21 @@ void Tile::rotate()
   innerBlocks[0][1] = Block(unrotated[1][2]);
   innerBlocks[0][2] = Block(unrotated[2][2]);
 
-  this->up.setType(innerBlocks[0][1].getType());
+  this->upFace.setType(innerBlocks[0][1].getType());
 
   // Middle row except center block (doesn't rotate)
   innerBlocks[1][0] = Block(unrotated[0][1]);
   innerBlocks[1][2] = Block(unrotated[2][1]);
 
-  this->left.setType(innerBlocks[1][0].getType());
-  this->right.setType(innerBlocks[1][2].getType());
+  this->leftFace.setType(innerBlocks[1][0].getType());
+  this->rightFace.setType(innerBlocks[1][2].getType());
 
   // Bottom row
   innerBlocks[2][0] = Block(unrotated[0][0]);
   innerBlocks[2][1] = Block(unrotated[1][0]);
   innerBlocks[2][2] = Block(unrotated[2][0]);
 
-  this->down.setType(innerBlocks[2][1].getType());
+  this->downFace.setType(innerBlocks[2][1].getType());
 
 
 
@@ -502,10 +502,23 @@ void Tile::rotate()
     rotation = 0;
 }
 
+void Tile::setNeighborUpTile(Tile &tile) {
+  upTile = &tile;
+}
+void Tile::setNeighborDownTile(Tile &tile) {
+  downTile = &tile;
+}
+void Tile::setNeighborLeftTile(Tile &tile) {
+  leftTile = &tile;
+}
+void Tile::setNeighborRightTile(Tile &tile) {
+  rightTile = &tile;
+}
+
 // Method to check if tile has any open face (up, down, left, right)
 bool Tile::hasOpenFace()
 {
-	if(!up.connected() || !down.connected() || !left.connected() || !right.connected())
+	if(!upFace.connected() || !downFace.connected() || !leftFace.connected() || !rightFace.connected())
     return true;
 	else 
     return false;
@@ -514,13 +527,13 @@ bool Tile::hasOpenFace()
 std::vector<std::string> Tile::getOpenFaces()
 {
 	std::vector<std::string> openFaces;
-	if(!up.connected())
+	if(!upFace.connected())
 		openFaces.push_back("up");
-	if(!down.connected())
+	if(!downFace.connected())
 		openFaces.push_back("down");
-	if(!left.connected())
+	if(!leftFace.connected())
 		openFaces.push_back("left");
-	if(!right.connected())
+	if(!rightFace.connected())
 		openFaces.push_back("right");
 	return openFaces;
 }
