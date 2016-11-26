@@ -11,9 +11,10 @@ Block::Block(char c)
   else if (c == Den)
 	  type = "den";
   else if (c == Mixed)
-	  type == "mixed";
+	  type = "mixed";
   else
   	type = "";
+  visited = false;
 }
 
 Block::Block()
@@ -36,7 +37,7 @@ void Block::setType(char c) {
   else if (c == Den)
     type = "den";
   else if (c == Mixed)
-	  type == "mixed";
+	  type = "mixed";
 }
 
 void Block::placeMeeple() {

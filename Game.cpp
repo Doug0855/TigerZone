@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "Board.h"
+#include "Tile_Structure/Structure.h"
 #include <fstream>
 #include <iostream>
 
@@ -79,6 +80,86 @@ void Game::makeMove(Tile tile) {
 	}
 	else {
 		std::cout << "TILE " << tile.getType() << " CANNOT BE PLACED" << std::endl;
+	}
+}
+
+void Game::meepleAi(int i, int j)
+{
+	if (gameboard.m_board[i][j]->getCenter().getType() == "den")
+	{
+		gameboard.placeMeeple(i, j, std::pair<int,int> (1,1));
+		return;
+	}
+	std::vector<Structure> structures = gameboard.getStructures(i, j);
+	if (structures.size() > 0)
+	{
+		int mostPoints = 0;
+		int bestStruct = -1;
+		for (size_t ii = 0; ii < structures.size(); ii++)
+		{
+			if (!structures[ii].hasMeeple)
+			{
+				bestStruct = ii;
+			}
+		}
+		
+		for (size_t ii = bestStruct; ii < structures.size(); ii++)
+		{
+			if (!structures[ii].hasMeeple)
+			{
+				int points = structurePoints(structures[ii]);
+				if (points > mostPoints)
+				{
+					mostPoints = points;
+					bestStruct = ii;
+				}
+			}
+		}
+		if(bestStruct != -1) gameboard.placeMeeple(i, j, structures[bestStruct].startingBlock);
+	}
+}
+
+int Game::structurePoints(Structure structure)
+{
+	int points = 0;
+	const int SIZE_POINTS = 1;
+	const int JUNGLE_POINTS = 3;
+	const int LAKE_POINTS = 2;
+	const int TRAIL_POINTS = 1;
+	const int PREY_POINTS = 1;
+	const int CROC_POINTS = -2;
+	
+	for (size_t i = 0; i < structure.structureBlocks.size(); i++)
+	{
+		points += SIZE_POINTS;
+	}
+	if (structure.type == "jungle")
+	{
+		points += JUNGLE_POINTS;
+	}
+	if (structure.type == "lake")
+	{
+		points += LAKE_POINTS;
+	}
+	if (structure.type == "trail")
+	{
+		points += TRAIL_POINTS;
+	}
+	for (int i = 0; i < structure.boarCount; i++)
+	{
+		points += PREY_POINTS;
+	}
+	for (int i = 0; i < structure.deerCount; i++)
+	{
+		points += PREY_POINTS;
+	}
+	for (int i = 0; i < structure.buffaloCount; i++)
+	{
+		points += PREY_POINTS;
+	}
+	for (int i = 0; i < structure.crocodileCount; i++)
+	{
+		points += CROC_POINTS;
 	}
 }
 

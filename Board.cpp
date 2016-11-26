@@ -188,110 +188,110 @@ std::pair<int,int> Board::getOptimalPlacement(Tile &tile, std::vector< std::pair
 	return availableMoves[0];
 }
 
- int Board::positionPoints(int i, int j)
- {
- 	const int LAKE_POINTS = 6;
- 	const int JUNGLE_POINTS = 3;
- 	const int TRAIL_POINTS = 1;	
-	
- 	int points = 0;
- 	if (m_board[i + 1][j] != NULL)
- 	{
- 		points += animalPoints(i + 1, j);
- 		if (m_board[i + 1][j]->getUpFace()->getType() == "lake")
- 		{
- 			points += LAKE_POINTS;
- 		}
- 		else if (m_board[i + 1][j]->getUpFace()->getType() == "jungle")
- 		{
- 			points += JUNGLE_POINTS;
- 		}
- 		else if (m_board[i + 1][j]->getUpFace()->getType() == "trail")
- 		{
- 			points += TRAIL_POINTS;
- 		}
- 	}
- 	if (m_board[i - 1][j] != NULL)
- 	{
- 		points += animalPoints(i - 1, j);
- 		if (m_board[i - 1][j]->getDownFace()->getType() == "lake")
- 		{
- 			points += LAKE_POINTS;
- 		}
- 		else if (m_board[i - 1][j]->getDownFace()->getType() == "jungle")
- 		{
- 			points += JUNGLE_POINTS;
- 		}
- 		else if (m_board[i - 1][j]->getDownFace()->getType() == "trail")
- 		{
- 			points += TRAIL_POINTS;
- 		}
- 	}
- 	if (m_board[i][j + 1] != NULL)
- 	{
- 		points += animalPoints(i, j + 1);
- 		if (m_board[i][j + 1]->getLeftFace()->getType() == "lake")
- 		{
- 			points += LAKE_POINTS;
- 		}
- 		else if (m_board[i][j + 1]->getLeftFace()->getType() == "jungle")
- 		{
- 			points += JUNGLE_POINTS;
- 		}
- 		else if (m_board[i][j + 1]->getLeftFace()->getType() == "trail")
- 		{
- 			points += TRAIL_POINTS;
- 		}
- 	}
- 	if (m_board[i][j - 1] != NULL)
- 	{
- 		points += animalPoints(i, j - 1);
- 		if (m_board[i][j - 1]->getRightFace()->getType() == "lake")
- 		{
- 			points += LAKE_POINTS;
- 		}
- 		else if (m_board[i][j - 1]->getRightFace()->getType() == "jungle")
- 		{
- 			points += JUNGLE_POINTS;
- 		}
- 		else if (m_board[i][j - 1]->getRightFace()->getType() == "trail")
- 		{
- 			points += TRAIL_POINTS;
- 		}
- 	}
- 	return points;
- }
+int Board::positionPoints(int i, int j)
+{
+	const int LAKE_POINTS = 6;
+	const int JUNGLE_POINTS = 3;
+	const int TRAIL_POINTS = 1;	
 
- int Board::animalPoints(int i, int j)
- {
- 	const int DEN_POINTS = 10;
- 	const int DEER_POINTS = 2;
- 	const int BOAR_POINTS = 2;
- 	const int BUFFALO_POINTS = 2;
- 	const int CROCODILE_POINTS = -2;
- 	int points = 0;
- 	if (m_board[i][j]->getCenter().getType() == "Den")
- 	{
- 		points += DEN_POINTS;
- 	}
- 	if (m_board[i][j]->hasBoar())
- 	{
- 		points += BOAR_POINTS;
- 	}
- 	if (m_board[i][j]->hasBuffalo())
- 	{
- 		points += BUFFALO_POINTS;
- 	}
- 	if (m_board[i][j]->hasDeer())
- 	{
- 		points += DEER_POINTS;
- 	}
- 	if (m_board[i][j]->hasCrocodile())
- 	{
- 		points += CROCODILE_POINTS;
- 	}
- 	return points;
- }
+	int points = 0;
+	if (m_board[i + 1][j] != NULL)
+	{
+		points += animalPoints(i + 1, j);
+		if (m_board[i + 1][j]->getUpFace()->getType() == "lake")
+		{
+			points += LAKE_POINTS;
+		}
+		else if (m_board[i + 1][j]->getUpFace()->getType() == "jungle")
+		{
+			points += JUNGLE_POINTS;
+		}
+		else if (m_board[i + 1][j]->getUpFace()->getType() == "trail")
+		{
+			points += TRAIL_POINTS;
+		}
+	}
+	if (m_board[i - 1][j] != NULL)
+	{
+		points += animalPoints(i - 1, j);
+		if (m_board[i - 1][j]->getDownFace()->getType() == "lake")
+		{
+			points += LAKE_POINTS;
+		}
+		else if (m_board[i - 1][j]->getDownFace()->getType() == "jungle")
+		{
+			points += JUNGLE_POINTS;
+		}
+		else if (m_board[i - 1][j]->getDownFace()->getType() == "trail")
+		{
+			points += TRAIL_POINTS;
+		}
+	}
+	if (m_board[i][j + 1] != NULL)
+	{
+		points += animalPoints(i, j + 1);
+		if (m_board[i][j + 1]->getLeftFace()->getType() == "lake")
+		{
+			points += LAKE_POINTS;
+		}
+		else if (m_board[i][j + 1]->getLeftFace()->getType() == "jungle")
+		{
+			points += JUNGLE_POINTS;
+		}
+		else if (m_board[i][j + 1]->getLeftFace()->getType() == "trail")
+		{
+			points += TRAIL_POINTS;
+		}
+	}
+	if (m_board[i][j - 1] != NULL)
+	{
+		points += animalPoints(i, j - 1);
+		if (m_board[i][j - 1]->getRightFace()->getType() == "lake")
+		{
+			points += LAKE_POINTS;
+		}
+		else if (m_board[i][j - 1]->getRightFace()->getType() == "jungle")
+		{
+			points += JUNGLE_POINTS;
+		}
+		else if (m_board[i][j - 1]->getRightFace()->getType() == "trail")
+		{
+			points += TRAIL_POINTS;
+		}
+	}
+	return points;
+}
+
+int Board::animalPoints(int i, int j)
+{
+	const int DEN_POINTS = 10;
+	const int DEER_POINTS = 2;
+	const int BOAR_POINTS = 2;
+	const int BUFFALO_POINTS = 2;
+	const int CROCODILE_POINTS = -2;
+	int points = 0;
+	if (m_board[i][j]->getCenter().getType() == "Den")
+	{
+		points += DEN_POINTS;
+	}
+	if (m_board[i][j]->hasBoar())
+	{
+		points += BOAR_POINTS;
+	}
+	if (m_board[i][j]->hasBuffalo())
+	{
+		points += BUFFALO_POINTS;
+	}
+	if (m_board[i][j]->hasDeer())
+	{
+		points += DEER_POINTS;
+	}
+	if (m_board[i][j]->hasCrocodile())
+	{
+		points += CROCODILE_POINTS;
+	}
+	return points;
+}
 
 // Place a tile on the board. Make sure all neighboring tiles are pointing to the corresponding faces
 void Board::place_tile(std::pair<int, int> location, Tile &tile)
@@ -301,18 +301,21 @@ void Board::place_tile(std::pair<int, int> location, Tile &tile)
 
 	m_board[row][col] = &tile;
 	connectFaces(row, col);
+	std::vector<Structure> availableStructures = getStructures(row, col);
 }
 
-bool Board::checkMeeplePlacement(Tile tile, std::pair<int,int> blockSpot)
-{
-	std::vector< std::vector<Block> > innerBlocks = tile.getInnerBlocks();
-	Block block = innerBlocks[blockSpot.first][blockSpot.second];
-	if (block.hasMeeple()) { return true; }
-	if (block.getType() == "jungle" || block.getType() == "mixed") 
-		checkJungle(tile, blockSpot);
-	if (block.getType() == "lake") checkLake(tile, blockSpot);
-	if (block.getType() == "trail") checkTrail(tile, blockSpot);
-}
+// bool Board::checkMeeplePlacement(Tile tile, std::pair<int,int> blockSpot)
+// {
+// 	std::vector< std::vector<Block> > innerBlocks = tile.getInnerBlocks();
+// 	Block block = innerBlocks[blockSpot.first][blockSpot.second];
+// 	if (block.hasMeeple()) { return true; }
+// 	if (block.getType() == "jungle" || block.getType() == "mixed") 
+// 		checkJungle(tile, blockSpot);
+// 	if (block.getType() == "lake") checkLake(tile, blockSpot);
+// 	if (block.getType() == "trail") checkTrail(tile, blockSpot);
+// }
+
+
 /*So you can use the blocks in a tile to find all of the parts of a tile in the same feature,
 To do this i have a queue of blocks and i find all of the adjacent blocks of the blocks your searching from that are the same type,
 the problem comes in when youre traversing to a new tile since the blocks dont have any connections to anything else
@@ -321,66 +324,219 @@ but then im not sure how i would hold that information for the new blocks of tha
 instead of having a queue of tiles i could recall the function again and have it run the same process on the tiles on whatever block you move onto it from
 the problem there is how to remember which tiles youve already visited and which blocks youve visted in those tiles
 */
-bool Board::checkJungle(Tile tile, std::pair<int, int> blockSpot)
+
+// Structure Board::checkJungle(Tile *tile, std::pair<int, int> blockSpot)
+// {
+// 	Structure jungleStruct("jungle", blockSpot);
+// }
+
+void Board::placeMeeple(int i, int j, std::pair<int, int> location)
 {
-	std::queue<Block> blocks;
-	int i = blockSpot.first;
-	int j = blockSpot.second;
-	if (tile.getInnerBlocks()[i][j].getType() == "mixed")
-	{
-		if (tile.getInnerBlocks()[1][1].getType() == "trail")
-		{
-			if (tile.getInnerBlocks()[0][0].getType() == "mixed") blocks.push(tile.getInnerBlocks()[0][0]);
-			if (tile.getInnerBlocks()[0][2].getType() == "mixed") blocks.push(tile.getInnerBlocks()[0][0]);
-			if (tile.getInnerBlocks()[2][0].getType() == "mixed") blocks.push(tile.getInnerBlocks()[0][0]);
-			if (tile.getInnerBlocks()[2][2].getType() == "mixed") blocks.push(tile.getInnerBlocks()[0][0]);
+	m_board[i][j]->placeMeeple(location);
+}
+
+Structure Board::checkLake(Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int, int> blockSpot)
+{
+	std::cout<<"in check lake"<<std::endl;
+	Structure lakeStruct("lake", blockSpot);
+	std::vector<Tile*> visitedTiles;
+	visitedTiles.push_back(tile);
+	buildLake(&lakeStruct, tile, tileBlocks, blockSpot, visitedTiles);
+	return lakeStruct;
+}
+
+void Board::buildLake(Structure* struc, Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int,int> blockSpot, std::vector<Tile*> &visitedTiles) {
+	// std::cout<<"in build lake"<<std::endl;
+	int row = blockSpot.first;
+	int col = blockSpot.second;
+	std::cout<<"in build lake at "<<row<<' '<<col<<std::endl;
+	tileBlocks[row][col].visit();
+	// for(int i = 0; i < 3; i++) {
+	// 	for(int j = 0; j < 3; j++) {
+	// 		std::cout<<"Block at "<<i<<' '<<j<<" for tile "<<tile<<" has been visited? "<<tileBlocks[i][j].isVisited()<<std::endl;
+	// 	}
+	// }
+	struc->structureBlocks.push_back(tileBlocks[row][col]);
+
+	if(tile->hasCrocodile())
+		struc->crocodileCount++;
+	if(tile->hasDeer())
+		struc->deerCount++;
+	if(tile->hasBoar())
+		struc->boarCount++;
+	if(tile->hasBuffalo())
+		struc->buffaloCount++;
+
+	// Check tiles above, below, left, and right of the current block to see if lake structure continues
+	// std::cout<<"about to cehck row+1"<<std::endl;
+	if((row + 1) <= 2 && !(tileBlocks[row + 1][col].isVisited()) && tileBlocks[row+1][col].getType() == "lake") {
+		buildLake(struc, tile, tileBlocks, std::pair<int,int>(row+1,col), visitedTiles);
+	}
+	else if(row + 1 > 2 && tile->getDownTile() != NULL) {
+		row = 0;
+		bool visitedNeighborTile = false;
+		for(int i = 0; i < visitedTiles.size(); i++) {
+			if(visitedTiles[i] == tile->getDownTile())
+				visitedNeighborTile = true;
+		}
+		if(!visitedNeighborTile) {
+			visitedTiles.push_back(tile->getDownTile());
+			std::vector< std::vector<Block> > newBlocks = tile->getDownTile()->getInnerBlocks();
+			buildLake(struc, tile->getDownTile(), newBlocks, std::pair<int,int>(row,col), visitedTiles);
 		}
 	}
+	// std::cout<<"about to check row-1"<<std::endl;
+	if((row - 1) >= 0 && !(tileBlocks[row - 1][col].isVisited()) && tileBlocks[row - 1][col].getType() == "lake") {
+		buildLake(struc, tile, tileBlocks, std::pair<int,int>(row-1,col), visitedTiles);
+	}
+	else if(row-1 < 0 && tile->getUpTile() != NULL) {
+		row = 2;
+		bool visitedNeighborTile = false;
+		for(int i = 0; i < visitedTiles.size(); i++) {
+			if(visitedTiles[i] == tile->getUpTile())
+				visitedNeighborTile = true;
+		}
+		if(!visitedNeighborTile) {
+			visitedTiles.push_back(tile->getUpTile());
+			std::vector< std::vector<Block> > newBlocks = tile->getUpTile()->getInnerBlocks();
+			buildLake(struc, tile->getUpTile(), newBlocks, std::pair<int,int>(row,col), visitedTiles);
+		}
+	}
+	// std::cout<<"about to check col+1"<<std::endl;
+	if((col + 1) <= 2 && !(tileBlocks[row][col + 1].isVisited()) && tileBlocks[row][col + 1].getType() == "lake") {
+		buildLake(struc, tile, tileBlocks, std::pair<int,int>(row,col+1), visitedTiles);
+	}
+	else if(col+1 > 2 && tile->getRightTile() != NULL) {
+		col = 0;
+		bool visitedNeighborTile = false;
+		for(int i = 0; i < visitedTiles.size(); i++) {
+			if(visitedTiles[i] == tile->getRightTile())
+				visitedNeighborTile = true;
+		}
+		if(!visitedNeighborTile) {
+			visitedTiles.push_back(tile->getRightTile());
+			std::vector< std::vector<Block> > newBlocks = tile->getRightTile()->getInnerBlocks();
+			buildLake(struc, tile->getRightTile(), newBlocks, std::pair<int,int>(row,col), visitedTiles);
+		}
+	}
+	// std::cout<<"about to check col-1"<<std::endl;
+	if((col - 1) >= 0 && !(tileBlocks[row][col-1].isVisited()) && tileBlocks[row][col - 1].getType() == "lake") {
+		// std::cout<<"passing col-1"<<std::endl;
+		buildLake(struc, tile, tileBlocks, std::pair<int,int>(row,col-1), visitedTiles);
+	} 
+	else if(col-1 < 0 && tile->getLeftTile() != NULL) {
+		col = 2;
+		bool visitedNeighborTile = false;
+		for(int i = 0; i < visitedTiles.size(); i++) {
+			if(visitedTiles[i] == tile->getLeftTile())
+				visitedNeighborTile = true;
+		}
+		if(!visitedNeighborTile) {
+			visitedTiles.push_back(tile->getLeftTile());
+			std::vector< std::vector<Block> > newBlocks = tile->getLeftTile()->getInnerBlocks();
+			buildLake(struc, tile->getLeftTile(), newBlocks, std::pair<int,int>(row,col), visitedTiles);
+		}
+	}
+	return;
 }
 
-bool Board::checkLake(Tile tile, std::pair<int, int> blockSpot)
+Structure Board::checkTrail(Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int, int> blockSpot)
 {
-
+	Structure trailStruct("trail", blockSpot);
+	std::vector<Tile*> visitedTiles;
+	visitedTiles.push_back(tile);
+	buildTrail(&trailStruct, tile, tileBlocks, blockSpot, visitedTiles);
+	return trailStruct;
 }
 
-bool Board::checkTrail(Tile tile, std::pair<int, int> blockSpot)
-{
+void Board::buildTrail(Structure* struc, Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int,int> blockSpot, std::vector<Tile*> &visitedTiles) {
+	int row = blockSpot.first;
+	int col = blockSpot.second;
+	tileBlocks[row][col].visit();
+	// for(int i = 0; i < 3; i++) {
+	// 	for(int j = 0; j < 3; j++) {
+	// 		std::cout<<"Block at "<<i<<' '<<j<<" for tile "<<tile<<" has been visited? "<<tileBlocks[i][j].isVisited()<<std::endl;
+	// 	}
+	// }
+	struc->structureBlocks.push_back(tileBlocks[row][col]);
 
+	if(tile->hasCrocodile())
+		struc->crocodileCount++;
+	if(tile->hasDeer())
+		struc->deerCount++;
+	if(tile->hasBoar())
+		struc->boarCount++;
+	if(tile->hasBuffalo())
+		struc->buffaloCount++;
+
+	// Check tiles above, below, left, and right of the current block to see if lake structure continues
+	// std::cout<<"about to cehck row+1"<<std::endl;
+	if((row + 1) <= 2 && !(tileBlocks[row + 1][col].isVisited()) && tileBlocks[row+1][col].getType() == "trail") {
+		buildTrail(struc, tile, tileBlocks, std::pair<int,int>(row+1,col), visitedTiles);
+	}
+	else if(row + 1 > 2 && tile->getDownTile() != NULL) {
+		bool visitedNeighborTile = false;
+		for(int i = 0; i < visitedTiles.size(); i++) {
+			if(visitedTiles[i] == tile->getDownTile())
+				visitedNeighborTile = true;
+		}
+		if(!visitedNeighborTile) {
+			visitedTiles.push_back(tile->getDownTile());
+			std::vector< std::vector<Block> > newBlocks = tile->getDownTile()->getInnerBlocks();
+			buildTrail(struc, tile->getDownTile(), newBlocks, std::pair<int,int>(row - 2,col), visitedTiles);
+		}
+	}
+	// std::cout<<"about to check row-1"<<std::endl;
+	if((row - 1) >= 0 && !(tileBlocks[row - 1][col].isVisited()) && tileBlocks[row - 1][col].getType() == "trail") {
+		buildTrail(struc, tile, tileBlocks, std::pair<int,int>(row-1,col), visitedTiles);
+	}
+	else if(row-1 < 0 && tile->getUpTile() != NULL) {
+		bool visitedNeighborTile = false;
+		for(int i = 0; i < visitedTiles.size(); i++) {
+			if(visitedTiles[i] == tile->getUpTile())
+				visitedNeighborTile = true;
+		}
+		if(!visitedNeighborTile) {
+			visitedTiles.push_back(tile->getUpTile());
+			std::vector< std::vector<Block> > newBlocks = tile->getUpTile()->getInnerBlocks();
+			buildTrail(struc, tile->getUpTile(), newBlocks, std::pair<int,int>(row+2,col), visitedTiles);
+		}
+	}
+	// std::cout<<"about to check col+1"<<std::endl;
+	if((col + 1) <= 2 && !(tileBlocks[row][col + 1].isVisited()) && tileBlocks[row][col + 1].getType() == "trail") {
+		buildTrail(struc, tile, tileBlocks, std::pair<int,int>(row,col+1), visitedTiles);
+	}
+	else if(col+1 > 2 && tile->getRightTile() != NULL) {
+		bool visitedNeighborTile = false;
+		for(int i = 0; i < visitedTiles.size(); i++) {
+			if(visitedTiles[i] == tile->getRightTile())
+				visitedNeighborTile = true;
+		}
+		if(!visitedNeighborTile) {
+			visitedTiles.push_back(tile->getRightTile());
+			std::vector< std::vector<Block> > newBlocks = tile->getRightTile()->getInnerBlocks();
+			buildTrail(struc, tile->getRightTile(), newBlocks, std::pair<int,int>(row,col-2), visitedTiles);
+		}
+	}
+	// std::cout<<"about to check col-1"<<std::endl;
+	if((col - 1) >= 0 && !(tileBlocks[row][col-1].isVisited()) && tileBlocks[row][col - 1].getType() == "trail") {
+		// std::cout<<"passing col-1"<<std::endl;
+		buildTrail(struc, tile, tileBlocks, std::pair<int,int>(row,col-1), visitedTiles);
+	} 
+	else if(col-1 < 0 && tile->getLeftTile() != NULL) {
+		bool visitedNeighborTile = false;
+		for(int i = 0; i < visitedTiles.size(); i++) {
+			if(visitedTiles[i] == tile->getLeftTile())
+				visitedNeighborTile = true;
+		}
+		if(!visitedNeighborTile) {
+			visitedTiles.push_back(tile->getLeftTile());
+			std::vector< std::vector<Block> > newBlocks = tile->getLeftTile()->getInnerBlocks();
+			buildTrail(struc, tile->getLeftTile(), newBlocks, std::pair<int,int>(row,col+2), visitedTiles);
+		}
+	}
+	return;
 }
-
-// bool Board::checkMeeplePlacement(Face &face)
-// {
-// 	std::queue<Face*> faces;
-// 	faces.push(&face);
-// 	while (faces.size() > 0)
-// 	{
-// 		if (faces.front()->hasMeeple()) { return true; }
-
-// 		if (faces.front()->getAcrossFace() != NULL && !faces.front()->getAcrossFace()->hasBeenVisited())
-// 		{
-// 			faces.push(faces.front()->getAcrossFace());
-// 		}
-
-// 		if (faces.front()->getLeftFace() != NULL && !faces.front()->getLeftFace()->hasBeenVisited())
-// 		{
-// 			faces.push(faces.front()->getLeftFace());
-// 		}
-
-// 		if (faces.front()->getRightFace() != NULL && !faces.front()->getRightFace()->hasBeenVisited())
-// 		{
-// 			faces.push(faces.front()->getRightFace());
-// 		}
-
-// 		if (faces.front()->getNeighborFace() != NULL && !faces.front()->getNeighborFace()->hasBeenVisited())
-// 		{
-// 			faces.push(faces.front()->getNeighborFace());
-// 		}
-
-// 		faces.front()->visit();
-// 		faces.pop();
-// 	}
-// 	return false;
-// }
 
 void Board::connectFaces(int row, int col)
 {
@@ -389,6 +545,16 @@ void Board::connectFaces(int row, int col)
 	{
 		(*m_board[row + 1][col]->getUpFace()).setNeighborFace(*m_board[row][col]->getDownFace());
 		(*m_board[row][col]->getDownFace()).setNeighborFace(*m_board[row + 1][col]->getUpFace());
+
+
+		// Set adjacent tiles now after setting faces
+		
+		// std::cout<<"**********DOWN TILE BEFORE SETTING IS "<<m_board[row][col]->getDownTile()<<std::endl;
+		(m_board[row][col])->setNeighborDownTile(*m_board[row + 1][col]);
+		// std::cout<<"**********DOWN TILE AFTER SETTING IS "<<m_board[row][col]->getDownTile()<<std::endl;
+		// std::cout<<"72 72 up tile before setting is "<<m_board[row+1][col]->getUpTile()<<std::endl;
+		(m_board[row+1][col])->setNeighborUpTile(*m_board[row][col]);
+		// std::cout<<"72 72 up tile after setting is "<<m_board[row+1][col]->getUpTile()<<std::endl;
 
 		//std::cout << "Neighbor of the up face of " << row + 1 << ' ' << col << " is " << m_board[row + 1][col]->getUpFace()->getNeighborFace() << std::endl;
 		//std::cout << "Neighbor of the down face of " << row << ' ' << col << " is " << m_board[row][col]->getDownFace()->getNeighborFace() << std::endl;
@@ -404,6 +570,10 @@ void Board::connectFaces(int row, int col)
 		(*m_board[row - 1][col]->getDownFace()).setNeighborFace(*m_board[row][col]->getUpFace());
 		(*m_board[row][col]->getUpFace()).setNeighborFace(*m_board[row - 1][col]->getDownFace());
 
+		// Set adjacent tiles now after setting faces
+		(m_board[row][col])->setNeighborUpTile(*m_board[row - 1][col]);
+		(m_board[row - 1][col])->setNeighborDownTile(*m_board[row][col]);
+
 		//std::cout << "Neighbor of the down face of " << row - 1 << ' ' << col << " is " << m_board[row - 1][col]->getDownFace()->getNeighborFace() << std::endl;
 		//std::cout << "Neighbor of the up face of " << row << ' ' << col << " is " << m_board[row][col]->getUpFace()->getNeighborFace() << std::endl;
 	}
@@ -417,6 +587,10 @@ void Board::connectFaces(int row, int col)
 	{
 		(*m_board[row][col - 1]->getRightFace()).setNeighborFace(*m_board[row][col]->getLeftFace());
 		(*m_board[row][col]->getLeftFace()).setNeighborFace(*m_board[row][col - 1]->getRightFace());
+
+		// Set adjacent tiles now after setting faces
+		(m_board[row][col])->setNeighborLeftTile(*m_board[row][col - 1]);
+		(m_board[row][col - 1])->setNeighborRightTile(*m_board[row][col]);
 
 		//std::cout << "Neighbor of the right face of " << row << ' ' << col - 1 << " is " << m_board[row][col - 1]->getRightFace()->getNeighborFace() << std::endl;
 		//std::cout << "Neighbor of the left face of " << row << ' ' << col << " is " << m_board[row][col]->getLeftFace()->getNeighborFace() << std::endl;
@@ -432,6 +606,10 @@ void Board::connectFaces(int row, int col)
 		(*m_board[row][col + 1]->getLeftFace()).setNeighborFace(*m_board[row][col]->getRightFace());
 		(*m_board[row][col]->getRightFace()).setNeighborFace(*m_board[row][col + 1]->getLeftFace());
 
+		// Set adjacent tiles now after setting faces
+		(m_board[row][col])->setNeighborRightTile(*m_board[row][col + 1]);
+		(m_board[row][col + 1])->setNeighborLeftTile(*m_board[row][col]);
+
 		//std::cout << "Neighbor of the left face of " << row << ' ' << col + 1 << " is " << m_board[row][col + 1]->getLeftFace()->getNeighborFace() << std::endl;
 		//std::cout << "Neighbor of the right face of " << row << ' ' << col << " is " << m_board[row][col]->getRightFace()->getNeighborFace() << std::endl;
 	}
@@ -439,4 +617,41 @@ void Board::connectFaces(int row, int col)
 	{
 		std::cout << "ERROR: FACES DON'T MATCH for tile right face" << std::endl;
 	}
+}
+
+// Pass in the coordinates of the tile that you just placed
+std::vector<Structure> Board::getStructures(int row, int col) {
+	std::cout<<"IN GET STRUCTURES FOR "<<row<<' '<<col<<std::endl;
+	std::vector<Structure> structures;
+	Tile* tile = m_board[row][col];
+	std::vector< std::vector<Block> > tileBlocks = tile->getInnerBlocks();
+	for(int i = 0; i < 3; i++) {
+		for(int j = 0; j < 3; j++) {
+			if(!(tileBlocks[i][j].isVisited())) {
+				if(tileBlocks[i][j].getType() == "jungle" || tileBlocks[i][j].getType() == "mixed") {
+					// Structure struc = checkJungle(tile, std::pair<int,int>(i,j));
+					// structures.push_back(struc);
+				}
+				else if(tileBlocks[i][j].getType() == "lake") {
+					Structure struc = checkLake(tile, tileBlocks, std::pair<int,int>(i,j));
+					structures.push_back(struc);
+				}
+				else if(tileBlocks[i][j].getType() == "trail") {
+					Structure struc = checkTrail(tile, tileBlocks, std::pair<int,int>(i,j));
+					structures.push_back(struc);
+				}
+			}
+		}
+	}
+	for(int i = 0; i < structures.size(); i++) {
+		for(int j = 0; j < structures[i].structureBlocks.size(); j++) {
+			structures[i].structureBlocks[j].unVisit();
+		}
+	}
+	for(int i = 0; i < structures.size(); i++) {
+		std::cout<<"Structure is of type "<<structures[i].type<<" with "<<structures[i].structureBlocks.size()
+		<<" blocks and starting block at "<<structures[i].startingBlock.first<<' '<<structures[i].startingBlock.second<<std::endl;
+	}
+	std::cout<<"Structures size is "<<structures.size()<<std::endl;
+	return structures;
 }

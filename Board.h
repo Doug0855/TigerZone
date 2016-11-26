@@ -2,6 +2,7 @@
 #define BOARD_H
 
 #include "Tile_Structure/Tile.h"
+#include "Tile_Structure/Structure.h"
 #include <vector>
 #include <string>
 #include <iostream>
@@ -33,14 +34,25 @@ public:
 
 	// places the tile on the board and connects the faces
 	void place_tile(std::pair<int, int> location, Tile &tile);
+
+	// Get a vector of the structures (and coordinates) within the tile where you may place a meeple
+	// Pass in the coordinates of the recently placed tile to access it within the board
+	std::vector<Structure> getStructures(int row, int col);
 	
 	// See if feature tile is being placed in has a meeple
 	bool checkMeeplePlacement(Tile tile, std::pair<int, int> blockSpot);
+	void placeMeeple(int i, int j, std::pair<int,int> location);
+	void meepleAi(int i, int j);
+
+	// Helper functions for building the structures of a recently placed tile
+	void buildLake(Structure* struc, Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int,int> blockSpot, std::vector<Tile*> &visitedTiles);
+	void buildTrail(Structure* struc, Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int,int> blockSpot, std::vector<Tile*> &visitedTiles);
+	void buildJungle(Structure* struc, Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int,int> blockSpot);
 
 private:
-	bool checkJungle(Tile tile, std::pair<int, int> blockSpot);
-	bool checkLake(Tile tile, std::pair<int, int> blockSpot);
-	bool checkTrail(Tile tile, std::pair<int, int> blockSpot);
+	// Structure checkJungle(Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int, int> blockSpot);
+	Structure checkLake(Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int, int> blockSpot);
+	Structure checkTrail(Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int, int> blockSpot);
 
 	void connectFaces(int row, int col);
 
