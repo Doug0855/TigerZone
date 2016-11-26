@@ -83,18 +83,23 @@ void Game::makeMove(Tile tile) {
 	}
 }
 
+// Hueristic to have an ai that can place down meeples in correct spots and values some more than others
 void Game::meepleAi(int i, int j)
 {
+	// always place at a den if you can
 	if (gameboard.m_board[i][j]->getCenter().getType() == "den")
 	{
 		gameboard.placeMeeple(i, j, std::pair<int,int> (1,1));
 		return;
 	}
+	// if there wasn't a den in the middle then get all the structures in the current tile
 	std::vector<Structure> structures = gameboard.getStructures(i, j);
+	// if you found structures
 	if (structures.size() > 0)
 	{
 		int mostPoints = 0;
 		int bestStruct = -1;
+		// find the first structure that doesn't have a meeple
 		for (size_t ii = 0; ii < structures.size(); ii++)
 		{
 			if (!structures[ii].hasMeeple)
@@ -102,12 +107,13 @@ void Game::meepleAi(int i, int j)
 				bestStruct = ii;
 			}
 		}
-		
+		// for all the strucutres that don't have meeples count up the point values
 		for (size_t ii = bestStruct; ii < structures.size(); ii++)
 		{
 			if (!structures[ii].hasMeeple)
 			{
 				int points = structurePoints(structures[ii]);
+				// select the one with the highest point values
 				if (points > mostPoints)
 				{
 					mostPoints = points;
@@ -115,10 +121,12 @@ void Game::meepleAi(int i, int j)
 				}
 			}
 		}
+		// as long as you found a stucutre without a meeple place the meele at the one with the highest points
 		if(bestStruct != -1) gameboard.placeMeeple(i, j, structures[bestStruct].startingBlock);
 	}
 }
 
+// add points according to values for different kind of features
 int Game::structurePoints(Structure structure)
 {
 	int points = 0;
