@@ -433,12 +433,13 @@ void Board::buildLake(Structure* struc, Tile *tile, std::vector< std::vector<Blo
 Structure Board::checkTrail(Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int, int> blockSpot)
 {
 	Structure trailStruct("trail", blockSpot);
-	buildTrail(&trailStruct, tile, tileBlocks, blockSpot);
+	std::vector<Tile*> visitedTiles;
+	visitedTiles.push_back(tile);
+	buildTrail(&trailStruct, tile, tileBlocks, blockSpot, visitedTiles);
 	return trailStruct;
 }
 
-void Board::buildTrail(Structure* struc, Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int,int> blockSpot) {
-	// std::cout<<"in build lake"<<std::endl;
+void Board::buildTrail(Structure* struc, Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int,int> blockSpot, std::vector<Tile*> &visitedTiles) {
 	int row = blockSpot.first;
 	int col = blockSpot.second;
 	tileBlocks[row][col].visit();
@@ -461,36 +462,68 @@ void Board::buildTrail(Structure* struc, Tile *tile, std::vector< std::vector<Bl
 	// Check tiles above, below, left, and right of the current block to see if lake structure continues
 	// std::cout<<"about to cehck row+1"<<std::endl;
 	if((row + 1) <= 2 && !(tileBlocks[row + 1][col].isVisited()) && tileBlocks[row+1][col].getType() == "trail") {
-		// std::cout<<"passing row+1"<<std::endl;
-		buildTrail(struc, tile, tileBlocks, std::pair<int,int>(row+1,col));
+		buildTrail(struc, tile, tileBlocks, std::pair<int,int>(row+1,col), visitedTiles);
 	}
 	else if(row + 1 > 2 && tile->getDownTile() != NULL) {
-		buildTrail(struc, tile->getDownTile(), tileBlocks, std::pair<int,int>(row - 2,col));
+		bool visitedNeighborTile = false;
+		for(int i = 0; i < visitedTiles.size(); i++) {
+			if(visitedTiles[i] == tile->getDownTile())
+				visitedNeighborTile = true;
+		}
+		if(!visitedNeighborTile) {
+			visitedTiles.push_back(tile->getDownTile());
+			tileBlocks = tile->getDownTile()->getInnerBlocks();
+			buildTrail(struc, tile->getDownTile(), tileBlocks, std::pair<int,int>(row - 2,col), visitedTiles);
+		}
 	}
 	// std::cout<<"about to check row-1"<<std::endl;
 	if((row - 1) >= 0 && !(tileBlocks[row - 1][col].isVisited()) && tileBlocks[row - 1][col].getType() == "trail") {
-		// std::cout<<"passing row-1"<<std::endl;
-		buildTrail(struc, tile, tileBlocks, std::pair<int,int>(row-1,col));
+		buildTrail(struc, tile, tileBlocks, std::pair<int,int>(row-1,col), visitedTiles);
 	}
 	else if(row-1 < 0 && tile->getUpTile() != NULL) {
-		buildTrail(struc, tile->getUpTile(), tileBlocks, std::pair<int,int>(row+2,col));
+		bool visitedNeighborTile = false;
+		for(int i = 0; i < visitedTiles.size(); i++) {
+			if(visitedTiles[i] == tile->getUpTile())
+				visitedNeighborTile = true;
+		}
+		if(!visitedNeighborTile) {
+			visitedTiles.push_back(tile->getUpTile());
+			tileBlocks = tile->getUpTile()->getInnerBlocks();
+			buildTrail(struc, tile->getUpTile(), tileBlocks, std::pair<int,int>(row+2,col), visitedTiles);
+		}
 	}
 	// std::cout<<"about to check col+1"<<std::endl;
 	if((col + 1) <= 2 && !(tileBlocks[row][col + 1].isVisited()) && tileBlocks[row][col + 1].getType() == "trail") {
-		// std::cout<<"passing col+1"<<std::endl;
-		buildTrail(struc, tile, tileBlocks, std::pair<int,int>(row,col+1));
+		buildTrail(struc, tile, tileBlocks, std::pair<int,int>(row,col+1), visitedTiles);
 	}
 	else if(col+1 > 2 && tile->getRightTile() != NULL) {
-		buildTrail(struc, tile->getRightTile(), tileBlocks, std::pair<int,int>(row,col-2));
+		bool visitedNeighborTile = false;
+		for(int i = 0; i < visitedTiles.size(); i++) {
+			if(visitedTiles[i] == tile->getRightTile())
+				visitedNeighborTile = true;
+		}
+		if(!visitedNeighborTile) {
+			visitedTiles.push_back(tile->getRightTile());
+			tileBlocks = tile->getRightTile()->getInnerBlocks();
+			buildTrail(struc, tile->getRightTile(), tileBlocks, std::pair<int,int>(row,col-2), visitedTiles);
+		}
 	}
 	// std::cout<<"about to check col-1"<<std::endl;
 	if((col - 1) >= 0 && !(tileBlocks[row][col-1].isVisited()) && tileBlocks[row][col - 1].getType() == "trail") {
 		// std::cout<<"passing col-1"<<std::endl;
-		buildTrail(struc, tile, tileBlocks, std::pair<int,int>(row,col-1));
+		buildTrail(struc, tile, tileBlocks, std::pair<int,int>(row,col-1), visitedTiles);
 	} 
 	else if(col-1 < 0 && tile->getLeftTile() != NULL) {
-		std::cout<<"passed getLeft tile, should be going to 72, 72"<<std::endl;
-		buildTrail(struc, tile->getLeftTile(), tileBlocks, std::pair<int,int>(row,col+2));
+		bool visitedNeighborTile = false;
+		for(int i = 0; i < visitedTiles.size(); i++) {
+			if(visitedTiles[i] == tile->getLeftTile())
+				visitedNeighborTile = true;
+		}
+		if(!visitedNeighborTile) {
+			visitedTiles.push_back(tile->getLeftTile());
+			tileBlocks = tile->getLeftTile()->getInnerBlocks();
+			buildTrail(struc, tile->getLeftTile(), tileBlocks, std::pair<int,int>(row,col+2), visitedTiles);
+		}
 	}
 	return;
 }
