@@ -23,3 +23,18 @@ Block::~Block()
 {
 
 }
+
+void Block::setType(char c) {
+  if (c == Jungle)
+    type = "jungle";
+  else if (c == Lake)
+    type = "lake";
+  else if (c == Trail)
+    type = "trail";
+  else if (c == Den)
+    type = "den";
+}
+
+void Block::placeMeeple() {
+  meeple = true;
+}

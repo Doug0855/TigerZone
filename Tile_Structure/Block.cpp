@@ -9,9 +9,12 @@ Block::Block(char c)
   else if (c == Trail)
   	type = "trail";
   else if (c == Den)
-  	type = "den";
+	  type = "den";
+  else if (c == Mixed)
+	  type = "mixed";
   else
   	type = "";
+  visited = false;
 }
 
 Block::Block()
@@ -22,4 +25,21 @@ Block::Block()
 Block::~Block()
 {
 
+}
+
+void Block::setType(char c) {
+  if (c == Jungle)
+    type = "jungle";
+  else if (c == Lake)
+    type = "lake";
+  else if (c == Trail)
+    type = "trail";
+  else if (c == Den)
+    type = "den";
+  else if (c == Mixed)
+	  type = "mixed";
+}
+
+void Block::placeMeeple() {
+  meeple = true;
 }

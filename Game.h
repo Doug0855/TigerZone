@@ -13,6 +13,7 @@ public:
 
 	void play();
 	void makeMove(Tile);
+	void meepleAi(int i, int j);
 	void updateBoard();
 	void switchPlayer();
 	void printToTextFile(Board);
@@ -20,6 +21,8 @@ public:
 
 	Board gameboard;
 private:
+	int structurePoints(Structure structure);
+
 	std::string gameId;
 	Player player1;
 	Player player2;

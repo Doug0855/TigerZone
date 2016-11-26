@@ -66,39 +66,61 @@ void printStack(TileStack stack) //debugging
 	}
 	std::cout << std::endl;/**/
 }
-void printTileAdddresses(Tile &tile) //debugging
-{
-	std::cout << "DownFace addr: " << tile.getDownFace() << std::endl;
-	std::cout << " Accross addr: " << tile.getDownFace()->getAccrossFace() << std::endl;
-	std::cout << " Left addr: " << tile.getDownFace()->getLeftFace() << std::endl;
-	std::cout << " Right addr: " << tile.getDownFace()->getRightFace() << std::endl;
+// void printTileAdddresses(Tile &tile) //debugging
+// {
+// 	std::cout << "DownFace addr: " << tile.getDownFace() << std::endl;
+// 	std::cout << " Accross addr: " << tile.getDownFace()->getAcrossFace() << std::endl;
+// 	std::cout << " Left addr: " << tile.getDownFace()->getLeftFace() << std::endl;
+// 	std::cout << " Right addr: " << tile.getDownFace()->getRightFace() << std::endl;
 
-	std::cout << "UpFace addr: " << tile.getUpFace() << std::endl;
-	std::cout << " Accross addr: " << tile.getUpFace()->getAccrossFace() << std::endl;
-	std::cout << " Left addr: " << tile.getUpFace()->getLeftFace() << std::endl;
-	std::cout << " Right addr: " << tile.getUpFace()->getRightFace() << std::endl;
+// 	std::cout << "UpFace addr: " << tile.getUpFace() << std::endl;
+// 	std::cout << " Across addr: " << tile.getUpFace()->getAcrossFace() << std::endl;
+// 	std::cout << " Left addr: " << tile.getUpFace()->getLeftFace() << std::endl;
+// 	std::cout << " Right addr: " << tile.getUpFace()->getRightFace() << std::endl;
 
-	std::cout << "RightFace addr: " << tile.getRightFace() << std::endl;
-	std::cout << " Accross addr: " << tile.getRightFace()->getAccrossFace() << std::endl;
-	std::cout << " Left addr: " << tile.getRightFace()->getLeftFace() << std::endl;
-	std::cout << " Right addr: " << tile.getRightFace()->getRightFace() << std::endl;
+// 	std::cout << "RightFace addr: " << tile.getRightFace() << std::endl;
+// 	std::cout << " Across addr: " << tile.getRightFace()->getAcrossFace() << std::endl;
+// 	std::cout << " Left addr: " << tile.getRightFace()->getLeftFace() << std::endl;
+// 	std::cout << " Right addr: " << tile.getRightFace()->getRightFace() << std::endl;
 
-	std::cout << "LeftFace addr: " << tile.getLeftFace() << std::endl;
-	std::cout << " Accross addr: " << tile.getLeftFace()->getAccrossFace() << std::endl;
-	std::cout << " Left addr: " << tile.getLeftFace()->getLeftFace() << std::endl;
-	std::cout << " Right addr: " << tile.getLeftFace()->getRightFace() << std::endl;
-}
+// 	std::cout << "LeftFace addr: " << tile.getLeftFace() << std::endl;
+// 	std::cout << " Across addr: " << tile.getLeftFace()->getAcrossFace() << std::endl;
+// 	std::cout << " Left addr: " << tile.getLeftFace()->getLeftFace() << std::endl;
+// 	std::cout << " Right addr: " << tile.getLeftFace()->getRightFace() << std::endl;
+// }
 
 int main() {
-	Tile tile1(19);
+	Board gameboard;
+	std::cout<<"in game"<<std::endl;
+	Tile tile1(21);
+	Tile tile2(8);
+	Tile tile3(20);
+	Tile tile4(9);
 	TileStack tStack;
 	tStack.shuffle();
 	Player p1;
 	Player p2;
-	Game game1("123", p1, p2, tStack, tile1, std::pair<int,int> (72,72));
-	game1.play();
+	std::cout<<"tile 1 up face is "<<tile1.getUpFace()->getType()<<std::endl;
+	// gameboard.place_tile(std::pair<int, int>(72,72), tile1);
+	gameboard.place_tile(std::pair<int, int>(72,71), tile2);
+	// gameboard.place_tile(std::pair<int, int>(71,72), tile3);
+	gameboard.place_tile(std::pair<int, int>(71,71), tile4);
+	// Game game1("123", p1, p2, tStack, tile1, std::pair<int,int> (72,72));
+	// game1.play();
 
-	printBoard(game1.gameboard);
+	// Tile tile2(5);
+	// gameboard.place_tile(std::pair<int,int>(71,72), tile2);
+	/*
+	Tile *tmpTile = new Tile(tStack.tiles[0].getNum());
+	gameboard.place_tile(std::pair<int,int>(72,71), *tmpTile);
+
+	std::vector<std::pair<int, int> > availableLocations = gameboard.display_positions(tStack.tiles[1]);
+	std::cout<<"there are "<<availableLocations.size()<<" available locations for tile "<<tStack.tiles[1].getType()<<std::endl;
+	for(int i = 0; i < availableLocations.size(); i++) {
+		std::cout<<i<<") "<<availableLocations[i].first<<' '<<availableLocations[i].second<<std::endl;
+	}
+	*/
+	// printBoard(game1.gameboard);
 
 	// Board gameBoard;
 	// gameBoard.place_tile(std::pair<int, int>(72, 50), tile1);
