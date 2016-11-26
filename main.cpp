@@ -92,18 +92,18 @@ void printStack(TileStack stack) //debugging
 int main() {
 	Board gameboard;
 	std::cout<<"in game"<<std::endl;
-	Tile tile1(19);
+	Tile tile1(8);
 	TileStack tStack;
 	tStack.shuffle();
 	Player p1;
 	Player p2;
 	std::cout<<"tile 1 up face is "<<tile1.getUpFace()->getType()<<std::endl;
 	gameboard.place_tile(std::pair<int, int>(72,72), tile1);
-	Game game1("123", p1, p2, tStack, tile1, std::pair<int,int> (72,72));
+	// Game game1("123", p1, p2, tStack, tile1, std::pair<int,int> (72,72));
 	// game1.play();
 
 	Tile tile2(5);
-	gameboard.place_tile(std::pair<int,int>(71,72), tile2);
+	// gameboard.place_tile(std::pair<int,int>(71,72), tile2);
 	/*
 	Tile *tmpTile = new Tile(tStack.tiles[0].getNum());
 	gameboard.place_tile(std::pair<int,int>(72,71), *tmpTile);

@@ -301,18 +301,21 @@ void Board::place_tile(std::pair<int, int> location, Tile &tile)
 
 	m_board[row][col] = &tile;
 	connectFaces(row, col);
+	getStructures(row, col);
 }
 
-bool Board::checkMeeplePlacement(Tile tile, std::pair<int,int> blockSpot)
-{
-	std::vector< std::vector<Block> > innerBlocks = tile.getInnerBlocks();
-	Block block = innerBlocks[blockSpot.first][blockSpot.second];
-	if (block.hasMeeple()) { return true; }
-	if (block.getType() == "jungle" || block.getType() == "mixed") 
-		checkJungle(tile, blockSpot);
-	if (block.getType() == "lake") checkLake(tile, blockSpot);
-	if (block.getType() == "trail") checkTrail(tile, blockSpot);
-}
+// bool Board::checkMeeplePlacement(Tile tile, std::pair<int,int> blockSpot)
+// {
+// 	std::vector< std::vector<Block> > innerBlocks = tile.getInnerBlocks();
+// 	Block block = innerBlocks[blockSpot.first][blockSpot.second];
+// 	if (block.hasMeeple()) { return true; }
+// 	if (block.getType() == "jungle" || block.getType() == "mixed") 
+// 		checkJungle(tile, blockSpot);
+// 	if (block.getType() == "lake") checkLake(tile, blockSpot);
+// 	if (block.getType() == "trail") checkTrail(tile, blockSpot);
+// }
+
+
 /*So you can use the blocks in a tile to find all of the parts of a tile in the same feature,
 To do this i have a queue of blocks and i find all of the adjacent blocks of the blocks your searching from that are the same type,
 the problem comes in when youre traversing to a new tile since the blocks dont have any connections to anything else
@@ -321,66 +324,69 @@ but then im not sure how i would hold that information for the new blocks of tha
 instead of having a queue of tiles i could recall the function again and have it run the same process on the tiles on whatever block you move onto it from
 the problem there is how to remember which tiles youve already visited and which blocks youve visted in those tiles
 */
-bool Board::checkJungle(Tile tile, std::pair<int, int> blockSpot)
+Structure Board::checkJungle(Tile *tile, std::pair<int, int> blockSpot)
 {
-	std::queue<Block> blocks;
-	int i = blockSpot.first;
-	int j = blockSpot.second;
-	if (tile.getInnerBlocks()[i][j].getType() == "mixed")
-	{
-		if (tile.getInnerBlocks()[1][1].getType() == "trail")
-		{
-			if (tile.getInnerBlocks()[0][0].getType() == "mixed") blocks.push(tile.getInnerBlocks()[0][0]);
-			if (tile.getInnerBlocks()[0][2].getType() == "mixed") blocks.push(tile.getInnerBlocks()[0][0]);
-			if (tile.getInnerBlocks()[2][0].getType() == "mixed") blocks.push(tile.getInnerBlocks()[0][0]);
-			if (tile.getInnerBlocks()[2][2].getType() == "mixed") blocks.push(tile.getInnerBlocks()[0][0]);
+	Structure jungleStruct("jungle", blockSpot);
+}
+
+Structure Board::checkLake(Tile *tile, std::pair<int, int> blockSpot)
+{
+	std::cout<<"in check lake"<<std::endl;
+	Structure lakeStruct("lake", blockSpot);
+	buildLake(&lakeStruct, tile, blockSpot);
+	return lakeStruct;
+}
+
+void Board::buildLake(Structure* struc, Tile *tile, std::pair<int,int> blockSpot) {
+	std::cout<<"in build lake"<<std::endl;
+	int row = blockSpot.first;
+	int col = blockSpot.second;
+	std::vector< std::vector<Block> > tileBlocks = tile->getInnerBlocks();
+	tileBlocks[row][col].visit();
+	for(int i = 0; i < 3; i++) {
+		for(int j = 0; j < 3; j++) {
+			std::cout<<"Block at "<<i<<' '<<j<<" for tile "<<tile<<" has been visited? "<<tileBlocks[i][j].isVisited()<<std::endl;
 		}
 	}
+	struc->structureBlocks.push_back(tileBlocks[row][col]);
+
+	if(tile->hasCrocodile())
+		struc->crocodileCount++;
+	if(tile->hasDeer())
+		struc->deerCount++;
+	if(tile->hasBoar())
+		struc->boarCount++;
+	if(tile->hasBuffalo())
+		struc->buffaloCount++;
+
+	// Check tiles above, below, left, and right of the current block to see if lake structure continues
+	// std::cout<<"about to cehck row+1"<<std::endl;
+	if((row + 1) < 3 && !(tileBlocks[row + 1][col].isVisited()) && tileBlocks[row+1][col].getType() == "lake") {
+		// std::cout<<"passing row+1"<<std::endl;
+		buildLake(struc, tile, std::pair<int,int>(row+1,col));
+	}
+	// std::cout<<"about to check row-1"<<std::endl;
+	if((row - 1) >= 0 && !(tileBlocks[row - 1][col].isVisited()) && tileBlocks[row - 1][col].getType() == "lake") {
+		// std::cout<<"passing row-1"<<std::endl;
+		buildLake(struc, tile, std::pair<int,int>(row-1,col));
+	}
+	// std::cout<<"about to check col+1"<<std::endl;
+	if((col + 1) < 3 && !(tileBlocks[row][col + 1].isVisited()) && tileBlocks[row][col + 1].getType() == "lake") {
+		// std::cout<<"passing col+1"<<std::endl;
+		buildLake(struc, tile, std::pair<int,int>(row,col+1));
+	}
+	// std::cout<<"about to check col-1"<<std::endl;
+	if((col - 1) >= 0 && !(tileBlocks[row][col-1].isVisited()) && tileBlocks[row][col - 1].getType() == "lake") {
+		// std::cout<<"passing col-1"<<std::endl;
+		buildLake(struc, tile, std::pair<int,int>(row,col-1));
+	}
+	return;
 }
 
-bool Board::checkLake(Tile tile, std::pair<int, int> blockSpot)
+Structure Board::checkTrail(Tile *tile, std::pair<int, int> blockSpot)
 {
-
+	Structure trailStruct("trail", blockSpot);
 }
-
-bool Board::checkTrail(Tile tile, std::pair<int, int> blockSpot)
-{
-
-}
-
-// bool Board::checkMeeplePlacement(Face &face)
-// {
-// 	std::queue<Face*> faces;
-// 	faces.push(&face);
-// 	while (faces.size() > 0)
-// 	{
-// 		if (faces.front()->hasMeeple()) { return true; }
-
-// 		if (faces.front()->getAcrossFace() != NULL && !faces.front()->getAcrossFace()->hasBeenVisited())
-// 		{
-// 			faces.push(faces.front()->getAcrossFace());
-// 		}
-
-// 		if (faces.front()->getLeftFace() != NULL && !faces.front()->getLeftFace()->hasBeenVisited())
-// 		{
-// 			faces.push(faces.front()->getLeftFace());
-// 		}
-
-// 		if (faces.front()->getRightFace() != NULL && !faces.front()->getRightFace()->hasBeenVisited())
-// 		{
-// 			faces.push(faces.front()->getRightFace());
-// 		}
-
-// 		if (faces.front()->getNeighborFace() != NULL && !faces.front()->getNeighborFace()->hasBeenVisited())
-// 		{
-// 			faces.push(faces.front()->getNeighborFace());
-// 		}
-
-// 		faces.front()->visit();
-// 		faces.pop();
-// 	}
-// 	return false;
-// }
 
 void Board::connectFaces(int row, int col)
 {
@@ -461,4 +467,40 @@ void Board::connectFaces(int row, int col)
 	{
 		std::cout << "ERROR: FACES DON'T MATCH for tile right face" << std::endl;
 	}
+}
+
+// Pass in the coordinates of the tile that you just placed
+std::vector<Structure> Board::getStructures(int row, int col) {
+	std::vector<Structure> structures;
+	Tile* tile = m_board[row][col];
+	std::vector< std::vector<Block> > tileBlocks = tile->getInnerBlocks();
+	for(int i = 0; i < 3; i++) {
+		for(int j = 0; j < 3; j++) {
+			if(!(tileBlocks[i][j].isVisited())) {
+				std::cout<<"past first visit check"<<std::endl;
+				if(tileBlocks[i][j].getType() == "jungle" || tileBlocks[i][j].getType() == "mixed") {
+					// Structure struc = checkJungle(tile, std::pair<int,int>(i,j));
+					// structures.push_back(struc);
+				}
+				else if(tileBlocks[i][j].getType() == "lake") {
+					std::cout<<"in lake"<<std::endl;
+					Structure struc = checkLake(tile, std::pair<int,int>(i,j));
+					structures.push_back(struc);
+					for(int i = 0; i < structures.size(); i++) {
+						std::cout<<"Structure has "<<structures[i].structureBlocks.size()<<" blocks in this structure "<<std::endl;
+					}
+				}
+				else if(tileBlocks[i][j].getType() == "trail") {
+					// Structure struc = checkJungle(tile, std::pair<int,int>(i,j));
+					// structures.push_back(struc);
+				}
+			}
+		}
+	}
+	// for(int i = 0; i < 3; i++) {
+	// 	for(int j = 0; j < 3; j++) {
+	// 		tileBlocks[i][j].unVisit();
+	// 	}
+	// }
+	return structures;
 }

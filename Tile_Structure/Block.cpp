@@ -14,6 +14,7 @@ Block::Block(char c)
 	  type = "mixed";
   else
   	type = "";
+  visited = false;
 }
 
 Block::Block()
