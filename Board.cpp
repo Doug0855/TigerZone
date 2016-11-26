@@ -332,6 +332,7 @@ Structure Board::checkJungle(Tile *tile, std::vector< std::vector<Block> >& tile
 	std::vector<Tile*> visitedTiles;
 	visitedTiles.push_back(tile);
 	buildJungle(&jungleStruct, tile, tileBlocks, blockSpot, visitedTiles);
+	return jungleStruct;
 }
 
 void Board::buildJungle(Structure* struc, Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int,int> blockSpot, std::vector<Tile*> &visitedTiles) {
@@ -766,9 +767,7 @@ std::vector<Structure> Board::getStructures(int row, int col) {
 			if(!(tileBlocks[i][j].isVisited())) {
 				if(tileBlocks[i][j].getType() == "jungle" || tileBlocks[i][j].getType() == "mixed") {
 					Structure struc = checkJungle(tile, tileBlocks, std::pair<int,int>(i,j));
-					std::cout<<"passed second if"<<std::endl;
 					structures.push_back(struc);
-					std::cout<<"hdfjhasdjkfna"<<std::endl;
 				}
 				else if(tileBlocks[i][j].getType() == "lake") {
 					Structure struc = checkLake(tile, tileBlocks, std::pair<int,int>(i,j));
