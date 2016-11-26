@@ -400,7 +400,6 @@ void Board::buildLake(Structure* struc, Tile *tile, std::vector< std::vector<Blo
 		buildLake(struc, tile, tileBlocks, std::pair<int,int>(row,col+1), visitedTiles);
 	}
 	else if(col+1 > 2 && tile->getRightTile() != NULL) {
-		col = 0;
 		bool visitedNeighborTile = false;
 		for(int i = 0; i < visitedTiles.size(); i++) {
 			if(visitedTiles[i] == tile->getRightTile())

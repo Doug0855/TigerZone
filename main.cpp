@@ -94,7 +94,7 @@ int main() {
 	std::cout<<"in game"<<std::endl;
 	Tile tile1(21);
 	Tile tile2(8);
-	Tile tile3(20);
+	// Tile tile3(20);
 	Tile tile4(9);
 	TileStack tStack;
 	tStack.shuffle();
