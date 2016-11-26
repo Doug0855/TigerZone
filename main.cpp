@@ -92,7 +92,7 @@ void printStack(TileStack stack) //debugging
 int main() {
 	Board gameboard;
 	std::cout<<"in game"<<std::endl;
-	Tile tile1(4);
+	// Tile tile1(4);
 	Tile tile2(17);
 	// Tile tile3(20);
 	// Tile tile4(9);
@@ -100,7 +100,6 @@ int main() {
 	tStack.shuffle();
 	Player p1;
 	Player p2;
-	std::cout<<"tile 1 up face is "<<tile1.getUpFace()->getType()<<std::endl;
 	// gameboard.place_tile(std::pair<int, int>(72,72), tile1);
 	gameboard.place_tile(std::pair<int, int>(72,73), tile2);
 	// gameboard.place_tile(std::pair<int, int>(72,71), tile2);
