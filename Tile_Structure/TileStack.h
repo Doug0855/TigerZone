@@ -9,6 +9,7 @@ class TileStack{
 public:
 
 	TileStack();
+	TileStack(std::vector<int> tileVector);
 	~TileStack();
 
 	void shuffle();

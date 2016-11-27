@@ -307,7 +307,8 @@ int main(int argc, char *argv[]) {
 
 	//Game game1("123", p1, p2, tStack, tile1, std::pair<int,int> (72,72));
 	//game1.play();
-
+	int z;
+	std::cin >> z;
 
 	//printBoard(game1.gameboard);
 	// std::string token;

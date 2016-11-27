@@ -2,6 +2,7 @@
 #define STRUCTURE_H
 
 #include "Block.h"
+#include "Tile.h"
 #include <string>
 
 class Structure {
@@ -10,6 +11,8 @@ public:
 	Structure(std::string type);
 	Structure();
 	~Structure();
+
+	void checkAnimals(Tile *tile);
 
 	std::string type;
 
@@ -23,10 +26,10 @@ public:
 	int boarCount;
 	int deerCount;
 	int buffaloCount;
-
-	bool hasMeeple = false;
-
 	int crocodileCount;
+
+	bool hasMeeple;
+
 };
 
 #endif
