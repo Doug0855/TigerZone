@@ -57,7 +57,7 @@ Adapter::~Adapter() {}
 	return expression;
 }*/
 
-int Adapter::exprToTile(std::string &expr) 
+int Adapter::exprToTile(std::string &expr)
 {
 	transform(expr.begin(), expr.end(), expr.begin(), toupper);
 	if (expr == "JJJJ-")
@@ -297,4 +297,31 @@ std::pair<int, int> Adapter::convertZone(int spot)
 	else if(spot = 7) return std::pair<int, int>(2,0);
 	else if(spot = 8) return std::pair<int, int>(2,1);
 	else if(spot = 9) return std::pair<int, int>(2,2);
+}
+
+values_t Adapter::translate(std::string message)
+{
+	if (message.compare(0,8,"STARTING") == 0) //STARTING TILE IS <tile> AT <x> <y> <orientation>
+	{
+		return parseStartingTile(message);
+	}
+
+
+}
+
+values_t Adapter::parseStartingTile(std::string message)
+{
+	std::string starting_tile, substr;
+	values_t out;
+
+	starting_tile = message.substr(17, message.find(" AT")-17); //get string where tile description starts until before " AT"
+	out.tile_num = exprToTile(starting_tile);
+	substr = message.substr(message.find("AT ")+3,message.find(" ", message.find("AT ")+3, 1)-message.find("AT ")-3); //get first string integer
+	out.i =  stoi(substr);
+	substr = message.erase(0, message.find(substr) + substr.length() + 1); //get string with last two integers
+	out.j = stoi(substr.substr(0,substr.find(" ")));
+	substr = substr.erase(0,substr.find(" ")+1); //get string with last int
+	substr = substr.substr(0,std::string::npos); //get the last integer
+	out.rotation = stoi(substr);
+	return out;
 }

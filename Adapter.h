@@ -13,11 +13,8 @@
 #include "Tile_Structure/Block.h"
 
 struct values_t {
-	int tile_num;
-	int rotation;
-	int i;
-	int j;
-
+	int tile_num, rotation, i, j;
+	std::vector<int> tile_stack;
 };
 
 
@@ -25,6 +22,8 @@ class Adapter {
 public:
 	Adapter();
 	~Adapter();
+
+	values_t translate(std::string message);
 
 	// Methods
 	//std::string tileToExpr(Tile& tile);
@@ -39,10 +38,12 @@ public:
 	std::pair<int, int> convertCoordinates(std::pair<int, int> location);
 	int convertZone(std::pair<int, int> location);
 	std::pair<int, int> convertZone(int spot);
-	
+
 private:
 	std::string playerID, roundID, score, numChallenges, numRounds, planTime, moveTime;
 	std::vector<std::string> tileList;
+
+	values_t parseStartingTile(std::string message);
 };
 
 #endif

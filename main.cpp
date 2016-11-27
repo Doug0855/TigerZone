@@ -120,15 +120,7 @@ void matchProtocol(Client &client, std::string &message_list)
 		}
 		else if (message.compare(0,1,"S") == 0) //getting starting tile information
 		{
-			starting_tile = message.substr(17, message.find(" AT")-17); //get string where tile description starts until before " AT"
-			substr = message.substr(message.find("AT ")+3,message.find(" ", message.find("AT ")+3, 1)-message.find("AT ")-3); //get first string integer
-			x = stoi(substr);
-			substr = message.erase(0, message.find(substr) + substr.length() + 1); //get string with last two integers
-			y = stoi(substr.substr(0,substr.find(" ")));
-			substr = substr.erase(0,substr.find(" ")+1); //get string with last int
-			substr = substr.substr(0,std::string::npos); //get the last integer
-			orientation = stoi(substr);
-			std::cout << "starting tile <" << starting_tile << "> at <" << x << ", " << y << ", " << orientation <<std::endl;
+			values_t message_info = adapter.translate(message);
 			//place starting tile
 			message = getMesssage(client, message_list);
 		}
