@@ -213,7 +213,7 @@ int Adapter::convertZone(std::pair<int, int> location)
 {
 	int i = location.first;
 	int j = location.second;
-	
+
 	if(i == 0)
 	{
 		if(j == 0) return 1;
@@ -253,7 +253,7 @@ values_t Adapter::translate(std::string message)
 	{
 		return parseStartingTile(message);
 	}
-	if (message.compare(0,3,"THE") == 0) //THE REMAINING <number_tiles> TILES ARE [ <tiles> ] 
+	if (message.compare(0,3,"THE") == 0) //THE REMAINING <number_tiles> TILES ARE [ <tiles> ]
 	{
 	  return parseTileStack(message);
 	}
@@ -269,7 +269,7 @@ values_t Adapter::translate(std::string message)
 	{
 	  return parseGameMove(message);
 	}
-	
+
 }
 
 values_t Adapter::parseStartingTile(std::string message)
@@ -297,7 +297,7 @@ values_t Adapter::parseTileStack(std::string message)
   std::vector<int> tile_stack;
   int tile_num;
   values_t out;
-  
+
   //message = getMesssage(client, message_list);
   substr = message.substr(14,message.find(" TILE")-14); //get first string integer
   out.number_of_tiles = stoi(substr);
@@ -319,40 +319,40 @@ values_t Adapter::parseMatch(std::string message)
   return out;
 }
 
-values_t Adapter::parseMakeMove(std::string message) 
+values_t Adapter::parseMakeMove(std::string message)
 {
   std::istringstream buffer(message);
   std::istream_iterator<std::string> beg(buffer), end;
-  
+
   std::vector<std::string> messageWords(beg,end);   //Put all the words from the message into a vector
- 
+
   std::string gameId = messageWords[5];       // Get the gameId from the string
   std::string tileType = messageWords[messageWords.size()-1]; //get the tileType that we are about to place
   std::string moveNum = messageWords[messageWords.size()-3];  //get the move number
-  
+
   values_t out;
   out.gameId = gameId;
   out.tileType = tileType;
   out.moveNumber = stoi(moveNum);
-  
+
   return out;
 }
- 
-values_t Adapter::parseGameMove(std::string message) 
+
+values_t Adapter::parseGameMove(std::string message)
 {
   values_t out;
-  
+
   std::istringstream buffer(message);
   std::istream_iterator<std::string> beg(buffer), end;
-  
+
   std::vector<std::string> messageWords(beg,end);   //Put all the words from the message into a vector
-  
+
   std::string gameId = messageWords[1];
   out.gameId = gameId;
-  
+
   if(messageWords[6] == "FORFEITED")  //Check to see if the other player forfeited
   {
-    out.tileNum = -1;
+    out.forfeit = -1;
     return out;
   }
   else if(messageWords[6] == "PLACED")  //Check to see if the other player forfeited
@@ -362,17 +362,17 @@ values_t Adapter::parseGameMove(std::string message)
     int yCoord = stoi(messageWords[10]);
     int rotation = stoi(messageWords[11]);
     std::string animalType = messageWords[12];
-    
+
     out.i = xCoord;
     out.j = yCoord;
     out.rotation = rotation;
     out.animal = animalType;
-    
+
     if(messageWords.size() == 14 && animalType == "TIGER"){
       int tigerZone = stoi(messageWords[13]);
       out.meepleZone = tigerZone;   //Set the zone where the meeple is placed in the tile
     }
-    
+
     return out;
   }
 }
