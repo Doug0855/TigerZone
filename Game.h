@@ -1,4 +1,4 @@
-#ifndef GAME_H
+﻿#ifndef GAME_H
 #define GAME_H
 
 #include "Player.h"
@@ -12,17 +12,16 @@ public:
 	~Game();
 
 	void play();
-	void makeMove(Tile);
-	void meepleAi(int i, int j);
+	std::string makeMove(Tile);
+	std::string meepleAi(int i, int j);
 	void updateBoard();
-	void switchPlayer();
 	void printToTextFile(Board);
-
-
+	
 	Board gameboard;
 private:
 	int structurePoints(Structure structure);
-
+	
+  int numMeeples = 7;
 	std::string gameId;
 	Player player1;
 	Player player2;
