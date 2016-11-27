@@ -97,7 +97,10 @@ std::string getMesssage(Client &client, std::string &msg_list)
 	return msg;
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/networkingTiger
 int moveProtocol(Client &client, std::string &mesagge_list, Game &game1, Game &game2)
 {
 	std::string message_to_send;

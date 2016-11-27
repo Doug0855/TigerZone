@@ -253,6 +253,7 @@ values_t Adapter::translate(std::string message)
 	{
 		return parseStartingTile(message);
 	}
+<<<<<<< HEAD
 	if (message.compare(0,3,"THE") == 0) //THE REMAINING <number_tiles> TILES ARE [ <tiles> ] 
 	{
 	  return parseTileStack(message);
@@ -270,6 +271,11 @@ values_t Adapter::translate(std::string message)
 	  return parseGameMove(message);
 	}
 	
+=======
+	
+
+
+>>>>>>> origin/networkingTiger
 }
 
 values_t Adapter::parseStartingTile(std::string message)
