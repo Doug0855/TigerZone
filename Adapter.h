@@ -11,6 +11,13 @@
 #include "Tile_Structure/Face.h"
 #include "Tile_Structure/Block.h"
 
+struct values_t {
+	int tile_num;
+
+
+};
+
+
 class Adapter {
 public:
 	Adapter();
@@ -18,7 +25,7 @@ public:
 
 	// Methods
 	//std::string tileToExpr(Tile& tile);
-	int exprToTile(std::string& expr);
+	values_t exprToTile(std::string &expr);
 	int numRotations(const int x);
 	std::vector<std::string> convertExpression(const std::string& expr);
 	std::string get(const std::string& prop);

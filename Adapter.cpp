@@ -4,6 +4,8 @@ Adapter::Adapter() {}
 
 Adapter::~Adapter() {}
 
+
+
 /*std::string Adapter::tileToExpr(Tile& tile) {
 	// Vector of chars to be converted to string
 	std::vector<char> expr;
@@ -55,65 +57,147 @@ Adapter::~Adapter() {}
 	return expression;
 }*/
 
-int Adapter::exprToTile(std::string& expr) {
-	int type = -1;
+values_t Adapter::exprToTile(std::string &expr) {
+	values_t output;
+	output.tile_num = -1;
+
 	transform(expr.begin(), expr.end(), expr.begin(), toupper);
 	if (expr == "JJJJ-")
-		return type = 1;
+	{
+		output.tile_num = 1;
+		return output;
+	}
 	if (expr == "LLLL-")
-		return type = 2;
+	{
+		output.tile_num = 2;
+		return output;
+	}
 	if (expr == "TLJT-")
-		return type = 3;
+	{
+		output.tile_num = 3;
+		return output;
+	}
 	if (expr == "TLTT-")
-		return type = 4;
+	{
+		output.tile_num = 4;
+		return output;
+	}
 	if (expr == "JJJJX")
-		return type = 5;
+	{
+		output.tile_num = 5;
+		return output;
+	}
 	if (expr == "JLLL-")
-		return type = 6;
+	{
+		output.tile_num = 6;
+		return output;
+	}
 	if (expr == "TLJTP")
-		return type = 7;
+	{
+		output.tile_num = 7;
+		return output;
+	}
 	if (expr == "TLTTP")
-		return type = 8;
+	{
+		output.tile_num = 8;
+		return output;
+	}
 	if (expr == "JJTJX")
-		return type = 9;
+	{
+		output.tile_num = 9;
+		return output;
+	}
 	if (expr == "LLJJ-")
-		return type = 10;
+	{
+		output.tile_num = 10;
+		return output;
+	}
 	if (expr == "JLTT-")
-		return type = 11;
+	{
+		output.tile_num = 11;
+		return output;
+	}
 	if (expr == "TLLT-")
-		return type = 12;
+	{
+		output.tile_num = 12;
+		return output;
+	}
 	if (expr == "TTTT-")
-		return type = 13;
+	{
+		output.tile_num = 13;
+		return output;
+	}
 	if (expr == "JLJL-")
-		return type = 14;
+	{
+		output.tile_num = 14;
+		return output;
+	}
 	if (expr == "JLTTB")
-		return type = 15;
+	{
+		output.tile_num = 15;
+		return output;
+	}
 	if (expr == "TLLTB")
-		return type = 16;
+	{
+		output.tile_num = 16;
+		return output;
+	}
 	if (expr == "TJTJ-")
-		return type = 17;
+	{
+		output.tile_num = 17;
+		return output;
+	}
 	if (expr == "LJLJ-")
-		return type = 18;
+	{
+		output.tile_num = 18;
+		return output;
+	}
 	if (expr == "TLTJ-")
-		return type = 19;
+	{
+		output.tile_num = 19;
+		return output;
+	}
 	if (expr == "LJTJ-")
-		return type = 20;
+	{
+		output.tile_num = 20;
+		return output;
+	}
 	if (expr == "TJJT-")
-		return type = 21;
+	{
+		output.tile_num = 21;
+		return output;
+	}
 	if (expr == "LJJJ-")
-		return type = 22;
+	{
+		output.tile_num = 22;
+		return output;
+	}
 	if (expr == "TLTJD")
-		return type = 23;
+	{
+		output.tile_num = 23;
+		return output;
+	}
 	if (expr == "LJTJD")
-		return type = 24;
+	{
+		output.tile_num = 24;
+		return output;
+	}
 	if (expr == "TJTT-")
-		return type = 25;
+	{
+		output.tile_num = 25;
+		return output;
+	}
 	if (expr == "JLLJ-")
-		return type = 26;
+	{
+		output.tile_num = 26;
+		return output;
+	}
 	if (expr == "TLLL-")
-		return type = 27;
-
-	return type;
+	{
+		output.tile_num = 27;
+		return output;
+	}
+	return output;
 }
 
 int Adapter::numRotations(const int x) {

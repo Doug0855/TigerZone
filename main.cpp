@@ -85,6 +85,17 @@ std::string parseMessageList(std::string &msg)
 
 	return token;
 }
+std::string getMesssage(Client &client, std::string &msg_list)
+{
+	std::string msg;
+	if (msg_list.empty())
+	{
+		msg_list = client.receiveMessage();
+		msg = parseMessageList(msg_list);
+	}
+	else msg = parseMessageList(msg_list);
+	return msg;
+}
 
 void moveProtocol()
 {
@@ -94,60 +105,57 @@ void moveProtocol()
 
 void matchProtocol(Client &client, std::string &message_list)
 {
-	std::string opponent_id, starting_tile, substr;
-	int x, y, orientation;
-	if (message_list.empty())
-	{
-		message_list = client.receiveMessage();
-		message = parseMessageList(message_list);
-	}
-	else message = parseMessageList(message_list);
+	Adapter adapter;
+	int x, y, orientation, number_of_tiles, tile_num;
+	std::string opponent_id, starting_tile, substr, message;
+	std::vector<int> tile_stack;
+	message = getMesssage(client, message_list);
 
 	while (message.compare(0,1,"G") != 0) //while Game is not over
 	{
 		if (message.compare(0,1,"Y") == 0) //getting opponent player id
 		{
-			opponent_id = message.substr(23,message.end()));
-			if (message_list.empty())
-			{
-				message_list = client.receiveMessage();
-				message = parseMessageList(message_list);
-			}
-			else message = parseMessageList(message_list);
+			//opponent_id = message.substr(23,message.end()));
+			message = getMesssage(client, message_list);
 		}
 		else if (message.compare(0,1,"S") == 0) //getting starting tile information
 		{
-			starting_tile = message.substr(17, message.find(" AT")-17);
-			substr = message.substr(message.find("AT ")+3,message.find(" ", message.find("AT ")+3, 1)-message.find("AT ")-3);
+			starting_tile = message.substr(17, message.find(" AT")-17); //get string where tile description starts until before " AT"
+			substr = message.substr(message.find("AT ")+3,message.find(" ", message.find("AT ")+3, 1)-message.find("AT ")-3); //get first string integer
 			x = stoi(substr);
-			y = stoi(message.substr());
-			orientation = stoi(message.substr());
+			substr = message.erase(0, message.find(substr) + substr.length() + 1); //get string with last two integers
+			y = stoi(substr.substr(0,substr.find(" ")));
+			substr = substr.erase(0,substr.find(" ")+1); //get string with last int
+			substr = substr.substr(0,std::string::npos); //get the last integer
+			orientation = stoi(substr);
+			std::cout << "starting tile <" << starting_tile << "> at <" << x << ", " << y << ", " << orientation <<std::endl;
 			//place starting tile
-			if (message_list.empty())
-			{
-				message_list = client.receiveMessage();
-				message = parseMessageList(message_list);
-			}
-			else message = parseMessageList(message_list);
+			message = getMesssage(client, message_list);
 		}
-		else if (message.compare(0,1,"E") == 0) //waiting for the next round to begin
+		else if (message.compare(0,1,"T") == 0) //get tile stack
 		{
-			if (message_list.empty())
+			std::string token;
+			std::string delimiter = " "; //delimiter between tiles
+			size_t pos = 0;
+			message = getMesssage(client, message_list);
+			substr = message.substr(14,message.find(" TILE")-14); //get first string integer
+			number_of_tiles = stoi(substr);
+			substr = message.erase(0, message.find("[")+1); //get string starting with the first tile to start tokeninzing tiles
+			for (int i = 0; i < number_of_tiles; i++)
 			{
-				message_list = client.receiveMessage();
-				message = parseMessageList(message_list);
+				pos = substr.find(" ");
+				token = substr.substr(0, pos);
+				substr.erase(0, pos + 1);
+				std::cout << "<"<< token << "> ";
+				tile_num = adapter.exprToTile(token);
+				tile_stack.push_back(tile_num);
 			}
-			else message = parseMessageList(message_list);
+			//create tile stack out of vector of integers
 		}
 		else //hopefully this is never reached
 		{
 			std::cout << "ERROR: previous message could not be processed correctly. Message skiped!" << std::endl;
-			if (message_list.empty())
-			{
-				message_list = client.receiveMessage();
-				message = parseMessageList(message_list);
-			}
-			else message = parseMessageList(message_list);
+			message = getMesssage(client, message_list);
 		}
 	}
 
@@ -156,13 +164,9 @@ void matchProtocol(Client &client, std::string &message_list)
 void roundProtocol(Client &client, std::string &message_list, int rounds)
 {
 	int round_id;
-	std:string TERMINATE_ROUND = "END OF ROUND " + rounds + " OF " + rounds;
-	if (message_list.empty())
-	{
-		message_list = client.receiveMessage();
-		message = parseMessageList(message_list);
-	}
-	else message = parseMessageList(message_list);
+	std::string message;
+	std::string TERMINATE_ROUND = "END OF ROUND " + std::to_string(rounds) + " OF " + std::to_string(rounds);
+	message = getMesssage(client, message_list);
 
 	while (message != TERMINATE_ROUND)
 	{
@@ -170,31 +174,16 @@ void roundProtocol(Client &client, std::string &message_list, int rounds)
 		{
 			round_id = stoi(message.substr(12,message.find(" OF")-12));
 			//matchProtocol(); // pass message reference
-			if (message_list.empty())
-			{
-				message_list = client.receiveMessage();
-				message = parseMessageList(message_list);
-			}
-			else message = parseMessageList(message_list);
+			message = getMesssage(client, message_list);
 		}
 		else if (message.compare(0,1,"E") == 0) //waiting for the next round to begin
 		{
-			if (message_list.empty())
-			{
-				message_list = client.receiveMessage();
-				message = parseMessageList(message_list);
-			}
-			else message = parseMessageList(message_list);
+			message = getMesssage(client, message_list);
 		}
 		else //hopefully this is never reached
 		{
 			std::cout << "ERROR: previous message could not be processed correctly. Message skiped!" << std::endl;
-			if (message_list.empty())
-			{
-				message_list = client.receiveMessage();
-				message = parseMessageList(message_list);
-			}
-			else message = parseMessageList(message_list);
+			message = getMesssage(client, message_list);
 		}
 	}
 }
@@ -202,9 +191,9 @@ void roundProtocol(Client &client, std::string &message_list, int rounds)
 void challengeProtocol(Client &client)
 {
 	int challenge_id, rounds;
-	std::string message, message_list;
-	message_list = client.receiveMessage();
-	message = parseMessageList(message_list);
+	std::string message;
+	std::string message_list = "";
+	message = getMesssage(client, message_list);
 	while (message != TERMINATE_CHALLENGE)
 	{
 		if (message.compare(0,1,"N") == 0) //executing a new challenge
@@ -216,32 +205,17 @@ void challengeProtocol(Client &client)
 				//roundProtocol(); //pass message reference
 				//std::cout << "challenge id is: " << challenge_id << " and playing " << rounds << " rounds" << std::endl;
 			}
-			if (message_list.empty())
-			{
-				message_list = client.receiveMessage();
-				message = parseMessageList(message_list);
-			}
-			else message = parseMessageList(message_list);
+			message = getMesssage(client, message_list);
 		}
 		else if (message.compare(0,1,"P") == 0)	//waiting for the next challenge to begin
 		{
 			std::cout << "waiting for the next challenge to begin" << std::endl;
-			if (message_list.empty())
-			{
-				message_list = client.receiveMessage();
-				message = parseMessageList(message_list);
-			}
-			else message = parseMessageList(message_list);
+			message = getMesssage(client, message_list);
 		}
 		else //hopefully this is never reached
 		{
 			std::cout << "ERROR: previous message could not be processed correctly. Message skiped!" << std::endl;
-			if (message_list.empty())
-			{
-				message_list = client.receiveMessage();
-				message = parseMessageList(message_list);
-			}
-			else message = parseMessageList(message_list);
+			message = getMesssage(client, message_list);
 		}
 	}
 }
@@ -298,7 +272,7 @@ int main(int argc, char *argv[]) {
 	std::cout<<"in game"<<std::endl;
 	Board gameboard;
 	Client serverConnection(SERVER_IP, PORT);
-	serverConnection.connectToServer();
+	//serverConnection.connectToServer();
 	//serverConnection.sendMessage("Hello World!");
 	//std::cout << serverConnection.receiveMessage() << std::endl;
 	//std::cout << serverConnection.receiveMessage() << std::endl;
@@ -309,15 +283,33 @@ int main(int argc, char *argv[]) {
 	TileStack tStack;
 	tStack.shuffle();
 
-	PLAYER_ID = authenticationProtocol(serverConnection, TOURNAMENT_PASS, TEAM_ID, TEAM_PASSWORD);
-	std::cout << "Player id returned is: " << PLAYER_ID << std::endl;
-	challengeProtocol(serverConnection);
+	//PLAYER_ID = authenticationProtocol(serverConnection, TOURNAMENT_PASS, TEAM_ID, TEAM_PASSWORD);
+	//std::cout << "Player id returned is: " << PLAYER_ID << std::endl;
+	//challengeProtocol(serverConnection);
 
-	// std::string message, player_id;
-	// message = "WELCOME <pid> PLEASE WAIT FOR THE NEXT CHALLENGE\r\n";
-	// // player_id = message.substr(8,message.find(" PLEASE")-8);
-	// // std::cout << "Player id returned is: " << player_id << " " << message.find(" PLEASE") << std::endl;
-	// std::cout << "Comparison is: " << message.compare(0,1,"W") << std::endl;
+
+		// if (message.compare(0,1,"Y") == 0) //getting opponent player id
+		// {
+		// 	//opponent_id = message.substr(23,message.end()));
+		// 	message = getMesssage(client, message_list);
+		// }
+		// else if (message.compare(0,1,"S") == 0) //getting starting tile information
+		// {
+		// 	starting_tile = message.substr(17, message.find(" AT")-17); //get string where tile description starts until before " AT"
+		// 	substr = message.substr(message.find("AT ")+3,message.find(" ", message.find("AT ")+3, 1)-message.find("AT ")-3); //get first string integer
+		// 	x = stoi(substr);
+		// 	substr = message.erase(0, message.find(substr) + substr.length() + 1); //get string with last two integers
+		// 	y = stoi(substr.substr(0,substr.find(" ")));
+		// 	substr = substr.erase(0,substr.find(" ")+1); //get string with last int
+		// 	substr = substr.substr(0,std::string::npos); //get the last integer
+		// 	orientation = stoi(substr);
+		// 	std::cout << "starting tile <" << starting_tile << "> at <" << x << ", " << y << ", " << orientation <<std::endl;
+		// 	//place starting tile
+		// 	message = getMesssage(client, message_list);
+		// }
+		// else if (message.compare(0,1,"T") == 0) //get tile stack
+		// {
+
 
 
 
@@ -326,6 +318,12 @@ int main(int argc, char *argv[]) {
 
 
 	//printBoard(game1.gameboard);
-
+	// std::string token;
+	// std::string delimiter = "\r\n";
+	// size_t pos = 0;
+	//
+	// pos = msg.find(delimiter);
+	// token = msg.substr(0, pos);
+	// msg.erase(0, pos + delimiter.length());
 	return 0;
 };
