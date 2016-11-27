@@ -16,11 +16,13 @@ public:
 	std::string meepleAi(int i, int j);
 	void updateBoard();
 	void printToTextFile(Board);
-	
+	void setID(std::string identification) { gameId = identification; }
+	std::string getID() { return gameId; }
+
 	Board gameboard;
 private:
 	int structurePoints(Structure structure);
-	
+
   int numMeeples = 7;
 	std::string gameId;
 	Player player1;

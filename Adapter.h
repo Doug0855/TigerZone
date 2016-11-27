@@ -18,7 +18,7 @@ struct values_t {
 	std::string gameId;
 	std::string tileType;
 	std::string animal;
-	int tileNum;
+	int forfeit = 0;
 	int moveNumber;
 	int meepleZone;
 };
