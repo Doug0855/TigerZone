@@ -87,32 +87,40 @@ void challenge(int newsockfd)
 void exchangeMessages(int newsockfd) {
 	int count = 0;
 	int n;
+	int waitSecond = 3;
 	std::string message;
 	char buffer[256];
+	char response;
 	std::cout<<"Client connected. Start sending messages."<<std::endl;
 
 	authentication(newsockfd);
 	// Loop to continuously get messages
 	while(true) {
-		// Get message
-		std::cout<<"Enter Message >>";
-		std::getline(std::cin, message);
-		message.append("\r\n");
-		std::cout<<"Verification: " <<message<<std::endl;
+		std::cout<<"Wait for a response? (y/n)"<<std::endl;
+		std::cin>>response;
 
-		// Clear buffer and insert message
-		bzero(buffer, 256);
-		message.copy(buffer, 255, 0);
-		n = write(newsockfd, buffer, strlen(buffer));
-		if (n < 0) error("Error occurred.");
-		else std::cout<<"Message sent successfully. Waiting for response"<<std::endl;
+		if (response == 'y') 
+		{
+			// Get message from client
+			bzero(buffer, 256);
+			n = read(newsockfd, buffer, 255);
+			std::cout<<"Message from client: ";
+			printf("%s\n", buffer);
+			if (n < 0) error("Error occurred.");
+		} else {
+			// Message to send
+			std::cout<<"Enter Message >>";
+			std::getline(std::cin, message);
+			message.append("\r\n");
+			std::cout<<"Verification: " <<message<<std::endl;
 
-		// Get message from client
-		bzero(buffer, 256);
-		n = read(newsockfd, buffer, 255);
-		std::cout<<"Message from client: ";
-		printf("%s\n", buffer);
-		if (n < 0) error("Error occurred.");
+			// Clear buffer and insert message
+			bzero(buffer, 256);
+			message.copy(buffer, 255, 0);
+			n = write(newsockfd, buffer, strlen(buffer));
+			if (n < 0) error("Error occurred.");
+			else std::cout<<"Message sent successfully."<<std::endl;
+		}
 	}		
 }
 int main(int argc, char *argv[])
