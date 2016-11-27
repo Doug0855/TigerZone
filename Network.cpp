@@ -1,9 +1,9 @@
 #include "Network.h"
 
-Client::Client(char *hostname, char *port)
+Client::Client(std::string hostname, std::string port)
 {
-    portno = atoi(port);
-    server = gethostbyname(hostname);
+    portno = stoi(port);
+    server = gethostbyname(hostname.c_str());
     if (server == NULL) {
         fprintf(stderr,"ERROR, no such host\n");
         exit(0);

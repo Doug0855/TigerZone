@@ -13,7 +13,7 @@
 
 class Client {
 public:
-  Client(char *hostname, char *port);
+  Client(std::string hostname, std::string port);
   ~Client();
 
   void connectToServer();
