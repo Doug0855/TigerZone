@@ -1,11 +1,14 @@
 #this target will compile all files
 all: TigerZone
 
-TigerZone: main.o Game.o Board.o Player.o Meeple.o Farmer.o Monk.o TileStack.o Tile.o Face.o Block.o Structure.o
-	g++ main.o Game.o Board.o Player.o Meeple.o Farmer.o Monk.o TileStack.o Tile.o Face.o Block.o Structure.o -o tiger.out
+TigerZone: main.o Adapter.o Game.o Board.o Player.o Meeple.o TileStack.o Tile.o Face.o Block.o Structure.o
+	g++ main.o Adapter.o Game.o Board.o Player.o Meeple.o TileStack.o Tile.o Face.o Block.o Structure.o -o tiger.out
 
 main.o: main.cpp
 	g++ -std=c++11 -c main.cpp
+
+Adapter.o: Adapter.cpp
+	g++ -std=c++11 -c Adapter.cpp
 
 Game.o: Game.cpp
 	g++ -std=c++11 -c Game.cpp
@@ -18,12 +21,6 @@ Player.o: Player.cpp
 
 Meeple.o: Meeple.cpp
 	g++ -std=c++11 -c Meeple.cpp
-
-Farmer.o: Farmer.cpp
-	g++ -std=c++11 -c Farmer.cpp
-
-Monk.o: Monk.cpp
-	g++ -std=c++11 -c Monk.cpp
 
 TileStack.o: Tile_Structure/TileStack.cpp
 	g++ -std=c++11 -c Tile_Structure/TileStack.cpp
