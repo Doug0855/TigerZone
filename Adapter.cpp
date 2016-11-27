@@ -4,7 +4,7 @@ Adapter::Adapter() {}
 
 Adapter::~Adapter() {}
 
-std::string Adapter::tileToExpr(Tile& tile) {
+/*std::string Adapter::tileToExpr(Tile& tile) {
 	// Vector of chars to be converted to string
 	std::vector<char> expr;
 
@@ -53,7 +53,7 @@ std::string Adapter::tileToExpr(Tile& tile) {
 	std::string expression(expr.begin(), expr.end());
 
 	return expression;
-}
+}*/
 
 int Adapter::exprToTile(std::string& expr) {
 	int type = -1;

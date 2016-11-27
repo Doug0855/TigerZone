@@ -7,9 +7,12 @@
 #include "Tile_Structure/Block.h"
 #include "Tile_Structure/Face.h"
 #include "Tile_Structure/TileStack.h"
+#include "Network.h"
 //#include "Meeple.h"
 #include "Game.h"
 #include "Board.h"
+#include "Adapter.h"
+//#include "Network.h"
 
 #define WHITE   "\033[37m"      /* White */
 #define BLUE    "\033[34m"      /* Blue */
@@ -32,7 +35,7 @@ void printToTextFile(Board gameboard)
 				out_data << item->getRotations() << item->getType();
 			else
 				out_data << '0' << '.';
-			
+
 		}
 		out_data << std::endl;
 	}
@@ -66,93 +69,48 @@ void printStack(TileStack stack) //debugging
 	}
 	std::cout << std::endl;/**/
 }
-// void printTileAdddresses(Tile &tile) //debugging
-// {
-// 	std::cout << "DownFace addr: " << tile.getDownFace() << std::endl;
-// 	std::cout << " Accross addr: " << tile.getDownFace()->getAcrossFace() << std::endl;
-// 	std::cout << " Left addr: " << tile.getDownFace()->getLeftFace() << std::endl;
-// 	std::cout << " Right addr: " << tile.getDownFace()->getRightFace() << std::endl;
 
-// 	std::cout << "UpFace addr: " << tile.getUpFace() << std::endl;
-// 	std::cout << " Across addr: " << tile.getUpFace()->getAcrossFace() << std::endl;
-// 	std::cout << " Left addr: " << tile.getUpFace()->getLeftFace() << std::endl;
-// 	std::cout << " Right addr: " << tile.getUpFace()->getRightFace() << std::endl;
+int main(int argc, char *argv[]) {
+	char *SERVER_IP, *PORT, *TOURNAMENT_PASS, *TEAM_ID, *TEAM_PASSWORD;
+	if( argc == 6 ) {
+		SERVER_IP = argv[1];
+		PORT = argv[2];
+		TOURNAMENT_PASS = argv[3];
+		TEAM_ID = argv[4];
+		TEAM_PASSWORD = argv[5];
+		std::cout << "Server IP is: " << SERVER_IP << std::endl;
+		std::cout << "Port: " << PORT << std::endl;
+		std::cout << "Tournament Password: " << TOURNAMENT_PASS << std::endl;
+		std::cout << "Team Username: " << TEAM_ID << std::endl;
+		std::cout << "Team Password: " << TEAM_PASSWORD << std::endl;
+	}
+	else if( argc > 6 ) {
+		printf("Too many arguments supplied.\n");
+		exit (EXIT_FAILURE);
+	}
+	else {
+		printf("Five arguments expected.\n");
+		exit (EXIT_FAILURE);
+	}
 
-// 	std::cout << "RightFace addr: " << tile.getRightFace() << std::endl;
-// 	std::cout << " Across addr: " << tile.getRightFace()->getAcrossFace() << std::endl;
-// 	std::cout << " Left addr: " << tile.getRightFace()->getLeftFace() << std::endl;
-// 	std::cout << " Right addr: " << tile.getRightFace()->getRightFace() << std::endl;
-
-// 	std::cout << "LeftFace addr: " << tile.getLeftFace() << std::endl;
-// 	std::cout << " Across addr: " << tile.getLeftFace()->getAcrossFace() << std::endl;
-// 	std::cout << " Left addr: " << tile.getLeftFace()->getLeftFace() << std::endl;
-// 	std::cout << " Right addr: " << tile.getLeftFace()->getRightFace() << std::endl;
-// }
-
-int main() {
-	Board gameboard;
 	std::cout<<"in game"<<std::endl;
-	Tile tile1(17);
-	Tile tile2(24);
-	Tile tile3(4);
-	// Tile tile4(9);
-	TileStack tStack;
-	tStack.shuffle();
+	Board gameboard;
+	Client serverConnection(SERVER_IP, PORT);
+	serverConnection.connectToServer();
+	serverConnection.sendMessage("Hello World!");
+	std::cout << serverConnection.receiveMessage() << std::endl;
+	std::cout << serverConnection.receiveMessage() << std::endl;
+	serverConnection.closeConnection();
+	Tile tile1(19);
 	Player p1;
 	Player p2;
-	gameboard.place_tile(std::pair<int, int>(72,72), tile1);
-	gameboard.place_tile(std::pair<int, int>(73,72), tile2);
-	gameboard.place_tile(std::pair<int, int>(72,71), tile3);
-	// gameboard.place_tile(std::pair<int, int>(71,71), tile4);
-	// Game game1("123", p1, p2, tStack, tile1, std::pair<int,int> (72,72));
-	// game1.play();
+	TileStack tStack;
+	tStack.shuffle();
 
-	// Tile tile2(5);
-	// gameboard.place_tile(std::pair<int,int>(71,72), tile2);
-	/*
-	Tile *tmpTile = new Tile(tStack.tiles[0].getNum());
-	gameboard.place_tile(std::pair<int,int>(72,71), *tmpTile);
+	//Game game1("123", p1, p2, tStack, tile1, std::pair<int,int> (72,72));
+	//game1.play();
 
-	std::vector<std::pair<int, int> > availableLocations = gameboard.display_positions(tStack.tiles[1]);
-	std::cout<<"there are "<<availableLocations.size()<<" available locations for tile "<<tStack.tiles[1].getType()<<std::endl;
-	for(int i = 0; i < availableLocations.size(); i++) {
-		std::cout<<i<<") "<<availableLocations[i].first<<' '<<availableLocations[i].second<<std::endl;
-	}
-	*/
-	// printBoard(game1.gameboard);
-
-	// Board gameBoard;
-	// gameBoard.place_tile(std::pair<int, int>(72, 50), tile1);
-
-	// for(int i = 0; i < /**/tStack.tiles.size()/**/; i++) {
-	// 	// Get all positions that we may place the tile
-	// 	std::vector<std::pair<int,int> > availableLocations = gameBoard.display_positions(tStack.tiles[i]);
-	// 	// check if there are any available moves. If so then place at the optimal spot.
-	// 	if(availableLocations.size() > 0) {
-	// 		Tile *tmpTile = new Tile(tStack.tiles[i].getNum());
-	// 		std::pair<int,int> optimalLocation = gameBoard.getOptimalPlacement(*tmpTile, availableLocations);
-	// 		gameBoard.place_tile(optimalLocation, *tmpTile);
-	// 	}
-	// 	else {
-	// 		std::cout << "TILE " << tStack.tiles[i].getType() << " CANNOT BE PLACED" << std::endl;
-	// 		continue;
-	// 	}
-	// }
-	// printStack(tStack);
-	// printBoard(gameBoard);
-	// printToTextFile(gameBoard);
-
-	// /**/if (gameBoard.m_board[72][50] != NULL)  //debugging
-	// {
-	// 	gameBoard.m_board[72][50]->getUpFace()->placeMeeple();
-	// 	std::cout << gameBoard.m_board[72][50]->getUpFace()->hasMeeple() << std::endl;
-	// 	//std::cout << gameBoard.m_board[67][47]->getDownFace()->getAccrossFace()->hasMeeple() << std::endl;;
-	// 	std::cout << "Is there meeple? " << gameBoard.checkMeeplePlacement(*gameBoard.m_board[72][50]->getRightFace());
-	// }
-	// else
-	// 	std::cout << "meeple not placed" << std::endl;/**/																			//debugging
-	int z;
-	std::cin >> z;
+	//printBoard(game1.gameboard);
 
 	return 0;
 };

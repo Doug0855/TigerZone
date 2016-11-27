@@ -17,14 +17,14 @@ public:
 	~Adapter();
 
 	// Methods
-	std::string tileToExpr(Tile& tile);
+	//std::string tileToExpr(Tile& tile);
 	int exprToTile(std::string& expr);
 	int numRotations(const int x);
 	std::vector<std::string> convertExpression(const std::string& expr);
 	std::string get(const std::string& prop);
 	void set(const std::string& prop, const std::string value);
 	std::string getTileString(const int& index);
-	int getCommand();
+	int getCommand(const std::vector<std::string>& myV);
 
 private:
 	std::string playerID, roundID, score, numChallenges, numRounds, planTime, moveTime;
