@@ -7,9 +7,12 @@
 #include "Tile_Structure/Block.h"
 #include "Tile_Structure/Face.h"
 #include "Tile_Structure/TileStack.h"
+#include "Network.h"
 //#include "Meeple.h"
 #include "Game.h"
 #include "Board.h"
+#include "Adapter.h"
+//#include "Network.h"
 
 #define WHITE   "\033[37m"      /* White */
 #define BLUE    "\033[34m"      /* Blue */
@@ -19,6 +22,9 @@
 #define RESET   "\033[0m"       /* Reset */
 #define BOLD    "\033[1m"       /* Bold */
 #define INVERT  "\033[7m"       /* Invert */
+
+#define TERMINATE_CHALLENGE "END OF CHALLENGES"
+
 
 void printToTextFile(Board gameboard)
 {
@@ -32,7 +38,7 @@ void printToTextFile(Board gameboard)
 				out_data << item->getRotations() << item->getType();
 			else
 				out_data << '0' << '.';
-			
+
 		}
 		out_data << std::endl;
 	}
@@ -66,93 +72,251 @@ void printStack(TileStack stack) //debugging
 	}
 	std::cout << std::endl;/**/
 }
-// void printTileAdddresses(Tile &tile) //debugging
-// {
-// 	std::cout << "DownFace addr: " << tile.getDownFace() << std::endl;
-// 	std::cout << " Accross addr: " << tile.getDownFace()->getAcrossFace() << std::endl;
-// 	std::cout << " Left addr: " << tile.getDownFace()->getLeftFace() << std::endl;
-// 	std::cout << " Right addr: " << tile.getDownFace()->getRightFace() << std::endl;
 
-// 	std::cout << "UpFace addr: " << tile.getUpFace() << std::endl;
-// 	std::cout << " Across addr: " << tile.getUpFace()->getAcrossFace() << std::endl;
-// 	std::cout << " Left addr: " << tile.getUpFace()->getLeftFace() << std::endl;
-// 	std::cout << " Right addr: " << tile.getUpFace()->getRightFace() << std::endl;
+std::string parseMessageList(std::string &msg)
+{
+	std::string token;
+	std::string delimiter = "\r\n";
+	size_t pos = 0;
 
-// 	std::cout << "RightFace addr: " << tile.getRightFace() << std::endl;
-// 	std::cout << " Across addr: " << tile.getRightFace()->getAcrossFace() << std::endl;
-// 	std::cout << " Left addr: " << tile.getRightFace()->getLeftFace() << std::endl;
-// 	std::cout << " Right addr: " << tile.getRightFace()->getRightFace() << std::endl;
+	pos = msg.find(delimiter);
+	token = msg.substr(0, pos);
+	msg.erase(0, pos + delimiter.length());
 
-// 	std::cout << "LeftFace addr: " << tile.getLeftFace() << std::endl;
-// 	std::cout << " Across addr: " << tile.getLeftFace()->getAcrossFace() << std::endl;
-// 	std::cout << " Left addr: " << tile.getLeftFace()->getLeftFace() << std::endl;
-// 	std::cout << " Right addr: " << tile.getLeftFace()->getRightFace() << std::endl;
-// }
+	return token;
+}
+std::string getMesssage(Client &client, std::string &msg_list)
+{
+	std::string msg;
+	if (msg_list.empty())
+	{
+		msg_list = client.receiveMessage();
+		msg = parseMessageList(msg_list);
+	}
+	else msg = parseMessageList(msg_list);
+	return msg;
+}
 
-int main() {
-	Board gameboard;
+void moveProtocol()
+{
+
+}
+
+
+void matchProtocol(Client &client, std::string &message_list)
+{
+	Adapter adapter;
+	int x, y, orientation, number_of_tiles, tile_num;
+	std::string opponent_id, starting_tile, substr, message;
+	std::vector<int> tile_stack;
+	message = getMesssage(client, message_list);
+
+	while (message.compare(0,1,"G") != 0) //while Game is not over
+	{
+		if (message.compare(0,1,"Y") == 0) //getting opponent player id
+		{
+			//opponent_id = message.substr(23,message.end()));
+			message = getMesssage(client, message_list);
+		}
+		else if (message.compare(0,1,"S") == 0) //getting starting tile information
+		{
+			values_t message_info = adapter.translate(message);
+			//place starting tile
+			message = getMesssage(client, message_list);
+		}
+		else if (message.compare(0,1,"T") == 0) //get tile stack
+		{
+			std::string token;
+			std::string delimiter = " "; //delimiter between tiles
+			size_t pos = 0;
+			message = getMesssage(client, message_list);
+			substr = message.substr(14,message.find(" TILE")-14); //get first string integer
+			number_of_tiles = stoi(substr);
+			substr = message.erase(0, message.find("[")+1); //get string starting with the first tile to start tokeninzing tiles
+			for (int i = 0; i < number_of_tiles; i++)
+			{
+				pos = substr.find(" ");
+				token = substr.substr(0, pos);
+				substr.erase(0, pos + 1);
+				std::cout << "<"<< token << "> ";
+				tile_num = adapter.exprToTile(token);
+				tile_stack.push_back(tile_num);
+			}
+			//create tile stack out of vector of integers
+		}
+		else //hopefully this is never reached
+		{
+			std::cout << "ERROR: previous message could not be processed correctly. Message skiped!" << std::endl;
+			message = getMesssage(client, message_list);
+		}
+	}
+
+}
+
+void roundProtocol(Client &client, std::string &message_list, int rounds)
+{
+	int round_id;
+	std::string message;
+	std::string TERMINATE_ROUND = "END OF ROUND " + std::to_string(rounds) + " OF " + std::to_string(rounds);
+	message = getMesssage(client, message_list);
+
+	while (message != TERMINATE_ROUND)
+	{
+		if (message.compare(0,1,"B") == 0) //executing a new round
+		{
+			round_id = stoi(message.substr(12,message.find(" OF")-12));
+			//matchProtocol(); // pass message reference
+			message = getMesssage(client, message_list);
+		}
+		else if (message.compare(0,1,"E") == 0) //waiting for the next round to begin
+		{
+			message = getMesssage(client, message_list);
+		}
+		else //hopefully this is never reached
+		{
+			std::cout << "ERROR: previous message could not be processed correctly. Message skiped!" << std::endl;
+			message = getMesssage(client, message_list);
+		}
+	}
+}
+
+void challengeProtocol(Client &client)
+{
+	int challenge_id, rounds;
+	std::string message;
+	std::string message_list = "";
+	message = getMesssage(client, message_list);
+	while (message != TERMINATE_CHALLENGE)
+	{
+		if (message.compare(0,1,"N") == 0) //executing a new challenge
+		{
+			challenge_id = stoi(message.substr(14,message.find(" YOU")-14));
+			rounds = stoi(message.substr(message.find("PLAY")+5,message.find(" MATCH")-message.find("PLAY")-5));
+			for (int i = 0; i < rounds; i++)
+			{
+				//roundProtocol(); //pass message reference
+				//std::cout << "challenge id is: " << challenge_id << " and playing " << rounds << " rounds" << std::endl;
+			}
+			message = getMesssage(client, message_list);
+		}
+		else if (message.compare(0,1,"P") == 0)	//waiting for the next challenge to begin
+		{
+			std::cout << "waiting for the next challenge to begin" << std::endl;
+			message = getMesssage(client, message_list);
+		}
+		else //hopefully this is never reached
+		{
+			std::cout << "ERROR: previous message could not be processed correctly. Message skiped!" << std::endl;
+			message = getMesssage(client, message_list);
+		}
+	}
+}
+
+std::string authenticationProtocol(Client &client, std::string tournament_password, std::string username, std::string password)
+{
+	std::string message;
+	std::string player_id;
+	message = client.receiveMessage();
+	if ( message == "THIS IS SPARTA!\r\n") //message to send tournament password
+	{
+		message = "JOIN " + tournament_password + '\r' + '\n';
+		client.sendMessage(message);
+	}
+	else
+	{
+		std::cout << "ERROR: first message from server is: " << message;
+		client.sendMessage("FAIL");
+	}
+	message = client.receiveMessage();
+	if ( message == "HELLO!\r\n") //message to send team username and password
+	{
+		message = "I AM " + username + " " + password + '\r' + '\n';
+		client.sendMessage(message);
+	}
+	else
+	{
+		std::cout << "ERROR: second message from server is: " << message;
+		client.sendMessage("FAIL");
+	}
+	message = client.receiveMessage(); //last authentication message giving player id back
+	player_id = message.substr(8,message.find(" PLEASE")-8);
+	return player_id;
+}
+
+int main(int argc, char *argv[]) {
+	std::string SERVER_IP, PORT, TOURNAMENT_PASS, TEAM_ID, TEAM_PASSWORD;
+	if( argc == 6 ) {
+		SERVER_IP = argv[1];
+		PORT = argv[2];
+		TOURNAMENT_PASS = argv[3];
+		TEAM_ID = argv[4];
+		TEAM_PASSWORD = argv[5];
+	}
+	else if( argc > 6 ) {
+		printf("Too many arguments supplied.\n");
+		exit (EXIT_FAILURE);
+	}
+	else {
+		printf("Five arguments expected.\n");
+		exit (EXIT_FAILURE);
+	}
+	std::string PLAYER_ID;
 	std::cout<<"in game"<<std::endl;
-	Tile tile1(24);
-	// Tile tile2(24);
-	// Tile tile3(4);
-	// Tile tile4(9);
-	TileStack tStack;
-	tStack.shuffle();
+	Board gameboard;
+	Client serverConnection(SERVER_IP, PORT);
+	//serverConnection.connectToServer();
+	//serverConnection.sendMessage("Hello World!");
+	//std::cout << serverConnection.receiveMessage() << std::endl;
+	//std::cout << serverConnection.receiveMessage() << std::endl;
+	//serverConnection.closeConnection();
+	Tile tile1(19);
 	Player p1;
 	Player p2;
-	gameboard.place_tile(std::pair<int, int>(72,72), tile1);
-	// gameboard.place_tile(std::pair<int, int>(73,72), tile2);
-	// gameboard.place_tile(std::pair<int, int>(72,71), tile3);
-	// gameboard.place_tile(std::pair<int, int>(71,71), tile4);
-	// Game game1("123", p1, p2, tStack, tile1, std::pair<int,int> (72,72));
-	// game1.play();
+	TileStack tStack;
+	tStack.shuffle();
 
-	// Tile tile2(5);
-	// gameboard.place_tile(std::pair<int,int>(71,72), tile2);
-	/*
-	Tile *tmpTile = new Tile(tStack.tiles[0].getNum());
-	gameboard.place_tile(std::pair<int,int>(72,71), *tmpTile);
+	//PLAYER_ID = authenticationProtocol(serverConnection, TOURNAMENT_PASS, TEAM_ID, TEAM_PASSWORD);
+	//std::cout << "Player id returned is: " << PLAYER_ID << std::endl;
+	//challengeProtocol(serverConnection);
 
-	std::vector<std::pair<int, int> > availableLocations = gameboard.display_positions(tStack.tiles[1]);
-	std::cout<<"there are "<<availableLocations.size()<<" available locations for tile "<<tStack.tiles[1].getType()<<std::endl;
-	for(int i = 0; i < availableLocations.size(); i++) {
-		std::cout<<i<<") "<<availableLocations[i].first<<' '<<availableLocations[i].second<<std::endl;
-	}
-	*/
-	// printBoard(game1.gameboard);
 
-	// Board gameBoard;
-	// gameBoard.place_tile(std::pair<int, int>(72, 50), tile1);
+		// if (message.compare(0,1,"Y") == 0) //getting opponent player id
+		// {
+		// 	//opponent_id = message.substr(23,message.end()));
+		// 	message = getMesssage(client, message_list);
+		// }
+		// else if (message.compare(0,1,"S") == 0) //getting starting tile information
+		// {
+		// 	starting_tile = message.substr(17, message.find(" AT")-17); //get string where tile description starts until before " AT"
+		// 	substr = message.substr(message.find("AT ")+3,message.find(" ", message.find("AT ")+3, 1)-message.find("AT ")-3); //get first string integer
+		// 	x = stoi(substr);
+		// 	substr = message.erase(0, message.find(substr) + substr.length() + 1); //get string with last two integers
+		// 	y = stoi(substr.substr(0,substr.find(" ")));
+		// 	substr = substr.erase(0,substr.find(" ")+1); //get string with last int
+		// 	substr = substr.substr(0,std::string::npos); //get the last integer
+		// 	orientation = stoi(substr);
+		// 	std::cout << "starting tile <" << starting_tile << "> at <" << x << ", " << y << ", " << orientation <<std::endl;
+		// 	//place starting tile
+		// 	message = getMesssage(client, message_list);
+		// }
+		// else if (message.compare(0,1,"T") == 0) //get tile stack
+		// {
 
-	// for(int i = 0; i < /**/tStack.tiles.size()/**/; i++) {
-	// 	// Get all positions that we may place the tile
-	// 	std::vector<std::pair<int,int> > availableLocations = gameBoard.display_positions(tStack.tiles[i]);
-	// 	// check if there are any available moves. If so then place at the optimal spot.
-	// 	if(availableLocations.size() > 0) {
-	// 		Tile *tmpTile = new Tile(tStack.tiles[i].getNum());
-	// 		std::pair<int,int> optimalLocation = gameBoard.getOptimalPlacement(*tmpTile, availableLocations);
-	// 		gameBoard.place_tile(optimalLocation, *tmpTile);
-	// 	}
-	// 	else {
-	// 		std::cout << "TILE " << tStack.tiles[i].getType() << " CANNOT BE PLACED" << std::endl;
-	// 		continue;
-	// 	}
-	// }
-	// printStack(tStack);
-	// printBoard(gameBoard);
-	// printToTextFile(gameBoard);
 
-	// /**/if (gameBoard.m_board[72][50] != NULL)  //debugging
-	// {
-	// 	gameBoard.m_board[72][50]->getUpFace()->placeMeeple();
-	// 	std::cout << gameBoard.m_board[72][50]->getUpFace()->hasMeeple() << std::endl;
-	// 	//std::cout << gameBoard.m_board[67][47]->getDownFace()->getAccrossFace()->hasMeeple() << std::endl;;
-	// 	std::cout << "Is there meeple? " << gameBoard.checkMeeplePlacement(*gameBoard.m_board[72][50]->getRightFace());
-	// }
-	// else
-	// 	std::cout << "meeple not placed" << std::endl;/**/																			//debugging
+
+
+	//Game game1("123", p1, p2, tStack, tile1, std::pair<int,int> (72,72));
+	//game1.play();
 	int z;
 	std::cin >> z;
 
+	//printBoard(game1.gameboard);
+	// std::string token;
+	// std::string delimiter = "\r\n";
+	// size_t pos = 0;
+	//
+	// pos = msg.find(delimiter);
+	// token = msg.substr(0, pos);
+	// msg.erase(0, pos + delimiter.length());
 	return 0;
 };
