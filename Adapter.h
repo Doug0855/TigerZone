@@ -14,7 +14,9 @@
 
 struct values_t {
 	int tile_num;
-
+	int rotation;
+	int i;
+	int j;
 
 };
 
@@ -26,7 +28,7 @@ public:
 
 	// Methods
 	//std::string tileToExpr(Tile& tile);
-	values_t exprToTile(std::string &expr);
+	int exprToTile(std::string &expr);
 	int numRotations(const int x);
 	std::vector<std::string> convertExpression(const std::string& expr);
 	std::string get(const std::string& prop);

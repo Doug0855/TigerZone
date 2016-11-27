@@ -57,152 +57,122 @@ Adapter::~Adapter() {}
 	return expression;
 }*/
 
-values_t Adapter::exprToTile(std::string &expr) {
-	values_t output;
-	output.tile_num = -1;
-
+int Adapter::exprToTile(std::string &expr) 
+{
 	transform(expr.begin(), expr.end(), expr.begin(), toupper);
 	if (expr == "JJJJ-")
 	{
-		output.tile_num = 1;
-		return output;
+		return 1;
 	}
 	if (expr == "LLLL-")
 	{
-		output.tile_num = 2;
-		return output;
+		return 2;
 	}
 	if (expr == "TLJT-")
 	{
-		output.tile_num = 3;
-		return output;
+		return 3;
 	}
 	if (expr == "TLTT-")
 	{
-		output.tile_num = 4;
-		return output;
+		return 4;
 	}
 	if (expr == "JJJJX")
 	{
-		output.tile_num = 5;
-		return output;
+		return 5;
 	}
 	if (expr == "JLLL-")
 	{
-		output.tile_num = 6;
-		return output;
+		return 6;
 	}
 	if (expr == "TLJTP")
 	{
-		output.tile_num = 7;
-		return output;
+		return 7;
 	}
 	if (expr == "TLTTP")
 	{
-		output.tile_num = 8;
-		return output;
+		return 8;
 	}
 	if (expr == "JJTJX")
 	{
-		output.tile_num = 9;
-		return output;
+		return 9;
 	}
 	if (expr == "LLJJ-")
 	{
-		output.tile_num = 10;
-		return output;
+		return 10;
 	}
 	if (expr == "JLTT-")
 	{
-		output.tile_num = 11;
-		return output;
+		return 11;
 	}
 	if (expr == "TLLT-")
 	{
-		output.tile_num = 12;
-		return output;
+		return 12;
 	}
 	if (expr == "TTTT-")
 	{
-		output.tile_num = 13;
-		return output;
+		return 13;
 	}
 	if (expr == "JLJL-")
 	{
-		output.tile_num = 14;
-		return output;
+		return 14;
 	}
 	if (expr == "JLTTB")
 	{
-		output.tile_num = 15;
-		return output;
+		return 15;
 	}
 	if (expr == "TLLTB")
 	{
-		output.tile_num = 16;
-		return output;
+		return 16;
 	}
 	if (expr == "TJTJ-")
 	{
-		output.tile_num = 17;
-		return output;
+		return 17;
 	}
 	if (expr == "LJLJ-")
 	{
-		output.tile_num = 18;
-		return output;
+		return 18;
 	}
 	if (expr == "TLTJ-")
 	{
-		output.tile_num = 19;
-		return output;
+		return 19;
 	}
 	if (expr == "LJTJ-")
 	{
-		output.tile_num = 20;
-		return output;
+		return 20;
 	}
 	if (expr == "TJJT-")
 	{
-		output.tile_num = 21;
-		return output;
+		return 21;
 	}
 	if (expr == "LJJJ-")
 	{
-		output.tile_num = 22;
-		return output;
+		return 22;
 	}
 	if (expr == "TLTJD")
 	{
-		output.tile_num = 23;
-		return output;
+		return 23;
 	}
 	if (expr == "LJTJD")
 	{
-		output.tile_num = 24;
-		return output;
+		return 24;
 	}
 	if (expr == "TJTT-")
 	{
-		output.tile_num = 25;
-		return output;
+		return 25;
 	}
 	if (expr == "JLLJ-")
 	{
-		output.tile_num = 26;
-		return output;
+		return 26;
 	}
 	if (expr == "TLLL-")
 	{
-		output.tile_num = 27;
-		return output;
+		return 27;
 	}
 	if (expr == "TLLLC")
 	{
-		output.tile_num = 28;
-		return output;
+		return 28;
 	}
-	return output;
+	return -1;
 
 }
 
