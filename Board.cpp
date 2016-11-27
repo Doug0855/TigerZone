@@ -370,8 +370,8 @@ void Board::buildJungle(Structure* struc, Tile *tile, std::vector< std::vector<B
 		std::cout<<"trail faces is "<<trailFaces<<std::endl;
 		if(trailFaces > 0) {
 			if(trailFaces != 1) {
-				for(int i = row; i < 3; i++) {
-					for(int j = col; j < 3; j++) {
+				for(int i = 0; i < 3; i++) {
+					for(int j = 0; j < 3; j++) {
 						if(tileBlocks[i][j].getType() == "mixed" && !(tileBlocks[i][j].isVisited()))
 							buildJungle(struc, tile, tileBlocks, std::pair<int,int>(i,j), visitedTiles);
 					}	
