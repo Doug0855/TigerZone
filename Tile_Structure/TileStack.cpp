@@ -36,6 +36,13 @@ TileStack::TileStack()
 	}
 }
 
+TileStack::TileStack(std::vector<int> tileVectors) {
+	for(int i = 0; i < tileVectors.size(); i++) {
+		Tile tile(i);
+		tiles.push_back(i);
+	}
+}
+
 TileStack::~TileStack()
 {
 

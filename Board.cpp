@@ -595,16 +595,26 @@ void Board::buildTrail(Structure* struc, Tile *tile, std::vector< std::vector<Bl
 
 	struc->structureBlocks.push_back(tileBlocks[row][col]);
 
-	if(tileBlocks[row][col].hasMeeple())
-		struc->hasMeeple = true;
-	if(tile->hasCrocodile())
-		struc->crocodileCount++;
-	if(tile->hasDeer())
-		struc->deerCount++;
-	if(tile->hasBoar())
-		struc->boarCount++;
-	if(tile->hasBuffalo())
-		struc->buffaloCount++;
+	bool addedTileAnimals;
+	for(int i = 0; i < visitedTiles.size(); i++) {
+			if(visitedTiles[i] == tile)
+			{
+				addedTileAnimals = true;
+				std::cout<<"Added animals already for this tile"<<std::endl;
+			}
+	}
+	if(!addedTileAnimals) {
+		if(tileBlocks[row][col].hasMeeple())
+			struc->hasMeeple = true;
+		if(tile->hasCrocodile())
+			struc->crocodileCount++;
+		if(tile->hasDeer())
+			struc->deerCount++;
+		if(tile->hasBoar())
+			struc->boarCount++;
+		if(tile->hasBuffalo())
+			struc->buffaloCount++;
+	}
 
 	// Check tiles above, below, left, and right of the current block to see if lake structure continues
 	// std::cout<<"about to cehck row+1"<<std::endl;
@@ -788,6 +798,7 @@ std::vector<Structure> Board::getStructures(int row, int col) {
 	for(int i = 0; i < structures.size(); i++) {
 		std::cout<<"Structure is of type "<<structures[i].type<<" with "<<structures[i].structureBlocks.size()
 		<<" blocks and starting block at "<<structures[i].startingBlock.first<<' '<<structures[i].startingBlock.second<<std::endl;
+		std::cout<<" and how many buffalo? : "<<structures[i].buffaloCount<<std::endl;
 	}
 	std::cout<<"Structures size is "<<structures.size()<<std::endl;
 	return structures;
