@@ -18,6 +18,8 @@ struct values_t {
 	std::string gameId;
 	std::string tileType;
 	std::string animal;
+	int tileNum;
+	int moveNumber;
 	int meepleZone;
 };
 
@@ -44,9 +46,10 @@ public:
 	std::pair<int, int> convertZone(int spot);
 
   values_t parseStartingTile(std::string message);
-  values_t parseTileStack(std::string message)
+  values_t parseTileStack(std::string message);
   values_t parseMatch(std::string message);
-  values_t parseMatch(std::string message);
+  values_t parseMakeMove(std::string message);
+  values_t parseGameMove(std::string message);
 
 private:
 	std::string playerID, roundID, score, numChallenges, numRounds, planTime, moveTime;

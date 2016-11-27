@@ -253,7 +253,6 @@ values_t Adapter::translate(std::string message)
 	{
 		return parseStartingTile(message);
 	}
-<<<<<<< HEAD
 	if (message.compare(0,3,"THE") == 0) //THE REMAINING <number_tiles> TILES ARE [ <tiles> ] 
 	{
 	  return parseTileStack(message);
@@ -271,11 +270,6 @@ values_t Adapter::translate(std::string message)
 	  return parseGameMove(message);
 	}
 	
-=======
-	
-
-
->>>>>>> origin/networkingTiger
 }
 
 values_t Adapter::parseStartingTile(std::string message)
@@ -304,16 +298,16 @@ values_t Adapter::parseTileStack(std::string message)
   int tile_num;
   values_t out;
   
-  message = getMesssage(client, message_list);
+  //message = getMesssage(client, message_list);
   substr = message.substr(14,message.find(" TILE")-14); //get first string integer
   out.number_of_tiles = stoi(substr);
   substr = message.erase(0, message.find("[")+1); //get string starting with the first tile to start tokeninzing tiles
-  for (int i = 0; i < number_of_tiles; i++)
+  for (int i = 0; i < out.number_of_tiles; i++)
   {
   	pos = substr.find(" ");
   	token = substr.substr(0, pos);
   	substr.erase(0, pos + 1);
-  	tile_num = adapter.exprToTile(token);
+  	tile_num = exprToTile(token);
   	tile_stack.push_back(tile_num);
   }
   return out;
@@ -330,7 +324,7 @@ values_t Adapter::parseMakeMove(std::string message)
   std::istringstream buffer(message);
   std::istream_iterator<std::string> beg(buffer), end;
   
-  vector<std::string> messageWords(beg,end);   //Put all the words from the message into a vector
+  std::vector<std::string> messageWords(beg,end);   //Put all the words from the message into a vector
  
   std::string gameId = messageWords[5];       // Get the gameId from the string
   std::string tileType = messageWords[messageWords.size()-1]; //get the tileType that we are about to place
@@ -339,7 +333,7 @@ values_t Adapter::parseMakeMove(std::string message)
   values_t out;
   out.gameId = gameId;
   out.tileType = tileType;
-  out.moveNumber = moveNum;
+  out.moveNumber = stoi(moveNum);
   
   return out;
 }
@@ -351,7 +345,7 @@ values_t Adapter::parseGameMove(std::string message)
   std::istringstream buffer(message);
   std::istream_iterator<std::string> beg(buffer), end;
   
-  vector<std::string> messageWords(beg,end);   //Put all the words from the message into a vector
+  std::vector<std::string> messageWords(beg,end);   //Put all the words from the message into a vector
   
   std::string gameId = messageWords[1];
   out.gameId = gameId;
