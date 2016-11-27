@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <utility>
 #include <fstream>
 #include <iomanip>
@@ -97,10 +97,12 @@ std::string getMesssage(Client &client, std::string &msg_list)
 	return msg;
 }
 
-int moveProtocol(Client &client, std::string &mesagge_list, Game &game1, Game &game2)
+int moveProtocol(Client &client, std::string &message_list, Game &game1, Game &game2)
 {
 	std::string message_to_send;
+	std::string message;
 	values_t message_info;
+	Adapter adapter;
 
 	message = getMesssage(client, message_list);
 
@@ -128,7 +130,7 @@ void matchProtocol(Client &client, std::string &message_list)
 	Adapter adapter;
 	values_t message_info;
 	int number_of_tiles, success;
-	message = getMesssage(client, message_list);
+	std::string message = getMesssage(client, message_list);
 	Tile tile1;
 	TileStack tStack;
 
@@ -162,9 +164,8 @@ void matchProtocol(Client &client, std::string &message_list)
 			Game game2("", opponent, ai, tStack, tile1, std::pair<int,int> (72,72));
 			for (int i = 0; i < number_of_tiles; i++)
 			{
-				success = moveProtocol(client, message_list, game1, game2,) //client, message_list, game1 and game2
-				if (success == -1)					//move must return a value to break from for loop in case of forfeit
-					break;
+				success = moveProtocol(client, message_list, game1, game2); //client, message_list, game1 and game2
+				if (success == -1)	break;				//move must return a value to break from for loop in case of forfeit	
 			}
 			message = getMesssage(client, message_list);
 		}
@@ -229,7 +230,7 @@ void challengeProtocol(Client &client)
 		}
 		else //hopefully this is never reached
 		{
-			std::cout << "ERROR: previous message could not be processed correctly. Message skiped!" << std::endl;
+			std::cout << "ERROR: previous message could not be processed correctly. Message skipped!" << std::endl;
 			message = getMesssage(client, message_list);
 		}
 	}

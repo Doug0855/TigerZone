@@ -1,4 +1,4 @@
-#include "Board.h"
+﻿#include "Board.h"
 
 
 Board::Board()
@@ -293,6 +293,11 @@ int Board::animalPoints(int i, int j)
 	return points;
 }
 
+void Board::placeCroc(int i, int j)
+{
+  m_board[i][j].setCrocodile();
+}
+
 // Place a tile on the board. Make sure all neighboring tiles are pointing to the corresponding faces
 void Board::place_tile(std::pair<int, int> location, Tile &tile)
 {
@@ -308,27 +313,6 @@ void Board::placeMeeple(int i, int j, std::pair<int, int> location)
 {
 	m_board[i][j]->placeMeeple(location);
 }
-
-// bool Board::checkMeeplePlacement(Tile tile, std::pair<int,int> blockSpot)
-// {
-// 	std::vector< std::vector<Block> > innerBlocks = tile.getInnerBlocks();
-// 	Block block = innerBlocks[blockSpot.first][blockSpot.second];
-// 	if (block.hasMeeple()) { return true; }
-// 	if (block.getType() == "jungle" || block.getType() == "mixed") 
-// 		checkJungle(tile, blockSpot);
-// 	if (block.getType() == "lake") checkLake(tile, blockSpot);
-// 	if (block.getType() == "trail") checkTrail(tile, blockSpot);
-// }
-
-
-/*So you can use the blocks in a tile to find all of the parts of a tile in the same feature,
-To do this i have a queue of blocks and i find all of the adjacent blocks of the blocks your searching from that are the same type,
-the problem comes in when youre traversing to a new tile since the blocks dont have any connections to anything else
-i could add a queue of tiles and push tiles onto that queue if you traverse to them from the blocks
-but then im not sure how i would hold that information for the new blocks of that tile in relation to the existing queue
-instead of having a queue of tiles i could recall the function again and have it run the same process on the tiles on whatever block you move onto it from
-the problem there is how to remember which tiles youve already visited and which blocks youve visted in those tiles
-*/
 
 Structure Board::checkJungle(Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int, int> blockSpot)
 {

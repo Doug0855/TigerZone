@@ -1,4 +1,4 @@
-#ifndef ADAPTER_H
+﻿#ifndef ADAPTER_H
 #define ADAPTER_H
 
 #include <string>
@@ -13,8 +13,14 @@
 #include "Tile_Structure/Block.h"
 
 struct values_t {
-	int tile_num, rotation, i, j;
+	int number_of_tiles, tile_num, rotation, i, j;
 	std::vector<int> tile_stack;
+	std::string gameId;
+	std::string tileType;
+	std::string animal;
+	int tileNum;
+	int moveNumber;
+	int meepleZone;
 };
 
 
@@ -39,11 +45,16 @@ public:
 	int convertZone(std::pair<int, int> location);
 	std::pair<int, int> convertZone(int spot);
 
+  values_t parseStartingTile(std::string message);
+  values_t parseTileStack(std::string message);
+  values_t parseMatch(std::string message);
+  values_t parseMakeMove(std::string message);
+  values_t parseGameMove(std::string message);
+
 private:
 	std::string playerID, roundID, score, numChallenges, numRounds, planTime, moveTime;
 	std::vector<std::string> tileList;
 
-	values_t parseStartingTile(std::string message);
 };
 
 #endif
