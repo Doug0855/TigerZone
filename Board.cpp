@@ -304,6 +304,11 @@ void Board::place_tile(std::pair<int, int> location, Tile &tile)
 	std::vector<Structure> availableStructures = getStructures(row, col);
 }
 
+void Board::placeMeeple(int i, int j, std::pair<int, int> location)
+{
+	m_board[i][j]->placeMeeple(location);
+}
+
 // bool Board::checkMeeplePlacement(Tile tile, std::pair<int,int> blockSpot)
 // {
 // 	std::vector< std::vector<Block> > innerBlocks = tile.getInnerBlocks();
@@ -328,7 +333,7 @@ the problem there is how to remember which tiles youve already visited and which
 Structure Board::checkJungle(Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int, int> blockSpot)
 {
 	Structure jungleStruct("jungle", blockSpot);
-	std::cout<<"in check jungle"<<std::endl;
+	jungleStruct.checkAnimals(tile);
 	std::vector<Tile*> visitedTiles;
 	visitedTiles.push_back(tile);
 	buildJungle(&jungleStruct, tile, tileBlocks, blockSpot, visitedTiles);
@@ -345,14 +350,18 @@ void Board::buildJungle(Structure* struc, Tile *tile, std::vector< std::vector<B
 
 	if(tileBlocks[row][col].hasMeeple())
 		struc->hasMeeple = true;
-	if(tile->hasCrocodile())
-		struc->crocodileCount++;
-	if(tile->hasDeer())
-		struc->deerCount++;
-	if(tile->hasBoar())
-		struc->boarCount++;
-	if(tile->hasBuffalo())
-		struc->buffaloCount++;
+
+	bool addedTileAnimals = false;
+	for(int i = 0; i < visitedTiles.size(); i++) {
+			if(visitedTiles[i] == tile)
+			{
+				addedTileAnimals = true;
+				std::cout<<"Added animals already for this tile"<<std::endl;
+			}
+	}
+	if(!addedTileAnimals) {
+		struc->checkAnimals(tile);
+	}
 
 	std::cout<<"block type is "<<tileBlocks[row][col].getType()<<std::endl;
 	if(tileBlocks[row][col].getType() == "mixed") {
@@ -451,19 +460,13 @@ void Board::buildJungle(Structure* struc, Tile *tile, std::vector< std::vector<B
 			buildJungle(struc, tile->getLeftTile(), newBlocks, std::pair<int,int>(row,col+2), visitedTiles);
 		}
 	}
-	std::cout<<"passed all ifs"<<std::endl;
 	return;
-}
-
-void Board::placeMeeple(int i, int j, std::pair<int, int> location)
-{
-	m_board[i][j]->placeMeeple(location);
 }
 
 Structure Board::checkLake(Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int, int> blockSpot)
 {
-	std::cout<<"in check lake"<<std::endl;
 	Structure lakeStruct("lake", blockSpot);
+	lakeStruct.checkAnimals(tile);
 	std::vector<Tile*> visitedTiles;
 	visitedTiles.push_back(tile);
 	buildLake(&lakeStruct, tile, tileBlocks, blockSpot, visitedTiles);
@@ -474,7 +477,6 @@ void Board::buildLake(Structure* struc, Tile *tile, std::vector< std::vector<Blo
 	// std::cout<<"in build lake"<<std::endl;
 	int row = blockSpot.first;
 	int col = blockSpot.second;
-	std::cout<<"in build lake at "<<row<<' '<<col<<std::endl;
 	tileBlocks[row][col].visit();
 	// for(int i = 0; i < 3; i++) {
 	// 	for(int j = 0; j < 3; j++) {
@@ -483,17 +485,29 @@ void Board::buildLake(Structure* struc, Tile *tile, std::vector< std::vector<Blo
 	// }
 	struc->structureBlocks.push_back(tileBlocks[row][col]);
 
-
+	// check block for meeple
 	if(tileBlocks[row][col].hasMeeple())
 		struc->hasMeeple = true;
-	if(tile->hasCrocodile())
-		struc->crocodileCount++;
-	if(tile->hasDeer())
-		struc->deerCount++;
-	if(tile->hasBoar())
-		struc->boarCount++;
-	if(tile->hasBuffalo())
-		struc->buffaloCount++;
+
+	bool addedTileAnimals;
+	for(int i = 0; i < visitedTiles.size(); i++) {
+			if(visitedTiles[i] == tile)
+			{
+				addedTileAnimals = true;
+				std::cout<<"Added animals already for this tile"<<std::endl;
+			}
+	}
+	if(!addedTileAnimals) {
+		struc->checkAnimals(tile);
+		// if(tile->hasCrocodile())
+		// 	struc->crocodileCount++;
+		// if(tile->hasDeer())
+		// 	struc->deerCount++;
+		// if(tile->hasBoar())
+		// 	struc->boarCount++;
+		// if(tile->hasBuffalo())
+		// 	struc->buffaloCount++;
+	}
 
 	// Check tiles above, below, left, and right of the current block to see if lake structure continues
 	// std::cout<<"about to cehck row+1"<<std::endl;
@@ -567,6 +581,7 @@ void Board::buildLake(Structure* struc, Tile *tile, std::vector< std::vector<Blo
 Structure Board::checkTrail(Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int, int> blockSpot)
 {
 	Structure trailStruct("trail", blockSpot);
+	trailStruct.checkAnimals(tile);
 	std::vector<Tile*> visitedTiles;
 	visitedTiles.push_back(tile);
 	buildTrail(&trailStruct, tile, tileBlocks, blockSpot, visitedTiles);
@@ -588,12 +603,15 @@ void Board::buildTrail(Structure* struc, Tile *tile, std::vector< std::vector<Bl
 			divergingTrailCount++;
 		if(tileBlocks[row][col-1].getType() == "trail") 
 			divergingTrailCount++;
-		std::cout<<"Diverging trail count is "<<divergingTrailCount<<std::endl;
 		if(divergingTrailCount > 2) 
 			return;
 	}
 
 	struc->structureBlocks.push_back(tileBlocks[row][col]);
+
+	// Check block for meeple
+	if(tileBlocks[row][col].hasMeeple())
+		struc->hasMeeple = true;
 
 	bool addedTileAnimals;
 	for(int i = 0; i < visitedTiles.size(); i++) {
@@ -604,16 +622,15 @@ void Board::buildTrail(Structure* struc, Tile *tile, std::vector< std::vector<Bl
 			}
 	}
 	if(!addedTileAnimals) {
-		if(tileBlocks[row][col].hasMeeple())
-			struc->hasMeeple = true;
-		if(tile->hasCrocodile())
-			struc->crocodileCount++;
-		if(tile->hasDeer())
-			struc->deerCount++;
-		if(tile->hasBoar())
-			struc->boarCount++;
-		if(tile->hasBuffalo())
-			struc->buffaloCount++;
+		struc->checkAnimals(tile);
+		// if(tile->hasCrocodile())
+		// 	struc->crocodileCount++;
+		// if(tile->hasDeer())
+		// 	struc->deerCount++;
+		// if(tile->hasBoar())
+		// 	struc->boarCount++;
+		// if(tile->hasBuffalo())
+		// 	struc->buffaloCount++;
 	}
 
 	// Check tiles above, below, left, and right of the current block to see if lake structure continues
