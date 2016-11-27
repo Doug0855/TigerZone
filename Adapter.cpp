@@ -197,7 +197,13 @@ values_t Adapter::exprToTile(std::string &expr) {
 		output.tile_num = 27;
 		return output;
 	}
+	if (expr == "TLLLC")
+	{
+		output.tile_num = 28;
+		return output;
+	}
 	return output;
+
 }
 
 int Adapter::numRotations(const int x) {
@@ -270,4 +276,55 @@ std::string Adapter::getTileString(const int& index) {
 
 int Adapter::getCommand(const std::vector<std::string>& myV) {
 
+}
+
+std::pair<int, int> Adapter::convertCoordinates(int i, int j)
+{
+	int row = i + 72;
+	int col = j + 72;
+	return std::pair<int, int> (row, col);
+}
+
+std::pair<int, int> Adapter::convertCoordinates(std::pair<int, int> location)
+{
+	int i = location.first - 72;
+	int j = location.second - 72;
+	return std::pair<int, int>(i, j);
+}
+
+int Adapter::convertZone(std::pair<int, int> location)
+{
+	int i = location.first;
+	int j = location.second;
+	if(i = 0)
+	{
+		if(j = 0) return 0;
+		else if(j = 1) return 1;
+		else if(j = 2) return 3;
+	}
+	else if(i = 1)
+	{
+		if(j = 0) return 4;
+		else if(j = 1) return 5;
+		else if(j = 2) return 6;
+	}
+	else if(i = 2)
+	{
+		if(j = 0) return 7;
+		else if(j = 1) return 8;
+		else if(j = 2) return 9;
+	}
+}
+
+std::pair<int, int> Adapter::convertZone(int spot)
+{
+	if(spot = 1) return std::pair<int, int>(0,0);
+	else if(spot = 2) return std::pair<int, int>(0,1);
+	else if(spot = 3) return std::pair<int, int>(0,2);
+	else if(spot = 4) return std::pair<int, int>(1,0);
+	else if(spot = 5) return std::pair<int, int>(1,1);
+	else if(spot = 6) return std::pair<int, int>(1,2);
+	else if(spot = 7) return std::pair<int, int>(2,0);
+	else if(spot = 8) return std::pair<int, int>(2,1);
+	else if(spot = 9) return std::pair<int, int>(2,2);
 }

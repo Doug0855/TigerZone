@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <utility>
 #include <iostream>
 #include <sstream>
 #include <iterator>
@@ -32,7 +33,11 @@ public:
 	void set(const std::string& prop, const std::string value);
 	std::string getTileString(const int& index);
 	int getCommand(const std::vector<std::string>& myV);
-
+	std::pair<int, int> convertCoordinates(int i, int j);
+	std::pair<int, int> convertCoordinates(std::pair<int, int> location);
+	int convertZone(std::pair<int, int> location);
+	std::pair<int, int> convertZone(int spot);
+	
 private:
 	std::string playerID, roundID, score, numChallenges, numRounds, planTime, moveTime;
 	std::vector<std::string> tileList;
