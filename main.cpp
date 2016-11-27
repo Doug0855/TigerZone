@@ -97,52 +97,76 @@ std::string getMesssage(Client &client, std::string &msg_list)
 	return msg;
 }
 
-void moveProtocol()
+int moveProtocol(Client &client, std::string &mesagge_list, Game &game1, Game &game2)
 {
+	std::string message_to_send;
+	values_t message_info;
 
+	message = getMesssage(client, message_list);
+
+	if (message.compare(0,1,"M") == 0)
+	{
+		message_info = adapter.translate(message);
+		if (!game1.hasID())
+			game1.setID(message_info.gameId);
+		//message_to_send = game1.getMove();
+		client.sendMessage(message_to_send);
+		message = getMesssage(client, message_list);
+	}
+	else if (message.compare(0,1,"G") == 0)
+	{
+		message_info = adapter.translate(message);
+		if (message_info.tile_num == -1)
+		{
+			return -1;
+		}
+	}
 }
-
 
 void matchProtocol(Client &client, std::string &message_list)
 {
 	Adapter adapter;
-	int x, y, orientation, number_of_tiles, tile_num;
-	std::string opponent_id, starting_tile, substr, message;
-	std::vector<int> tile_stack;
+	values_t message_info;
+	int number_of_tiles, success;
 	message = getMesssage(client, message_list);
+	Tile tile1;
+	TileStack tStack;
 
 	while (message.compare(0,1,"G") != 0) //while Game is not over
 	{
 		if (message.compare(0,1,"Y") == 0) //getting opponent player id
 		{
-			//opponent_id = message.substr(23,message.end()));
+			message_info = adapter.translate(message);
+			//use opponent player id
 			message = getMesssage(client, message_list);
 		}
 		else if (message.compare(0,1,"S") == 0) //getting starting tile information
 		{
-			values_t message_info = adapter.translate(message);
-			//place starting tile
+			message_info = adapter.translate(message);
+			tile1 = Tile(message_info.tile_num); //getting first tile
 			message = getMesssage(client, message_list);
 		}
 		else if (message.compare(0,1,"T") == 0) //get tile stack
 		{
-			std::string token;
-			std::string delimiter = " "; //delimiter between tiles
-			size_t pos = 0;
+			message_info = adapter.translate(message);
+			number_of_tiles = message_info.number_of_tiles; //gettting the number of tiles
+			tStack = TileStack(message_info.tile_stack); //getting tile stack
 			message = getMesssage(client, message_list);
-			substr = message.substr(14,message.find(" TILE")-14); //get first string integer
-			number_of_tiles = stoi(substr);
-			substr = message.erase(0, message.find("[")+1); //get string starting with the first tile to start tokeninzing tiles
+		}
+		else if (message.compare(0,1,"M") == 0)
+		{
+			message_info = adapter.translate(message);
+			//use planning time
+			Player ai, opponent;
+			Game game1("", ai, opponent, tStack, tile1, std::pair<int,int> (72,72));
+			Game game2("", opponent, ai, tStack, tile1, std::pair<int,int> (72,72));
 			for (int i = 0; i < number_of_tiles; i++)
 			{
-				pos = substr.find(" ");
-				token = substr.substr(0, pos);
-				substr.erase(0, pos + 1);
-				std::cout << "<"<< token << "> ";
-				tile_num = adapter.exprToTile(token);
-				tile_stack.push_back(tile_num);
+				success = moveProtocol(client, message_list, game1, game2,) //client, message_list, game1 and game2
+				if (success == -1)					//move must return a value to break from for loop in case of forfeit
+					break;
 			}
-			//create tile stack out of vector of integers
+			message = getMesssage(client, message_list);
 		}
 		else //hopefully this is never reached
 		{
@@ -150,7 +174,6 @@ void matchProtocol(Client &client, std::string &message_list)
 			message = getMesssage(client, message_list);
 		}
 	}
-
 }
 
 void roundProtocol(Client &client, std::string &message_list, int rounds)

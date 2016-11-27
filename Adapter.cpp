@@ -305,6 +305,7 @@ values_t Adapter::translate(std::string message)
 	{
 		return parseStartingTile(message);
 	}
+	
 
 
 }
