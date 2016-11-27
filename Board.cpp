@@ -336,9 +336,11 @@ the problem there is how to remember which tiles youve already visited and which
 Structure Board::checkJungle(Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int, int> blockSpot)
 {
 	Structure jungleStruct("jungle", blockSpot);
+	std::cout<<"in check jungle"<<std::endl;
 	std::vector<Tile*> visitedTiles;
 	visitedTiles.push_back(tile);
 	buildJungle(&jungleStruct, tile, tileBlocks, blockSpot, visitedTiles);
+	return jungleStruct;
 }
 
 void Board::buildJungle(Structure* struc, Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int,int> blockSpot, std::vector<Tile*> &visitedTiles) {
@@ -360,9 +362,37 @@ void Board::buildJungle(Structure* struc, Tile *tile, std::vector< std::vector<B
 	if(tile->hasBuffalo())
 		struc->buffaloCount++;
 
+	std::cout<<"block type is "<<tileBlocks[row][col].getType()<<std::endl;
+	if(tileBlocks[row][col].getType() == "mixed") {
+		int trailFaces = 0;
+		// Determine how many faces are trail faces. If there's only 1 than we know the mixed blocks don't connect
+		if(tile->getUpFace()->getType() == "trail")
+			trailFaces++;
+		if(tile->getDownFace()->getType() == "trail")
+			trailFaces++;
+		if(tile->getRightFace()->getType() == "trail")
+			trailFaces++;
+		if(tile->getLeftFace()->getType() == "trail")
+			trailFaces++;
+
+		std::cout<<"trail faces is "<<trailFaces<<std::endl;
+		if(trailFaces > 0) {
+			if(trailFaces != 1) {
+				for(int i = 0; i < 3; i++) {
+					for(int j = 0; j < 3; j++) {
+						if(tileBlocks[i][j].getType() == "mixed" && !(tileBlocks[i][j].isVisited()))
+							buildJungle(struc, tile, tileBlocks, std::pair<int,int>(i,j), visitedTiles);
+					}	
+				}
+			}
+		}
+
+	}
+
 	// Check tiles above, below, left, and right of the current block to see if lake structure continues
 	// std::cout<<"about to cehck row+1"<<std::endl;
-	if((row + 1) <= 2 && !(tileBlocks[row + 1][col].isVisited()) && tileBlocks[row+1][col].getType() == "jungle") {
+	if((row + 1) <= 2 && !(tileBlocks[row + 1][col].isVisited()) && 
+		(tileBlocks[row+1][col].getType() == "jungle" || tileBlocks[row+1][col].getType() == "mixed")) {
 		buildJungle(struc, tile, tileBlocks, std::pair<int,int>(row+1,col), visitedTiles);
 	}
 	else if(row + 1 > 2 && tile->getDownTile() != NULL) {
@@ -378,7 +408,8 @@ void Board::buildJungle(Structure* struc, Tile *tile, std::vector< std::vector<B
 		}
 	}
 	// std::cout<<"about to check row-1"<<std::endl;
-	if((row - 1) >= 0 && !(tileBlocks[row - 1][col].isVisited()) && tileBlocks[row - 1][col].getType() == "jungle") {
+	if((row - 1) >= 0 && !(tileBlocks[row - 1][col].isVisited()) && 
+		(tileBlocks[row - 1][col].getType() == "jungle" || tileBlocks[row-1][col].getType() == "mixed")) {
 		buildJungle(struc, tile, tileBlocks, std::pair<int,int>(row-1,col), visitedTiles);
 	}
 	else if(row-1 < 0 && tile->getUpTile() != NULL) {
@@ -394,7 +425,8 @@ void Board::buildJungle(Structure* struc, Tile *tile, std::vector< std::vector<B
 		}
 	}
 	// std::cout<<"about to check col+1"<<std::endl;
-	if((col + 1) <= 2 && !(tileBlocks[row][col + 1].isVisited()) && tileBlocks[row][col + 1].getType() == "jungle") {
+	if((col + 1) <= 2 && !(tileBlocks[row][col + 1].isVisited()) && 
+		(tileBlocks[row][col + 1].getType() == "jungle" || tileBlocks[row][col+1].getType() == "mixed")) {
 		buildJungle(struc, tile, tileBlocks, std::pair<int,int>(row,col+1), visitedTiles);
 	}
 	else if(col+1 > 2 && tile->getRightTile() != NULL) {
@@ -410,7 +442,8 @@ void Board::buildJungle(Structure* struc, Tile *tile, std::vector< std::vector<B
 		}
 	}
 	// std::cout<<"about to check col-1"<<std::endl;
-	if((col - 1) >= 0 && !(tileBlocks[row][col-1].isVisited()) && tileBlocks[row][col - 1].getType() == "jungle") {
+	if((col - 1) >= 0 && !(tileBlocks[row][col-1].isVisited()) && 
+		(tileBlocks[row][col - 1].getType() == "jungle" ||	 tileBlocks[row][col-1].getType() == "mixed")) {
 		// std::cout<<"passing col-1"<<std::endl;
 		buildJungle(struc, tile, tileBlocks, std::pair<int,int>(row,col-1), visitedTiles);
 	} 
@@ -426,11 +459,7 @@ void Board::buildJungle(Structure* struc, Tile *tile, std::vector< std::vector<B
 			buildJungle(struc, tile->getLeftTile(), newBlocks, std::pair<int,int>(row,col+2), visitedTiles);
 		}
 	}
-
-	// Check for mixed block scenarios
-	if(tileBlocks[row][col].getType() == "mixed") {
-		
-	}
+	std::cout<<"passed all ifs"<<std::endl;
 	return;
 }
 
@@ -745,8 +774,8 @@ std::vector<Structure> Board::getStructures(int row, int col) {
 		for(int j = 0; j < 3; j++) {
 			if(!(tileBlocks[i][j].isVisited())) {
 				if(tileBlocks[i][j].getType() == "jungle" || tileBlocks[i][j].getType() == "mixed") {
-					// Structure struc = checkJungle(tile, std::pair<int,int>(i,j));
-					// structures.push_back(struc);
+					Structure struc = checkJungle(tile, tileBlocks, std::pair<int,int>(i,j));
+					structures.push_back(struc);
 				}
 				else if(tileBlocks[i][j].getType() == "lake") {
 					Structure struc = checkLake(tile, tileBlocks, std::pair<int,int>(i,j));
