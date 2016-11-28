@@ -157,8 +157,8 @@ int moveProtocol(Client &client, std::string &message_list, Game &game1, Game &g
 				if (message_info.playerId == OPPONENT_ID)
 				{
 					tmpTile = Tile(message_info.tile_num);
-					int j = message_info.coordinates.first;
-					int i = message_info.coordinates.second;
+					int i = message_info.coordinates.first;
+					int j = message_info.coordinates.second;
 					int orientation = message_info.rotation;
 
 					if (message_info.gameId == game1.getID())
