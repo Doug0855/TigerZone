@@ -105,18 +105,21 @@ int moveProtocol(Client &client, std::string &message_list, Game &game1, Game &g
 	Adapter adapter;
 
 	message = getMesssage(client, message_list);
-
+//if success1 and success2
 	if (message.compare(0,1,"M") == 0)
 	{
+		std::cout << "SERVER ASKING FOR MOVE" << std::endl;
 		message_info = adapter.translate(message);
 		if (game1.getID() == "")
 			game1.setID(message_info.gameId);
 		if (message_info.gameId == game1.getID())
 		{
+			message = "SUPPOSED TO MAKE OUR MOVE";
 			//message_to_send = game1.getMove();
 		}
 		else if (message_info.gameId == game2.getID())
 		{
+			message = "SUPPOSED TO MAKE OUR MOVE";
 			//message_to_send = game2.getMove();
 		}
 		client.sendMessage(message_to_send);
@@ -124,6 +127,7 @@ int moveProtocol(Client &client, std::string &message_list, Game &game1, Game &g
 	}
 	else if (message.compare(0,1,"G") == 0)
 	{
+		std::cout << "GAME MOVES INFORMATION" << std::endl;
 		message_info = adapter.translate(message);
 		if (message_info.gameId != game1.getID() && game2.getID() == "")
 			game2.setID(message_info.gameId);
@@ -150,18 +154,23 @@ void matchProtocol(Client &client, std::string &message_list)
 	{
 		if (message.compare(0,1,"Y") == 0) //getting opponent player id
 		{
+			std::cout << "OPPONNENT PLAYER INFO" << std::endl;
 			message_info = adapter.translate(message);
 			//use opponent player id
 			message = getMesssage(client, message_list);
 		}
 		else if (message.compare(0,1,"S") == 0) //getting starting tile information
 		{
+			std::cout << "STARTING TILE INFO: " << message << std::endl;
+
 			message_info = adapter.translate(message);
+			std::cout << "tile num is: " << message_info.tile_num << std::endl;
 			tile1 = Tile(message_info.tile_num); //getting first tile
 			message = getMesssage(client, message_list);
 		}
 		else if (message.compare(0,1,"T") == 0) //get tile stack
 		{
+			std::cout << "TILE STACK INFO" << std::endl;
 			message_info = adapter.translate(message);
 			number_of_tiles = message_info.number_of_tiles; //gettting the number of tiles
 			tStack = TileStack(message_info.tile_stack); //getting tile stack
@@ -169,6 +178,7 @@ void matchProtocol(Client &client, std::string &message_list)
 		}
 		else if (message.compare(0,1,"M") == 0)
 		{
+			std::cout << "MATCH BEGINS SOON" << std::endl;
 			message_info = adapter.translate(message);
 			//use planning time
 			Player ai, opponent;
@@ -177,13 +187,14 @@ void matchProtocol(Client &client, std::string &message_list)
 			for (int i = 0; i < number_of_tiles; i++)
 			{
 				moveProtocol(client, message_list, game1, game2, game1_success, game2_success); //client, message_list, game1 and game2
-				if (game1_success == -1 && game2_success = -1)	break;				//move must return a value to break from for loop in case of forfeit
+				if (game1_success == -1 && game2_success == -1)	break;				//move must return a value to break from for loop in case of forfeit
 			}
 			message = getMesssage(client, message_list);
 		}
 		else //hopefully this is never reached
 		{
 			std::cout << "ERROR: previous message could not be processed correctly. Message skiped!" << std::endl;
+			std::cout << "	ERROR message: " << message << std::endl;
 			message = getMesssage(client, message_list);
 		}
 	}
@@ -200,20 +211,25 @@ void roundProtocol(Client &client, std::string &message_list, int rounds)
 	{
 		if (message.compare(0,1,"B") == 0) //executing a new round
 		{
+			std::cout << "BEGINNING ROUND..." << std::endl;
 			round_id = stoi(message.substr(12,message.find(" OF")-12));
-			//matchProtocol(); // pass message reference
+			matchProtocol(client, message_list); // pass message reference
 			message = getMesssage(client, message_list);
 		}
 		else if (message.compare(0,1,"E") == 0) //waiting for the next round to begin
 		{
+			std::cout << "END OF ROUND...WAITING FOR THE NEXT MATCH" << std::endl;
 			message = getMesssage(client, message_list);
 		}
 		else //hopefully this is never reached
 		{
 			std::cout << "ERROR: previous message could not be processed correctly. Message skiped!" << std::endl;
+			std::cout << "	ERROR message: " << message << std::endl;
 			message = getMesssage(client, message_list);
 		}
 	}
+	std::cout << "FINISHED ROUND PROTOCOL" << std::endl;
+
 }
 
 void challengeProtocol(Client &client)
@@ -230,8 +246,8 @@ void challengeProtocol(Client &client)
 			rounds = stoi(message.substr(message.find("PLAY")+5,message.find(" MATCH")-message.find("PLAY")-5));
 			for (int i = 0; i < rounds; i++)
 			{
-				//roundProtocol(); //pass message reference
-				//std::cout << "challenge id is: " << challenge_id << " and playing " << rounds << " rounds" << std::endl;
+				std::cout << "challenge id is: " << challenge_id << " and playing " << rounds << " rounds" << std::endl;
+				roundProtocol(client, message_list, rounds); //pass message reference
 			}
 			message = getMesssage(client, message_list);
 		}
@@ -243,6 +259,7 @@ void challengeProtocol(Client &client)
 		else //hopefully this is never reached
 		{
 			std::cout << "ERROR: previous message could not be processed correctly. Message skipped!" << std::endl;
+			std::cout << "	ERROR message: " << message << std::endl;
 			message = getMesssage(client, message_list);
 		}
 	}
@@ -300,7 +317,7 @@ int main(int argc, char *argv[]) {
 	std::cout<<"in game"<<std::endl;
 	Board gameboard;
 	Client serverConnection(SERVER_IP, PORT);
-	//serverConnection.connectToServer();
+	serverConnection.connectToServer();
 	//serverConnection.sendMessage("Hello World!");
 	//std::cout << serverConnection.receiveMessage() << std::endl;
 	//std::cout << serverConnection.receiveMessage() << std::endl;
@@ -311,48 +328,25 @@ int main(int argc, char *argv[]) {
 	TileStack tStack;
 	tStack.shuffle();
 
-	//PLAYER_ID = authenticationProtocol(serverConnection, TOURNAMENT_PASS, TEAM_ID, TEAM_PASSWORD);
-	//std::cout << "Player id returned is: " << PLAYER_ID << std::endl;
-	//challengeProtocol(serverConnection);
+	PLAYER_ID = authenticationProtocol(serverConnection, TOURNAMENT_PASS, TEAM_ID, TEAM_PASSWORD);
+	std::cout << "Player id returned is: " << PLAYER_ID << std::endl;
+	challengeProtocol(serverConnection);
 
+	/*TESTING ADAPTER*/
+	values_t message_info;
+	Adapter adapter;
+	std::string message;
 
-		// if (message.compare(0,1,"Y") == 0) //getting opponent player id
-		// {
-		// 	//opponent_id = message.substr(23,message.end()));
-		// 	message = getMesssage(client, message_list);
-		// }
-		// else if (message.compare(0,1,"S") == 0) //getting starting tile information
-		// {
-		// 	starting_tile = message.substr(17, message.find(" AT")-17); //get string where tile description starts until before " AT"
-		// 	substr = message.substr(message.find("AT ")+3,message.find(" ", message.find("AT ")+3, 1)-message.find("AT ")-3); //get first string integer
-		// 	x = stoi(substr);
-		// 	substr = message.erase(0, message.find(substr) + substr.length() + 1); //get string with last two integers
-		// 	y = stoi(substr.substr(0,substr.find(" ")));
-		// 	substr = substr.erase(0,substr.find(" ")+1); //get string with last int
-		// 	substr = substr.substr(0,std::string::npos); //get the last integer
-		// 	orientation = stoi(substr);
-		// 	std::cout << "starting tile <" << starting_tile << "> at <" << x << ", " << y << ", " << orientation <<std::endl;
-		// 	//place starting tile
-		// 	message = getMesssage(client, message_list);
-		// }
-		// else if (message.compare(0,1,"T") == 0) //get tile stack
-		// {
+	message = "STARTING TILE IS TLTJ- AT 0 0 0";
+	message_info = adapter.translate(message);
+	std::cout << "tile num is: " << message_info.tile_num << std::endl;
+
 
 
 
 
 	//Game game1("123", p1, p2, tStack, tile1, std::pair<int,int> (72,72));
 	//game1.play();
-	int z;
-	std::cin >> z;
 
-	//printBoard(game1.gameboard);
-	// std::string token;
-	// std::string delimiter = "\r\n";
-	// size_t pos = 0;
-	//
-	// pos = msg.find(delimiter);
-	// token = msg.substr(0, pos);
-	// msg.erase(0, pos + delimiter.length());
 	return 0;
 };

@@ -31,8 +31,8 @@ void Client::connectToServer()
 }
 void Client::sendMessage(std::string message)
 {
-  bzero(buffer,256);
-  message.copy(buffer, 255, 0);
+  bzero(buffer,1000);
+  message.copy(buffer, 999, 0);
   //fgets(buffer,255,stdin);
   n = write(sockfd,buffer,strlen(buffer));
   if (n < 0)
@@ -41,8 +41,8 @@ void Client::sendMessage(std::string message)
 std::string Client::receiveMessage()
 {
   std::string message;
-  bzero(buffer,256);
-  n = read(sockfd,buffer,255);
+  bzero(buffer,1000);
+  n = read(sockfd,buffer,999);
   if (n < 0)
        error("ERROR reading from socket");
   else

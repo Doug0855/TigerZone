@@ -26,7 +26,7 @@ private:
   struct sockaddr_in serv_addr;
   struct hostent *server;
 
-  char buffer[256];
+  char buffer[1000];
   void error(const char *msg);
 };
 

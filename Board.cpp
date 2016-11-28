@@ -135,7 +135,7 @@ std::pair<int,int> Board::getOptimalPlacement(Tile &tile, std::vector< std::pair
 	 	{
 	 		int i = availableMoves[z].first;
 	 		int j = availableMoves[z].second;
-	 		for (int q = 0; q < 4; q++) 
+	 		for (int q = 0; q < 4; q++)
 	 		{
 	 			int points = 0;
 	 			if ((m_board[i + 1][j] == NULL || m_board[i + 1][j]->getUpFace()->faceEquals(*tile.getDownFace())) &&
@@ -168,7 +168,7 @@ std::pair<int,int> Board::getOptimalPlacement(Tile &tile, std::vector< std::pair
 	 {
 	 	int i = availableMoves[0].first;
 	 	int j = availableMoves[0].second;
-	 	for (int q = 0; q < 4; q++) 
+	 	for (int q = 0; q < 4; q++)
 	 	{
 	 		if ((m_board[i + 1][j] == NULL || m_board[i + 1][j]->getUpFace()->faceEquals(*tile.getDownFace())) &&
 	 			(m_board[i - 1][j] == NULL || m_board[i - 1][j]->getDownFace()->faceEquals(*tile.getUpFace())) &&
@@ -192,7 +192,7 @@ int Board::positionPoints(int i, int j)
 {
 	const int LAKE_POINTS = 6;
 	const int JUNGLE_POINTS = 3;
-	const int TRAIL_POINTS = 1;	
+	const int TRAIL_POINTS = 1;
 
 	int points = 0;
 	if (m_board[i + 1][j] != NULL)
@@ -295,7 +295,7 @@ int Board::animalPoints(int i, int j)
 
 void Board::placeCroc(int i, int j)
 {
-  m_board[i][j].setCrocodile();
+  m_board[i][j]->setCrocodile();
 }
 
 // Place a tile on the board. Make sure all neighboring tiles are pointing to the corresponding faces
@@ -367,7 +367,7 @@ void Board::buildJungle(Structure* struc, Tile *tile, std::vector< std::vector<B
 					for(int j = 0; j < 3; j++) {
 						if(tileBlocks[i][j].getType() == "mixed" && !(tileBlocks[i][j].isVisited()))
 							buildJungle(struc, tile, tileBlocks, std::pair<int,int>(i,j), visitedTiles);
-					}	
+					}
 				}
 			}
 		}
@@ -376,7 +376,7 @@ void Board::buildJungle(Structure* struc, Tile *tile, std::vector< std::vector<B
 
 	// Check tiles above, below, left, and right of the current block to see if lake structure continues
 	// std::cout<<"about to cehck row+1"<<std::endl;
-	if((row + 1) <= 2 && !(tileBlocks[row + 1][col].isVisited()) && 
+	if((row + 1) <= 2 && !(tileBlocks[row + 1][col].isVisited()) &&
 		(tileBlocks[row+1][col].getType() == "jungle" || tileBlocks[row+1][col].getType() == "mixed")) {
 		buildJungle(struc, tile, tileBlocks, std::pair<int,int>(row+1,col), visitedTiles);
 	}
@@ -393,7 +393,7 @@ void Board::buildJungle(Structure* struc, Tile *tile, std::vector< std::vector<B
 		}
 	}
 	// std::cout<<"about to check row-1"<<std::endl;
-	if((row - 1) >= 0 && !(tileBlocks[row - 1][col].isVisited()) && 
+	if((row - 1) >= 0 && !(tileBlocks[row - 1][col].isVisited()) &&
 		(tileBlocks[row - 1][col].getType() == "jungle" || tileBlocks[row-1][col].getType() == "mixed")) {
 		buildJungle(struc, tile, tileBlocks, std::pair<int,int>(row-1,col), visitedTiles);
 	}
@@ -410,7 +410,7 @@ void Board::buildJungle(Structure* struc, Tile *tile, std::vector< std::vector<B
 		}
 	}
 	// std::cout<<"about to check col+1"<<std::endl;
-	if((col + 1) <= 2 && !(tileBlocks[row][col + 1].isVisited()) && 
+	if((col + 1) <= 2 && !(tileBlocks[row][col + 1].isVisited()) &&
 		(tileBlocks[row][col + 1].getType() == "jungle" || tileBlocks[row][col+1].getType() == "mixed")) {
 		buildJungle(struc, tile, tileBlocks, std::pair<int,int>(row,col+1), visitedTiles);
 	}
@@ -427,11 +427,11 @@ void Board::buildJungle(Structure* struc, Tile *tile, std::vector< std::vector<B
 		}
 	}
 	// std::cout<<"about to check col-1"<<std::endl;
-	if((col - 1) >= 0 && !(tileBlocks[row][col-1].isVisited()) && 
+	if((col - 1) >= 0 && !(tileBlocks[row][col-1].isVisited()) &&
 		(tileBlocks[row][col - 1].getType() == "jungle" ||	 tileBlocks[row][col-1].getType() == "mixed")) {
 		// std::cout<<"passing col-1"<<std::endl;
 		buildJungle(struc, tile, tileBlocks, std::pair<int,int>(row,col-1), visitedTiles);
-	} 
+	}
 	else if(col-1 < 0 && tile->getLeftTile() != NULL) {
 		bool visitedNeighborTile = false;
 		for(int i = 0; i < visitedTiles.size(); i++) {
@@ -546,7 +546,7 @@ void Board::buildLake(Structure* struc, Tile *tile, std::vector< std::vector<Blo
 	if((col - 1) >= 0 && !(tileBlocks[row][col-1].isVisited()) && tileBlocks[row][col - 1].getType() == "lake") {
 		// std::cout<<"passing col-1"<<std::endl;
 		buildLake(struc, tile, tileBlocks, std::pair<int,int>(row,col-1), visitedTiles);
-	} 
+	}
 	else if(col-1 < 0 && tile->getLeftTile() != NULL) {
 		bool visitedNeighborTile = false;
 		for(int i = 0; i < visitedTiles.size(); i++) {
@@ -579,15 +579,15 @@ void Board::buildTrail(Structure* struc, Tile *tile, std::vector< std::vector<Bl
 
 	if(row == 1 && col == 1) {
 		int divergingTrailCount = 0;
-		if(tileBlocks[row+1][col].getType() == "trail") 
+		if(tileBlocks[row+1][col].getType() == "trail")
 			divergingTrailCount++;
-		if(tileBlocks[row-1][col].getType() == "trail") 
+		if(tileBlocks[row-1][col].getType() == "trail")
 			divergingTrailCount++;
-		if(tileBlocks[row][col+1].getType() == "trail") 
+		if(tileBlocks[row][col+1].getType() == "trail")
 			divergingTrailCount++;
-		if(tileBlocks[row][col-1].getType() == "trail") 
+		if(tileBlocks[row][col-1].getType() == "trail")
 			divergingTrailCount++;
-		if(divergingTrailCount > 2) 
+		if(divergingTrailCount > 2)
 			return;
 	}
 
@@ -670,7 +670,7 @@ void Board::buildTrail(Structure* struc, Tile *tile, std::vector< std::vector<Bl
 	if((col - 1) >= 0 && !(tileBlocks[row][col-1].isVisited()) && tileBlocks[row][col - 1].getType() == "trail") {
 		// std::cout<<"passing col-1"<<std::endl;
 		buildTrail(struc, tile, tileBlocks, std::pair<int,int>(row,col-1), visitedTiles);
-	} 
+	}
 	else if(col-1 < 0 && tile->getLeftTile() != NULL) {
 		bool visitedNeighborTile = false;
 		for(int i = 0; i < visitedTiles.size(); i++) {
@@ -696,7 +696,7 @@ void Board::connectFaces(int row, int col)
 
 
 		// Set adjacent tiles now after setting faces
-		
+
 		// std::cout<<"**********DOWN TILE BEFORE SETTING IS "<<m_board[row][col]->getDownTile()<<std::endl;
 		(m_board[row][col])->setNeighborDownTile(*m_board[row + 1][col]);
 		// std::cout<<"**********DOWN TILE AFTER SETTING IS "<<m_board[row][col]->getDownTile()<<std::endl;

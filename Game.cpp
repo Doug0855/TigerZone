@@ -26,7 +26,7 @@ void Game::play() {
 	for(int i = 0; i <  tileStack.tiles.size(); i++) {
 		Tile currentTile = tileStack.tiles[i];
 		if(i % 2 == 0) {
-			
+
 			std::vector<std::pair<int,int> > availableLocations = gameboard.display_positions(currentTile);
 			std::cout<<"There are "<<availableLocations.size()<<" available locations for this tile"<<std::endl;
 			for(int k = 0; k < availableLocations.size(); k++) {
@@ -48,7 +48,7 @@ void Game::play() {
 
 			// printToTextFile(gameboard);
 			std::cout<<std::endl;
-		} 
+		}
 		else {
 			std::cout<<"COMPUTER TURN"<<std::endl;
 			// computer turn for solo play, player2 turn for tournament play
@@ -70,14 +70,15 @@ void Game::play() {
 	printToTextFile(gameboard);
 }
 
-void enemyMove(Tile tile, int i, int j, int orientation, bool tiger, bool croc, std::pair<int,int> tigerSpot)
+void Game::enemyMove(Tile tile, int i, int j, int orientation, bool tiger, bool croc, std::pair<int,int> tigerSpot)
 {
   Tile *tmpTile = new Tile(tile.getNum());
   for(int i = 0; i< orientation; i++)
   {
-    tmpTile.rotate();
+    tmpTile->rotate();
   }
-  gameboard.place_tile(std::pair<int,int>(i,j), *tmpTile);
+	std::pair<int, int> optimalLocation(i,j);
+  gameboard.place_tile(optimalLocation, *tmpTile);
   if(tiger) gameboard.placeMeeple(i, j, tigerSpot);
   if(croc) gameboard.placeCroc(i ,j);
 }
@@ -87,7 +88,7 @@ std::string Game::makeMove(Tile tile) {
   std::string placement;
   std::string tiger = "";
   Adapter adapter;
-  
+
 	std::vector<std::pair<int,int> > availableLocations = gameboard.display_positions(tile);
 	// check if there are any available moves. If so then place at the optimal spot.
 	if(availableLocations.size() > 0) {
@@ -100,13 +101,13 @@ std::string Game::makeMove(Tile tile) {
 		  numMeeples--;
 		}
 		std::pair<int,int> convertCoordinates = adapter.convertCoordinates(optimalLocation.first, optimalLocation.second);
-		placement = "GAME " + gameId + " PLACE " +  + tmpTile.getType()+" AT " +convertCoordinates.first + convertCoordinates.second  +" "+ tmpTile.getRotations() * 90;
-		return placement + tigerl
+		placement = "GAME " + gameId + " PLACE " + tmpTile->getType() +" AT " + std::to_string(convertCoordinates.first) + std::to_string(convertCoordinates.second)  + " " + std::to_string(tmpTile->getRotations() * 90) + "\r\n";
+		return placement + tiger;
 	}
 	else {
 		return "GAME " + gameId + " TILE " + tile.getType()+" UNPLACEABLE PASS ";
 	}
-	
+
 }
 
 // Hueristic to have an ai that can place down meeples in correct spots and values some more than others
@@ -117,7 +118,7 @@ std::string Game::meepleAi(int i, int j)
 	if (gameboard.m_board[i][j]->getCenter().getType() == "den")
 	{
 		gameboard.placeMeeple(i, j, std::pair<int,int> (1,1));
-		return;
+		return "";
 	}
 	// if there wasn't a den in the middle then get all the structures in the current tile
 	std::vector<Structure> structures = gameboard.getStructures(i, j);
@@ -153,7 +154,7 @@ std::string Game::meepleAi(int i, int j)
 		{
 		  gameboard.placeMeeple(i, j, structures[bestStruct].startingBlock);
 		  return " TIGER " + adapter.convertZone(std::pair<int, int> (i,j));
-		} 
+		}
 	}
 	return "";
 }
@@ -168,7 +169,7 @@ int Game::structurePoints(Structure structure)
 	const int TRAIL_POINTS = 2;
 	const int PREY_POINTS = 1;
 	const int CROC_POINTS = -2;
-	
+
 	for (size_t i = 0; i < structure.structureBlocks.size(); i++)
 	{
 		points += SIZE_POINTS;
@@ -221,10 +222,9 @@ void Game::printToTextFile(Board gameboard)
 				out_data << item->getRotations() << item->getType();
 			else
 				out_data << '0' << '.';
-			
+
 		}
 		out_data << std::endl;
 	}
 	out_data.close();
 }
-

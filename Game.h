@@ -18,6 +18,7 @@ public:
 	void printToTextFile(Board);
 	void setID(std::string identification) { gameId = identification; }
 	std::string getID() { return gameId; }
+	void enemyMove(Tile tile, int i, int j, int orientation, bool tiger, bool croc, std::pair<int,int> tigerSpot);
 
 	Board gameboard;
 private:

@@ -98,8 +98,9 @@ void exchangeMessages(int newsockfd) {
 	while(true) {
 		std::cout<<"Wait for a response? (y/n)"<<std::endl;
 		std::cin>>response;
+		std::cin.ignore();
 
-		if (response == 'y') 
+		if (response == 'y')
 		{
 			// Get message from client
 			bzero(buffer, 256);
@@ -121,7 +122,7 @@ void exchangeMessages(int newsockfd) {
 			if (n < 0) error("Error occurred.");
 			else std::cout<<"Message sent successfully."<<std::endl;
 		}
-	}		
+	}
 }
 int main(int argc, char *argv[])
 {
@@ -153,7 +154,7 @@ int main(int argc, char *argv[])
 
 	// Send messages betwen server and client
 	exchangeMessages(newsockfd);
-	
+
 	close(newsockfd);
 	close(sockfd);
 	return 0;

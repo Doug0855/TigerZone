@@ -249,6 +249,7 @@ std::pair<int, int> Adapter::convertZone(int spot)
 
 values_t Adapter::translate(std::string message)
 {
+	values_t output;
 	if (message.compare(0,8,"STARTING") == 0) //STARTING TILE IS <tile> AT <x> <y> <orientation>
 	{
 		return parseStartingTile(message);
@@ -269,7 +270,7 @@ values_t Adapter::translate(std::string message)
 	{
 	  return parseGameMove(message);
 	}
-
+	return output;
 }
 
 values_t Adapter::parseStartingTile(std::string message)
