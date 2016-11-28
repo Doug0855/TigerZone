@@ -242,7 +242,7 @@ void matchProtocol(Client &client, std::string &message_list)
 			}
 			message = getMesssage(client, message_list);
 		}
-		else if (message.compare(0,1,"G") != 0)
+		else if (message.compare(0,1,"G") == 0)
 		{
 			count++;
 			if (count == 2)
