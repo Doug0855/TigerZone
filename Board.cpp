@@ -79,9 +79,9 @@ std::vector< std::pair<int, int> > Board::checkPlacement(Tile tile, int i, int j
 				 (m_board[i + 1][j + 1] == NULL || m_board[i + 1][j + 1]->getLeftFace()->faceEquals(*tile.getRightFace())) &&
 				 (m_board[i][j]->getDownFace()->faceEquals(*tile.getUpFace())))
 			{
-				std::cout<<"Checking down face equals"<<m_board[i][j]->getDownFace()->faceEquals(*tile.getUpFace())<<std::endl;
-				std::cout<<"Down face type: "<<m_board[i][j]->getDownFaceType()<<std::endl;
-				std::cout<<"Tile up face type: "<<tile.getUpFaceType()<<std::endl;
+				//debugging std::cout<<"Checking down face equals"<<m_board[i][j]->getDownFace()->faceEquals(*tile.getUpFace())<<std::endl;
+				//debugging std::cout<<"Down face type: "<<m_board[i][j]->getDownFaceType()<<std::endl;
+				//debugging std::cout<<"Tile up face type: "<<tile.getUpFaceType()<<std::endl;
 				places.push_back(std::pair<int, int>(i + 1, j));
 				break;
 			}

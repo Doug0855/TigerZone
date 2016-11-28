@@ -90,7 +90,8 @@ std::string getMesssage(Client &client, std::string &msg_list)
 	std::string msg;
 	if (msg_list.empty())
 	{
-		msg_list = client.receiveMessage();
+		//msg_list = client.receiveMessage();
+		msg_list = "NEW CHALLENGE 1 YOU WILL PLAY 1 MATCH\r\nBEGIN ROUND 1 OF 1\r\nYOUR OPPONENT IS PLAYER Blue";
 		msg = parseMessageList(msg_list);
 	}
 	else msg = parseMessageList(msg_list);
@@ -174,9 +175,9 @@ int moveProtocol(Client &client, std::string &message_list, Game &game1, Game &g
 						std::cout << "tile placed at <" << i << ", " << j << "> :" << "with rotation: " << orientation << std::endl;
 						std::cout << "croc? " << message_info.croc << "tiger? " << message_info.tiger << "zone " << "[" <<message_info.tiger_spot.first << ", " << message_info.tiger_spot.second << "] " << std::endl;
 						tmpTile = Tile(message_info.tile_num);
-						std::cout << "DEBUG FLAG" << std::endl; 
+						//debugging std::cout << "DEBUG FLAG" << std::endl;
 						game2.enemyMove(tmpTile, i, j, orientation, message_info.tiger, message_info.croc, message_info.tiger_spot);
-						std::cout << "DEBUG FLAG 2" << std::endl; 
+						//debugging std::cout << "DEBUG FLAG 2" << std::endl;
 					}
 				}
 			}
@@ -234,7 +235,7 @@ void matchProtocol(Client &client, std::string &message_list)
 			Game game2("", opponent, ai, tStack, tile1, std::pair<int,int> (72,72));
 			for (int i = 0; i < number_of_tiles; i++)
 			{
-				std::cout<<"Running moveProtocol first time."<<std::endl;
+				//debugging std::cout<<"Running moveProtocol first time."<<std::endl;
 				moveProtocol(client, message_list, game1, game2, game1_success, game2_success, OPPONENT_ID); //client, message_list, game1 and game2
 				if (game1_success == -1 && game2_success == -1)	break;				//move must return a value to break from for loop in case of forfeit
 				//std::cout<<"Running moveProtocol second time."<<std::endl;
@@ -370,23 +371,21 @@ int main(int argc, char *argv[]) {
 		printf("Five arguments expected.\n");
 		exit (EXIT_FAILURE);
 	}
-	std::string PLAYER_ID;
-	std::cout<<"in game"<<std::endl;
-	Board gameboard;
 	Client serverConnection(SERVER_IP, PORT);
 	serverConnection.connectToServer();
 
 
-	Tile tile1(19);
-	Player p1;
-	Player p2;
-	TileStack tStack;
-	tStack.shuffle();
+	std::string message_list = "";
+	//PLAYER_ID = authenticationProtocol(serverConnection, TOURNAMENT_PASS, TEAM_ID, TEAM_PASSWORD);
+	//std::cout << "Player id returned is: " << PLAYER_ID << std::endl;
+	//challengeProtocol(serverConnection);
+	//serverConnection.closeConnection();
 
-	PLAYER_ID = authenticationProtocol(serverConnection, TOURNAMENT_PASS, TEAM_ID, TEAM_PASSWORD);
-	std::cout << "Player id returned is: " << PLAYER_ID << std::endl;
-	challengeProtocol(serverConnection);
-	serverConnection.closeConnection();
+	std::cout << "message1: " << getMesssage(serverConnection, message_list) << std::endl;
+	std::cout << "message2: " << getMesssage(serverConnection, message_list) << std::endl;
+	std::cout << "message3: " << getMesssage(serverConnection, message_list) << std::endl;
+	std::cout << "message4: " << getMesssage(serverConnection, message_list) << std::endl;
+
 
 	//Game game1("123", p1, p2, tStack, tile1, std::pair<int,int> (72,72));
 	//game1.play();
