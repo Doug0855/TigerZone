@@ -217,7 +217,7 @@ std::pair<int, int> Adapter::convertCoordinates(std::pair<int, int> location)
 	return std::pair<int, int>(i, j);
 }
 
-int Adapter::convertZonePair(std::pair<int, int> location)
+int Adapter::convertZone(std::pair<int, int> location)
 {
 	int i = location.first;
 	int j = location.second;
@@ -242,7 +242,7 @@ int Adapter::convertZonePair(std::pair<int, int> location)
 	}
 }
 
-std::pair<int, int> Adapter::convertZoneInt(int spot)
+std::pair<int, int> Adapter::convertZone(int spot)
 {
 	if(spot == 1) return std::pair<int, int>(0,0);
 	else if(spot == 2) return std::pair<int, int>(0,1);
@@ -392,7 +392,7 @@ values_t Adapter::parseGameMove(std::string message)
 
     if(messageWords.size() == 14 && animalType == "TIGER"){
       int tigerZone = stoi(messageWords[13]);
-      out.tiger_spot = convertZoneInt(tigerZone);   //Set the zone where the meeple is placed in the tile
+      out.tiger_spot = convertZone(tigerZone);   //Set the zone where the meeple is placed in the tile
     }
 
     return out;

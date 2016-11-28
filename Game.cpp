@@ -160,7 +160,7 @@ std::string Game::meepleAi(int i, int j)
 		if (bestStruct != structures.size())
 		{
 		  gameboard.placeMeeple(i, j, structures[bestStruct].startingBlock);
-		  std::string temp = std::to_string(adapter.convertZonePair(structures[bestStruct].startingBlock));
+		  std::string temp = std::to_string(adapter.convertZone(structures[bestStruct].startingBlock));
 		  tiger = " TIGER " + temp;
 		  return tiger;
 		}

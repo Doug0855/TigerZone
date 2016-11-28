@@ -46,8 +46,8 @@ public:
 
 	std::pair<int, int> convertCoordinates(int i, int j);
 	std::pair<int, int> convertCoordinates(std::pair<int, int> location);
-	int convertZonePair(std::pair<int, int> location);
-	std::pair<int, int> convertZoneInt(int spot);
+	int convertZone(std::pair<int, int> location);
+	std::pair<int, int> convertZone(int spot);
 
   values_t parseStartingTile(std::string message);
   values_t parseTileStack(std::string message);
