@@ -127,13 +127,13 @@ int moveProtocol(Client &client, std::string &message_list, Game &game1, Game &g
 			{
 				std::cout << "sent our move for tile: " << message_info.tile_num <<  " and game: " << message_info.gameId << std::endl;
 				tmpTile = Tile(message_info.tile_num);
-				message_to_send = game1.makeMove(tmpTile);
+				message_to_send = game1.makeMove(tmpTile, message_info.moveNumber);
 			}
 			else if (message_info.gameId == game2.getID())
 			{
 				std::cout << "sent our move for tile: " << message_info.tile_num <<  " and game: " << message_info.gameId << std::endl;
 				tmpTile = Tile(message_info.tile_num);
-				message_to_send = game2.makeMove(tmpTile);
+				message_to_send = game2.makeMove(tmpTile, message_info.moveNumber);
 			}
 			client.sendMessage(message_to_send);
 			message = getMesssage(client, message_list);

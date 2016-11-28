@@ -358,6 +358,8 @@ values_t Adapter::parseGameMove(std::string message)
 
   std::string gameId = messageWords[1];
   out.gameId = gameId;
+  std::string temp = messageWords[3];
+  out.moveNumber = stoi(temp);
 
   if(messageWords[6] == "FORFEITED:")  //Check to see if the other player forfeited
   {

@@ -12,7 +12,7 @@ public:
 	~Game();
 
 	void play();
-	std::string makeMove(Tile);
+	std::string makeMove(Tile, int);
 	std::string meepleAi(int i, int j);
 	void updateBoard();
 	void printToTextFile(Board);

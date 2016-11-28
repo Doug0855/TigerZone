@@ -84,7 +84,7 @@ void Game::enemyMove(Tile tile, int i, int j, int orientation, bool tiger, bool 
 }
 
 // returns true if a move can be made
-std::string Game::makeMove(Tile tile) {
+std::string Game::makeMove(Tile tile, int moveNumber) {
   std::string placement;
   std::string tiger = "";
   Adapter adapter;
@@ -103,7 +103,7 @@ std::string Game::makeMove(Tile tile) {
 		std::pair<int,int> convertCoordinates = adapter.convertCoordinates(optimalLocation);
 		std::cout << "DEBUG: Optimal location first: " << optimalLocation.first << std::endl;
 		std::cout << "DEBUG: Optimal location second: " << optimalLocation.second << std::endl; 
-		placement = "GAME " + gameId + " PLACE " + adapter.tileToExpr(tmpTile->getNum()) +" AT " + std::to_string(convertCoordinates.first) + " " + std::to_string(convertCoordinates.second)  + " " + std::to_string(tmpTile->getRotations() * 90);
+		placement = "GAME " + gameId + " MOVE " + std::to_string(moveNumber) + " PLACE " + adapter.tileToExpr(tmpTile->getNum()) +" AT " + std::to_string(convertCoordinates.first) + " " + std::to_string(convertCoordinates.second)  + " " + std::to_string(tmpTile->getRotations() * 90);
 		
 		if (tiger == "")
 			tiger = " NONE";
