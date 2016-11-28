@@ -90,17 +90,18 @@ void exchangeMessages(int newsockfd) {
 	int waitSecond = 3;
 	std::string message;
 	char buffer[256];
-	char response;
+	std::string response;
 	std::cout<<"Client connected. Start sending messages."<<std::endl;
 
 	authentication(newsockfd);
 	// Loop to continuously get messages
 	while(true) {
 		std::cout<<"Wait for a response? (y/n)"<<std::endl;
-		std::cin>>response;
-		std::cin.ignore();
+		std::getline(std::cin,response);
+		//std::cin>>response;
+		//std::cin.ignore();
 
-		if (response == 'y')
+		if (response[0] == 'y')
 		{
 			// Get message from client
 			bzero(buffer, 256);
@@ -122,6 +123,10 @@ void exchangeMessages(int newsockfd) {
 			if (n < 0) error("Error occurred.");
 			else std::cout<<"Message sent successfully."<<std::endl;
 		}
+		if(message.compare("") == 0){
+			exit(1);
+		}
+		message = "";
 	}
 }
 int main(int argc, char *argv[])
