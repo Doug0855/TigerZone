@@ -11,6 +11,7 @@ Game::Game(std::string gameId, Player p1, Player p2, TileStack t, Tile startingT
 	Tile *startTile = new Tile(startingTile.getNum());
 	gameboard.place_tile(startingCoordinates, *startTile);
 
+	numMeeples = 7;
 	player1 = p1;
 	player2 = p2;
 	this->gameId = gameId;
@@ -73,7 +74,7 @@ void Game::play() {
 void Game::enemyMove(Tile tile, int i, int j, int orientation, bool tiger, bool croc, std::pair<int,int> tigerSpot)
 {
   Tile *tmpTile = new Tile(tile.getNum());
-  for(int i = 0; i< orientation; i++)
+  for(int k = 0; k< orientation; k++)
   {
     tmpTile->rotate();
   }
@@ -104,7 +105,7 @@ std::string Game::makeMove(Tile tile, int moveNumber) {
 		std::cout << "DEBUG: Optimal location first: " << optimalLocation.first << std::endl;
 		std::cout << "DEBUG: Optimal location second: " << optimalLocation.second << std::endl; 
 		placement = "GAME " + gameId + " MOVE " + std::to_string(moveNumber) + " PLACE " + adapter.tileToExpr(tmpTile->getNum()) +" AT " + std::to_string(convertCoordinates.first) + " " + std::to_string(convertCoordinates.second)  + " " + std::to_string(tmpTile->getRotations() * 90);
-
+		
 		return placement + tiger + "\r\n";
 	}
 	else {
@@ -117,11 +118,13 @@ std::string Game::makeMove(Tile tile, int moveNumber) {
 std::string Game::meepleAi(int i, int j)
 {
   Adapter adapter;
+  std::string tiger;
 	// always place at a den if you can
 	if (gameboard.m_board[i][j]->getCenter().getType() == "den")
 	{
 		gameboard.placeMeeple(i, j, std::pair<int,int> (1,1));
-		return " TIGER " + adapter.convertZone(std::pair<int, int>(1, 1));
+		tiger = " TIGER 5";
+		return tiger;
 	}
 	// if there wasn't a den in the middle then get all the structures in the current tile
 	std::vector<Structure> structures = gameboard.getStructures(i, j);
@@ -129,13 +132,14 @@ std::string Game::meepleAi(int i, int j)
 	if (structures.size() > 0)
 	{
 		int mostPoints = 0;
-		int bestStruct = -1;
+		int bestStruct = structures.size();
 		// find the first structure that doesn't have a meeple
 		for (size_t ii = 0; ii < structures.size(); ii++)
 		{
 			if (!structures[ii].hasMeeple)
 			{
 				bestStruct = ii;
+				break;
 			}
 		}
 		// for all the strucutres that don't have meeples count up the point values
@@ -153,13 +157,16 @@ std::string Game::meepleAi(int i, int j)
 			}
 		}
 		// as long as you found a stucutre without a meeple place the meele at the one with the highest points
-		if(bestStruct != -1)
+		if (bestStruct != structures.size())
 		{
 		  gameboard.placeMeeple(i, j, structures[bestStruct].startingBlock);
-		  return " TIGER " + adapter.convertZone(std::pair<int, int> (i,j));
+		  std::string temp = std::to_string(adapter.convertZonePair(structures[bestStruct].startingBlock));
+		  tiger = " TIGER " + temp;
+		  return tiger;
 		}
 	}
-	return " NONE";
+	tiger = " NONE";
+	return tiger;
 }
 
 // add points according to values for different kind of features

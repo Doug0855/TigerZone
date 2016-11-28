@@ -24,7 +24,7 @@ public:
 private:
 	int structurePoints(Structure structure);
 
-  int numMeeples = 7;
+	int numMeeples;
 	std::string gameId;
 	Player player1;
 	Player player2;

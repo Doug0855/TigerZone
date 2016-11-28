@@ -22,7 +22,7 @@ Structure::Structure(std::string type) {
 }
 
 Structure::Structure() {
-
+	this->hasMeeple = false;
 }
 
 Structure::~Structure() {
