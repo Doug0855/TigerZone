@@ -333,7 +333,7 @@ values_t Adapter::parseMakeMove(std::string message)
 
   values_t out;
   out.gameId = gameId;
-  out.tileType = tileType;
+  out.tile_num = exprToTile(tileType);
   out.moveNumber = stoi(moveNum);
 
   return out;
@@ -351,27 +351,38 @@ values_t Adapter::parseGameMove(std::string message)
   std::string gameId = messageWords[1];
   out.gameId = gameId;
 
-  if(messageWords[6] == "FORFEITED")  //Check to see if the other player forfeited
+  if(messageWords[6] == "FORFEITED:")  //Check to see if the other player forfeited
   {
     out.forfeit = -1;
     return out;
   }
   else if(messageWords[6] == "PLACED")  //Check to see if the other player forfeited
   {
+		std::string playerId = messageWords[5];
     std::string tileType = messageWords[7];
     int xCoord = stoi(messageWords[9]);
     int yCoord = stoi(messageWords[10]);
     int rotation = stoi(messageWords[11]);
     std::string animalType = messageWords[12];
 
-    out.i = xCoord;
-    out.j = yCoord;
-    out.rotation = rotation;
-    out.animal = animalType;
+		out.playerId = playerId;
+
+		out.coordinates = convertCoordinates(std::pair<int,int> (xCoord, yCoord));
+    out.rotation = numRotations(rotation);
+		out.tile_num = exprToTile(tileType);
+		if (animalType == "CROCODILE")
+			out.croc = true;
+		else
+			out.croc = false;
+		if (animalType == "TIGER")
+			out.tiger = true;
+		else
+			out.tiger = false;
+
 
     if(messageWords.size() == 14 && animalType == "TIGER"){
       int tigerZone = stoi(messageWords[13]);
-      out.meepleZone = tigerZone;   //Set the zone where the meeple is placed in the tile
+      out.tiger_spot = convertZone(tigerZone);   //Set the zone where the meeple is placed in the tile
     }
 
     return out;

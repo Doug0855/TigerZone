@@ -101,7 +101,7 @@ std::string Game::makeMove(Tile tile) {
 		  numMeeples--;
 		}
 		std::pair<int,int> convertCoordinates = adapter.convertCoordinates(optimalLocation.first, optimalLocation.second);
-		placement = "GAME " + gameId + " PLACE " + tmpTile->getType() +" AT " + std::to_string(convertCoordinates.first) + std::to_string(convertCoordinates.second)  + " " + std::to_string(tmpTile->getRotations() * 90) + "\r\n";
+		placement = "GAME " + gameId + " PLACE " + tmpTile->getType() +" AT " + std::to_string(convertCoordinates.first) + std::to_string(convertCoordinates.second)  + " " + std::to_string(tmpTile->getRotations() * 90);
 		return placement + tiger;
 	}
 	else {

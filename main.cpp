@@ -97,13 +97,14 @@ std::string getMesssage(Client &client, std::string &msg_list)
 	return msg;
 }
 
-int moveProtocol(Client &client, std::string &message_list, Game &game1, Game &game2, int &success1, int &success2)
+int moveProtocol(Client &client, std::string &message_list, Game &game1, Game &game2, int &success1, int &success2, std::string OPPONENT_ID)
 {
 	std::string message_to_send;
 	std::string message;
 	values_t message_info;
 	Adapter adapter;
 	int runTime = 3;
+	Tile tmpTile;
 
 	message = getMesssage(client, message_list);
 
@@ -124,13 +125,15 @@ int moveProtocol(Client &client, std::string &message_list, Game &game1, Game &g
 				game1.setID(message_info.gameId);
 			if (message_info.gameId == game1.getID())
 			{
-				message_to_send = "SUPPOSED TO MAKE OUR MOVE";
-				//message_to_send = game1.getMove();
+				std::cout << "sent our move for tile: " << message_info.tile_num <<  " and game: " << message_info.gameId << std::endl;
+				tmpTile = Tile(message_info.tile_num);
+				message_to_send = game1.makeMove(tmpTile);
 			}
 			else if (message_info.gameId == game2.getID())
 			{
-				message_to_send = "SUPPOSED TO MAKE OUR MOVE";
-				//message_to_send = game2.getMove();
+				std::cout << "sent our move for tile: " << message_info.tile_num <<  " and game: " << message_info.gameId << std::endl;
+				tmpTile = Tile(message_info.tile_num);
+				message_to_send = game2.makeMove(tmpTile);
 			}
 			client.sendMessage(message_to_send);
 			message = getMesssage(client, message_list);
@@ -144,9 +147,36 @@ int moveProtocol(Client &client, std::string &message_list, Game &game1, Game &g
 			if (message_info.forfeit == -1)
 			{
 				if (game2.getID() == message_info.gameId)
-					success2 == -1;
+					success2 = -1;
 				else if (game1.getID() == message_info.gameId)
-					success1 == -1;
+					success1 = -1;
+			}
+			else
+			{
+				if (message_info.playerId == OPPONENT_ID)
+				{
+					tmpTile = Tile(message_info.tile_num);
+					int i = message_info.coordinates.first;
+					int j = message_info.coordinates.second;
+					int orientation = message_info.rotation;
+
+					if (message_info.gameId == game1.getID())
+					{
+						std::cout << "received opponent move for tile: " << message_info.tile_num <<  " and game: " << message_info.gameId << std::endl;
+						std::cout << "tile placed at <" << i << ", " << j << "> :" << "with rotation: " << orientation << std::endl;
+						std::cout << "croc? " << message_info.tiger << "tiger? " << message_info.tiger << "zone " << "[" <<message_info.tiger_spot.first << ", " << message_info.tiger_spot.second << "] " << std::endl;
+						tmpTile = Tile(message_info.tile_num);
+						game1.enemyMove(tmpTile, i, j, orientation, message_info.tiger, message_info.croc, message_info.tiger_spot);
+					}
+					else if (message_info.gameId == game2.getID())
+					{
+						std::cout << "received opponent move for tile: " << message_info.tile_num <<  " and game: " << message_info.gameId << std::endl;
+						std::cout << "tile placed at <" << i << ", " << j << "> :" << "with rotation: " << orientation << std::endl;
+						std::cout << "croc? " << message_info.tiger << "tiger? " << message_info.tiger << "zone " << "[" <<message_info.tiger_spot.first << ", " << message_info.tiger_spot.second << "] " << std::endl;
+						tmpTile = Tile(message_info.tile_num);
+						game2.enemyMove(tmpTile, i, j, orientation, message_info.tiger, message_info.croc, message_info.tiger_spot);
+					}
+				}
 			}
 			if (i < runTime-1)
 				message = getMesssage(client, message_list);
@@ -161,6 +191,7 @@ void matchProtocol(Client &client, std::string &message_list)
 	int number_of_tiles, game1_success, game2_success;
 	int count = 0;
 	bool lastMessage = true;
+	std::string OPPONENT_ID;
 	std::string message = getMesssage(client, message_list);
 	Tile tile1;
 	TileStack tStack;
@@ -169,9 +200,11 @@ void matchProtocol(Client &client, std::string &message_list)
 	{
 		if (message.compare(0,1,"Y") == 0) //getting opponent player id
 		{
-			std::cout << "OPPONNENT PLAYER INFO" << std::endl;
-			message_info = adapter.translate(message);
-			//use opponent player id
+			std::cout << "OPPONENT PLAYER INFO" << std::endl;
+			//message_info = adapter.translate(message);
+			//OPPONENT_ID = message_info.playerId; 					//use opponent player id
+			OPPONENT_ID = message.substr(24, std::string::npos-24);
+			std::cout << "Opponent ID is: " << OPPONENT_ID << std::endl;
 			message = getMesssage(client, message_list);
 		}
 		else if (message.compare(0,1,"S") == 0) //getting starting tile information
@@ -200,7 +233,7 @@ void matchProtocol(Client &client, std::string &message_list)
 			for (int i = 0; i < number_of_tiles; i++)
 			{
 				std::cout<<"Running moveProtocol first time."<<std::endl;
-				moveProtocol(client, message_list, game1, game2, game1_success, game2_success); //client, message_list, game1 and game2
+				moveProtocol(client, message_list, game1, game2, game1_success, game2_success, OPPONENT_ID); //client, message_list, game1 and game2
 				if (game1_success == -1 && game2_success == -1)	break;				//move must return a value to break from for loop in case of forfeit
 				//std::cout<<"Running moveProtocol second time."<<std::endl;
 				//moveProtocol(client, message_list, game1, game2, game1_success, game2_success); //client, message_list, game1 and game2
@@ -340,10 +373,8 @@ int main(int argc, char *argv[]) {
 	Board gameboard;
 	Client serverConnection(SERVER_IP, PORT);
 	serverConnection.connectToServer();
-	//serverConnection.sendMessage("Hello World!");
-	//std::cout << serverConnection.receiveMessage() << std::endl;
-	//std::cout << serverConnection.receiveMessage() << std::endl;
-	//serverConnection.closeConnection();
+
+
 	Tile tile1(19);
 	Player p1;
 	Player p2;
@@ -353,19 +384,10 @@ int main(int argc, char *argv[]) {
 	PLAYER_ID = authenticationProtocol(serverConnection, TOURNAMENT_PASS, TEAM_ID, TEAM_PASSWORD);
 	std::cout << "Player id returned is: " << PLAYER_ID << std::endl;
 	challengeProtocol(serverConnection);
+	serverConnection.closeConnection();
 
 	//Game game1("123", p1, p2, tStack, tile1, std::pair<int,int> (72,72));
 	//game1.play();
-	int z;
-	std::cin >> z;
 
-	//printBoard(game1.gameboard);
-	// std::string token;
-	// std::string delimiter = "\r\n";
-	// size_t pos = 0;
-	//
-	// pos = msg.find(delimiter);
-	// token = msg.substr(0, pos);
-	// msg.erase(0, pos + delimiter.length());
 	return 0;
 };
