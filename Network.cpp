@@ -1,5 +1,7 @@
 ﻿#include "Network.h"
 
+#define DEBUG
+
 Client::Client(std::string hostname, std::string port)
 {
     portno = stoi(port);
@@ -35,18 +37,25 @@ void Client::sendMessage(std::string message)
   message.copy(buffer, 999, 0);
   //fgets(buffer,255,stdin);
   n = write(sockfd,buffer,strlen(buffer));
-  if (n < 0)
-       error("ERROR writing to socket");
+  if (n < 0){
+    error("ERROR writing to socket");
+  }
+  #ifdef DEBUG
+  std::cout << "Message sent: " << message << std::endl;
+  #endif
+
 }
 std::string Client::receiveMessage()
 {
   std::string message;
   bzero(buffer,1000);
   n = read(sockfd,buffer,999);
-  if (n < 0)
-       error("ERROR reading from socket");
-  else
-        message = buffer;
+  if (n < 0){
+    error("ERROR reading from socket");
+  }
+  else{
+    message = buffer;
+  }
   return message;
 }
 void Client::closeConnection()

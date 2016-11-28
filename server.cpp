@@ -96,12 +96,12 @@ void exchangeMessages(int newsockfd) {
 	authentication(newsockfd);
 	// Loop to continuously get messages
 	while(true) {
-		std::cout<<"Wait for a response? (y/n)"<<std::endl;
+
+		std::cout<<"Get response? (y/n)"<< std::endl;
 		std::getline(std::cin,response);
-		//std::cin>>response;
-		//std::cin.ignore();
+
 		if (response.compare("") == 0){
-			continue;
+			break;
 		}
 		if (response[0] == 'y')
 		{
@@ -116,7 +116,10 @@ void exchangeMessages(int newsockfd) {
 			std::cout<<"Enter Message >>";
 			std::getline(std::cin, message);
 			message.append("\r\n");
-			std::cout<<"Verification: " <<message<<std::endl;
+			std::cout <<"Verification: " << message << std::endl;
+			if (message.compare("THANK YOU FOR PLAYING! GOODBYE") == 0){
+				break;
+			}
 
 			// Clear buffer and insert message
 			bzero(buffer, 256);

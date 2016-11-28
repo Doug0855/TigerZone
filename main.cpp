@@ -14,6 +14,8 @@
 #include "Adapter.h"
 //#include "Network.h"
 
+#define DEBUG
+
 #define WHITE   "\033[37m"      /* White */
 #define BLUE    "\033[34m"      /* Blue */
 #define GREEN   "\033[32m"      /* Green */
@@ -92,9 +94,13 @@ std::string getMesssage(Client &client, std::string &msg_list)
 	{
 		msg_list = client.receiveMessage();
 		//msg_list = "NEW CHALLENGE 1 YOU WILL PLAY 1 MATCH\r\nBEGIN ROUND 1 OF 1\r\nYOUR OPPONENT IS PLAYER Blue";
-		msg = parseMessageList(msg_list);
+		//msg = parseMessageList(msg_list);
 	}
-	else msg = parseMessageList(msg_list);
+	msg = parseMessageList(msg_list);
+	#ifdef DEBUG
+		std::cout << "Message got: " << msg << std::endl;
+	#endif
+
 	return msg;
 }
 
