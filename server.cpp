@@ -90,7 +90,7 @@ void exchangeMessages(int newsockfd) {
 	int waitSecond = 3;
 	std::string message;
 	char buffer[256];
-	char response;
+	std::string response;
 	std::cout<<"Client connected. Start sending messages."<<std::endl;
 
 	authentication(newsockfd);
@@ -100,7 +100,9 @@ void exchangeMessages(int newsockfd) {
 		std::getline(std::cin,response);
 		//std::cin>>response;
 		//std::cin.ignore();
-
+		if (response.compare("") == 0){
+			continue;
+		}
 		if (response[0] == 'y')
 		{
 			// Get message from client
@@ -109,7 +111,7 @@ void exchangeMessages(int newsockfd) {
 			std::cout<<"Message from client: ";
 			printf("%s\n", buffer);
 			if (n < 0) error("Error occurred.");
-		} else {
+		} else if (response[0] == 'n'){
 			// Message to send
 			std::cout<<"Enter Message >>";
 			std::getline(std::cin, message);
@@ -122,9 +124,11 @@ void exchangeMessages(int newsockfd) {
 			n = write(newsockfd, buffer, strlen(buffer));
 			if (n < 0) error("Error occurred.");
 			else std::cout<<"Message sent successfully."<<std::endl;
+		} else {
+			std::cout << "ERR: input y/n" << std::endl;
 		}
 		if(message.compare("") == 0){
-			exit(1);
+			//exit(1);
 		}
 		message = "";
 	}
