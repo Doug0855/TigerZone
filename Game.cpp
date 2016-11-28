@@ -104,7 +104,7 @@ std::string Game::makeMove(Tile tile, int moveNumber) {
 		std::pair<int,int> convertCoordinates = adapter.convertCoordinates(optimalLocation);
 		//debugging std::cout << "DEBUG: Optimal location first: " << optimalLocation.first << std::endl;
 		//debugging std::cout << "DEBUG: Optimal location second: " << optimalLocation.second << std::endl;
-		placement = "GAME " + gameId + " MOVE " + std::to_string(moveNumber) + " PLACE " + adapter.tileToExpr(tmpTile->getNum()) +" AT " + std::to_string(convertCoordinates.first) + " " + std::to_string(convertCoordinates.second)  + " " + std::to_string(tmpTile->getRotations() * 90);
+		placement = "GAME " + gameId + " MOVE " + std::to_string(moveNumber) + " PLACE " + adapter.tileToExpr(tmpTile->getNum()) +" AT " + std::to_string(convertCoordinates.second) + " " + std::to_string(convertCoordinates.first)  + " " + std::to_string(tmpTile->getRotations() * 90);
 
 		return placement + tiger + "\r\n";
 	}

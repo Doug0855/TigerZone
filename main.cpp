@@ -90,8 +90,8 @@ std::string getMesssage(Client &client, std::string &msg_list)
 	std::string msg;
 	if (msg_list.empty())
 	{
-		//msg_list = client.receiveMessage();
-		msg_list = "NEW CHALLENGE 1 YOU WILL PLAY 1 MATCH\r\nBEGIN ROUND 1 OF 1\r\nYOUR OPPONENT IS PLAYER Blue";
+		msg_list = client.receiveMessage();
+		//msg_list = "NEW CHALLENGE 1 YOU WILL PLAY 1 MATCH\r\nBEGIN ROUND 1 OF 1\r\nYOUR OPPONENT IS PLAYER Blue";
 		msg = parseMessageList(msg_list);
 	}
 	else msg = parseMessageList(msg_list);
@@ -157,8 +157,8 @@ int moveProtocol(Client &client, std::string &message_list, Game &game1, Game &g
 				if (message_info.playerId == OPPONENT_ID)
 				{
 					tmpTile = Tile(message_info.tile_num);
-					int i = message_info.coordinates.first;
-					int j = message_info.coordinates.second;
+					int j = message_info.coordinates.first;
+					int i = message_info.coordinates.second;
 					int orientation = message_info.rotation;
 
 					if (message_info.gameId == game1.getID())
@@ -376,15 +376,15 @@ int main(int argc, char *argv[]) {
 
 
 	std::string message_list = "";
-	//PLAYER_ID = authenticationProtocol(serverConnection, TOURNAMENT_PASS, TEAM_ID, TEAM_PASSWORD);
-	//std::cout << "Player id returned is: " << PLAYER_ID << std::endl;
-	//challengeProtocol(serverConnection);
-	//serverConnection.closeConnection();
+	std::string PLAYER_ID = authenticationProtocol(serverConnection, TOURNAMENT_PASS, TEAM_ID, TEAM_PASSWORD);
+	std::cout << "Player id returned is: " << PLAYER_ID << std::endl;
+	challengeProtocol(serverConnection);
+	serverConnection.closeConnection();
 
-	std::cout << "message1: " << getMesssage(serverConnection, message_list) << std::endl;
-	std::cout << "message2: " << getMesssage(serverConnection, message_list) << std::endl;
-	std::cout << "message3: " << getMesssage(serverConnection, message_list) << std::endl;
-	std::cout << "message4: " << getMesssage(serverConnection, message_list) << std::endl;
+	// std::cout << "message1: " << getMesssage(serverConnection, message_list) << std::endl;
+	// std::cout << "message2: " << getMesssage(serverConnection, message_list) << std::endl;
+	// std::cout << "message3: " << getMesssage(serverConnection, message_list) << std::endl;
+	// std::cout << "message4: " << getMesssage(serverConnection, message_list) << std::endl;
 
 
 	//Game game1("123", p1, p2, tStack, tile1, std::pair<int,int> (72,72));
