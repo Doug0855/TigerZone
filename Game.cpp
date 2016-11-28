@@ -104,9 +104,6 @@ std::string Game::makeMove(Tile tile, int moveNumber) {
 		std::cout << "DEBUG: Optimal location first: " << optimalLocation.first << std::endl;
 		std::cout << "DEBUG: Optimal location second: " << optimalLocation.second << std::endl; 
 		placement = "GAME " + gameId + " MOVE " + std::to_string(moveNumber) + " PLACE " + adapter.tileToExpr(tmpTile->getNum()) +" AT " + std::to_string(convertCoordinates.first) + " " + std::to_string(convertCoordinates.second)  + " " + std::to_string(tmpTile->getRotations() * 90);
-		
-		if (tiger == "")
-			tiger = " NONE";
 
 		return placement + tiger + "\r\n";
 	}
@@ -124,7 +121,7 @@ std::string Game::meepleAi(int i, int j)
 	if (gameboard.m_board[i][j]->getCenter().getType() == "den")
 	{
 		gameboard.placeMeeple(i, j, std::pair<int,int> (1,1));
-		return "";
+		return " TIGER " + adapter.convertZone(std::pair<int, int>(1, 1));
 	}
 	// if there wasn't a den in the middle then get all the structures in the current tile
 	std::vector<Structure> structures = gameboard.getStructures(i, j);
@@ -162,7 +159,7 @@ std::string Game::meepleAi(int i, int j)
 		  return " TIGER " + adapter.convertZone(std::pair<int, int> (i,j));
 		}
 	}
-	return "";
+	return " NONE";
 }
 
 // add points according to values for different kind of features

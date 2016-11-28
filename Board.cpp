@@ -769,7 +769,7 @@ void Board::connectFaces(int row, int col)
 }
 
 	// Pass in the coordinates of the tile that you just placed
-	std::vector<Structure> Board::getStructures(int row, int col) {
+std::vector<Structure> Board::getStructures(int row, int col) {
 	//debugging std::cout<<"IN GET STRUCTURES FOR "<<row<<' '<<col<<std::endl;
 	std::vector<Structure> structures;
 	Tile* tile = m_board[row][col];
