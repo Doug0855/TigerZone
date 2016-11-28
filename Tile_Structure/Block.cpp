@@ -15,10 +15,12 @@ Block::Block(char c)
   else
   	type = "";
   visited = false;
+  meeple = false;
 }
 
 Block::Block()
 {
+	meeple = false;
   type = "";
 }
 

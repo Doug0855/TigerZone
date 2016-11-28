@@ -1,4 +1,4 @@
-#ifndef BOARD_H
+﻿#ifndef BOARD_H
 #define BOARD_H
 
 #include "Tile_Structure/Tile.h"
@@ -32,6 +32,8 @@ public:
 
 	int animalPoints(int i, int j);
 
+  void placeCroc(int i, int j);
+  
 	// places the tile on the board and connects the faces
 	void place_tile(std::pair<int, int> location, Tile &tile);
 
@@ -44,12 +46,13 @@ public:
 	void placeMeeple(int i, int j, std::pair<int,int> location);
 	void meepleAi(int i, int j);
 
+private:
+
 	// Helper functions for building the structures of a recently placed tile
 	void buildLake(Structure* struc, Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int,int> blockSpot, std::vector<Tile*> &visitedTiles);
 	void buildTrail(Structure* struc, Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int,int> blockSpot, std::vector<Tile*> &visitedTiles);
 	void buildJungle(Structure* struc, Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int,int> blockSpot,  std::vector<Tile*> &visitedTiles);
-
-private:
+	
 	Structure checkJungle(Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int, int> blockSpot);
 	Structure checkLake(Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int, int> blockSpot);
 	Structure checkTrail(Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int, int> blockSpot);
