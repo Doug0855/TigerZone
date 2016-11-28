@@ -125,66 +125,67 @@ std::vector< std::pair<int, int> > Board::checkPlacement(Tile tile, int i, int j
 	return places;
 }
 
-std::pair<int,int> Board::getOptimalPlacement(Tile &tile, std::vector< std::pair<int, int> > availableMoves) {
-	 if (availableMoves.size() > 1)
-	 {
-	 	int bestRotation = 0;
-	 	std::pair<int, int> bestSpot;
-	 	int mostPoints = 0;
-	 	for (size_t z = 0; z < availableMoves.size(); z++)
-	 	{
-	 		int i = availableMoves[z].first;
-	 		int j = availableMoves[z].second;
-	 		for (int q = 0; q < 4; q++)
-	 		{
-	 			int points = 0;
-	 			if ((m_board[i + 1][j] == NULL || m_board[i + 1][j]->getUpFace()->faceEquals(*tile.getDownFace())) &&
-	 				(m_board[i - 1][j] == NULL || m_board[i - 1][j]->getDownFace()->faceEquals(*tile.getUpFace())) &&
-	 				(m_board[i][j + 1] == NULL || m_board[i][j + 1]->getLeftFace()->faceEquals(*tile.getRightFace())) &&
-	 				(m_board[i][j - 1] == NULL || m_board[i][j - 1]->getRightFace()->faceEquals(*tile.getLeftFace())))
-	 			{
-	 				points = positionPoints(i, j);
-	 			}
-	 			else
-	 			{
-	 				points = -1;
-	 			}
-	 			if (points > mostPoints)
-	 			{
-	 				mostPoints = points;
-	 				bestSpot = availableMoves[z];
-	 				bestRotation = q;
-	 			}
-	 			tile.rotate();
-	 		}
-	 	}
-	 	for (int i = 0; i < bestRotation; i++)
-	 	{
-	 		tile.rotate();
-	 	}
-	 	return bestSpot;
-	 }
-	 else
-	 {
-	 	int i = availableMoves[0].first;
-	 	int j = availableMoves[0].second;
-	 	for (int q = 0; q < 4; q++)
-	 	{
-	 		if ((m_board[i + 1][j] == NULL || m_board[i + 1][j]->getUpFace()->faceEquals(*tile.getDownFace())) &&
-	 			(m_board[i - 1][j] == NULL || m_board[i - 1][j]->getDownFace()->faceEquals(*tile.getUpFace())) &&
-	 			(m_board[i][j + 1] == NULL || m_board[i][j + 1]->getLeftFace()->faceEquals(*tile.getRightFace())) &&
-	 			(m_board[i][j - 1] == NULL || m_board[i][j - 1]->getRightFace()->faceEquals(*tile.getLeftFace())))
-	 		{
-	 			std::cout << "Location " << i << ' ' << j << " passed optimalPlacement checks of connecting to all surrounding tiles" << std::endl;
-	 			break;
-	 		}
-	 		else
-	 		{
-	 			tile.rotate();
-	 		}
-	 	}
-	 	return availableMoves[0];
-	 }
+std::pair<int,int> Board::getOptimalPlacement(Tile &tile, std::vector< std::pair<int, int> > availableMoves)
+{
+	if (availableMoves.size() > 1)
+	{
+		int bestRotation = 0;
+		std::pair<int, int> bestSpot;
+		int mostPoints = -1; // set this to -1 otherwise if points is never > mostPoints bestSpot won't be selected
+		for (size_t z = 0; z < availableMoves.size(); z++)
+		{
+			int i = availableMoves[z].first;
+			int j = availableMoves[z].second;
+			for (int q = 0; q < 4; q++)
+			{
+				int points = 0;
+				if ((m_board[i + 1][j] == NULL || m_board[i + 1][j]->getUpFace()->faceEquals(*tile.getDownFace())) &&
+				(m_board[i - 1][j] == NULL || m_board[i - 1][j]->getDownFace()->faceEquals(*tile.getUpFace())) &&
+				(m_board[i][j + 1] == NULL || m_board[i][j + 1]->getLeftFace()->faceEquals(*tile.getRightFace())) &&
+				(m_board[i][j - 1] == NULL || m_board[i][j - 1]->getRightFace()->faceEquals(*tile.getLeftFace())))
+				{
+					points = positionPoints(i, j);
+				}
+				else
+				{
+					points = -1;
+				}
+				if (points > mostPoints)
+				{
+					mostPoints = points;
+					bestSpot = availableMoves[z];
+					bestRotation = q;
+				}
+				tile.rotate();
+			}
+		}
+		for (int i = 0; i < bestRotation; i++)
+		{
+			tile.rotate();
+		}
+		return bestSpot;
+	}
+	else
+	{
+		int i = availableMoves[0].first;
+		int j = availableMoves[0].second;
+		for (int q = 0; q < 4; q++)
+		{
+			if ((m_board[i + 1][j] == NULL || m_board[i + 1][j]->getUpFace()->faceEquals(*tile.getDownFace())) &&
+			(m_board[i - 1][j] == NULL || m_board[i - 1][j]->getDownFace()->faceEquals(*tile.getUpFace())) &&
+			(m_board[i][j + 1] == NULL || m_board[i][j + 1]->getLeftFace()->faceEquals(*tile.getRightFace())) &&
+			(m_board[i][j - 1] == NULL || m_board[i][j - 1]->getRightFace()->faceEquals(*tile.getLeftFace())))
+			{
+				//debugging std::cout << "Location " << i << ' ' << j << " passed optimalPlacement checks of connecting to all surrounding tiles" << std::endl;
+				break;
+			}
+			else
+			{
+				tile.rotate();
+			}
+		}
+		return availableMoves[0];
+	}
 	return availableMoves[0];
 }
 
@@ -327,7 +328,7 @@ Structure Board::checkJungle(Tile *tile, std::vector< std::vector<Block> >& tile
 void Board::buildJungle(Structure* struc, Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int,int> blockSpot, std::vector<Tile*> &visitedTiles) {
 	int row = blockSpot.first;
 	int col = blockSpot.second;
-	std::cout<<"in build jungle at "<<row<<' '<<col<<std::endl;
+	//debugging std::cout<<"in build jungle at "<<row<<' '<<col<<std::endl;
 	tileBlocks[row][col].visit();
 
 	struc->structureBlocks.push_back(tileBlocks[row][col]);
@@ -340,14 +341,14 @@ void Board::buildJungle(Structure* struc, Tile *tile, std::vector< std::vector<B
 			if(visitedTiles[i] == tile)
 			{
 				addedTileAnimals = true;
-				std::cout<<"Added animals already for this tile"<<std::endl;
+				//debugging std::cout<<"Added animals already for this tile"<<std::endl;
 			}
 	}
 	if(!addedTileAnimals) {
 		struc->checkAnimals(tile);
 	}
 
-	std::cout<<"block type is "<<tileBlocks[row][col].getType()<<std::endl;
+	//debugging std::cout<<"block type is "<<tileBlocks[row][col].getType()<<std::endl;
 	if(tileBlocks[row][col].getType() == "mixed") {
 		int trailFaces = 0;
 		// Determine how many faces are trail faces. If there's only 1 than we know the mixed blocks don't connect
@@ -360,7 +361,7 @@ void Board::buildJungle(Structure* struc, Tile *tile, std::vector< std::vector<B
 		if(tile->getLeftFace()->getType() == "trail")
 			trailFaces++;
 
-		std::cout<<"trail faces is "<<trailFaces<<std::endl;
+		//debugging std::cout<<"trail faces is "<<trailFaces<<std::endl;
 		if(trailFaces > 0) {
 			if(trailFaces != 1) {
 				for(int i = 0; i < 3; i++) {
@@ -478,7 +479,7 @@ void Board::buildLake(Structure* struc, Tile *tile, std::vector< std::vector<Blo
 			if(visitedTiles[i] == tile)
 			{
 				addedTileAnimals = true;
-				std::cout<<"Added animals already for this tile"<<std::endl;
+				//debugging std::cout<<"Added animals already for this tile"<<std::endl;
 			}
 	}
 	if(!addedTileAnimals) {
@@ -602,7 +603,7 @@ void Board::buildTrail(Structure* struc, Tile *tile, std::vector< std::vector<Bl
 			if(visitedTiles[i] == tile)
 			{
 				addedTileAnimals = true;
-				std::cout<<"Added animals already for this tile"<<std::endl;
+				//debugging std::cout<<"Added animals already for this tile"<<std::endl;
 			}
 	}
 	if(!addedTileAnimals) {
@@ -767,9 +768,9 @@ void Board::connectFaces(int row, int col)
 	}
 }
 
-// Pass in the coordinates of the tile that you just placed
-std::vector<Structure> Board::getStructures(int row, int col) {
-	std::cout<<"IN GET STRUCTURES FOR "<<row<<' '<<col<<std::endl;
+	// Pass in the coordinates of the tile that you just placed
+	std::vector<Structure> Board::getStructures(int row, int col) {
+	//debugging std::cout<<"IN GET STRUCTURES FOR "<<row<<' '<<col<<std::endl;
 	std::vector<Structure> structures;
 	Tile* tile = m_board[row][col];
 	std::vector< std::vector<Block> > tileBlocks = tile->getInnerBlocks();
@@ -796,11 +797,11 @@ std::vector<Structure> Board::getStructures(int row, int col) {
 			structures[i].structureBlocks[j].unVisit();
 		}
 	}
-	for(int i = 0; i < structures.size(); i++) {
-		std::cout<<"Structure is of type "<<structures[i].type<<" with "<<structures[i].structureBlocks.size()
-		<<" blocks and starting block at "<<structures[i].startingBlock.first<<' '<<structures[i].startingBlock.second<<std::endl;
-		std::cout<<" and how many buffalo? : "<<structures[i].buffaloCount<<std::endl;
-	}
-	std::cout<<"Structures size is "<<structures.size()<<std::endl;
+	//debugging for(int i = 0; i < structures.size(); i++) {
+	//debugging 	std::cout<<"Structure is of type "<<structures[i].type<<" with "<<structures[i].structureBlocks.size()
+	//debugging 	<<" blocks and starting block at "<<structures[i].startingBlock.first<<' '<<structures[i].startingBlock.second<<std::endl;
+	//debugging 	std::cout<<" and how many buffalo? : "<<structures[i].buffaloCount<<std::endl;
+	//debugging }
+	//debugging std::cout<<"Structures size is "<<structures.size()<<std::endl;
 	return structures;
 }

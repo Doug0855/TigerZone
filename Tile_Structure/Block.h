@@ -9,7 +9,7 @@
 #define    Lake      	'l'
 #define    Trail     	't'
 #define    Den	      'd'
-#define	   Mixed       'm'
+#define	   Mixed      'm'
 
 class Block {
 public:
@@ -30,7 +30,7 @@ public:
 private:
 	bool meeple, visited;
 	std::string type;
-	
+
 };
 
 #endif
