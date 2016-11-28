@@ -5,9 +5,10 @@ Adapter::Adapter() {}
 Adapter::~Adapter() {}
 
 std::string Adapter::tileToExpr(int i){
-	std::string tiles[28] = {"JJJJ-","LLLL-","TLJT-","TLTT-","JJJJX", "JLLL-", "TLJTP", "TLTTP", "JJTJX", "LLJJ-", "JLTT-", 
-		"TLLT-", "TTTT-", "JLJL-", "JLTTB", "TLLTB", "TJTJ-", "LJLJ-" , "TLTJ-", "LJTJ-", "TJJT-", "LJJJ-", "TLTJD", "LJTJD", 
-		"TJTT-", "JLLJ-", "TLLL-", "TLLLC"};
+	std::string tiles[28] = {"JJJJ-", "JJJJX", "JJTJX", "TTTT-", "TJTJ-", 
+		"TJJT-" , "TJTT-", "LLLL-", "JLLL-" , "LLJJ-", "JLJL-", "LJLJ-", 
+		"LJJJ-", "JLLJ-", "TLJT-", "TLJTP", "JLTT-", "JLTTB", "TLTJ-" , 
+		"TLTJD", "TLLL-", "TLTT-" , "TLTTP", "TLLT-" , "TLLTB" , "LJTJ-", "LJTJD", "TLLLC"};
 	return tiles[i-1];
 }
 
@@ -18,35 +19,35 @@ int Adapter::exprToTile(std::string &expr)
 	{
 		return 1;
 	}
-	if (expr == "LLLL-")
+	if (expr == "JJJJX")
 	{
 		return 2;
 	}
-	if (expr == "TLJT-")
+	if (expr == "JJTJX")
 	{
 		return 3;
 	}
-	if (expr == "TLTT-")
+	if (expr == "TTTT-")
 	{
 		return 4;
 	}
-	if (expr == "JJJJX")
+	if (expr == "TJTJ-")
 	{
 		return 5;
 	}
-	if (expr == "JLLL-")
+	if (expr == "TJJT-")
 	{
 		return 6;
 	}
-	if (expr == "TLJTP")
+	if (expr == "TJTT-")
 	{
 		return 7;
 	}
-	if (expr == "TLTTP")
+	if (expr == "LLLL-")
 	{
 		return 8;
 	}
-	if (expr == "JJTJX")
+	if (expr == "JLLL-")
 	{
 		return 9;
 	}
@@ -54,35 +55,35 @@ int Adapter::exprToTile(std::string &expr)
 	{
 		return 10;
 	}
-	if (expr == "JLTT-")
+	if (expr == "JLJL-")
 	{
 		return 11;
 	}
-	if (expr == "TLLT-")
+	if (expr == "LJLJ-")
 	{
 		return 12;
 	}
-	if (expr == "TTTT-")
+	if (expr == "LJJJ-")
 	{
 		return 13;
 	}
-	if (expr == "JLJL-")
+	if (expr == "JLLJ-")
 	{
 		return 14;
 	}
-	if (expr == "JLTTB")
+	if (expr == "TLJT-")
 	{
 		return 15;
 	}
-	if (expr == "TLLTB")
+	if (expr == "TLJTP")
 	{
 		return 16;
 	}
-	if (expr == "TJTJ-")
+	if (expr == "JLTT-")
 	{
 		return 17;
 	}
-	if (expr == "LJLJ-")
+	if (expr == "JLTTB")
 	{
 		return 18;
 	}
@@ -90,35 +91,35 @@ int Adapter::exprToTile(std::string &expr)
 	{
 		return 19;
 	}
-	if (expr == "LJTJ-")
+	if (expr == "TLTJD")
 	{
 		return 20;
 	}
-	if (expr == "TJJT-")
+	if (expr == "TLLL-")
 	{
 		return 21;
 	}
-	if (expr == "LJJJ-")
+	if (expr == "TLTT-")
 	{
 		return 22;
 	}
-	if (expr == "TLTJD")
+	if (expr == "TLTTP")
 	{
 		return 23;
 	}
-	if (expr == "LJTJD")
+	if (expr == "TLLT-")
 	{
 		return 24;
 	}
-	if (expr == "TJTT-")
+	if (expr == "TLLTB")
 	{
 		return 25;
 	}
-	if (expr == "JLLJ-")
+	if (expr == "LJTJ-")
 	{
 		return 26;
 	}
-	if (expr == "TLLL-")
+	if (expr == "LJTJD")
 	{
 		return 27;
 	}
@@ -365,26 +366,26 @@ values_t Adapter::parseGameMove(std::string message)
   }
   else if(messageWords[6] == "PLACED")  //Check to see if the other player forfeited
   {
-		std::string playerId = messageWords[5];
+	std::string playerId = messageWords[5];
     std::string tileType = messageWords[7];
     int xCoord = stoi(messageWords[9]);
     int yCoord = stoi(messageWords[10]);
     int rotation = stoi(messageWords[11]);
     std::string animalType = messageWords[12];
 
-		out.playerId = playerId;
+	out.playerId = playerId;
 
-		out.coordinates = convertCoordinates(std::pair<int,int> (xCoord, yCoord));
-    out.rotation = numRotations(rotation);
-		out.tile_num = exprToTile(tileType);
-		if (animalType == "CROCODILE")
-			out.croc = true;
-		else
-			out.croc = false;
-		if (animalType == "TIGER")
-			out.tiger = true;
-		else
-			out.tiger = false;
+	out.coordinates = convertCoordinates(xCoord, yCoord);
+	out.rotation = numRotations(rotation);
+	out.tile_num = exprToTile(tileType);
+	if (animalType == "CROCODILE")
+		out.croc = true;
+	else
+		out.croc = false;
+	if (animalType == "TIGER")
+		out.tiger = true;
+	else
+		out.tiger = false;
 
 
     if(messageWords.size() == 14 && animalType == "TIGER"){

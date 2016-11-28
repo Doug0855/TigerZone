@@ -164,7 +164,7 @@ int moveProtocol(Client &client, std::string &message_list, Game &game1, Game &g
 					{
 						std::cout << "received opponent move for tile: " << message_info.tile_num <<  " and game: " << message_info.gameId << std::endl;
 						std::cout << "tile placed at <" << i << ", " << j << "> :" << "with rotation: " << orientation << std::endl;
-						std::cout << "croc? " << message_info.tiger << "tiger? " << message_info.tiger << "zone " << "[" <<message_info.tiger_spot.first << ", " << message_info.tiger_spot.second << "] " << std::endl;
+						std::cout << "croc? " << message_info.croc << "tiger? " << message_info.tiger << "zone " << "[" <<message_info.tiger_spot.first << ", " << message_info.tiger_spot.second << "] " << std::endl;
 						tmpTile = Tile(message_info.tile_num);
 						game1.enemyMove(tmpTile, i, j, orientation, message_info.tiger, message_info.croc, message_info.tiger_spot);
 					}
@@ -172,9 +172,11 @@ int moveProtocol(Client &client, std::string &message_list, Game &game1, Game &g
 					{
 						std::cout << "received opponent move for tile: " << message_info.tile_num <<  " and game: " << message_info.gameId << std::endl;
 						std::cout << "tile placed at <" << i << ", " << j << "> :" << "with rotation: " << orientation << std::endl;
-						std::cout << "croc? " << message_info.tiger << "tiger? " << message_info.tiger << "zone " << "[" <<message_info.tiger_spot.first << ", " << message_info.tiger_spot.second << "] " << std::endl;
+						std::cout << "croc? " << message_info.croc << "tiger? " << message_info.tiger << "zone " << "[" <<message_info.tiger_spot.first << ", " << message_info.tiger_spot.second << "] " << std::endl;
 						tmpTile = Tile(message_info.tile_num);
+						std::cout << "DEBUG FLAG" << std::endl; 
 						game2.enemyMove(tmpTile, i, j, orientation, message_info.tiger, message_info.croc, message_info.tiger_spot);
+						std::cout << "DEBUG FLAG 2" << std::endl; 
 					}
 				}
 			}

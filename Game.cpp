@@ -104,10 +104,14 @@ std::string Game::makeMove(Tile tile) {
 		std::cout << "DEBUG: Optimal location first: " << optimalLocation.first << std::endl;
 		std::cout << "DEBUG: Optimal location second: " << optimalLocation.second << std::endl; 
 		placement = "GAME " + gameId + " PLACE " + adapter.tileToExpr(tmpTile->getNum()) +" AT " + std::to_string(convertCoordinates.first) + " " + std::to_string(convertCoordinates.second)  + " " + std::to_string(tmpTile->getRotations() * 90);
-		return placement + tiger;
+		
+		if (tiger == "")
+			tiger = " NONE";
+
+		return placement + tiger + "\r\n";
 	}
 	else {
-		return "GAME " + gameId + " TILE " + tile.getType()+" UNPLACEABLE PASS ";
+		return "GAME " + gameId + " TILE " + adapter.tileToExpr(tile.getNum()) +" UNPLACEABLE PASS\r\n";
 	}
 
 }
