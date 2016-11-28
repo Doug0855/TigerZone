@@ -99,7 +99,7 @@ std::string Game::makeMove(Tile tile, int moveNumber) {
 		if(numMeeples > 0)
 		{
 		  tiger = meepleAi(optimalLocation.first, optimalLocation.second);
-		  numMeeples--;
+		  if (tiger != " NONE") numMeeples--;
 		}
 		std::pair<int,int> convertCoordinates = adapter.convertCoordinates(optimalLocation);
 		std::cout << "DEBUG: Optimal location first: " << optimalLocation.first << std::endl;
