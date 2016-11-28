@@ -100,10 +100,10 @@ std::string Game::makeMove(Tile tile) {
 		  tiger = meepleAi(optimalLocation.first, optimalLocation.second);
 		  numMeeples--;
 		}
-		std::pair<int,int> convertCoordinates = adapter.convertCoordinates(optimalLocation.first, optimalLocation.second);
+		std::pair<int,int> convertCoordinates = adapter.convertCoordinates(optimalLocation);
 		std::cout << "DEBUG: Optimal location first: " << optimalLocation.first << std::endl;
 		std::cout << "DEBUG: Optimal location second: " << optimalLocation.second << std::endl; 
-		placement = "GAME " + gameId + " PLACE " + tmpTile->getType() +" AT " + std::to_string(convertCoordinates.first) + std::to_string(convertCoordinates.second)  + " " + std::to_string(tmpTile->getRotations() * 90);
+		placement = "GAME " + gameId + " PLACE " + adapter.tileToExpr(tmpTile->getNum()) +" AT " + std::to_string(convertCoordinates.first) + " " + std::to_string(convertCoordinates.second)  + " " + std::to_string(tmpTile->getRotations() * 90);
 		return placement + tiger;
 	}
 	else {

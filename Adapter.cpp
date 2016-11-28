@@ -4,6 +4,13 @@ Adapter::Adapter() {}
 
 Adapter::~Adapter() {}
 
+std::string Adapter::tileToExpr(int i){
+	std::string tiles[28] = {"JJJJ-","LLLL-","TLJT-","TLTT-","JJJJX", "JLLL-", "TLJTP", "TLTTP", "JJTJX", "LLJJ-", "JLTT-", 
+		"TLLT-", "TTTT-", "JLJL-", "JLTTB", "TLLTB", "TJTJ-", "LJLJ-" , "TLTJ-", "LJTJ-", "TJJT-", "LJJJ-", "TLTJD", "LJTJD", 
+		"TJTT-", "JLLJ-", "TLLL-", "TLLLC"};
+	return tiles[i-1];
+}
+
 int Adapter::exprToTile(std::string &expr)
 {
 	transform(expr.begin(), expr.end(), expr.begin(), toupper);

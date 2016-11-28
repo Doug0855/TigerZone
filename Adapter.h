@@ -34,6 +34,7 @@ public:
 
 	// Methods
 	//std::string tileToExpr(Tile& tile);
+	std::string tileToExpr(int i);
 	int exprToTile(std::string &expr);
 	int numRotations(const int x);
 
