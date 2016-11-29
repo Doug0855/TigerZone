@@ -83,38 +83,51 @@ void challenge(int newsockfd)
 	if (n < 0) error("ERROR reading from socket");
 	printf("Here is the message: %s\n",buffer);*/
 }
+std::string getMsg(int newsockfd){
+	char buffer[256];
+	bzero(buffer, 256);
+	int n = read(newsockfd, buffer, 255);
+	if (n < 0){
+		error("Error occured");
+	}
 
-void exchangeMessages(int newsockfd) {
+	return std::string(buffer);
+
+}
+void exchangeMessages(int newsockfd) { //get a single message from the client
 	int count = 0;
 	int n;
 	int waitSecond = 3;
 	std::string message;
 	char buffer[256];
-	char response;
+	std::string response;
 	std::cout<<"Client connected. Start sending messages."<<std::endl;
 
 	authentication(newsockfd);
 	// Loop to continuously get messages
 	while(true) {
-		std::cout<<"Wait for a response? (y/n)"<<std::endl;
-		std::getline(std::cin,response);
-		//std::cin>>response;
-		//std::cin.ignore();
 
+		std::cout<<"Get response? (y/n)"<< std::endl;
+		std::getline(std::cin,response);
+
+		if (response.compare("") == 0){
+			break;
+		}
 		if (response[0] == 'y')
 		{
 			// Get message from client
-			bzero(buffer, 256);
-			n = read(newsockfd, buffer, 255);
-			std::cout<<"Message from client: ";
-			printf("%s\n", buffer);
-			if (n < 0) error("Error occurred.");
-		} else {
+
+			std::cout <<"Message from client: " << getMsg(newsockfd) << std::endl;
+
+		} else if (response[0] == 'n'){
 			// Message to send
 			std::cout<<"Enter Message >>";
 			std::getline(std::cin, message);
 			message.append("\r\n");
-			std::cout<<"Verification: " <<message<<std::endl;
+			std::cout <<"Verification: " << message << std::endl;
+			if (message.compare("THANK YOU FOR PLAYING! GOODBYE\r\n") == 0){
+				break;
+			}
 
 			// Clear buffer and insert message
 			bzero(buffer, 256);
@@ -122,13 +135,16 @@ void exchangeMessages(int newsockfd) {
 			n = write(newsockfd, buffer, strlen(buffer));
 			if (n < 0) error("Error occurred.");
 			else std::cout<<"Message sent successfully."<<std::endl;
+		} else {
+			std::cout << "ERR: input y/n" << std::endl;
 		}
 		if(message.compare("") == 0){
-			exit(1);
+			//exit(1);
 		}
 		message = "";
 	}
 }
+
 int main(int argc, char *argv[])
 {
 	int sockfd, newsockfd, portno;
