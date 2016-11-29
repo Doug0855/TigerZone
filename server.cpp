@@ -126,6 +126,11 @@ void exchangeMessages(int newsockfd) { //get a single message from the client
 			message.append("\r\n");
 			std::cout <<"Verification: " << message << std::endl;
 			if (message.compare("THANK YOU FOR PLAYING! GOODBYE\r\n") == 0){
+				bzero(buffer, 256);
+				message.copy(buffer, 255, 0);
+				n = write(newsockfd, buffer, strlen(buffer));
+				if (n < 0) error("Error occurred.");
+				else std::cout<<"Message sent successfully."<<std::endl;
 				break;
 			}
 

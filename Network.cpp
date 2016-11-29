@@ -40,9 +40,9 @@ void Client::sendMessage(std::string message)
   if (n < 0){
     error("ERROR writing to socket");
   }
-  #ifdef DEBUG
-  std::cout << "Message sent: " << message << std::endl;
-  #endif
+  //#ifdef DEBUG
+  //std::cout << "Message sent: " << message << std::endl;
+  //#endif
 
 }
 std::string Client::receiveMessage()
