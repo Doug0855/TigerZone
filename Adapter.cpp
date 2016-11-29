@@ -5,9 +5,9 @@ Adapter::Adapter() {}
 Adapter::~Adapter() {}
 
 std::string Adapter::tileToExpr(int i){
-	std::string tiles[28] = {"JJJJ-", "JJJJX", "JJTJX", "TTTT-", "TJTJ-", 
-		"TJJT-" , "TJTT-", "LLLL-", "JLLL-" , "LLJJ-", "JLJL-", "LJLJ-", 
-		"LJJJ-", "JLLJ-", "TLJT-", "TLJTP", "JLTT-", "JLTTB", "TLTJ-" , 
+	std::string tiles[28] = {"JJJJ-", "JJJJX", "JJTJX", "TTTT-", "TJTJ-",
+		"TJJT-" , "TJTT-", "LLLL-", "JLLL-" , "LLJJ-", "JLJL-", "LJLJ-",
+		"LJJJ-", "JLLJ-", "TLJT-", "TLJTP", "JLTT-", "JLTTB", "TLTJ-" ,
 		"TLTJD", "TLLL-", "TLTT-" , "TLTTP", "TLLT-" , "TLLTB" , "LJTJ-", "LJTJD", "TLLLC"};
 	return tiles[i-1];
 }
@@ -203,18 +203,18 @@ int Adapter::getCommand(const std::vector<std::string>& myV) {
 
 }
 
-std::pair<int, int> Adapter::convertCoordinates(int i, int j)
+std::pair<int, int> Adapter::convertCoordinates(int x, int y) //convert from server
 {
-	int row = i + 72;
-	int col = j + 72;
+	int row = 72 - y;
+	int col = x + 72;
 	return std::pair<int, int> (row, col);
 }
 
-std::pair<int, int> Adapter::convertCoordinates(std::pair<int, int> location)
+std::pair<int, int> Adapter::convertCoordinates(std::pair<int, int> location) //convert from client to server
 {
-	int i = location.first - 72;
-	int j = location.second - 72;
-	return std::pair<int, int>(i, j);
+	int x = location.second - 72;
+	int y = 72 - location.first;
+	return std::pair<int, int>(x, y);
 }
 
 int Adapter::convertZone(std::pair<int, int> location)
