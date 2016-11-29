@@ -108,6 +108,7 @@ int moveProtocol(Client &client, std::string &message_list, Game &game1, Game &g
 	Tile tmpTile;
 
 	message = getMesssage(client, message_list);
+	std::cout << GREEN << "Server sent: " << RESET << message << std::endl;
 
 	if (success1 == -1 || success2 == -1 && message.compare(0,1,"M") == 0)
 		runTime = 2;
@@ -138,6 +139,7 @@ int moveProtocol(Client &client, std::string &message_list, Game &game1, Game &g
 			}
 			client.sendMessage(message_to_send);
 			message = getMesssage(client, message_list);
+			std::cout << GREEN << "Server sent: " << RESET << message << std::endl;
 		}
 		else if (message.compare(0,1,"G") == 0)
 		{
@@ -182,7 +184,10 @@ int moveProtocol(Client &client, std::string &message_list, Game &game1, Game &g
 				}
 			}
 			if (i < runTime-1)
+			{
 				message = getMesssage(client, message_list);
+				std::cout << GREEN << "Server sent: " << RESET << message << std::endl;
+			}
 		}
 	}
 }
@@ -196,6 +201,7 @@ void matchProtocol(Client &client, std::string &message_list)
 	bool lastMessage = true;
 	std::string OPPONENT_ID;
 	std::string message = getMesssage(client, message_list);
+	std::cout << GREEN << "Server sent: " << RESET << message << std::endl;
 	Tile tile1;
 	TileStack tStack;
 
@@ -209,6 +215,7 @@ void matchProtocol(Client &client, std::string &message_list)
 			OPPONENT_ID = message.substr(24, std::string::npos-24);
 			std::cout << "Opponent ID is: " << OPPONENT_ID << std::endl;
 			message = getMesssage(client, message_list);
+			std::cout << GREEN << "Server sent: " << RESET << message << std::endl;
 		}
 		else if (message.compare(0,1,"S") == 0) //getting starting tile information
 		{
@@ -216,6 +223,7 @@ void matchProtocol(Client &client, std::string &message_list)
 			message_info = adapter.translate(message);
 			tile1 = Tile(message_info.tile_num); //getting first tile
 			message = getMesssage(client, message_list);
+			std::cout << GREEN << "Server sent: " << RESET << message << std::endl;
 		}
 		else if (message.compare(0,1,"T") == 0) //get tile stack
 		{
@@ -224,6 +232,7 @@ void matchProtocol(Client &client, std::string &message_list)
 			number_of_tiles = message_info.number_of_tiles; //gettting the number of tiles
 			tStack = TileStack(message_info.tile_stack); //getting tile stack
 			message = getMesssage(client, message_list);
+			std::cout << GREEN << "Server sent: " << RESET << message << std::endl;
 		}
 		else if (message.compare(0,1,"M") == 0)
 		{
@@ -242,6 +251,7 @@ void matchProtocol(Client &client, std::string &message_list)
 				//moveProtocol(client, message_list, game1, game2, game1_success, game2_success); //client, message_list, game1 and game2
 			}
 			message = getMesssage(client, message_list);
+			std::cout << GREEN << "Server sent: " << RESET << message << std::endl;
 		}
 		else if (message.compare(0,1,"G") == 0)
 		{
@@ -249,7 +259,10 @@ void matchProtocol(Client &client, std::string &message_list)
 			if (count == 2)
 				lastMessage = false;
 			else
+			{
 				message = getMesssage(client, message_list);
+				std::cout << GREEN << "Server sent: " << RESET << message << std::endl;
+			}
 		}
 		else //hopefully this is never reached
 		{
@@ -266,6 +279,7 @@ void roundProtocol(Client &client, std::string &message_list, int rounds)
 	std::string message;
 	std::string TERMINATE_ROUND = "END OF ROUND " + std::to_string(rounds) + " OF " + std::to_string(rounds);
 	message = getMesssage(client, message_list);
+	std::cout << GREEN << "Server sent: " << RESET << message << std::endl;
 
 	while (message != TERMINATE_ROUND)
 	{
@@ -275,17 +289,20 @@ void roundProtocol(Client &client, std::string &message_list, int rounds)
 			round_id = stoi(message.substr(12,message.find(" OF")-12));
 			matchProtocol(client, message_list); // pass message reference
 			message = getMesssage(client, message_list);
+			std::cout << GREEN << "Server sent: " << RESET << message << std::endl;
 		}
 		else if (message.compare(0,1,"E") == 0) //waiting for the next round to begin
 		{
 			std::cout << "END OF ROUND...WAITING FOR THE NEXT MATCH" << std::endl;
 			message = getMesssage(client, message_list);
+			std::cout << GREEN << "Server sent: " << RESET << message << std::endl;
 		}
 		else //hopefully this is never reached
 		{
 			std::cout << "ERROR: previous message could not be processed correctly. Message skiped!" << std::endl;
 			std::cout << "	ERROR message: " << message << std::endl;
 			message = getMesssage(client, message_list);
+			std::cout << GREEN << "Server sent: " << RESET << message << std::endl;
 		}
 	}
 }
@@ -296,6 +313,7 @@ void challengeProtocol(Client &client)
 	std::string message;
 	std::string message_list = "";
 	message = getMesssage(client, message_list);
+	std::cout << GREEN << "Server sent: " << RESET << message << std::endl;
 	while (message != TERMINATE_CHALLENGE)
 	{
 		if (message.compare(0,1,"N") == 0) //executing a new challenge
@@ -308,11 +326,13 @@ void challengeProtocol(Client &client)
 				roundProtocol(client, message_list, rounds); //pass message reference
 			}
 			message = getMesssage(client, message_list);
+			std::cout << GREEN << "Server sent: " << RESET << message << std::endl;
 		}
 		else if (message.compare(0,1,"P") == 0)	//waiting for the next challenge to begin
 		{
 			std::cout << "waiting for the next challenge to begin" << std::endl;
 			message = getMesssage(client, message_list);
+			std::cout << GREEN << "Server sent: " << RESET << message << std::endl;
 		}
 		else //hopefully this is never reached
 		{
@@ -325,32 +345,41 @@ void challengeProtocol(Client &client)
 
 std::string authenticationProtocol(Client &client, std::string tournament_password, std::string username, std::string password)
 {
-	std::string message;
-	std::string player_id;
-	message = client.receiveMessage();
-	if ( message == "THIS IS SPARTA!\r\n") //message to send tournament password
+	std::string message, message_to_send, player_id;
+	std::string message_list = "";
+	message = getMesssage(client, message_list);
+	std::cout << GREEN << "Server sent: " << RESET << message << std::endl;
+
+	if ( message == "THIS IS SPARTA!") //message to send tournament password
 	{
-		message = "JOIN " + tournament_password + '\r' + '\n';
-		client.sendMessage(message);
+		message_to_send = "JOIN " + tournament_password + "\r\n";
+		std::cout << RED << "	We sent: " << RESET << message_to_send << std::endl;
+		client.sendMessage(message_to_send);
 	}
 	else
 	{
 		std::cout << "ERROR: first message from server is: " << message;
-		client.sendMessage("FAIL");
+		client.sendMessage("ILLEGAL MESSAGE SENT BY SERVER");
 	}
-	message = client.receiveMessage();
-	if ( message == "HELLO!\r\n") //message to send team username and password
+
+	message = getMesssage(client, message_list);
+	std::cout << GREEN << "Server sent: " << RESET << message << std::endl;
+	if ( message == "HELLO!") //message to send team username and password
 	{
-		message = "I AM " + username + " " + password + '\r' + '\n';
-		client.sendMessage(message);
+		message_to_send = "I AM " + username + " " + password + "\r\n";
+		std::cout << RED << "	We sent: " << RESET << message_to_send << std::endl;
+		client.sendMessage(message_to_send);
 	}
 	else
 	{
 		std::cout << "ERROR: second message from server is: " << message;
-		client.sendMessage("FAIL");
+		client.sendMessage("ILLEGAL MESSAGE SENT BY SERVER");
 	}
-	message = client.receiveMessage(); //last authentication message giving player id back
+
+	message = getMesssage(client, message_list); //last authentication message giving player id back
+	std::cout << GREEN << "Server sent: " << RESET << message << std::endl;
 	player_id = message.substr(8,message.find(" PLEASE")-8);
+	std::cout << "	Player ID returned is: " << player_id << std::endl;
 	return player_id;
 }
 
@@ -377,7 +406,6 @@ int main(int argc, char *argv[]) {
 
 	std::string message_list = "";
 	std::string PLAYER_ID = authenticationProtocol(serverConnection, TOURNAMENT_PASS, TEAM_ID, TEAM_PASSWORD);
-	std::cout << "Player id returned is: " << PLAYER_ID << std::endl;
 	challengeProtocol(serverConnection);
 	serverConnection.closeConnection();
 
