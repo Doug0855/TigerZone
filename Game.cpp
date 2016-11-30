@@ -87,7 +87,7 @@ void Game::enemyMove(Tile tile, int i, int j, int orientation, bool tiger, bool 
 // returns true if a move can be made
 std::string Game::makeMove(Tile tile, int moveNumber) {
   std::string placement;
-  std::string tiger = "";
+  std::string tiger = " NONE";
   Adapter adapter;
 
 	std::vector<std::pair<int,int> > availableLocations = gameboard.display_positions(tile);
@@ -99,8 +99,9 @@ std::string Game::makeMove(Tile tile, int moveNumber) {
 		if(numMeeples > 0)
 		{
 		  tiger = meepleAi(optimalLocation.first, optimalLocation.second);
-		  if (tiger != " NONE") numMeeples--;
+			if (tiger != " NONE") numMeeples--;
 		}
+
 		std::pair<int,int> convertCoordinates = adapter.convertCoordinates(optimalLocation);
 		//debugging std::cout << "DEBUG: Optimal location first: " << optimalLocation.first << std::endl;
 		//debugging std::cout << "DEBUG: Optimal location second: " << optimalLocation.second << std::endl;
