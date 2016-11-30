@@ -118,7 +118,7 @@ int moveProtocol(Client &client, std::string &message_list, Game &game1, Game &g
 
 	if (success1 == -1 || success2 == -1 && message.compare(0,1,"M") == 0)
 		runTime = 2;
-	else if (success1 == -1 || success2 == -1 && message.compare(0,1,"G") == 0)
+	else if ((success1 == -1 || success2 == -1) && message.compare(0,1,"G") == 0)
 		runTime = 1;
 	else if (success1 == -1 && success2 == -1)
 		runTime = 0;
@@ -160,6 +160,8 @@ int moveProtocol(Client &client, std::string &message_list, Game &game1, Game &g
 					success2 = -1;
 				else if (game1.getID() == message_info.gameId)
 					success1 = -1;
+				if (success1 == -1 && success2 == -1)
+					break;
 			}
 			else
 			{
@@ -253,9 +255,13 @@ void matchProtocol(Client &client, std::string &message_list)
 			game2_success = 0;
 			for (int i = 0; i < number_of_tiles; i++)
 			{
-				//debugging std::cout<<"Running moveProtocol first time."<<std::endl;
+				std::cout<<"	Running moveProtocol: Game success for game 1 and 2 are " << game1_success << " and " << game2_success << std::endl;
 				moveProtocol(client, message_list, game1, game2, game1_success, game2_success, OPPONENT_ID); //client, message_list, game1 and game2
-				if (game1_success == -1 && game2_success == -1)	break;				//move must return a value to break from for loop in case of forfeit
+				if (game1_success == -1 && game2_success == -1)
+				{
+					break;
+				}
+					//move must return a value to break from for loop in case of forfeit
 				//std::cout<<"Running moveProtocol second time."<<std::endl;
 				//moveProtocol(client, message_list, game1, game2, game1_success, game2_success); //client, message_list, game1 and game2
 			}
@@ -264,6 +270,7 @@ void matchProtocol(Client &client, std::string &message_list)
 		}
 		else if (message.compare(0,1,"G") == 0)
 		{
+			std::cout << "	GAME OVER MESSAGE RECEICED #" << count << std::endl;
 			count++;
 			if (count == 2)
 				lastMessage = false;
