@@ -17,11 +17,11 @@ struct values_t {
 	std::vector<int> tile_stack;
 	std::pair<int, int> coordinates;
 	std::pair<int, int> tiger_spot;
-	std::string gameId;
+	std::string gameId, moveNumber;
 	std::string playerId;
 	bool croc, tiger;
 	int forfeit = 0;
-	int moveNumber, meepleZone;
+	int meepleZone;
 };
 
 

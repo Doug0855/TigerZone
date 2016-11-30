@@ -1,0 +1,832 @@
+Connected to Server successfully!
+[32mServer sent: [0mTHIS IS SPARTA!
+[31m	We sent: [0mJOIN TIGERZONE
+
+[32mServer sent: [0mHELLO!
+[31m	We sent: [0mI AM TEAMJ IAMJ
+
+[32mServer sent: [0mWELCOME TEAMJ PLEASE WAIT FOR THE NEXT CHALLENGE
+	Player ID returned is: TEAMJ
+[32mServer sent: [0mNEW CHALLENGE 1 YOU WILL PLAY 1 MATCH
+	Challenge ID is: 1 and playing 1 round(s)
+[32mServer sent: [0mBEGIN ROUND 1 OF 1
+	BEGINNING ROUND...
+[32mServer sent: [0mYOUR OPPONENT IS PLAYER TEAMR
+	OPPONENT PLAYER INFO
+	Opponent ID is: TEAMR
+[32mServer sent: [0mSTARTING TILE IS TLTJ- AT 0 0 0
+	STARTING TILE INFO 
+[32mServer sent: [0mTHE REMAINING 76 TILES ARE [ JJJJX JLTT- LLLL- TJJT- TJTJ- LLJJ- LJLJ- LLJJ- TLLLC TLLTB TJJT- JLLL- LJJJ- TLJT- TLTTP TJTJ- TLTJ- LJJJ- JLTTB JLLJ- LLJJ- JLLL- TJJT- LJTJD TLLT- TJJT- TJJT- LLJJ- TJTJ- TJTT- TLTJ- TJJT- JJJJX TLLTB TJTT- JLTTB TJTT- TLTTP JJJJX TTTT- TJTJ- JJJJX TLJTP TLLT- TLTJD TLLLC TLLL- JLJL- TLLT- TLTJD LJLJ- TJTT- JLJL- LJTJ- TJJT- JJTJX TJTJ- JLLJ- JJTJX LJTJD LJJJ- LLJJ- TJJT- JLLL- LJJJ- TLJTP LJJJ- TJTJ- JLLL- TLTT- TJTJ- LJLJ- JLJL- TJJT- JJJJ- TJTJ- ]
+	TILE STACK INFO
+[32mServer sent: [0mMATCH BEGINS IN 10 SECONDS
+	MATCH BEGINS SOON
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 1 WITHIN 1 SECOND: MOVE 1 PLACE JJJJX
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 1 MOVE 1 PLACE JJJJX AT -1 0 0 TIGER 5
+
+[32mServer sent: [0mGAME 1 MOVE 1 PLAYER TEAMJ PLACED JJJJX AT -1 0 0 TIGER 5
+	GAME MOVES INFORMATION
+[32mServer sent: [0mGAME 2 MOVE 1 PLAYER TEAMR PLACED JJJJX AT -1 0 0 TIGER 5
+	GAME MOVES INFORMATION
+	Received opponent move for tile: 2 in game: 2
+		tile placed at <72, 71> :with rotation: 0
+		croc? 0 tiger? 1 zone [1, 1] 
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 2 WITHIN 1 SECOND: MOVE 2 PLACE JLTT-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 2 MOVE 2 PLACE JLTT- AT 1 0 180 TIGER 1
+
+[32mServer sent: [0mGAME 1 MOVE 2 PLAYER TEAMR PLACED JLTT- AT 0 -1 270 NONE
+	GAME MOVES INFORMATION
+	Received opponent move for tile: 17 in game: 1
+		tile placed at <73, 72> with rotation: 3
+		croc? 0 tiger? 0 zone [0, 0] 
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 1 WITHIN 1 SECOND: MOVE 3 PLACE LLLL-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 1 MOVE 3 PLACE LLLL- AT 1 0 0 TIGER 1
+
+[32mServer sent: [0mGAME 1 MOVE 3 PLAYER TEAMJ PLACED LLLL- AT 1 0 0 TIGER 1
+	GAME MOVES INFORMATION
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 2 WITHIN 1 SECOND: MOVE 4 PLACE LLLL-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 2 MOVE 4 TILE LLLL- UNPLACEABLE PASS
+
+[32mServer sent: [0mGAME 1 MOVE 4 PLAYER TEAMR PLACED TJJT- AT -1 1 0 NONE
+	GAME MOVES INFORMATION
+	Received opponent move for tile: 6 in game: 1
+		tile placed at <71, 71> with rotation: 0
+		croc? 0 tiger? 0 zone [0, 0] 
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 1 WITHIN 1 SECOND: MOVE 5 PLACE TJTJ-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 1 MOVE 5 PLACE TJTJ- AT 0 1 0 TIGER 1
+
+[32mServer sent: [0mGAME 1 MOVE 5 PLAYER TEAMJ PLACED TJTJ- AT 0 1 0 TIGER 1
+	GAME MOVES INFORMATION
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 2 WITHIN 1 SECOND: MOVE 6 PLACE LLLL-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 2 MOVE 6 TILE LLLL- UNPLACEABLE PASS
+
+[32mServer sent: [0mGAME 1 MOVE 6 PLAYER TEAMR PLACED LLJJ- AT 1 -1 0 NONE
+	GAME MOVES INFORMATION
+	Received opponent move for tile: 10 in game: 1
+		tile placed at <73, 73> with rotation: 0
+		croc? 0 tiger? 0 zone [0, 0] 
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 1 WITHIN 1 SECOND: MOVE 7 PLACE LJLJ-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 1 MOVE 7 PLACE LJLJ- AT 1 1 0 TIGER 1
+
+[32mServer sent: [0mGAME 1 MOVE 7 PLAYER TEAMJ PLACED LJLJ- AT 1 1 0 TIGER 1
+	GAME MOVES INFORMATION
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 2 WITHIN 1 SECOND: MOVE 8 PLACE LLLL-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 2 MOVE 8 TILE LLLL- UNPLACEABLE PASS
+
+[32mServer sent: [0mGAME 1 MOVE 8 PLAYER TEAMR PLACED LLJJ- AT 1 2 270 NONE
+	GAME MOVES INFORMATION
+	Received opponent move for tile: 10 in game: 1
+		tile placed at <70, 73> with rotation: 3
+		croc? 0 tiger? 0 zone [0, 0] 
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 1 WITHIN 1 SECOND: MOVE 9 PLACE TLLLC
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 1 MOVE 9 PLACE TLLLC AT 2 2 0 TIGER 1
+
+[32mServer sent: [0mGAME 1 MOVE 9 PLAYER TEAMJ PLACED TLLLC AT 2 2 0 TIGER 1
+	GAME MOVES INFORMATION
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 2 WITHIN 1 SECOND: MOVE 10 PLACE LLLL-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 2 MOVE 10 TILE LLLL- UNPLACEABLE PASS
+
+[32mServer sent: [0mGAME 1 MOVE 10 PLAYER TEAMR PLACED TLLTB AT -2 1 270 CROCODILE
+	GAME MOVES INFORMATION
+	Received opponent move for tile: 25 in game: 1
+		tile placed at <71, 70> with rotation: 3
+		croc? 1 tiger? 0 zone [0, 0] 
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 1 WITHIN 1 SECOND: MOVE 11 PLACE TJJT-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 1 MOVE 11 PLACE TJJT- AT 0 2 90 TIGER 4
+
+[32mServer sent: [0mGAME 1 MOVE 11 PLAYER TEAMJ PLACED TJJT- AT 0 2 90 TIGER 4
+	GAME MOVES INFORMATION
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 2 WITHIN 1 SECOND: MOVE 12 PLACE LLLL-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 2 MOVE 12 TILE LLLL- UNPLACEABLE PASS
+
+[32mServer sent: [0mGAME 1 MOVE 12 PLAYER TEAMR PLACED JLLL- AT 2 0 180 NONE
+	GAME MOVES INFORMATION
+	Received opponent move for tile: 9 in game: 1
+		tile placed at <72, 74> with rotation: 2
+		croc? 0 tiger? 0 zone [0, 0] 
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 1 WITHIN 1 SECOND: MOVE 13 PLACE LJJJ-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 1 MOVE 13 PLACE LJJJ- AT -2 0 0 TIGER 2
+
+[32mServer sent: [0mGAME 1 MOVE 13 PLAYER TEAMJ PLACED LJJJ- AT -2 0 0 TIGER 2
+	GAME MOVES INFORMATION
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 2 WITHIN 1 SECOND: MOVE 14 PLACE LLLL-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 2 MOVE 14 TILE LLLL- UNPLACEABLE PASS
+
+[32mServer sent: [0mGAME 1 MOVE 14 PLAYER TEAMR PLACED TLJT- AT 2 3 90 NONE
+	GAME MOVES INFORMATION
+	Received opponent move for tile: 15 in game: 1
+		tile placed at <69, 74> with rotation: 1
+		croc? 0 tiger? 0 zone [0, 0] 
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 1 WITHIN 1 SECOND: MOVE 15 PLACE TLTTP
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 1 MOVE 15 PLACE TLTTP AT 2 4 270 NONE
+
+[32mServer sent: [0mGAME 1 MOVE 15 PLAYER TEAMJ PLACED TLTTP AT 2 4 270 NONE
+	GAME MOVES INFORMATION
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 2 WITHIN 1 SECOND: MOVE 16 PLACE LLLL-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 2 MOVE 16 TILE LLLL- UNPLACEABLE PASS
+
+[32mServer sent: [0mGAME 1 MOVE 16 PLAYER TEAMR PLACED TJTJ- AT -3 0 180 NONE
+	GAME MOVES INFORMATION
+	Received opponent move for tile: 5 in game: 1
+		tile placed at <72, 69> with rotation: 2
+		croc? 0 tiger? 0 zone [0, 0] 
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 1 WITHIN 1 SECOND: MOVE 17 PLACE TLTJ-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 1 MOVE 17 PLACE TLTJ- AT -3 1 0 NONE
+
+[32mServer sent: [0mGAME 1 MOVE 17 PLAYER TEAMJ PLACED TLTJ- AT -3 1 0 NONE
+	GAME MOVES INFORMATION
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 2 WITHIN 1 SECOND: MOVE 18 PLACE LLLL-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 2 MOVE 18 TILE LLLL- UNPLACEABLE PASS
+
+[32mServer sent: [0mGAME 1 MOVE 18 PLAYER TEAMR PLACED LJJJ- AT 0 3 270 NONE
+	GAME MOVES INFORMATION
+	Received opponent move for tile: 13 in game: 1
+		tile placed at <69, 72> with rotation: 3
+		croc? 0 tiger? 0 zone [0, 0] 
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 1 WITHIN 1 SECOND: MOVE 19 PLACE JLTTB
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 1 MOVE 19 PLACE JLTTB AT 1 3 180 NONE
+
+[32mServer sent: [0mGAME 1 MOVE 19 PLAYER TEAMJ PLACED JLTTB AT 1 3 180 NONE
+	GAME MOVES INFORMATION
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 2 WITHIN 1 SECOND: MOVE 20 PLACE LLLL-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 2 MOVE 20 TILE LLLL- UNPLACEABLE PASS
+
+[32mServer sent: [0mGAME 1 MOVE 20 PLAYER TEAMR PLACED JLLJ- AT 2 -1 270 NONE
+	GAME MOVES INFORMATION
+	Received opponent move for tile: 14 in game: 1
+		tile placed at <73, 74> with rotation: 3
+		croc? 0 tiger? 0 zone [0, 0] 
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 1 WITHIN 1 SECOND: MOVE 21 PLACE LLJJ-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 1 MOVE 21 PLACE LLJJ- AT 3 0 90 NONE
+
+[32mServer sent: [0mGAME 1 MOVE 21 PLAYER TEAMJ PLACED LLJJ- AT 3 0 90 NONE
+	GAME MOVES INFORMATION
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 2 WITHIN 1 SECOND: MOVE 22 PLACE LLLL-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 2 MOVE 22 TILE LLLL- UNPLACEABLE PASS
+
+[32mServer sent: [0mGAME 1 MOVE 22 PLAYER TEAMR PLACED JLLL- AT 3 1 0 NONE
+	GAME MOVES INFORMATION
+	Received opponent move for tile: 9 in game: 1
+		tile placed at <71, 75> with rotation: 0
+		croc? 0 tiger? 0 zone [0, 0] 
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 1 WITHIN 1 SECOND: MOVE 23 PLACE TJJT-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 1 MOVE 23 PLACE TJJT- AT 1 4 180 NONE
+
+[32mServer sent: [0mGAME 1 MOVE 23 PLAYER TEAMJ PLACED TJJT- AT 1 4 180 NONE
+	GAME MOVES INFORMATION
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 2 WITHIN 1 SECOND: MOVE 24 PLACE LLLL-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 2 MOVE 24 TILE LLLL- UNPLACEABLE PASS
+
+[32mServer sent: [0mGAME 1 MOVE 24 PLAYER TEAMR PLACED LJTJD AT -2 -1 90 CROCODILE
+	GAME MOVES INFORMATION
+	Received opponent move for tile: 27 in game: 1
+		tile placed at <73, 70> with rotation: 1
+		croc? 1 tiger? 0 zone [0, 0] 
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 1 WITHIN 1 SECOND: MOVE 25 PLACE TLLT-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 1 MOVE 25 PLACE TLLT- AT -3 -1 0 NONE
+
+[32mServer sent: [0mGAME 1 MOVE 25 PLAYER TEAMJ PLACED TLLT- AT -3 -1 0 NONE
+	GAME MOVES INFORMATION
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 2 WITHIN 1 SECOND: MOVE 26 PLACE LLLL-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 2 MOVE 26 TILE LLLL- UNPLACEABLE PASS
+
+[32mServer sent: [0mGAME 1 MOVE 26 PLAYER TEAMR PLACED TJJT- AT -3 2 180 NONE
+	GAME MOVES INFORMATION
+	Received opponent move for tile: 6 in game: 1
+		tile placed at <70, 69> with rotation: 2
+		croc? 0 tiger? 0 zone [0, 0] 
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 1 WITHIN 1 SECOND: MOVE 27 PLACE TJJT-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 1 MOVE 27 PLACE TJJT- AT 0 4 0 NONE
+
+[32mServer sent: [0mGAME 1 MOVE 27 PLAYER TEAMJ PLACED TJJT- AT 0 4 0 NONE
+	GAME MOVES INFORMATION
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 2 WITHIN 1 SECOND: MOVE 28 PLACE LLLL-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 2 MOVE 28 TILE LLLL- UNPLACEABLE PASS
+
+[32mServer sent: [0mGAME 1 MOVE 28 PLAYER TEAMR PLACED LLJJ- AT -3 -2 90 NONE
+	GAME MOVES INFORMATION
+	Received opponent move for tile: 10 in game: 1
+		tile placed at <74, 69> with rotation: 1
+		croc? 0 tiger? 0 zone [0, 0] 
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 1 WITHIN 1 SECOND: MOVE 29 PLACE TJTJ-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 1 MOVE 29 PLACE TJTJ- AT -1 -1 90 NONE
+
+[32mServer sent: [0mGAME 1 MOVE 29 PLAYER TEAMJ PLACED TJTJ- AT -1 -1 90 NONE
+	GAME MOVES INFORMATION
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 2 WITHIN 1 SECOND: MOVE 30 PLACE LLLL-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 2 MOVE 30 TILE LLLL- UNPLACEABLE PASS
+
+[32mServer sent: [0mGAME 1 MOVE 30 PLAYER TEAMR PLACED TJTT- AT 2 5 0 NONE
+	GAME MOVES INFORMATION
+	Received opponent move for tile: 7 in game: 1
+		tile placed at <67, 74> with rotation: 0
+		croc? 0 tiger? 0 zone [0, 0] 
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 1 WITHIN 1 SECOND: MOVE 31 PLACE TLTJ-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 1 MOVE 31 PLACE TLTJ- AT 4 1 180 NONE
+
+[32mServer sent: [0mGAME 1 MOVE 31 PLAYER TEAMJ PLACED TLTJ- AT 4 1 180 NONE
+	GAME MOVES INFORMATION
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 2 WITHIN 1 SECOND: MOVE 32 PLACE LLLL-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 2 MOVE 32 TILE LLLL- UNPLACEABLE PASS
+
+[32mServer sent: [0mGAME 1 MOVE 32 PLAYER TEAMR PLACED TJJT- AT 4 0 270 NONE
+	GAME MOVES INFORMATION
+	Received opponent move for tile: 6 in game: 1
+		tile placed at <72, 76> with rotation: 3
+		croc? 0 tiger? 0 zone [0, 0] 
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 1 WITHIN 1 SECOND: MOVE 33 PLACE JJJJX
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 1 MOVE 33 PLACE JJJJX AT 3 -1 0 NONE
+
+[32mServer sent: [0mGAME 1 MOVE 33 PLAYER TEAMJ PLACED JJJJX AT 3 -1 0 NONE
+	GAME MOVES INFORMATION
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 2 WITHIN 1 SECOND: MOVE 34 PLACE LLLL-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 2 MOVE 34 TILE LLLL- UNPLACEABLE PASS
+
+[32mServer sent: [0mGAME 1 MOVE 34 PLAYER TEAMR PLACED TLLTB AT 0 5 90 NONE
+	GAME MOVES INFORMATION
+	Received opponent move for tile: 25 in game: 1
+		tile placed at <67, 72> with rotation: 1
+		croc? 0 tiger? 0 zone [0, 0] 
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 1 WITHIN 1 SECOND: MOVE 35 PLACE TJTT-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 1 MOVE 35 PLACE TJTT- AT -1 5 90 NONE
+
+[32mServer sent: [0mGAME 1 MOVE 35 PLAYER TEAMJ PLACED TJTT- AT -1 5 90 NONE
+	GAME MOVES INFORMATION
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 2 WITHIN 1 SECOND: MOVE 36 PLACE LLLL-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 2 MOVE 36 TILE LLLL- UNPLACEABLE PASS
+
+[32mServer sent: [0mGAME 1 MOVE 36 PLAYER TEAMR PLACED JLTTB AT -1 3 270 NONE
+	GAME MOVES INFORMATION
+	Received opponent move for tile: 18 in game: 1
+		tile placed at <69, 71> with rotation: 3
+		croc? 0 tiger? 0 zone [0, 0] 
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 1 WITHIN 1 SECOND: MOVE 37 PLACE TJTT-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 1 MOVE 37 PLACE TJTT- AT -1 4 180 NONE
+
+[32mServer sent: [0mGAME 1 MOVE 37 PLAYER TEAMJ PLACED TJTT- AT -1 4 180 NONE
+	GAME MOVES INFORMATION
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 2 WITHIN 1 SECOND: MOVE 38 PLACE LLLL-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 2 MOVE 38 TILE LLLL- UNPLACEABLE PASS
+
+[32mServer sent: [0mGAME 1 MOVE 38 PLAYER TEAMR PLACED TLTTP AT 5 0 0 NONE
+	GAME MOVES INFORMATION
+	Received opponent move for tile: 23 in game: 1
+		tile placed at <72, 77> with rotation: 0
+		croc? 0 tiger? 0 zone [0, 0] 
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 1 WITHIN 1 SECOND: MOVE 39 PLACE JJJJX
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 1 MOVE 39 PLACE JJJJX AT 4 -1 0 NONE
+
+[32mServer sent: [0mGAME 1 MOVE 39 PLAYER TEAMJ PLACED JJJJX AT 4 -1 0 NONE
+	GAME MOVES INFORMATION
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 2 WITHIN 1 SECOND: MOVE 40 PLACE LLLL-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 2 MOVE 40 TILE LLLL- UNPLACEABLE PASS
+
+[32mServer sent: [0mGAME 1 MOVE 40 PLAYER TEAMR PLACED TTTT- AT -2 5 270 NONE
+	GAME MOVES INFORMATION
+	Received opponent move for tile: 4 in game: 1
+		tile placed at <67, 70> with rotation: 3
+		croc? 0 tiger? 0 zone [0, 0] 
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 1 WITHIN 1 SECOND: MOVE 41 PLACE TJTJ-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 1 MOVE 41 PLACE TJTJ- AT 5 1 0 NONE
+
+[32mServer sent: [0mGAME 1 MOVE 41 PLAYER TEAMJ PLACED TJTJ- AT 5 1 0 NONE
+	GAME MOVES INFORMATION
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 2 WITHIN 1 SECOND: MOVE 42 PLACE LLLL-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 2 MOVE 42 TILE LLLL- UNPLACEABLE PASS
+
+[32mServer sent: [0mGAME 1 MOVE 42 PLAYER TEAMR PLACED JJJJX AT 3 -2 180 TIGER 5
+	GAME MOVES INFORMATION
+	Received opponent move for tile: 2 in game: 1
+		tile placed at <74, 75> with rotation: 2
+		croc? 0 tiger? 1 zone [1, 1] 
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 1 WITHIN 1 SECOND: MOVE 43 PLACE TLJTP
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 1 MOVE 43 PLACE TLJTP AT 2 -2 90 NONE
+
+[32mServer sent: [0mGAME 1 MOVE 43 PLAYER TEAMJ PLACED TLJTP AT 2 -2 90 NONE
+	GAME MOVES INFORMATION
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 2 WITHIN 1 SECOND: MOVE 44 PLACE LLLL-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 2 MOVE 44 TILE LLLL- UNPLACEABLE PASS
+
+[32mServer sent: [0mGAME 1 MOVE 44 PLAYER TEAMR PLACED TLLT- AT 0 -2 180 NONE
+	GAME MOVES INFORMATION
+	Received opponent move for tile: 24 in game: 1
+		tile placed at <74, 72> with rotation: 2
+		croc? 0 tiger? 0 zone [0, 0] 
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 1 WITHIN 1 SECOND: MOVE 45 PLACE TLTJD
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 1 MOVE 45 PLACE TLTJD AT 0 6 270 NONE
+
+[32mServer sent: [0mGAME 1 MOVE 45 PLAYER TEAMJ PLACED TLTJD AT 0 6 270 NONE
+	GAME MOVES INFORMATION
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 2 WITHIN 1 SECOND: MOVE 46 PLACE LLLL-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 2 MOVE 46 TILE LLLL- UNPLACEABLE PASS
+
+[32mServer sent: [0mGAME 1 MOVE 46 PLAYER TEAMR PLACED TLLLC AT 3 4 90 NONE
+	GAME MOVES INFORMATION
+	Received opponent move for tile: 28 in game: 1
+		tile placed at <68, 75> with rotation: 1
+		croc? 0 tiger? 0 zone [0, 0] 
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 1 WITHIN 1 SECOND: MOVE 47 PLACE TLLL-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 1 MOVE 47 PLACE TLLL- AT 6 0 0 NONE
+
+[32mServer sent: [0mGAME 1 MOVE 47 PLAYER TEAMJ PLACED TLLL- AT 6 0 0 NONE
+	GAME MOVES INFORMATION
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 2 WITHIN 1 SECOND: MOVE 48 PLACE LLLL-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 2 MOVE 48 TILE LLLL- UNPLACEABLE PASS
+
+[32mServer sent: [0mGAME 1 MOVE 48 PLAYER TEAMR PLACED JLJL- AT 3 -3 0 NONE
+	GAME MOVES INFORMATION
+	Received opponent move for tile: 11 in game: 1
+		tile placed at <75, 75> with rotation: 0
+		croc? 0 tiger? 0 zone [0, 0] 
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 1 WITHIN 1 SECOND: MOVE 49 PLACE TLLT-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 1 MOVE 49 PLACE TLLT- AT -1 2 180 NONE
+
+[32mServer sent: [0mGAME 1 MOVE 49 PLAYER TEAMJ PLACED TLLT- AT -1 2 180 NONE
+	GAME MOVES INFORMATION
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 2 WITHIN 1 SECOND: MOVE 50 PLACE LLLL-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 2 MOVE 50 TILE LLLL- UNPLACEABLE PASS
+
+[32mServer sent: [0mGAME 1 MOVE 50 PLAYER TEAMR PLACED TLTJD AT -2 6 180 NONE
+	GAME MOVES INFORMATION
+	Received opponent move for tile: 20 in game: 1
+		tile placed at <66, 70> with rotation: 2
+		croc? 0 tiger? 0 zone [0, 0] 
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 1 WITHIN 1 SECOND: MOVE 51 PLACE LJLJ-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 1 MOVE 51 PLACE LJLJ- AT -1 -2 90 NONE
+
+[32mServer sent: [0mGAME 1 MOVE 51 PLAYER TEAMJ PLACED LJLJ- AT -1 -2 90 NONE
+	GAME MOVES INFORMATION
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 2 WITHIN 1 SECOND: MOVE 52 PLACE LLLL-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 2 MOVE 52 TILE LLLL- UNPLACEABLE PASS
+
+[32mServer sent: [0mGAME 1 MOVE 52 PLAYER TEAMR PLACED TJTT- AT 4 2 90 NONE
+	GAME MOVES INFORMATION
+	Received opponent move for tile: 7 in game: 1
+		tile placed at <70, 76> with rotation: 1
+		croc? 0 tiger? 0 zone [0, 0] 
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 1 WITHIN 1 SECOND: MOVE 53 PLACE JLJL-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 1 MOVE 53 PLACE JLJL- AT -3 6 0 NONE
+
+[32mServer sent: [0mGAME 1 MOVE 53 PLAYER TEAMJ PLACED JLJL- AT -3 6 0 NONE
+	GAME MOVES INFORMATION
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 2 WITHIN 1 SECOND: MOVE 54 PLACE LLLL-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 2 MOVE 54 TILE LLLL- UNPLACEABLE PASS
+
+[32mServer sent: [0mGAME 1 MOVE 54 PLAYER TEAMR PLACED LJTJ- AT -4 6 270 NONE
+	GAME MOVES INFORMATION
+	Received opponent move for tile: 26 in game: 1
+		tile placed at <66, 68> with rotation: 3
+		croc? 0 tiger? 0 zone [0, 0] 
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 1 WITHIN 1 SECOND: MOVE 55 PLACE TJJT-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 1 MOVE 55 PLACE TJJT- AT -1 6 270 NONE
+
+[32mServer sent: [0mGAME 1 MOVE 55 PLAYER TEAMJ PLACED TJJT- AT -1 6 270 NONE
+	GAME MOVES INFORMATION
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 2 WITHIN 1 SECOND: MOVE 56 PLACE LLLL-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 2 MOVE 56 TILE LLLL- UNPLACEABLE PASS
+
+[32mServer sent: [0mGAME 1 MOVE 56 PLAYER TEAMR PLACED JJTJX AT -2 4 180 TIGER 5
+	GAME MOVES INFORMATION
+	Received opponent move for tile: 3 in game: 1
+		tile placed at <68, 70> with rotation: 2
+		croc? 0 tiger? 1 zone [1, 1] 
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 1 WITHIN 1 SECOND: MOVE 57 PLACE TJTJ-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 1 MOVE 57 PLACE TJTJ- AT 1 -2 90 NONE
+
+[32mServer sent: [0mGAME 1 MOVE 57 PLAYER TEAMJ PLACED TJTJ- AT 1 -2 90 NONE
+	GAME MOVES INFORMATION
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 2 WITHIN 1 SECOND: MOVE 58 PLACE LLLL-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 2 MOVE 58 TILE LLLL- UNPLACEABLE PASS
+
+[32mServer sent: [0mGAME 1 MOVE 58 PLAYER TEAMR PLACED JLLJ- AT -3 4 180 NONE
+	GAME MOVES INFORMATION
+	Received opponent move for tile: 14 in game: 1
+		tile placed at <68, 69> with rotation: 2
+		croc? 0 tiger? 0 zone [0, 0] 
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 1 WITHIN 1 SECOND: MOVE 59 PLACE JJTJX
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 1 MOVE 59 PLACE JJTJX AT -3 3 90 NONE
+
+[32mServer sent: [0mGAME 1 MOVE 59 PLAYER TEAMJ PLACED JJTJX AT -3 3 90 NONE
+	GAME MOVES INFORMATION
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 2 WITHIN 1 SECOND: MOVE 60 PLACE LLLL-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 2 MOVE 60 TILE LLLL- UNPLACEABLE PASS
+
+[32mServer sent: [0mGAME 1 MOVE 60 PLAYER TEAMR PLACED LJTJD AT -3 7 90 NONE
+	GAME MOVES INFORMATION
+	Received opponent move for tile: 27 in game: 1
+		tile placed at <65, 69> with rotation: 1
+		croc? 0 tiger? 0 zone [0, 0] 
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 1 WITHIN 1 SECOND: MOVE 61 PLACE LJJJ-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 1 MOVE 61 PLACE LJJJ- AT -2 -2 270 NONE
+
+[32mServer sent: [0mGAME 1 MOVE 61 PLAYER TEAMJ PLACED LJJJ- AT -2 -2 270 NONE
+	GAME MOVES INFORMATION
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 2 WITHIN 1 SECOND: MOVE 62 PLACE LLLL-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 2 MOVE 62 TILE LLLL- UNPLACEABLE PASS
+
+[32mServer sent: [0mGAME 1 MOVE 62 PLAYER TEAMR PLACED LLJJ- AT -4 3 180 NONE
+	GAME MOVES INFORMATION
+	Received opponent move for tile: 10 in game: 1
+		tile placed at <69, 68> with rotation: 2
+		croc? 0 tiger? 0 zone [0, 0] 
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 1 WITHIN 1 SECOND: MOVE 63 PLACE TJJT-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 1 MOVE 63 PLACE TJJT- AT -2 7 90 NONE
+
+[32mServer sent: [0mGAME 1 MOVE 63 PLAYER TEAMJ PLACED TJJT- AT -2 7 90 NONE
+	GAME MOVES INFORMATION
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 2 WITHIN 1 SECOND: MOVE 64 PLACE LLLL-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 2 MOVE 64 TILE LLLL- UNPLACEABLE PASS
+
+[32mServer sent: [0mGAME 1 MOVE 64 PLAYER TEAMR PLACED JLLL- AT -1 -3 0 NONE
+	GAME MOVES INFORMATION
+	Received opponent move for tile: 9 in game: 1
+		tile placed at <75, 71> with rotation: 0
+		croc? 0 tiger? 0 zone [0, 0] 
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 1 WITHIN 1 SECOND: MOVE 65 PLACE LJJJ-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 1 MOVE 65 PLACE LJJJ- AT -4 7 270 NONE
+
+[32mServer sent: [0mGAME 1 MOVE 65 PLAYER TEAMJ PLACED LJJJ- AT -4 7 270 NONE
+	GAME MOVES INFORMATION
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 2 WITHIN 1 SECOND: MOVE 66 PLACE LLLL-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 2 MOVE 66 TILE LLLL- UNPLACEABLE PASS
+
+[32mServer sent: [0mGAME 1 MOVE 66 PLAYER TEAMR PLACED TLJTP AT 5 -1 270 NONE
+	GAME MOVES INFORMATION
+	Received opponent move for tile: 16 in game: 1
+		tile placed at <73, 77> with rotation: 3
+		croc? 0 tiger? 0 zone [0, 0] 
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 1 WITHIN 1 SECOND: MOVE 67 PLACE LJJJ-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 1 MOVE 67 PLACE LJJJ- AT -4 4 270 NONE
+
+[32mServer sent: [0mGAME 1 MOVE 67 PLAYER TEAMJ PLACED LJJJ- AT -4 4 270 NONE
+	GAME MOVES INFORMATION
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 2 WITHIN 1 SECOND: MOVE 68 PLACE LLLL-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 2 MOVE 68 TILE LLLL- UNPLACEABLE PASS
+
+[32mServer sent: [0mGAME 1 MOVE 68 PLAYER TEAMR PLACED TJTJ- AT -2 3 90 NONE
+	GAME MOVES INFORMATION
+	Received opponent move for tile: 5 in game: 1
+		tile placed at <69, 70> with rotation: 1
+		croc? 0 tiger? 0 zone [0, 0] 
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 1 WITHIN 1 SECOND: MOVE 69 PLACE JLLL-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 1 MOVE 69 PLACE JLLL- AT 2 1 90 NONE
+
+[32mServer sent: [0mGAME 1 MOVE 69 PLAYER TEAMJ PLACED JLLL- AT 2 1 90 NONE
+	GAME MOVES INFORMATION
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 2 WITHIN 1 SECOND: MOVE 70 PLACE LLLL-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 2 MOVE 70 TILE LLLL- UNPLACEABLE PASS
+
+[32mServer sent: [0mGAME 1 MOVE 70 PLAYER TEAMR PLACED TLTT- AT -1 -4 90 NONE
+	GAME MOVES INFORMATION
+	Received opponent move for tile: 22 in game: 1
+		tile placed at <76, 71> with rotation: 1
+		croc? 0 tiger? 0 zone [0, 0] 
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 1 WITHIN 1 SECOND: MOVE 71 PLACE TJTJ-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 1 MOVE 71 PLACE TJTJ- AT -4 5 90 NONE
+
+[32mServer sent: [0mGAME 1 MOVE 71 PLAYER TEAMJ PLACED TJTJ- AT -4 5 90 NONE
+	GAME MOVES INFORMATION
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 2 WITHIN 1 SECOND: MOVE 72 PLACE LLLL-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 2 MOVE 72 TILE LLLL- UNPLACEABLE PASS
+
+[32mServer sent: [0mGAME 1 MOVE 72 PLAYER TEAMR PLACED LJLJ- AT 3 5 0 NONE
+	GAME MOVES INFORMATION
+	Received opponent move for tile: 12 in game: 1
+		tile placed at <67, 75> with rotation: 0
+		croc? 0 tiger? 0 zone [0, 0] 
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 1 WITHIN 1 SECOND: MOVE 73 PLACE JLJL-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 1 MOVE 73 PLACE JLJL- AT -4 2 90 NONE
+
+[32mServer sent: [0mGAME 1 MOVE 73 PLAYER TEAMJ PLACED JLJL- AT -4 2 90 NONE
+	GAME MOVES INFORMATION
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 2 WITHIN 1 SECOND: MOVE 74 PLACE LLLL-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 2 MOVE 74 TILE LLLL- UNPLACEABLE PASS
+
+[32mServer sent: [0mGAME 1 MOVE 74 PLAYER TEAMR PLACED TJJT- AT -4 0 0 NONE
+	GAME MOVES INFORMATION
+	Received opponent move for tile: 6 in game: 1
+		tile placed at <72, 68> with rotation: 0
+		croc? 0 tiger? 0 zone [0, 0] 
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 1 WITHIN 1 SECOND: MOVE 75 PLACE JJJJ-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 1 MOVE 75 PLACE JJJJ- AT 4 -2 0 NONE
+
+[32mServer sent: [0mGAME 1 MOVE 75 PLAYER TEAMJ PLACED JJJJ- AT 4 -2 0 NONE
+	GAME MOVES INFORMATION
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 2 WITHIN 1 SECOND: MOVE 76 PLACE LLLL-
+	SERVER ASKING FOR A MOVE
+[31m	We sent: [0mGAME 2 MOVE 76 TILE LLLL- UNPLACEABLE PASS
+
+[32mServer sent: [0mGAME 1 MOVE 76 PLAYER TEAMR PLACED TJTJ- AT -5 7 0 NONE
+	GAME MOVES INFORMATION
+	Received opponent move for tile: 5 in game: 1
+		tile placed at <65, 67> with rotation: 0
+		croc? 0 tiger? 0 zone [0, 0] 
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME MOVES INFORMATION
+[32mServer sent: [0mGAME 2 MOVE 2 PLAYER TEAMJ PLACED JLTT- AT 1 0 180 TIGER 1
+	GAME OVER MESSAGE RECEICED #0
+[32mServer sent: [0mMAKE YOUR MOVE IN GAME 2 WITHIN 1 SECOND: MOVE 78 PLACE LLLL-
+	MATCH BEGINS SOON
+	Running moveProtocol: Game success for game 1 and 2 are 0 and 0
+[32mServer sent: [0mGAME 2 MOVE 78 PLAYER TEAMJ FORFEITED: TIMEOUT
+	GAME MOVES INFORMATION
+[32mServer sent: [0mGAME 1 OVER PLAYER TEAMJ 24 PLAYER TEAMR 15
+	GAME MOVES INFORMATION
