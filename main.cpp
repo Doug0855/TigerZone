@@ -336,11 +336,12 @@ void challengeProtocol(Client &client)
 		{
 			challenge_id = stoi(message.substr(14,message.find(" YOU")-14));
 			rounds = stoi(message.substr(message.find("PLAY")+5,message.find(" MATCH")-message.find("PLAY")-5));
-			for (int i = 0; i < rounds; i++)
-			{
-				std::cout << "	Challenge ID is: " << challenge_id << " and playing " << rounds << " round(s)" << std::endl;
-				roundProtocol(client, message_list, rounds); //pass message reference
-			}
+			//for (int i = 0; i < rounds; i++)
+			//{
+			std::cout << "	Challenge ID is: " << challenge_id << " and playing " << rounds << " round(s)" << std::endl;
+			//std::cout << "	Current Round: " << i << std::endl;
+			roundProtocol(client, message_list, rounds); //pass message reference
+			//}
 			message = getMesssage(client, message_list);
 			std::cout << GREEN << "Server sent: " << RESET << message << std::endl;
 		}
@@ -425,7 +426,7 @@ int main(int argc, char *argv[]) {
 	std::string message_list = "";
 	std::string PLAYER_ID = authenticationProtocol(serverConnection, TOURNAMENT_PASS, TEAM_ID, TEAM_PASSWORD);
 	challengeProtocol(serverConnection);
-	serverConnection.closeConnection();
+	//serverConnection.closeConnection();
 
 	// std::cout << "message1: " << getMesssage(serverConnection, message_list) << std::endl;
 	// std::cout << "message2: " << getMesssage(serverConnection, message_list) << std::endl;

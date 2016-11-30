@@ -1,0 +1,14 @@
+Connected to Server successfully!
+[32mServer sent: [0mTHIS IS SPARTA!
+
+ERROR: first message from server is: THIS IS SPARTA!
+[32mServer sent: [0mHIS IS SPARTA!
+
+ERROR: second message from server is: HIS IS SPARTA!
+[32mServer sent: [0mIS IS SPARTA!
+
+	Player ID returned is: ARTA!
+
+[32mServer sent: [0m
+	ERROR: previous message could not be processed correctly. Message skipped!
+		ERROR message: 

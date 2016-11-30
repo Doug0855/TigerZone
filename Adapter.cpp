@@ -342,7 +342,7 @@ values_t Adapter::parseMakeMove(std::string message)
   values_t out;
   out.gameId = gameId;
   out.tile_num = exprToTile(tileType);
-  out.moveNumber = stoi(moveNum);
+  out.moveNumber = moveNum;
 
   return out;
 }
@@ -359,7 +359,7 @@ values_t Adapter::parseGameMove(std::string message)
   std::string gameId = messageWords[1];
   out.gameId = gameId;
   std::string temp = messageWords[3];
-  out.moveNumber = stoi(temp);
+  out.moveNumber = temp;
 
   if(messageWords[6] == "FORFEITED:")  //Check to see if the other player forfeited
   {
