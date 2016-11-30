@@ -109,7 +109,7 @@ std::string Game::makeMove(Tile tile, int moveNumber) {
 		return placement + tiger + "\r\n";
 	}
 	else {
-		return "GAME " + gameId + " TILE " + adapter.tileToExpr(tile.getNum()) +" UNPLACEABLE PASS\r\n";
+		return "GAME " + gameId + " MOVE " + std::to_string(moveNumber) + " TILE " + adapter.tileToExpr(tile.getNum()) +" UNPLACEABLE PASS\r\n";
 	}
 
 }

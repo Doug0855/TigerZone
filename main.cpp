@@ -249,6 +249,8 @@ void matchProtocol(Client &client, std::string &message_list)
 			Player ai, opponent;
 			Game game1("", ai, opponent, tStack, tile1, std::pair<int,int> (72,72));
 			Game game2("", opponent, ai, tStack, tile1, std::pair<int,int> (72,72));
+			game1_success = 0;
+			game2_success = 0;
 			for (int i = 0; i < number_of_tiles; i++)
 			{
 				//debugging std::cout<<"Running moveProtocol first time."<<std::endl;
