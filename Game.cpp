@@ -85,7 +85,7 @@ void Game::enemyMove(Tile tile, int i, int j, int orientation, bool tiger, bool 
 }
 
 // returns true if a move can be made
-std::string Game::makeMove(Tile tile, int moveNumber) {
+std::string Game::makeMove(Tile tile, std::string moveNumber) {
   std::string placement;
   std::string tiger = " NONE";
   Adapter adapter;
@@ -105,12 +105,12 @@ std::string Game::makeMove(Tile tile, int moveNumber) {
 		std::pair<int,int> convertCoordinates = adapter.convertCoordinates(optimalLocation);
 		//debugging std::cout << "DEBUG: Optimal location first: " << optimalLocation.first << std::endl;
 		//debugging std::cout << "DEBUG: Optimal location second: " << optimalLocation.second << std::endl;
-		placement = "GAME " + gameId + " MOVE " + std::to_string(moveNumber) + " PLACE " + adapter.tileToExpr(tmpTile->getNum()) +" AT " + std::to_string(convertCoordinates.first) + " " + std::to_string(convertCoordinates.second)  + " " + std::to_string(tmpTile->getRotations() * 90);
+		placement = "GAME " + gameId + " MOVE " + moveNumber + " PLACE " + adapter.tileToExpr(tmpTile->getNum()) +" AT " + std::to_string(convertCoordinates.first) + " " + std::to_string(convertCoordinates.second)  + " " + std::to_string(tmpTile->getRotations() * 90);
 
 		return placement + tiger + "\r\n";
 	}
 	else {
-		return "GAME " + gameId + " MOVE " + std::to_string(moveNumber) + " TILE " + adapter.tileToExpr(tile.getNum()) +" UNPLACEABLE PASS\r\n";
+		return "GAME " + gameId + " MOVE " + moveNumber + " TILE " + adapter.tileToExpr(tile.getNum()) +" UNPLACEABLE PASS\r\n";
 	}
 
 }

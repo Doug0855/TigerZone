@@ -289,11 +289,11 @@ void matchProtocol(Client &client, std::string &message_list)
 	}
 }
 
-void roundProtocol(Client &client, std::string &message_list, int rounds)
+void roundProtocol(Client &client, std::string &message_list, string rounds)
 {
-	int round_id;
+	std::string round_id;
 	std::string message;
-	std::string TERMINATE_ROUND = "END OF ROUND " + std::to_string(rounds) + " OF " + std::to_string(rounds);
+	std::string TERMINATE_ROUND = "END OF ROUND " + rounds + " OF " + rounds;
 	message = getMesssage(client, message_list);
 	std::cout << GREEN << "Server sent: " << RESET << message << std::endl;
 
@@ -302,7 +302,7 @@ void roundProtocol(Client &client, std::string &message_list, int rounds)
 		if (message.compare(0,1,"B") == 0) //executing a new round
 		{
 			std::cout << "	BEGINNING ROUND..." << std::endl;
-			round_id = stoi(message.substr(12,message.find(" OF")-12));
+			round_id = message.substr(12,message.find(" OF")-12);
 			matchProtocol(client, message_list); // pass message reference
 			message = getMesssage(client, message_list);
 			std::cout << GREEN << "Server sent: " << RESET << message << std::endl;
@@ -325,7 +325,7 @@ void roundProtocol(Client &client, std::string &message_list, int rounds)
 
 void challengeProtocol(Client &client)
 {
-	int challenge_id, rounds;
+	std::string challenge_id, rounds;
 	std::string message;
 	std::string message_list = "";
 	message = getMesssage(client, message_list);
@@ -334,8 +334,8 @@ void challengeProtocol(Client &client)
 	{
 		if (message.compare(0,1,"N") == 0) //executing a new challenge
 		{
-			challenge_id = stoi(message.substr(14,message.find(" YOU")-14));
-			rounds = stoi(message.substr(message.find("PLAY")+5,message.find(" MATCH")-message.find("PLAY")-5));
+			challenge_id = message.substr(14,message.find(" YOU")-14);
+			rounds = message.substr(message.find("PLAY")+5,message.find(" MATCH")-message.find("PLAY")-5);
 			for (int i = 0; i < rounds; i++)
 			{
 				std::cout << "	Challenge ID is: " << challenge_id << " and playing " << rounds << " round(s)" << std::endl;
