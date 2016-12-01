@@ -116,7 +116,7 @@ int moveProtocol(Client &client, std::string &message_list, Game &game1, Game &g
 	message = getMesssage(client, message_list);
 	std::cout << GREEN << "Server sent: " << RESET << message << std::endl;
 
-	if (success1 == -1 || success2 == -1 && message.compare(0,1,"M") == 0)
+	if ((success1 == -1 || success2 == -1) && message.compare(0,1,"M") == 0)
 		runTime = 2;
 	else if ((success1 == -1 || success2 == -1) && message.compare(0,1,"G") == 0)
 		runTime = 1;
