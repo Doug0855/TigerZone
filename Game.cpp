@@ -1,4 +1,4 @@
-﻿#include "Game.h"
+#include "Game.h"
 #include "Board.h"
 #include "Adapter.h"
 #include "Tile_Structure/Structure.h"
@@ -23,6 +23,7 @@ Game::~Game()
 
 }
 
+//debugging section for playing a game and testing ai not used by the server
 void Game::play() {
 	for(int i = 0; i <  tileStack.tiles.size(); i++) {
 		Tile currentTile = tileStack.tiles[i];
@@ -71,34 +72,46 @@ void Game::play() {
 	printToTextFile(gameboard);
 }
 
+//function for the other player making a move
 void Game::enemyMove(Tile tile, int i, int j, int orientation, bool tiger, bool croc, std::pair<int,int> tigerSpot)
 {
+	//create a tile to place
   Tile *tmpTile = new Tile(tile.getNum());
+  //set the proper orientation for the tile
   for(int k = 0; k< orientation; k++)
   {
     tmpTile->rotate();
   }
 	std::pair<int, int> optimalLocation(i,j);
+	//place the tile at the location specified 
   gameboard.place_tile(optimalLocation, *tmpTile);
+  // if there is a tiger place it 
   if(tiger) gameboard.placeMeeple(i, j, tigerSpot);
+  // if there is a croc place it
   if(croc) gameboard.placeCroc(i ,j);
 }
 
-// returns true if a move can be made
+// returns the move string for the server
 std::string Game::makeMove(Tile tile, std::string moveNumber) {
   std::string placement;
   std::string tiger = " NONE";
   Adapter adapter;
 
+	// get all location the tile can be placed at
 	std::vector<std::pair<int,int> > availableLocations = gameboard.display_positions(tile);
 	// check if there are any available moves. If so then place at the optimal spot.
 	if(availableLocations.size() > 0) {
 		Tile *tmpTile = new Tile(tile.getNum());
+		// get best place out of the available location according to our ai
 		std::pair<int, int> optimalLocation = gameboard.getOptimalPlacement(*tmpTile, availableLocations);
+		//place the tile
 		gameboard.place_tile(optimalLocation, *tmpTile);
+		// if we have tiger run the tiger ai
 		if(numMeeples > 0)
 		{
-		  tiger = meepleAi(optimalLocation.first, optimalLocation.second);
+			// try to place a tiger
+		  	tiger = meepleAi(optimalLocation.first, optimalLocation.second);
+			// if we placed a tiger subtract from the number of tigers we have
 			if (tiger != " NONE") numMeeples--;
 		}
 
@@ -180,7 +193,10 @@ int Game::structurePoints(Structure structure)
 	const int TRAIL_POINTS = 2;
 	const int PREY_POINTS = 1;
 	const int CROC_POINTS = -2;
-
+	/*
+	This entire thing is just checking the type of the structure and anything 
+	it has and adding points to a specific location to find the "best one"
+	*/
 	for (size_t i = 0; i < structure.structureBlocks.size(); i++)
 	{
 		points += SIZE_POINTS;

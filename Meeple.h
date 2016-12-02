@@ -1,6 +1,7 @@
 #ifndef MEEPLE_H
 #define MEEPLE_H
 
+//ignore this class
 #include <string>
 #include <utility>
 
