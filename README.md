@@ -1,4 +1,4 @@
-# TigerZone™ :tiger:
+﻿# TigerZone™ :tiger:
 
 ## TEAM J MEMBERS
 - Austin Lindenberg @alindenberg
@@ -37,3 +37,6 @@ Note: The Challenge will end very quickly as only a few moves are executed. The 
 
 ## Unit Tests
 A Unit Testing class was made in order to quickly run tests for each new object made. The UnitTester class tests the functionality of the Face, Tile, and the TileStack classes. More information about this class is included in TigerZone/HOMEPAGE-Team_J/HowToRunTests.txt.
+
+## GUI Tests
+To use the gui you take the text file output from the printToTextFile function in our client and put that text file in the level folder of the debug section in the gui folder. Then you run tigerzone.exe and the board will be printed on the screen. To run tigerzone.exe you need to have visual studio 2013 installed.
