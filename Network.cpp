@@ -2,6 +2,7 @@
 
 #define DEBUG
 
+//Client object, created with hostname and port
 Client::Client(std::string hostname, std::string port)
 {
     portno = stoi(port);
@@ -20,9 +21,10 @@ Client::Client(std::string hostname, std::string port)
 }
 Client::~Client()
 {
-
+	//Deconstructor 
 }
 
+//Attempts connection to server 
 void Client::connectToServer()
 {
   int tmp = connect(sockfd, (struct sockaddr *) &serv_addr, sizeof(serv_addr));
@@ -45,6 +47,7 @@ void Client::sendMessage(std::string message)
   //#endif
 
 }
+//Reads message from the server socket
 std::string Client::receiveMessage()
 {
   std::string message;
@@ -58,11 +61,13 @@ std::string Client::receiveMessage()
   }
   return message;
 }
+//Closes connection to server 
 void Client::closeConnection()
 {
   close(sockfd);
   fprintf(stdout, "Connection to Server terminated by the Client!\n");
 }
+//Error flag 
 void Client::error(const char *msg)
 {
     perror(msg);
