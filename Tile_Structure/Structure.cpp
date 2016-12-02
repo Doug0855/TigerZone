@@ -2,6 +2,7 @@
 
 #include <string>
 
+// init the structure
 Structure::Structure(std::string type, std::pair<int,int> blockCoords) {
 	this->type = type;
 	this->startingBlock = blockCoords;
@@ -29,6 +30,7 @@ Structure::~Structure() {
 
 }
 
+// add animals to the structure as necessary according to the current tile
 void Structure::checkAnimals(Tile *tile) {
 	if(tile->hasCrocodile())
 		this->crocodileCount++;

@@ -1,5 +1,6 @@
 #include "TileStack.h"
 
+// init the tile stack to the proper number of each type of tile
 TileStack::TileStack()
 {
 	for (int i = 1; i < 29; i++)
@@ -36,6 +37,7 @@ TileStack::TileStack()
 	}
 }
 
+// init the tile stack based on a different tilestack
 TileStack::TileStack(std::vector<int> tileVectors) {
 	for(int i = 0; i < tileVectors.size(); i++) {
 		Tile tile(i);
@@ -48,11 +50,13 @@ TileStack::~TileStack()
 
 }
 
+// shuffle the tilestack
 void TileStack::shuffle()
 {
 	std::random_shuffle(this->tiles.begin(), this->tiles.end());
 }
 
+// draw from the top of the tile stack
 Tile TileStack::draw()
 {
 	Tile tile = tiles.front();
@@ -60,6 +64,7 @@ Tile TileStack::draw()
 	return tile;
 }
 
+// ignore this
 bool TileStack::isEmpty() {
 	return true;
 }

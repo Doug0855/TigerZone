@@ -12,6 +12,7 @@ public:
 	Structure();
 	~Structure();
 
+	// see if theres an animal in the strucutre
 	void checkAnimals(Tile *tile);
 
 	std::string type;
