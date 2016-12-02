@@ -28,7 +28,7 @@
 #define TERMINATE_CHALLENGE "END OF CHALLENGES"
 
 
-void printToTextFile(Board gameboard)
+void printToTextFile(Board gameboard) //Prints the game board to a text file
 {
 	std::ofstream out_data("Levels/level.txt");
 	out_data << "Level:" << std::endl;
@@ -63,7 +63,7 @@ void printBoard(Board gameBoard) //debugging
 		}
 		std::cout<<std::endl;
 	}
-} 															//debug
+} 															
 void printStack(TileStack stack) //debugging
 {
 	/*print tile stack content for debugging*/
@@ -75,8 +75,8 @@ void printStack(TileStack stack) //debugging
 	std::cout << std::endl;/**/
 }
 
-std::string parseMessageList(std::string &msg)
-{
+std::string parseMessageList(std::string &msg) //finds and returns the first message in the message list
+{											
 	std::string token;
 	std::string delimiter = "\r\n";
 	size_t pos = 0;
@@ -87,7 +87,7 @@ std::string parseMessageList(std::string &msg)
 
 	return token;
 }
-std::string getMesssage(Client &client, std::string &msg_list)
+std::string getMesssage(Client &client, std::string &msg_list) //Updates the message list and then parses for the first message to return.
 {
 	std::string msg;
 	if (msg_list.empty())
@@ -105,7 +105,12 @@ std::string getMesssage(Client &client, std::string &msg_list)
 }
 
 int moveProtocol(Client &client, std::string &message_list, Game &game1, Game &game2, int &success1, int &success2, std::string OPPONENT_ID)
-{
+{ 
+	/*
+	This protocol is called whenever a move needs to be made.
+	It takes a reference to both games being played and two success values.
+	These success values are used to calculate the number of iterations needed in the processing loop
+	*/
 	std::string message_to_send;
 	std::string message;
 	values_t message_info;
@@ -116,11 +121,11 @@ int moveProtocol(Client &client, std::string &message_list, Game &game1, Game &g
 	message = getMesssage(client, message_list);
 	std::cout << GREEN << "Server sent: " << RESET << message << std::endl;
 
-	if ((success1 == -1 || success2 == -1) && message.compare(0,1,"M") == 0)
+	if ((success1 == -1 || success2 == -1) && message.compare(0,1,"M") == 0) //Need to make a move
 		runTime = 2;
-	else if ((success1 == -1 || success2 == -1) && message.compare(0,1,"G") == 0)
+	else if ((success1 == -1 || success2 == -1) && message.compare(0,1,"G") == 0) //Need to get a game piece
 		runTime = 1;
-	else if (success1 == -1 && success2 == -1)
+	else if (success1 == -1 && success2 == -1) //Do nothing
 		runTime = 0;
 
 	for (int i = 0; i < runTime; i++)
@@ -192,7 +197,7 @@ int moveProtocol(Client &client, std::string &message_list, Game &game1, Game &g
 					}
 				}
 			}
-			if (i < runTime-1)
+			if (i < runTime-1) //if it isn't the final message, display the message the server sent.
 			{
 				message = getMesssage(client, message_list);
 				std::cout << GREEN << "Server sent: " << RESET << message << std::endl;
@@ -202,7 +207,7 @@ int moveProtocol(Client &client, std::string &message_list, Game &game1, Game &g
 }
 
 void matchProtocol(Client &client, std::string &message_list)
-{
+{ //This protocol is called once for each match.
 	Adapter adapter;
 	values_t message_info;
 	int number_of_tiles, game1_success, game2_success;
@@ -270,7 +275,7 @@ void matchProtocol(Client &client, std::string &message_list)
 		}
 		else if (message.compare(0,1,"G") == 0)
 		{
-			std::cout << "	GAME OVER MESSAGE RECEICED #" << count << std::endl;
+			std::cout << "	GAME OVER MESSAGE RECEIVED #" << count << std::endl;
 			count++;
 			if (count == 2)
 				lastMessage = false;
@@ -315,7 +320,7 @@ void roundProtocol(Client &client, std::string &message_list, int rounds)
 		}
 		else //hopefully this is never reached
 		{
-			std::cout << "	ERROR: previous message could not be processed correctly. Message skiped!" << std::endl;
+			std::cout << "	ERROR: previous message could not be processed correctly. Message skipped!" << std::endl;
 			std::cout << "		ERROR message: " << message << std::endl;
 			message = getMesssage(client, message_list);
 			std::cout << GREEN << "Server sent: " << RESET << message << std::endl;
@@ -323,7 +328,7 @@ void roundProtocol(Client &client, std::string &message_list, int rounds)
 	}
 }
 
-void challengeProtocol(Client &client)
+void challengeProtocol(Client &client) //This protocol is called once for each challenge
 {
 	int challenge_id, rounds;
 	std::string message;
@@ -363,7 +368,8 @@ void challengeProtocol(Client &client)
 }
 
 std::string authenticationProtocol(Client &client, std::string tournament_password, std::string username, std::string password)
-{
+{ //This protocol is called only to authenticate the client to the server.
+
 	std::string message, message_to_send, player_id;
 	std::string message_list = "";
 	message = getMesssage(client, message_list);
@@ -404,7 +410,7 @@ std::string authenticationProtocol(Client &client, std::string tournament_passwo
 
 int main(int argc, char *argv[]) {
 	std::string SERVER_IP, PORT, TOURNAMENT_PASS, TEAM_ID, TEAM_PASSWORD;
-	if( argc == 6 ) {
+	if( argc == 6 ) { //getting command line args
 		SERVER_IP = argv[1];
 		PORT = argv[2];
 		TOURNAMENT_PASS = argv[3];
@@ -424,18 +430,11 @@ int main(int argc, char *argv[]) {
 
 
 	std::string message_list = "";
+	
+	//starting auth protocol...
+
 	std::string PLAYER_ID = authenticationProtocol(serverConnection, TOURNAMENT_PASS, TEAM_ID, TEAM_PASSWORD);
 	challengeProtocol(serverConnection);
-	//serverConnection.closeConnection();
-
-	// std::cout << "message1: " << getMesssage(serverConnection, message_list) << std::endl;
-	// std::cout << "message2: " << getMesssage(serverConnection, message_list) << std::endl;
-	// std::cout << "message3: " << getMesssage(serverConnection, message_list) << std::endl;
-	// std::cout << "message4: " << getMesssage(serverConnection, message_list) << std::endl;
-
-
-	//Game game1("123", p1, p2, tStack, tile1, std::pair<int,int> (72,72));
-	//game1.play();
 
 	return 0;
 };
