@@ -20,3 +20,9 @@
 ## Compiling our Mock server implementation
 1. Clone our TigerZone™ repository into your local computer
 2. Run ```g++ server.cpp -o server.out``` to compile our mock server implementation
+
+## Running our TigerZone™ implementation
+Usage: ```tiger.out <IP_ADDRESS> <PORT_NUMBER> <CHALLENGE_PASS> <TEAM_NAME> <TEAM_PASSWORD>```
+
+## Running our Mock Server implementation
+Usage: ```server.out <PORT_NUMBER> < <SERVER_COMMANDS>```
