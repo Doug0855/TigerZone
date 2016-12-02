@@ -34,3 +34,6 @@ Usage: ```server.out <PORT_NUMBER> < <SERVER_COMMANDS>```
     ```./tiger.out localhost 3333 TIGERZONE TEAMJ IAMJ ```
 
 Note: The Challenge will end very quickly as only a few moves are executed. The mock server tests the client server communication flow logic by sending mock commands. Some of the commands are erronous and this test does not check for syntactically correct commands from either the server or client. This test will test that the Network Protocol is followed correctly. 
+
+## Unit Tests
+A Unit Testing class was made in order to quickly run tests for each new object made. The UnitTester class tests the functionality of the Face, Tile, and the TileStack classes. More information about this class is included in TigerZone/HOMEPAGE-Team_J/HowToRunTests.txt.
