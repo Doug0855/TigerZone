@@ -2,4 +2,4 @@ Running our TigerZone™ implementation
 Usage: tiger.out <IP_ADDRESS> <PORT_NUMBER> <CHALLENGE_PASS> <TEAM_NAME> <TEAM_PASSWORD>
 
 Running our Mock Server implementation
-Usage: server.out <PORT_NUMBER>
+Usage: server.out <PORT_NUMBER> < <SERVER_COMMANDS>
