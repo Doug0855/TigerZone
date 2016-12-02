@@ -1,5 +1,5 @@
 #include "Face.h"
-
+/*Each tile has 4 faces, either Jungle, Lake, or Game Trail.  */
 Face::Face(std::string faceType)
 {
 	type = faceType;

@@ -1,9 +1,13 @@
 ﻿#include "Adapter.h"
+/*Adapter translates messages sent by the server into types congruent 
+with our internal Game structure and vice versa*/
 
 Adapter::Adapter() {}
 
 Adapter::~Adapter() {}
 
+/*Converts an tile number to the appropriate tile string
+GAME->SERVER*/
 std::string Adapter::tileToExpr(int i){
 	std::string tiles[28] = {"JJJJ-", "JJJJX", "JJTJX", "TTTT-", "TJTJ-",
 		"TJJT-" , "TJTT-", "LLLL-", "JLLL-" , "LLJJ-", "JLJL-", "LJLJ-",
@@ -12,6 +16,8 @@ std::string Adapter::tileToExpr(int i){
 	return tiles[i-1];
 }
 
+/*Converts a tile string to the appropriate tile number
+SERVER->GAME*/
 int Adapter::exprToTile(std::string &expr)
 {
 	transform(expr.begin(), expr.end(), expr.begin(), toupper);
@@ -131,6 +137,8 @@ int Adapter::exprToTile(std::string &expr)
 
 }
 
+/*Converts number of rotations to a degree of rotation
+GAME->SERVER*/
 int Adapter::numRotations(const int x) {
 	int numRotations = 0;
 	if (x == 90)
@@ -142,7 +150,8 @@ int Adapter::numRotations(const int x) {
 
 	return numRotations;
 }
-
+/*Parses through message reccieved by the server and stores each word in a 
+string vector. */
 std::vector<std::string> Adapter::convertExpression(const std::string& expr) {
 	// Convert to stream
 	std::istringstream buf(expr);
@@ -153,8 +162,8 @@ std::vector<std::string> Adapter::convertExpression(const std::string& expr) {
 	return myV;
 }
 
+/*Returns the appropriate value for the given prop*/
 std::string Adapter::get(const std::string& prop) {
-	// Based on prop, return value
 	if (prop == "pid")
 		return this->playerID;
 	if (prop == "rid")
@@ -173,8 +182,8 @@ std::string Adapter::get(const std::string& prop) {
 	return "Error";
 }
 
+/*Sets the appropriate attribute(chosen by prop) to the string const*/
 void Adapter::set(const std::string& prop, const std::string value) {
-	// Based on prop, return value
 	if (prop == "pid")
 		this->playerID = value;
 	if (prop == "rid")
@@ -191,6 +200,7 @@ void Adapter::set(const std::string& prop, const std::string value) {
 		this->moveTime = value;
 }
 
+/*Returns the tile string at the given index, also contains error check*/
 std::string Adapter::getTileString(const int& index) {
 	// Error check
 	if (index < 0 || index > this->tileList.size())
@@ -199,17 +209,19 @@ std::string Adapter::getTileString(const int& index) {
 	return this->tileList[index];
 }
 
-int Adapter::getCommand(const std::vector<std::string>& myV) {
-
-}
-
-std::pair<int, int> Adapter::convertCoordinates(int x, int y) //convert from server
+/*Converts coordinates given by the server to the system of coordinates used in 
+game logic
+SERVER->CLIENT*/
+std::pair<int, int> Adapter::convertCoordinates(int x, int y)  
 {
 	int row = 72 - y;
 	int col = x + 72;
 	return std::pair<int, int> (row, col);
 }
 
+/*Converts coordinates given by client to those that can be understood by the 
+server
+CLIENT->SERVER*/
 std::pair<int, int> Adapter::convertCoordinates(std::pair<int, int> location) //convert from client to server
 {
 	int x = location.second - 72;
@@ -217,6 +229,9 @@ std::pair<int, int> Adapter::convertCoordinates(std::pair<int, int> location) //
 	return std::pair<int, int>(x, y);
 }
 
+/*Converts zone coordinates given by client to zone number 
+used by server
+CLIENT->SERVER*/
 int Adapter::convertZone(std::pair<int, int> location)
 {
 	int i = location.first;
@@ -242,6 +257,8 @@ int Adapter::convertZone(std::pair<int, int> location)
 	}
 }
 
+/*Converts zone number given by server to coordinates used by client
+SERVER->CLIENT*/
 std::pair<int, int> Adapter::convertZone(int spot)
 {
 	if(spot == 1) return std::pair<int, int>(0,0);
@@ -255,6 +272,8 @@ std::pair<int, int> Adapter::convertZone(int spot)
 	else if(spot == 9) return std::pair<int, int>(2,2);
 }
 
+/*Reads the first word of the message sent by server then calls the appropriate 
+parsing method*/
 values_t Adapter::translate(std::string message)
 {
 	values_t output;
@@ -281,6 +300,8 @@ values_t Adapter::translate(std::string message)
 	return output;
 }
 
+/*Parses message sent by server, returns info about starting tile
+Called by adapter::translate()*/
 values_t Adapter::parseStartingTile(std::string message)
 {
 	std::string starting_tile, substr;
@@ -298,6 +319,8 @@ values_t Adapter::parseStartingTile(std::string message)
 	return out;
 }
 
+/*Parses message sent by server, returns info about tile stack
+Called by adapter::translate()*/
 values_t Adapter::parseTileStack(std::string message)
 {
   std::string token, substr;
@@ -307,7 +330,6 @@ values_t Adapter::parseTileStack(std::string message)
   int tile_num;
   values_t out;
 
-  //message = getMesssage(client, message_list);
   substr = message.substr(14,message.find(" TILE")-14); //get first string integer
   out.number_of_tiles = stoi(substr);
   substr = message.erase(0, message.find("[")+1); //get string starting with the first tile to start tokeninzing tiles
@@ -322,12 +344,16 @@ values_t Adapter::parseTileStack(std::string message)
   return out;
 }
 
+/*Parses message sent by server, returns info about match
+Called by adapter::translate()*/
 values_t Adapter::parseMatch(std::string message)
 {
   values_t out;
   return out;
 }
 
+/*Parses message sent by server, returns info about current move
+Called by adapter::translate()*/
 values_t Adapter::parseMakeMove(std::string message)
 {
   std::istringstream buffer(message);
@@ -347,6 +373,8 @@ values_t Adapter::parseMakeMove(std::string message)
   return out;
 }
 
+/*Parses message sent by server, returns info about game state
+Called by adapter::translate()*/
 values_t Adapter::parseGameMove(std::string message)
 {
   values_t out;
