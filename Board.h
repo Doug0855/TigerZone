@@ -28,8 +28,10 @@ public:
 	// gets best placement and rotation for current tile
 	std::pair<int, int> getOptimalPlacement(Tile &tile, std::vector< std::pair<int, int> > availableMoves);
 	
+	// Integer to hold posssible points if a meeple were to be placed at the i,j position within a block
 	int positionPoints(int i, int j);
 
+	// Points from an animal along a structure
 	int animalPoints(int i, int j);
 
   void placeCroc(int i, int j);
@@ -43,7 +45,10 @@ public:
 	
 	// See if feature tile is being placed in has a meeple
 	bool checkMeeplePlacement(Tile tile, std::pair<int, int> blockSpot);
+	// Place a meeple at tile i,j in the block at pair location within the tile
 	void placeMeeple(int i, int j, std::pair<int,int> location);
+	// Give the AI the coordinates of our recently placed tile to analyze and determine which block to place 
+	// a tiger in (if it may place one at all in the first plcae)
 	void meepleAi(int i, int j);
 
 private:
@@ -53,6 +58,7 @@ private:
 	void buildTrail(Structure* struc, Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int,int> blockSpot, std::vector<Tile*> &visitedTiles);
 	void buildJungle(Structure* struc, Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int,int> blockSpot,  std::vector<Tile*> &visitedTiles);
 	
+	// Initial functions to start building a connected structure from the tile that was just placed
 	Structure checkJungle(Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int, int> blockSpot);
 	Structure checkLake(Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int, int> blockSpot);
 	Structure checkTrail(Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int, int> blockSpot);

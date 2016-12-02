@@ -3,7 +3,7 @@
 
 Board::Board()
 {
-	// Initialize board to be 150x150 vector of Tiles*
+	// Initialize board to be 150x150 vector of null Tiles*
 	Tile *NULL_tile = NULL;
 	for(int i = 0; i < 160; i++)
 	{
@@ -50,7 +50,6 @@ std::vector< std::pair<int, int> > Board::display_positions(Tile tile)
 // Returns location pairs where the tile may be placed
 std::vector< std::pair<int, int> > Board::checkPlacement(Tile tile, int i, int j, std::string openFaces)
 {
-	// std::cout<<"Checking placement for tile "<<tile.getType()<<" based off location "<<i<<' '<<j<<std::endl;
 	std::vector< std::pair<int, int> > places;
 	if (openFaces == "up"){
 		for (int ii = 0; ii < 4; ii++)
@@ -62,7 +61,6 @@ std::vector< std::pair<int, int> > Board::checkPlacement(Tile tile, int i, int j
 				 (m_board[i - 1][j + 1] == NULL || m_board[i - 1][j + 1]->getLeftFace()->faceEquals(*tile.getRightFace())) &&
 				 (m_board[i - 2][j] == NULL || m_board[i - 2][j]->getDownFace()->faceEquals(*tile.getUpFace())))
 			{
-				// std::cout<<"Can connect to up face of i,j"<<std::endl;
 				places.push_back(std::pair<int, int>(i - 1, j));
 				break;
 			}
@@ -125,20 +123,26 @@ std::vector< std::pair<int, int> > Board::checkPlacement(Tile tile, int i, int j
 	return places;
 }
 
+// A method to get the best tile placement from the vector of possible locations we may place the tile (availableMoves)
 std::pair<int,int> Board::getOptimalPlacement(Tile &tile, std::vector< std::pair<int, int> > availableMoves)
 {
+	// Check that there's more than 1 possible place to put the tile
 	if (availableMoves.size() > 1)
 	{
+		// Keep track of the orientation of the tile for when we find the best location
 		int bestRotation = 0;
 		std::pair<int, int> bestSpot;
 		int mostPoints = -1; // set this to -1 otherwise if points is never > mostPoints bestSpot won't be selected
 		for (size_t z = 0; z < availableMoves.size(); z++)
 		{
+			// set the row and col (i and j)
 			int i = availableMoves[z].first;
 			int j = availableMoves[z].second;
+			// Check the available location with all possible tile rotations
 			for (int q = 0; q < 4; q++)
 			{
 				int points = 0;
+				// double check that the tile can connect to all neighbors and run the positionPoints method if it can
 				if ((m_board[i + 1][j] == NULL || m_board[i + 1][j]->getUpFace()->faceEquals(*tile.getDownFace())) &&
 				(m_board[i - 1][j] == NULL || m_board[i - 1][j]->getDownFace()->faceEquals(*tile.getUpFace())) &&
 				(m_board[i][j + 1] == NULL || m_board[i][j + 1]->getLeftFace()->faceEquals(*tile.getRightFace())) &&
@@ -165,6 +169,7 @@ std::pair<int,int> Board::getOptimalPlacement(Tile &tile, std::vector< std::pair
 		}
 		return bestSpot;
 	}
+	// If there was only 1 available location to place the tile
 	else
 	{
 		int i = availableMoves[0].first;
@@ -189,6 +194,7 @@ std::pair<int,int> Board::getOptimalPlacement(Tile &tile, std::vector< std::pair
 	return availableMoves[0];
 }
 
+// Method to get the value of a position where we may place the tile with our defined logic for structure value (lakes, jungles, trails)
 int Board::positionPoints(int i, int j)
 {
 	const int LAKE_POINTS = 6;
@@ -196,6 +202,8 @@ int Board::positionPoints(int i, int j)
 	const int TRAIL_POINTS = 1;
 
 	int points = 0;
+	// for the following if statements you'll be checking the positions adjacent tiles and adding points based on 
+	// the adjacents tile's face as well as existing animals within that tile.
 	if (m_board[i + 1][j] != NULL)
 	{
 		points += animalPoints(i + 1, j);
@@ -263,6 +271,7 @@ int Board::positionPoints(int i, int j)
 	return points;
 }
 
+// Method to get the points for an animal or den based off our logic and value of animals
 int Board::animalPoints(int i, int j)
 {
 	const int DEN_POINTS = 10;
@@ -271,6 +280,7 @@ int Board::animalPoints(int i, int j)
 	const int BUFFALO_POINTS = 2;
 	const int CROCODILE_POINTS = -2;
 	int points = 0;
+	// You'll check the tile for existence of animal/dens listed above and add points accordingly if present
 	if (m_board[i][j]->getCenter().getType() == "Den")
 	{
 		points += DEN_POINTS;
@@ -294,6 +304,7 @@ int Board::animalPoints(int i, int j)
 	return points;
 }
 
+// Place a crocodile on a tile in the board
 void Board::placeCroc(int i, int j)
 {
   m_board[i][j]->setCrocodile();
@@ -310,21 +321,27 @@ void Board::place_tile(std::pair<int, int> location, Tile &tile)
 	std::vector<Structure> availableStructures = getStructures(row, col);
 }
 
+// Place a meeple in tile row i and column j and at the block 'location' within that tile
 void Board::placeMeeple(int i, int j, std::pair<int, int> location)
 {
 	m_board[i][j]->placeMeeple(location);
 }
 
+// Method to begin constructing the jungle structure once we find a section of the tile that has a jungle feature
 Structure Board::checkJungle(Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int, int> blockSpot)
 {
 	Structure jungleStruct("jungle", blockSpot);
 	jungleStruct.checkAnimals(tile);
+	// Keep track of visited tiles so we don't double count for animals
 	std::vector<Tile*> visitedTiles;
 	visitedTiles.push_back(tile);
+	// Call the helper method to continue the BFS from the jungle's neighbors
 	buildJungle(&jungleStruct, tile, tileBlocks, blockSpot, visitedTiles);
 	return jungleStruct;
 }
 
+// Helper method to checkJungle that continues building the jungle based off its up,down,left,right neighbors 
+// as well as checking if the tile is a mixed tile (shares jungle with water) and employing logic to continue traversal in that scenario
 void Board::buildJungle(Structure* struc, Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int,int> blockSpot, std::vector<Tile*> &visitedTiles) {
 	int row = blockSpot.first;
 	int col = blockSpot.second;
@@ -348,10 +365,10 @@ void Board::buildJungle(Structure* struc, Tile *tile, std::vector< std::vector<B
 		struc->checkAnimals(tile);
 	}
 
-	//debugging std::cout<<"block type is "<<tileBlocks[row][col].getType()<<std::endl;
 	if(tileBlocks[row][col].getType() == "mixed") {
 		int trailFaces = 0;
-		// Determine how many faces are trail faces. If there's only 1 than we know the mixed blocks don't connect
+		// Determine how many faces are trail faces. If there's only 1 than we know the mixed blocks don't connect within the tile
+		// Otherwise we know that the mixed blocks connect to form only 1 jungle rather than 2
 		if(tile->getUpFace()->getType() == "trail")
 			trailFaces++;
 		if(tile->getDownFace()->getType() == "trail")
@@ -361,7 +378,6 @@ void Board::buildJungle(Structure* struc, Tile *tile, std::vector< std::vector<B
 		if(tile->getLeftFace()->getType() == "trail")
 			trailFaces++;
 
-		//debugging std::cout<<"trail faces is "<<trailFaces<<std::endl;
 		if(trailFaces > 0) {
 			if(trailFaces != 1) {
 				for(int i = 0; i < 3; i++) {
@@ -448,16 +464,20 @@ void Board::buildJungle(Structure* struc, Tile *tile, std::vector< std::vector<B
 	return;
 }
 
+// Method to begin constructing the lake structure once we find a section of the tile that has a jungle feature
 Structure Board::checkLake(Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int, int> blockSpot)
 {
 	Structure lakeStruct("lake", blockSpot);
 	lakeStruct.checkAnimals(tile);
+	// Keep track of visited tiles so we don't double count for animals
 	std::vector<Tile*> visitedTiles;
 	visitedTiles.push_back(tile);
+	// Call the helper method to continue the BFS
 	buildLake(&lakeStruct, tile, tileBlocks, blockSpot, visitedTiles);
 	return lakeStruct;
 }
 
+// Same logic as buildJungle
 void Board::buildLake(Structure* struc, Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int,int> blockSpot, std::vector<Tile*> &visitedTiles) {
 	// std::cout<<"in build lake"<<std::endl;
 	int row = blockSpot.first;
@@ -468,12 +488,15 @@ void Board::buildLake(Structure* struc, Tile *tile, std::vector< std::vector<Blo
 	// 		std::cout<<"Block at "<<i<<' '<<j<<" for tile "<<tile<<" has been visited? "<<tileBlocks[i][j].isVisited()<<std::endl;
 	// 	}
 	// }
+
+	// Push the current block into the vector of blocks for this structure
 	struc->structureBlocks.push_back(tileBlocks[row][col]);
 
-	// check block for meeple
+	// check block for meeple and set the structure boolean accordingly
 	if(tileBlocks[row][col].hasMeeple())
 		struc->hasMeeple = true;
 
+	// Check to see if you've already added this tiles animals to the structure
 	bool addedTileAnimals;
 	for(int i = 0; i < visitedTiles.size(); i++) {
 			if(visitedTiles[i] == tile)
@@ -482,6 +505,7 @@ void Board::buildLake(Structure* struc, Tile *tile, std::vector< std::vector<Blo
 				//debugging std::cout<<"Added animals already for this tile"<<std::endl;
 			}
 	}
+	// If you havent already added the tiles animals to the structure, do so
 	if(!addedTileAnimals) {
 		struc->checkAnimals(tile);
 		// if(tile->hasCrocodile())
@@ -494,8 +518,8 @@ void Board::buildLake(Structure* struc, Tile *tile, std::vector< std::vector<Blo
 		// 	struc->buffaloCount++;
 	}
 
-	// Check tiles above, below, left, and right of the current block to see if lake structure continues
-	// std::cout<<"about to cehck row+1"<<std::endl;
+	// Check tiles above, below, left, and right of the current block to see if lake structure continues. 
+	// Call this function with the new coordinates (of the direction you're going) again if it does
 	if((row + 1) <= 2 && !(tileBlocks[row + 1][col].isVisited()) && tileBlocks[row+1][col].getType() == "lake") {
 		buildLake(struc, tile, tileBlocks, std::pair<int,int>(row+1,col), visitedTiles);
 	}
@@ -563,21 +587,27 @@ void Board::buildLake(Structure* struc, Tile *tile, std::vector< std::vector<Blo
 	return;
 }
 
+// Method to begin constructing the trail structure once we find a section of the tile that has a jungle feature
 Structure Board::checkTrail(Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int, int> blockSpot)
 {
 	Structure trailStruct("trail", blockSpot);
 	trailStruct.checkAnimals(tile);
+	// Keep track of visited tiles in order to not double count a tile's animals
 	std::vector<Tile*> visitedTiles;
 	visitedTiles.push_back(tile);
+	// Call the helper method to continue constructing the trail with our defined logic
 	buildTrail(&trailStruct, tile, tileBlocks, blockSpot, visitedTiles);
 	return trailStruct;
 }
 
+// Method to build up a trail through a BFS by checking it's up,down,left,right neighbors and continuing the traversal if one is a trail
 void Board::buildTrail(Structure* struc, Tile *tile, std::vector< std::vector<Block> >& tileBlocks, std::pair<int,int> blockSpot, std::vector<Tile*> &visitedTiles) {
 	int row = blockSpot.first;
 	int col = blockSpot.second;
 	tileBlocks[row][col].visit();
 
+	// We must check how many ways a trail exits/enters a block to know how many trails the block contains.
+	// If its 2 or under then the block is 1 connected trail, if it's more than the trails all start from the center and are unique entities
 	if(row == 1 && col == 1) {
 		int divergingTrailCount = 0;
 		if(tileBlocks[row+1][col].getType() == "trail")
@@ -598,6 +628,7 @@ void Board::buildTrail(Structure* struc, Tile *tile, std::vector< std::vector<Bl
 	if(tileBlocks[row][col].hasMeeple())
 		struc->hasMeeple = true;
 
+	// Check to see if you've added this blocks animals
 	bool addedTileAnimals;
 	for(int i = 0; i < visitedTiles.size(); i++) {
 			if(visitedTiles[i] == tile)
@@ -618,8 +649,7 @@ void Board::buildTrail(Structure* struc, Tile *tile, std::vector< std::vector<Bl
 		// 	struc->buffaloCount++;
 	}
 
-	// Check tiles above, below, left, and right of the current block to see if lake structure continues
-	// std::cout<<"about to cehck row+1"<<std::endl;
+	// Check tiles above, below, left, and right of the current block to see if trail structure continues
 	if((row + 1) <= 2 && !(tileBlocks[row + 1][col].isVisited()) && tileBlocks[row+1][col].getType() == "trail") {
 		buildTrail(struc, tile, tileBlocks, std::pair<int,int>(row+1,col), visitedTiles);
 	}
@@ -687,6 +717,7 @@ void Board::buildTrail(Structure* struc, Tile *tile, std::vector< std::vector<Bl
 	return;
 }
 
+// Connect the faces or edges of a tile that you just placed to it's surrounding neighbours that are NOT null
 void Board::connectFaces(int row, int col)
 {
 	if(row+1 <= 150 && m_board[row+1][col] != NULL &&
@@ -768,7 +799,8 @@ void Board::connectFaces(int row, int col)
 	}
 }
 
-	// Pass in the coordinates of the tile that you just placed
+// Pass in the coordinates of the tile that you just placed and get a vector of structures (lake, jungle, trail) that exist within that tile
+// so we may use that to make a decision on meeple placement
 std::vector<Structure> Board::getStructures(int row, int col) {
 	//debugging std::cout<<"IN GET STRUCTURES FOR "<<row<<' '<<col<<std::endl;
 	std::vector<Structure> structures;
@@ -777,6 +809,7 @@ std::vector<Structure> Board::getStructures(int row, int col) {
 	for(int i = 0; i < 3; i++) {
 		for(int j = 0; j < 3; j++) {
 			if(!(tileBlocks[i][j].isVisited())) {
+				// For each block within the tile we will check it's type and build the structure from there with a Breadth first search
 				if(tileBlocks[i][j].getType() == "jungle" || tileBlocks[i][j].getType() == "mixed") {
 					Structure struc = checkJungle(tile, tileBlocks, std::pair<int,int>(i,j));
 					structures.push_back(struc);
