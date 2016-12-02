@@ -1,6 +1,6 @@
 #include "Tile.h"
 
-// Constructor to create one of the 27 different tiles
+// Constructor to create one of the 28 different tiles from a number
 Tile::Tile(int type)
 {
   // Initialize the tile's block matrix to null blocks
@@ -440,6 +440,7 @@ Tile::Tile(int type)
     initialization = false;
   }
 }
+// Initialize a null tile to place on the board
 Tile::Tile()
 {
   rotation = 0;
@@ -456,6 +457,7 @@ Tile::~Tile()
 
 }
 
+// Set the face (or edges) types of a tile equal to the corresponding middle block of that face within the tiles innerBlock 3x3 matrix
 void Tile::setFaceTypes() {
   upFace.setType(innerBlocks[0][1].getType());
   downFace.setType(innerBlocks[2][1].getType());
@@ -463,6 +465,7 @@ void Tile::setFaceTypes() {
   rightFace.setType(innerBlocks[1][2].getType());
 }
 
+// Set a row of blocks for a tile's innerBlocks vector.
 void Tile::setRow(int row, char type1, char type2, char type3) {
   innerBlocks[row][0] = Block(type1);
   innerBlocks[row][1] = Block(type2);
@@ -500,6 +503,7 @@ void Tile::rotate()
     rotation = 0;
 }
 
+// Set the directional tile attributes of a tile to the address of another tile so we know what neighbors that tile has
 void Tile::setNeighborUpTile(Tile &tile) {
   upTile = &tile;
 }
@@ -536,6 +540,7 @@ std::vector<std::string> Tile::getOpenFaces()
 	return openFaces;
 }
 
+// Place a meeple in the tile's innerBlocks 3x3 matrix at the 'location' pair passed
 void Tile::placeMeeple(std::pair<int, int> location)
 {
 	innerBlocks[location.first][location.second].placeMeeple();

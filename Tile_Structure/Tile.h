@@ -8,6 +8,7 @@
 
 class Tile {
 public:
+	// Initiate a tile with a given num. Num corresponds to the type of tile which are from the website and are numbered from left to right.
 	Tile(int num);
 	Tile();
 	~Tile();
@@ -15,6 +16,7 @@ public:
 	// Set a row of blocks for a tile
 	void setRow(int row, char type1, char type2, char type3);
 
+	// Place a meeple at block 'location' within the tiles innerBlocks vector
 	void placeMeeple(std::pair<int, int> location);
 
 	// Rotate the tile and set all of the faces to the face that was -90 degrees of it.
