@@ -241,6 +241,94 @@ std::vector<bool> UnitTester::connectedFacesTest() {
 	return results;
 }
 
+std::vector<bool> UnitTester::createTileStack() {
+	// Vector to store results
+	std::vector<bool> results;
+
+	TileStack testStack(10);
+	if (testStack.isEmpty() == false)
+		results.push_back(true);
+	else
+		results.push_back(false);
+
+	if (!testStack.getTile(0)->getDen())
+		results.push_back(true);
+	else
+		results.push_back(false);
+
+	TileStack testStack1;
+	if (testStack1.getStackSize() == 76)
+		results.push_back(true);
+	else
+		results.push_back(false);
+
+
+	return results;
+}
+
+std::vector<bool> UnitTester::drawTileTest() {
+	// Vector to store results
+	std::vector<bool> results;
+
+	// Create stack and draw card
+	TileStack testStack(10);
+	int initSize = testStack.getStackSize();
+	testStack.getTile(9)->getUpFace()->setType("Jungle");
+	Tile* drawnTile = testStack.drawTile();
+
+	if (testStack.getStackSize() == initSize)
+		results.push_back(false);
+	else
+		results.push_back(true);
+
+	if (drawnTile->getUpFace()->getType() == "Jungle")
+		results.push_back(true);
+	else
+		results.push_back(false);
+
+	return results;
+}
+
+std::vector<bool> UnitTester::shuffleTest() {
+	// Vector to store results
+	std::vector<bool> results;
+
+	// Create stack and shuffle
+	TileStack testStack(10);
+	for (int i = 0; i < testStack.getStackSize(); i++) {
+		if (i%2 == 0)
+			testStack.getTile(i)->getUpFace()->setType("Jungle");
+		else if (i%2 != 0 && i%3 == 0)
+			testStack.getTile(i)->getUpFace()->setType("Lake");
+		else if (i == 7)
+			testStack.getTile(i)->getUpFace()->setType("None");
+		else
+			testStack.getTile(i)->getUpFace()->setType("Path");
+	}
+
+	int position = -1;
+	testStack.shuffle();
+	for (int i = 0; i < testStack.getStackSize(); i++) {
+		if (testStack.getTile(i)->getUpFace()->getType() == "None")
+			position = i;
+	}
+
+	if (position == 7)
+		results.push_back(false);
+	else
+		results.push_back(true);
+
+
+	return results;
+}
+
+std::vector<bool> UnitTester::insertTileTest() {
+	// Vector to store results
+	std::vector<bool> results;
+
+	return results;
+}	
+
 void UnitTester::printResults(std::vector<bool> &v) {
 	// Prints contents of vector
 	for (int i = 0; i < v.size(); i++) {
@@ -292,5 +380,29 @@ void UnitTester::runTests() {
 	std::cout<<"Conducting getConnectedFaces tests..."<<std::endl;
 	myVector.clear();
 	myVector = connectedFacesTest();
+	printResults(myVector);
+
+	std::cout<<std::endl;
+	std::cout<<"Conducting createTileStack tests..."<<std::endl;
+	myVector.clear();
+	myVector = createTileStack();
+	printResults(myVector);
+
+	std::cout<<std::endl;
+	std::cout<<"Conducting drawTileTest tests..."<<std::endl;
+	myVector.clear();
+	myVector = drawTileTest();
+	printResults(myVector);
+
+	std::cout<<std::endl;
+	std::cout<<"Conducting shuffleTest tests..."<<std::endl;
+	myVector.clear();
+	myVector = shuffleTest();
+	printResults(myVector);
+
+	std::cout<<std::endl;
+	std::cout<<"Conducting createBoard tests..."<<std::endl;
+	myVector.clear();
+	myVector = createBoard();
 	printResults(myVector);
 }
