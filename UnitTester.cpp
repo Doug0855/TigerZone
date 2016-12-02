@@ -4,11 +4,12 @@ UnitTester::UnitTester() {}
 
 UnitTester::~UnitTester() {}
 
-std::vector<bool> UnitTester::createFace() {
+std::vector<bool> UnitTester::createFace() 
+{
 	// Vector to store results
 	std::vector<bool> results;
 	
-	// Test 0
+	// Test 0: Create face
 	try {
 		Face testFace;
 		results.push_back(true);
@@ -16,7 +17,7 @@ std::vector<bool> UnitTester::createFace() {
 		results.push_back(result);
 	}
 
-	// Test 1
+	// Test 1: Create face with assigned values
 	try {
 		Face testFace(NULL, "Jungle", "Boar");
 		results.push_back(true);
@@ -24,7 +25,7 @@ std::vector<bool> UnitTester::createFace() {
 		results.push_back(false);
 	}
 
-	// Test 2
+	// Test 2: Create face with more values
 	try {
 		Face testFace(NULL, NULL, NULL, NULL, "Lake", "Deer");
 		results.push_back(true);
@@ -35,7 +36,8 @@ std::vector<bool> UnitTester::createFace() {
 	return results;
 }
 
-std::vector<bool> UnitTester::internalPointers() {
+std::vector<bool> UnitTester::internalPointers() 
+{
 	// Vector to store results
 	std::vector<bool> results;
 
@@ -64,7 +66,8 @@ std::vector<bool> UnitTester::internalPointers() {
 	return results;
 }
 
-std::vector<bool> UnitTester::externalPointer() {
+std::vector<bool> UnitTester::externalPointer() 
+{
 	// Vector to store results
 	std::vector<bool> results;
 
@@ -77,6 +80,7 @@ std::vector<bool> UnitTester::externalPointer() {
 	else
 		results.push_back(false);
 
+	// Create face to point to
 	Face* externalFace = new Face(NULL, "Lake", "None");
 	testFace.setExternal(externalFace);
 
@@ -88,7 +92,8 @@ std::vector<bool> UnitTester::externalPointer() {
 	return results;
 }
 
-std::vector<bool> UnitTester::createTile() {
+std::vector<bool> UnitTester::createTile() 
+{
 	// Vector to store results
 	std::vector<bool> results;
 	
@@ -114,7 +119,8 @@ std::vector<bool> UnitTester::createTile() {
 	return results;
 }
 
-std::vector<bool> UnitTester::rotateTest() {
+std::vector<bool> UnitTester::rotateTest() 
+{
 	// Vector to store results
 	std::vector<bool> results;
 
@@ -139,6 +145,7 @@ std::vector<bool> UnitTester::rotateTest() {
 	else
 		results.push_back(false);
 
+	// Another rotate
 	testTile.rotate();
 	if (testTile.getUpFace()->getType() == "Lake"   	&& 
 		testTile.getDownFace()->getType() == "Lake" 	&& 
@@ -148,6 +155,7 @@ std::vector<bool> UnitTester::rotateTest() {
 	else
 		results.push_back(false);
 
+	// Another rotate
 	testTile.rotate();
 	if (testTile.getUpFace()->getType() == "Jungle"   &&
 		testTile.getDownFace()->getType() == "Jungle" && 
@@ -160,7 +168,8 @@ std::vector<bool> UnitTester::rotateTest() {
 	return results;
 }
 
-std::vector<bool> UnitTester::openFacesTest() {
+std::vector<bool> UnitTester::openFacesTest() 
+{
 	// Vector to store results
 	std::vector<bool> results;
 
@@ -171,6 +180,7 @@ std::vector<bool> UnitTester::openFacesTest() {
 	Face* right = new Face(NULL, "Jungle", "None");
 	Face* external = new Face();
 	
+	// Set internal pointers
 	up->setInternalPointer("o", down);
 	down->setInternalPointer("o", up);
 
@@ -207,7 +217,8 @@ std::vector<bool> UnitTester::openFacesTest() {
 	return results;
 }
 
-std::vector<bool> UnitTester::connectedFacesTest() {
+std::vector<bool> UnitTester::connectedFacesTest() 
+{
 	// Vector to store results
 	std::vector<bool> results;
 
@@ -218,6 +229,7 @@ std::vector<bool> UnitTester::connectedFacesTest() {
 	Face* right = new Face(NULL, "Jungle", "None");
 	Face* external = new Face();
 	
+	// Set internal pointers
 	up->setInternalPointer("o", down);
 	down->setInternalPointer("o", up);
 
@@ -241,10 +253,12 @@ std::vector<bool> UnitTester::connectedFacesTest() {
 	return results;
 }
 
-std::vector<bool> UnitTester::createTileStack() {
+std::vector<bool> UnitTester::createTileStack() 
+{
 	// Vector to store results
 	std::vector<bool> results;
 
+	// Create tileStack with 10 tiles
 	TileStack testStack(10);
 	if (testStack.isEmpty() == false)
 		results.push_back(true);
@@ -256,6 +270,7 @@ std::vector<bool> UnitTester::createTileStack() {
 	else
 		results.push_back(false);
 
+	// Create standard tileStack 
 	TileStack testStack1;
 	if (testStack1.getStackSize() == 76)
 		results.push_back(true);
@@ -266,7 +281,8 @@ std::vector<bool> UnitTester::createTileStack() {
 	return results;
 }
 
-std::vector<bool> UnitTester::drawTileTest() {
+std::vector<bool> UnitTester::drawTileTest() 
+{
 	// Vector to store results
 	std::vector<bool> results;
 
@@ -306,6 +322,7 @@ std::vector<bool> UnitTester::shuffleTest() {
 			testStack.getTile(i)->getUpFace()->setType("Path");
 	}
 
+	// Get position of changed tile to make sure not in same place
 	int position = -1;
 	testStack.shuffle();
 	for (int i = 0; i < testStack.getStackSize(); i++) {
@@ -322,14 +339,16 @@ std::vector<bool> UnitTester::shuffleTest() {
 	return results;
 }
 
-std::vector<bool> UnitTester::insertTileTest() {
+std::vector<bool> UnitTester::insertTileTest()
+{
 	// Vector to store results
 	std::vector<bool> results;
 
 	return results;
 }	
 
-void UnitTester::printResults(std::vector<bool> &v) {
+void UnitTester::printResults(std::vector<bool> &v) 
+{
 	// Prints contents of vector
 	for (int i = 0; i < v.size(); i++) {
 		if (v[i] == true)
@@ -339,7 +358,8 @@ void UnitTester::printResults(std::vector<bool> &v) {
 	}
 }
 
-void UnitTester::runTests() {
+void UnitTester::runTests() 
+{
 	// Executes tests
 	std::vector<bool> myVector;
 	myVector = createFace();
