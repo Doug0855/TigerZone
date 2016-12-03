@@ -22,9 +22,11 @@
 2. Run ```g++ server.cpp -o server.out``` to compile our mock server implementation
 
 ## Running our TigerZone™ implementation
+Note: This implementation correctly worked while running on a Linux OS machine
 Usage: ```tiger.out <IP_ADDRESS> <PORT_NUMBER> <CHALLENGE_PASS> <TEAM_NAME> <TEAM_PASSWORD>```
 
 ## Running our Mock Server implementation
+Note: This implementation correctly worked while running on a Linux OS machine
 Usage: ```server.out <PORT_NUMBER> < <SERVER_COMMANDS>```
 
 ## Testing our Server-Client model implementation
