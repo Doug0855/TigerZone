@@ -63,7 +63,7 @@ void printBoard(Board gameBoard) //debugging
 		}
 		std::cout<<std::endl;
 	}
-} 															
+}
 void printStack(TileStack stack) //debugging
 {
 	/*print tile stack content for debugging*/
@@ -76,7 +76,7 @@ void printStack(TileStack stack) //debugging
 }
 
 std::string parseMessageList(std::string &msg) //finds and returns the first message in the message list
-{											
+{
 	std::string token;
 	std::string delimiter = "\r\n";
 	size_t pos = 0;
@@ -105,7 +105,7 @@ std::string getMesssage(Client &client, std::string &msg_list) //Updates the mes
 }
 
 int moveProtocol(Client &client, std::string &message_list, Game &game1, Game &game2, int &success1, int &success2, std::string OPPONENT_ID)
-{ 
+{
 	/*
 	This protocol is called whenever a move needs to be made.
 	It takes a reference to both games being played and two success values.
@@ -179,18 +179,18 @@ int moveProtocol(Client &client, std::string &message_list, Game &game1, Game &g
 
 					if (message_info.gameId == game1.getID())
 					{
-						std::cout << "	Received opponent move for tile: " << message_info.tile_num <<  " in game: " << message_info.gameId << std::endl;
-						std::cout << "		tile placed at <" << i << ", " << j << "> " << "with rotation: " << orientation << std::endl;
-						std::cout << "		croc? " << message_info.croc << " tiger? " << message_info.tiger << " zone " << "[" <<message_info.tiger_spot.first << ", " << message_info.tiger_spot.second << "] " << std::endl;
+						//std::cout << "	Received opponent move for tile: " << message_info.tile_num <<  " in game: " << message_info.gameId << std::endl;
+						//std::cout << "		tile placed at <" << i << ", " << j << "> " << "with rotation: " << orientation << std::endl;
+						//std::cout << "		croc? " << message_info.croc << " tiger? " << message_info.tiger << " zone " << "[" <<message_info.tiger_spot.first << ", " << message_info.tiger_spot.second << "] " << std::endl;
 						tmpTile = Tile(message_info.tile_num);
 						game1.enemyMove(tmpTile, i, j, orientation, message_info.tiger, message_info.croc, message_info.tiger_spot);
 					}
 					else if (message_info.gameId == game2.getID())
 					{
-						std::cout << "	Received opponent move for tile: " << message_info.tile_num <<  " in game: " << message_info.gameId << std::endl;
-						std::cout << "		tile placed at <" << i << ", " << j << "> :" << "with rotation: " << orientation << std::endl;
-						std::cout << "		croc? " << message_info.croc << " tiger? " << message_info.tiger << " zone " << "[" <<message_info.tiger_spot.first << ", " << message_info.tiger_spot.second << "] " << std::endl;
-						tmpTile = Tile(message_info.tile_num);
+						//std::cout << "	Received opponent move for tile: " << message_info.tile_num <<  " in game: " << message_info.gameId << std::endl;
+						//std::cout << "		tile placed at <" << i << ", " << j << "> :" << "with rotation: " << orientation << std::endl;
+						//std::cout << "		croc? " << message_info.croc << " tiger? " << message_info.tiger << " zone " << "[" <<message_info.tiger_spot.first << ", " << message_info.tiger_spot.second << "] " << std::endl;
+						//tmpTile = Tile(message_info.tile_num);
 						//debugging std::cout << "DEBUG FLAG" << std::endl;
 						game2.enemyMove(tmpTile, i, j, orientation, message_info.tiger, message_info.croc, message_info.tiger_spot);
 						//debugging std::cout << "DEBUG FLAG 2" << std::endl;
@@ -430,7 +430,7 @@ int main(int argc, char *argv[]) {
 
 
 	std::string message_list = "";
-	
+
 	//starting auth protocol...
 
 	std::string PLAYER_ID = authenticationProtocol(serverConnection, TOURNAMENT_PASS, TEAM_ID, TEAM_PASSWORD);
